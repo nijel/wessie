@@ -54,6 +54,10 @@
   <item url="img/wessie.png" />
   <item url="img/wessie_banner.png" />
   <item url="img/wessie_icon.png" />
+  <item url="admin/category_delete.php" />
+  <item url="admin/category_edit.php" />
+  <item url="admin/admin.css" />
+  <item url="admin/admin.js" />
  </project>
 </webproject>
 <!-- $Id$ -->
