@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 // +----------------------------------------------------------------------+
-// | Web Site System version 0.1                                          |
+// / wessie - web site system                                             |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 2001 Michal Cihar                                      |
 // +----------------------------------------------------------------------+
@@ -38,10 +38,10 @@ Header('Content-Type: text/html; charset='.$admin_charset);
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $admin_charset?>" />
     <title><?php echo $page_title?></title>
-    <meta name="Author" content="<?php echo $wss_author?>" />
-    <meta name="Generator" content="<?php echo $wss_version.', Copyright (C) 2001 '.$wss_author?>" />
+    <meta name="Author" content="<?php echo $wessie_author?>" />
+    <meta name="Generator" content="<?php echo $wessie_version.', Copyright (C) 2001 '.$wessie_author?>" />
     <link rel="home" href="<?php echo $site_home?>" />
-    <link rel="copyright" href="mailto:<?php echo $wss_author?>" />
+    <link rel="copyright" href="mailto:<?php echo $wessie_author?>" />
   <script language="JavaScript" type="text/javascript">
   <!--
      if(top != self) { window.top.location.href=location; }

@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 // +----------------------------------------------------------------------+
-// | Web Site System version 0.1                                          |
+// / wessie - web site system                                             |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 2001 Michal Cihar                                      |
 // +----------------------------------------------------------------------+
@@ -24,8 +24,8 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-if (!isset($WSS_db_connect_php_loaded)){
-	$WSS_db_connect_php_loaded=1;
+if (!isset($wessie_db_connect_php_loaded)){
+	$wessie_db_connect_php_loaded=1;
 	if ($db_persistent){
 		if (!($db_connection=mysql_pconnect($db_host,$db_user,$db_pass)))
 			do_error(1,'pconnect');

@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 // +----------------------------------------------------------------------+
-// | Web Site System version 0.1                                          |
+// / wessie - web site system                                             |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 2001 Michal Cihar                                      |
 // +----------------------------------------------------------------------+
@@ -25,9 +25,9 @@
 //
 // $Id$
 error_reporting (E_ALL);
-// Config script for WSS
-if (!isset($WSS_config_php_loaded)){
-$WSS_config_php_loaded=1;
+// Config script for wessie
+if (!isset($wessie_config_php_loaded)){
+$wessie_config_php_loaded=1;
 
 $error_log_file='./logs/error.log';
 
@@ -46,19 +46,19 @@ $lang_file='./lang/${lang}.php';
 //Site main design template (defaultly language independant or use ${lang} for specifying language name):
 $template_file='./templates/default/template.php';
 
-$cookie_count='wss_count';
-$cookie_lang='wss_lang';
+$cookie_count='wessie_count';
+$cookie_lang='wessie_lang';
 
 $session_time=3600;  // how long $cookie_count should be held (1 hour)
 $lang_time=31536000;  // how long $cookie_lang should be held (1 year)
 
 $db_host='localhost'; // Host where MySQL is running
-$db_user='root'; // User name
-$db_pass=''; // User password
-$db_name='wss'; // Database name that is used by WSS
+$db_user='wessie'; // User name
+$db_pass='wessie'; // User password
+$db_name='wessie'; // Database name that is used by wessie
 $db_persistent=false; //true = use persistent connections, otherwise don't use
 
-$table_prepend_name=''; //prepended before each table name this allows multiple WSS running on one database
+$table_prepend_name=''; //prepended before each table name this allows multiple wessie running on one database
 
 // if you change following variables, you have to chage table names in MySQL!
 $table_page='page';
@@ -82,8 +82,8 @@ $table_stat='stat';
 $site_author='Michal Cihar';
 $site_author_email='cihar@email.cz';
 
-$site_home='http://wss.cic';
-$site_name='WSS Demo';
+$site_home='http://wessie.cic';
+$site_name='wessie Demo';
 
 $copyright='Copyright &copy; 2001 <a href="mailto:'.$site_author_email.'">'.$site_author.'</a>';
 

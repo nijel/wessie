@@ -2,11 +2,11 @@ $Id$
 !this list is currently very incomplete!
 
 
-wss_version - wss name with version
-wss_version_only - wss version
-wss_author - author of wss
-wss_author_email - email of wss author
-wss_url - wss url
+wessie_version - wessie name with version
+wessie_version_only - wessie version
+wessie_author - author of wessie
+wessie_author_email - email of wessie author
+wessie_url - wessie url
 
 site_name - name of site
 site_author - site author

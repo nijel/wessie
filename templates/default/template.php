@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 // +----------------------------------------------------------------------+
-// | Web Site System version 0.1                                          |
+// / wessie - web site system                                             |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 2001 Michal Cihar                                      |
 // +----------------------------------------------------------------------+
@@ -24,7 +24,7 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-// Template definition file for WSS - Web Site System //
+// Default template definition file for wessie
 
 //File containing default template:
 $template_data='./templates/default/template.inc.php';

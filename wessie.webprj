@@ -1,5 +1,5 @@
 <!DOCTYPE webproject ><webproject>
- <project preview="http://wss/" type="Local" name="wss" >
+ <project preview="http://wessie/" type="Local" name="wessie" >
   <upload/>
   <author>Michal Cihar</author>
   <email>cihar@email.cz</email>
@@ -22,8 +22,6 @@
   <item url="admin/menu.php" />
   <item url="admin/users.php" />
   <item url="admin/downloads.php" />
-  <item url="img/WSS.png" />
-  <item url="img/WSS_banner.png" />
   <item url="logs/error.log" />
   <item url="sql/site.sql" />
   <item url="templates/default/img/bar_left.png" />
@@ -48,5 +46,6 @@
   <item url="admin/functions.php" />
   <item url="admin/article_delete.php" />
   <item url="templates/default/template.inc.php" />
+  <item url="INSTALL" />
  </project>
 </webproject>

@@ -1,2 +1,7 @@
-This will be sometimes README for WSS
+This will be sometimes README for wessie
 $Id$
+
+Features:
+ * modular architecture (I hope ;o))
+ * generates valid xhtml 1.0 document (when content and templates are
+   correct - at least default templates are correct)

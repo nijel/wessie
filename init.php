@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 // +----------------------------------------------------------------------+
-// | Web Site System version 0.1                                          |
+// / wessie - web site system                                             |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 2001 Michal Cihar                                      |
 // +----------------------------------------------------------------------+
@@ -24,11 +24,11 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-$wss_version_only='0.1 beta';
-$wss_version='Web Site System '.$wss_version_only;
-$wss_author='Michal Cihar';
-$wss_author_email='cihar@email.cz';
-$wss_url='http://cicom.tsx.org';
+$wessie_version_only='0.1 beta';
+$wessie_version='wessie '.$wessie_version_only;
+$wessie_author='Michal Cihar';
+$wessie_author_email='cihar@email.cz';
+$wessie_url='http://cicom.tsx.org';
 $search_url='search.php';
 $search_param='q';
 

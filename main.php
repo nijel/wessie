@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 // +----------------------------------------------------------------------+
-// | Web Site System version 0.1                                          |
+// / wessie - web site system                                             |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 2001 Michal Cihar                                      |
 // +----------------------------------------------------------------------+
@@ -24,6 +24,7 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
+// Main executed script
 
 error_reporting (E_ALL);
 //BEFORE publishing check all TEMPORARY words!
@@ -230,8 +231,8 @@ global $table_prepend_name,$table_download,$table_download_group,$db_connection;
 }
 
 function upper_menu(){
-        global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wss_version,$wss_author,$browser,$os,
-                $wss_author_email,$wss_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
+        global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
+                $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
                 $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
         global $table_prepend_name,$table_category,$lng,$db_connection,$upper_menu_divisor,$page,$categories;
@@ -246,8 +247,8 @@ function upper_menu(){
 }
 
 function top_pages(){
-        global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wss_version,$wss_author,$browser,$os,
-                $wss_author_email,$wss_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
+        global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
+                $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
                 $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
         global $table_prepend_name,$table_category,$table_page,$lng,$db_connection,$top_pages_divisor,$top_pages_count,$categories;;
@@ -290,8 +291,8 @@ function left_menu(){
 global $lng,$id,$table_prepend_name,$table_menu,$db_connection;
 
 function add_childs($child_id,$depth,$parents){
-global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wss_version,$wss_author,$browser,$os,
-        $wss_author_email,$wss_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
+global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
+        $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
         $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 global $first_item,$left_menu_divisor,$id,$category,$db_connection,$table_menu,$table_page,$table_prepend_name,$lng;
 
@@ -347,7 +348,7 @@ global $content,
         $site_name,$site_author,$site_author_email,$site_name,$site_home,
         $page_title,$category_name,
         $browser,$os,
-        $wss_version,$wss_author,$wss_author_email,$wss_url,
+        $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
         $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 eval('?'.'>'.$content.'<?php ');
 }
@@ -365,7 +366,7 @@ global $page,
         $site_name,$site_author,$site_author_email,$site_name,$site_home,
         $page_title,$category_name,
         $browser,$os,
-        $wss_version,$wss_author,$wss_author_email,$wss_url,
+        $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
         $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
 eval('?'.'>'.$page['name'].'<?php ');
@@ -376,7 +377,7 @@ global $category,
         $site_name,$site_author,$site_author_email,$site_name,$site_home,
         $page_title,$category_name,
         $browser,$os,
-        $wss_version,$wss_author,$wss_author_email,$wss_url,
+        $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
         $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
 eval('?'.'>'.$category['name'].'<?php ');
@@ -386,7 +387,7 @@ function keywords(){
 global $page,
         $site_name,$site_author,$site_author_email,$site_name,$site_home,
         $page_title,$category_name,
-        $wss_version,$wss_author,$wss_author_email,$wss_url,
+        $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
         $browser,$os,
         $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
@@ -398,7 +399,7 @@ global $page,
     $site_name,$site_author,$site_author_email,$site_name,$site_home,
     $page_title,$category_name,
     $browser,$os,
-    $wss_version,$wss_author,$wss_author_email,$wss_url,
+    $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
     $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
 eval('?'.'>'.$page['description'].'<?php ');
@@ -413,7 +414,7 @@ global $languages,$lang_name,$lang_main_page,$languages_divisor,$id,
         $site_name,$site_author,$site_author_email,$site_name,$site_home,
         $page_title,$category_name,
         $browser,$os,
-        $wss_version,$wss_author,$wss_author_email,$wss_url,
+        $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
         $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 if (count($languages)==1){
     $result='&nbsp;'; // if there is only one language it's useles to offer it
@@ -428,8 +429,8 @@ eval('?'.'>'.$result.'<?php ');
 }
 
 function make_stat($which,$cond,$mul,$cvt="<?php echo \$item['item'] ?>"){
-global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wss_version,$wss_author,$browser,$os,
-        $wss_author_email,$wss_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
+global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
+        $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
         $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 global $db_connection,$table_stat,$table_prepend_name,$lng,$stat_start,$stat_end,$msg_unknown,$lang_name;
 

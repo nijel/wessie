@@ -1,5 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                  "DTD/xhtml1-transitional.dtd">
+<?php
+/* vim: set expandtab tabstop=4 shiftwidth=4: */
+// +----------------------------------------------------------------------+
+// / wessie - web site system                                             |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2001 Michal Cihar                                      |
+// +----------------------------------------------------------------------+
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 2 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to the Free Software          |
+// | Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 |
+// | USA                                                                  |
+// +----------------------------------------------------------------------+
+// | Authors: Michal Cihar <cihar at email dot cz>                        |
+// +----------------------------------------------------------------------+
+//
+// $Id$
+// Default template definition file for wessie
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang; ?>" lang="<?php echo $lang; ?>">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
@@ -10,7 +37,7 @@
   <meta name="author" content="<?php echo $site_author; ?>" />
   <meta name="keywords" content="<?php keywords(); ?>" />
   <meta name="description" content="<?php description(); ?>" />
-  <meta name="generator" content="<?php echo $wss_version.', Copyright (C) 2001 '.$wss_author; ?>" />
+  <meta name="generator" content="<?php echo $wessie_version.', Copyright (C) 2001 '.$wessie_author; ?>" />
   <script language="JavaScript" type="text/javascript">
   <!--
       if(top != self) { window.top.location.href=location; }
@@ -28,7 +55,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td align="center" valign="middle" width="200">
-<center><img src="<?php echo $base_path ; ?>img/WSS.png" align="middle" alt="WSS" width="179" height="95" border="0" /></center>
+<center><img src="<?php echo $base_path ; ?>img/wessie.png" align="middle" alt="wessie" width="179" height="95" border="0" /></center>
 </td>
 <td align="center" valign="middle"><?php top_pages(); ?></td>
 <td align="right" valign="middle" width="470">
