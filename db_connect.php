@@ -24,6 +24,11 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
+
+//load configuration
+require_once('./config.php');
+//error handling
+require_once('./errors.php');
 if (!isset($wessie_db_connect_php_loaded)){
     $wessie_db_connect_php_loaded=1;
     if ($db_persistent){
