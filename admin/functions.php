@@ -352,11 +352,19 @@ function make_row($even,$url){
     echo'><td>';
 }
 
-function make_tab_edit($href,$text,$url){
+function make_tab_item($href,$text,$url){
     global $SCRIPT_NAME,$admin_highlight_tabs;
     echo '<td'.(strpos($SCRIPT_NAME,$url)?' class="selected"':'');
     highlighter($admin_highlight_tabs);
     echo ' onclick="window.location.replace(\''.$href.'\')"><a href="'.$href.'">'.$text.'</a></td>'."\n";
+}
+
+function make_tab_start(){
+    echo '<table class="tabs"><tr>';
+}
+
+function make_tab_end(){
+    echo '</tr></table>';
 }
 
 function highlighter($color='#00ff00'){

@@ -26,13 +26,10 @@
 // $Id$
 require_once('./admin_header.php');
 ?>
-<table class="tabs">
-  <tr>
 <?php
-
-make_tab_edit('./download_item.php','Downloads','/download_item');
-make_tab_edit('./download_group.php','Download groups','/download_group');
-make_tab_edit('./upload.php','Upload files','/upload');
+make_tab_start();
+make_tab_item('./download_item.php','Downloads','/download_item');
+make_tab_item('./download_group.php','Download groups','/download_group');
+make_tab_item('./upload.php','Upload files','/upload');
+make_tab_end();
 ?>
-  </tr>
-</table>

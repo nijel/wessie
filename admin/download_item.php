@@ -55,7 +55,7 @@ if (isset($filter_group) && ($filter_group != 'any')) {
 }
 
 if (!$id_result=mysql_query(
-'SELECT id, filename, grp, count '.
+'SELECT id, filename, remote, grp, count '.
 ' from '.$table_prepend_name.$table_download.
 ' where '.$cond.
 ' order by id'))
@@ -65,12 +65,40 @@ if (mysql_num_rows($id_result) == 0){
     echo "Nothing...";
 } else {
     echo 'Listed downloads: '.mysql_num_rows($id_result);
-    echo '<table class="data"><tr><th>Id</th><th>Filename</th><th>Group</th><th>Count</th><th>Actions</th></tr>'."\n";
+    echo '<table class="data"><tr><th>Id</th><th>Filename</th><th>Remote</th><th>Size</th><th>Group</th><th>Count</th><th>Actions</th></tr>'."\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
+        if ($item['remote']==0){
+            if (!file_exists('../'.$item['filename'])){
+                $size='<span class="error">Not found</span>';
+            }else{
+                $size_b=filesize('../'.$item['filename']);
+                $size_kb=round($size_b*10/1024)/10;
+                $size_mb=round($size_kb*10/1024)/10;
+                $size_gb=round($size_mb*10/1024)/10;
+
+                if ($size_b<1024) {
+                    $size=$size_b.' B';
+                }elseif ($size_b<1048576) {
+                    $size=$size_kb.' kB';
+                }elseif ($size_b<1073741824) {
+                    $size=$size_mb.' MB';
+                }else{
+                    $size=$size_gb.' GB';
+                }
+            }
+        }else{
+            $file = @fopen ($item['filename'], 'r');
+            if (!$file) {
+                $size='<span class="error">Not found</span>';
+            }else{
+                $size='N/A';
+                fclose($file);
+            }
+        }
         make_row($even,'download_item_edit.php?id='.$item['id']);
         $even = 1 - $even;
-        echo $item['id'].'</td><td>'.htmlspecialchars($item['filename']).'</td><td>'.htmlspecialchars(get_download_group_name($item['grp'])).'</td><td>'.$item['count'].'</td>';
+        echo $item['id'].'</td><td>'.htmlspecialchars($item['filename']).'</td><td>'.($item['remote']==1?'yes':'no').'</td><td>'.$size.'</td><td>'.htmlspecialchars(get_download_group_name($item['grp'])).'</td><td>'.$item['count'].'</td>';
         echo '<td>&nbsp;<a href="download_item_edit.php?id='.$item['id'].'">Edit</a>&nbsp;|&nbsp;<a href="download_item_delete.php?id='.$item['id'].'">Delete</a>&nbsp;|&nbsp;<a href="../download.php?id='.$item['id'].'" target="_blank">Download</a>&nbsp;</td></tr>'."\n";
     }
     echo "</table>\n";
