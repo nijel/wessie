@@ -119,8 +119,8 @@ Create new menu item, in language: <?php language_edit($lng); ?>
 Synchronize menu items, in category <?php category_edit(-1,$lng=='any'?0:$lng,'category',TRUE); ?>
  from language: <?php language_edit($lng,FALSE,'lng_from'); ?>
  to language: <?php language_edit($lng,TRUE,'lng_to'); ?>
+ overwrite existing items <input type="checkbox" name="overwrite" />
 <input type="submit" value=" Go " />
-<input type="hidden" name="action" value="sync" />
 </form>
 <?php
 require_once('./admin_footer.php');

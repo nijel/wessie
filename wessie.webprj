@@ -47,5 +47,8 @@
   <item url="admin/article_delete.php" />
   <item url="templates/default/template.inc.php" />
   <item url="INSTALL" />
+  <item url="admin/menu_edit.php" />
+  <item url="admin/menu_delete.php" />
+  <item url="admin/menu_sync.php" />
  </project>
 </webproject>
