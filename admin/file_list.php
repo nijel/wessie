@@ -54,7 +54,7 @@ if (!isset($dir)||$dir==''||!@is_dir($dir)){
     $dir = $server_root_dir;
 }elseif (!@chdir($dir)){
     $dir = $server_root_dir;
-}elseif ($restrict && (strlen($dir) < $root_dir_len || strpos($dir,$root_dir) === false)) {
+}elseif ($restrict && (strlen($dir) < $root_dir_len || strpos($dir,$root_dir) != 0)) {
     echo '<div class="error">Error: Directory restriction does not allow you to work in selected directory ("'.$dir.'")!</div>';
     $dir = $server_root_dir;
 }else{

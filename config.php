@@ -189,8 +189,8 @@ $admin_file_restrict = FALSE;
 //                        web server root
 // $admin_fm_maxsize    - maximal size of upload in admnistration, this doe
 //                        cannot be larget than upload_max_filesize in php.ini!
-$admin_fm_restrict = TRUE;
 $admin_fm_restrict = FALSE;
+$admin_fm_restrict = TRUE;
 $admin_fm_show_size = TRUE;
 $admin_fm_show_type = TRUE;
 $admin_fm_show_mtime = TRUE;

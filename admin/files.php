@@ -43,7 +43,7 @@ if (!isset($dir)){
     $dir = getcwd();
 }
 
-if ($admin_fm_restrict && (strlen($dir) < $root_dir_len || strpos($dir,$root_dir) === false)) {
+if ($admin_fm_restrict && (strlen($dir) < $root_dir_len || strpos($dir,$root_dir)  != 0)) {
     echo '<div class="error">Error: Directory restriction does not allow you to work in selected directory ("'.$dir.'")!</div>';
     $dir = $root_dir;
 }
@@ -172,10 +172,10 @@ while (list ($key, $val) = each($list)){
 /*        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">rm</a>':'<a href="files_action.php?action=delete&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">rm</a>').
         '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">mv</a>':'<a href="files_action.php?action=move&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">mv</a>').
         '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">cp</a>':'<a href="files_action.php?action=copy&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">cp</a>').*/
-        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Delete</a>':'<a href="files_action.php?action=delete&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">Delete</a>').
-        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Move</a>':'<a href="files_action.php?action=move&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">Move</a>').
-        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Copy</a>':'<a href="files_action.php?action=copy&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">Copy</a>').
-        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Chmod</a>':'<a href="files_action.php?action=chmod&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">Chmod</a>').
+        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Delete</a>':'<a href="files_action.php?action=delete&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Delete</a>').
+        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Move</a>':'<a href="files_action.php?action=move&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Move</a>').
+        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Copy</a>':'<a href="files_action.php?action=copy&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Copy</a>').
+        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Chmod</a>':'<a href="files_action.php?action=chmod&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Chmod</a>').
         '');
 
     echo "</tr>\n";
