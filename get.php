@@ -48,6 +48,7 @@ if (!(mysql_query("UPDATE $db_prepend$table_download set count=count+1 where id=
 if ($file['remote']==1){
     header('Location: '.$file['filename']);
 }else{
-    header('Location: '.$base_url.$file['filename']);
+//    header('Location: '.$base_url.$file['filename']);
+    header('Location: http://'.$SERVER_NAME.$file['filename']);
 }
 ?>
