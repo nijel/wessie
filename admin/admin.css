@@ -152,8 +152,12 @@ table.data {
 table.data td.size {
     text-align: right;
 }
+table.data td.date {
+    text-align: right;
+}
 table.data td.perms {
     font-family: monospace;
+    text-align: center;
 }
 table.item {
     border: none;

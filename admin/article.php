@@ -79,7 +79,7 @@ if (mysql_num_rows($id_result) == 0){
         echo make_cell($item['page'],$url);
         echo make_cell(htmlspecialchars($item['name']),$url);
         echo make_cell($lang_name[$item['lng']],$url);
-        echo make_cell(strftime('%c',$item['last_change']),$url);
+        echo make_cell(strftime('%c',$item['last_change']),$url,'date');
         echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="article_delete.php?id='.$item['page'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;'.((isset($admin_validator)&&($admin_validator!=''))?'|&nbsp;<a href="'.$admin_validator.urlencode(make_absolute_url($item['page'],$item['lng'])).'" target="_blank">Validate</a>&nbsp;':'').'</td></tr>'."\n";
     }
     echo "</table>\n";

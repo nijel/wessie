@@ -53,10 +53,9 @@ if (isset($search) && trim($search) == '') unset($search);
 $root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
 $root_dir_len = strlen($root_dir);
 
-if (!isset($dir)||!@is_dir($dir)){
-    echo '<div class="error">Error: Selected directory ("'.$dir.'") not accessible!</div>';
+if (!isset($dir)){
     $dir = $root_dir;
-}elseif (!@chdir($dir)){
+}elseif (!@chdir($dir)||!@is_dir($dir)){
     echo '<div class="error">Error: Selected directory ("'.$dir.'") not accessible!</div>';
     $dir = $root_dir;
 }else{
@@ -154,9 +153,9 @@ while (list ($key, $val) = each($list)){
 
     if($admin_fm_show_size) make_cell($size,'','size');
     if($admin_fm_show_type) make_cell($val['type']);
-    if($admin_fm_show_mtime) make_cell(strftime('%c',$val['ctime']));
-    if($admin_fm_show_ctime) make_cell(strftime('%c',$val['mtime']));
-    if($admin_fm_show_atime) make_cell(strftime('%c',$val['atime']));
+    if($admin_fm_show_mtime) make_cell(strftime('%c',$val['ctime']),'','date');
+    if($admin_fm_show_ctime) make_cell(strftime('%c',$val['mtime']),'','date');
+    if($admin_fm_show_atime) make_cell(strftime('%c',$val['atime']),'','date');
     if($admin_fm_show_allowed) make_cell(($val['r']?'r':'-').($val['w']?'w':'-').($val['x']?'x':'-'),'','perms');
     if($admin_fm_show_rights) make_cell(perms2str($val['perms']),'','perms');
     if($admin_fm_show_owner) make_cell($val['owner']);
