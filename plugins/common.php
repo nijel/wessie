@@ -105,6 +105,7 @@ function addPageType($name){
     echo "added\n";
     if (!savePageTypes())
         return FALSE;
+    return TRUE;
 }
 
 function delPageType($name){
@@ -116,7 +117,7 @@ function delPageType($name){
     echo 'Trying to uninstall page type...';
 
     $key = array_search($name,$pageTypes);
-    if ($key=== FALSE||$key==''){
+    if (!in_array($name,$pageTypes)){
         echo "\n".'<div class="error">This type is not installed!</div>';
         $error .= 'This type is not installed!<br/>';
         return FALSE;
@@ -134,5 +135,6 @@ function delPageType($name){
     echo "\n";
     if (!savePageTypes())
         return FALSE;
+    return TRUE;
 }
 ?>
