@@ -49,7 +49,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td align="center" valign="middle" width="200">
-<center><img src="<?php echo $base_path ; ?>img/wessie.png" align="middle" alt="wessie - web site system" width="200" height="100" border="0" /></center>
+<center><img src="<?php echo $base_path . $site_logo; ?>" align="middle" alt="<?php echo $site_logo_alt; ?>" width="<?php echo $site_logo_width; ?>" height="<?php echo $site_logo_height; ?>" border="0" /></center>
 </td>
 <td align="center" valign="middle"><?php top_pages(); ?></td>
 <td align="right" valign="middle" width="470">
