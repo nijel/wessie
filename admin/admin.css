@@ -95,7 +95,6 @@ table.tabs {
     border-right: none;
     border-top: none;
     border-bottom: 1px solid #000000;
-    borded: solid;
     width: 100%;
     text-align: center;
     padding: 1px 1px 0px 1px;
@@ -110,11 +109,12 @@ table.tabs td {
     border-left: 1px solid #000000;
     border-right: 1px solid #000000;
     border-top: 1px solid #000000;
-    border-bottom: none;
+    border-bottom: 0px none;
     cursor: hand;
 }
 table.tabs td.selected {
     background-color: #eeeebb;
+    font-weight: bold;
 }
 table.data {
     border: none;
@@ -175,6 +175,9 @@ p.radios {
 }
 span.warning {
     font-weight: bold;
+}
+span.note {
+    font-size: small;
 }
 h1 {
     font-size: large;

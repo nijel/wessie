@@ -120,13 +120,16 @@ function init_category_name(){
     $category_name_init=TRUE;
 }
 
-function download_group_edit($selected,$name='group',$add_any=FALSE,$class='select',$disabled=array()){
+function download_group_edit($selected,$name='group',$add_any=0,$class='select',$disabled=array()){
     global $download_group_name_init,$download_group_name_cache;
     if (!$download_group_name_init) init_download_group_name();
     echo '<select name="'.$name.'"'.($class!=''?' class="'.$class.'"':'').'>';
-    if ($add_any){
+    if ($add_any==1){
         echo '<option value="any">Any</option>';
+    }elseif ($add_any==2){
+        echo '<option value="0">None</option>';
     }
+
     reset($download_group_name_cache);
     while (list ($key, $val) = each($download_group_name_cache)){
         if (!in_array($key,$disabled)){
@@ -237,11 +240,7 @@ function is_page_free($id,$lng){
         show_error("Can't get page info! (".mysql_error().')');
         exit;
     }
-    if (mysql_num_rows($id_result)!=0){
-        return FALSE;
-    } else {
-        return TRUE;
-    }
+    return (mysql_num_rows($id_result)==0);
 }
 
 function is_category_free($id,$lng){
@@ -250,11 +249,16 @@ function is_category_free($id,$lng){
         show_error("Can't get page info! (".mysql_error().')');
         exit;
     }
-    if (mysql_num_rows($id_result)!=0){
-        return FALSE;
-    } else {
-        return TRUE;
+    return (mysql_num_rows($id_result)==0);
+}
+
+function is_download_free($id){
+    global $table_prepend_name,$table_download;
+    if (!$id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_download.' where  id='.$id)){
+        show_error("Can't get download info! (".mysql_error().')');
+        exit;
     }
+    return (mysql_num_rows($id_result)==0);
 }
 
 function get_page_translations($id){

@@ -38,7 +38,7 @@ require_once('./download_header.php');
         Filename:
         <input type="text" name="filter_name" <?php if(isset($filter_name)){ echo 'value="'.$filter_name.'"'; }?> class="text"/>
         &nbsp;Group:
-        <?php download_group_edit((isset($filter_group) && ($filter_group != 'any'))?$filter_group:-1,'filter_group',TRUE,'select') ?>
+        <?php download_group_edit((isset($filter_group) && ($filter_group != 'any'))?$filter_group:-1,'filter_group',1,'select') ?>
         &nbsp;<input type="submit" value=" Go " class="go" />
       </form>
     </td>
