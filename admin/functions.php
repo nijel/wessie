@@ -287,13 +287,13 @@ function type_edit($selected=-1,$add_any=FALSE,$name='type',$disabled=array(),$c
     echo '</select>';
 }
 
-function new_page($name,$type,$file,$description,$keywords,$lng,$category,$page){
+function new_page($name,$type,$param,$description,$keywords,$lng,$category,$page){
     global $db_prepend,$table_page;
-    if (!mysql_query('INSERT '.$db_prepend.$table_page.' set name="'.opt_addslashes($name).'", type="'.$type.'", param="'.opt_addslashes($file).'",description="'.opt_addslashes($description).'",keywords="'.opt_addslashes($keywords).'",category='.$category.',lng='.$lng.($page!=-1?', id='.$page:''))){
+    if (!mysql_query('INSERT '.$db_prepend.$table_page.' set name="'.opt_addslashes($name).'", type="'.$type.'", param="'.$param.'",description="'.opt_addslashes($description).'",keywords="'.opt_addslashes($keywords).'",category='.$category.',lng='.$lng.($page!=-1?', id='.$page:''))){
         show_error("Can't create page! (".mysql_error().')');
         exit;
     }
-    if (!$id_result=mysql_query('SELECT id from '.$db_prepend.$table_page.' where  name="'.opt_addslashes($name).'" and type="'.$type.'" and param="'.opt_addslashes($file).'" and description="'.opt_addslashes($description).'" and keywords="'.opt_addslashes($keywords).'" and category='.$category.' and lng='.$lng.($page!=-1?' and id='.$page:''))){
+    if (!$id_result=mysql_query('SELECT id from '.$db_prepend.$table_page.' where  name="'.opt_addslashes($name).'" and type="'.$type.'" and param="'.$param.'" and description="'.opt_addslashes($description).'" and keywords="'.opt_addslashes($keywords).'" and category='.$category.' and lng='.$lng.($page!=-1?' and id='.$page:''))){
         show_error("Can't get back page info! (".mysql_error().')');
         exit;
     }
