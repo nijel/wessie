@@ -40,6 +40,9 @@ $languages[1]='cs';
 $lang_name[1]='Cesky';
 $lang_main_page[1]=1;
 $default_lang=0;
+$lang_alias['en']=0;
+$lang_alias['cs']=1;
+$lang_alias['cz']=1;
 //language file, use ${lang} for specifying language name
 $lang_file='./lang/${lang}.php';
 
@@ -110,5 +113,7 @@ $admin_description_rows=2;
 $admin_description_cols=40;
 
 $admin_confirm_delete=TRUE;
+
+$show_error_detail=TRUE;
 }
 ?>
