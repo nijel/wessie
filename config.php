@@ -162,16 +162,12 @@ $special[1] = '';
 // $admin_hash_cookie  - how long should be cookie with hash valid, this doesn't affect
 //                       security, security is made by $admin_timeout
 // $admin_confirm_delete - confirm deleting in administration?
-// $admin_highlight_* - highlighting of list items and tabs on mouse over,
-//                      if empty item is not highlighted
 // $admin_validator    - link to validate page, at the end is appended url
 $admin_charset = 'iso-8859-2';
 $admin_timeout = '20 MINUTE';
 $admin_user_cookie = 2592000;
 $admin_hash_cookie = 3600;
 $admin_confirm_delete = TRUE;
-$admin_highlight_list = '#ffffcc';
-$admin_highlight_tabs = '#ffffcc';
 $admin_validator = 'http://validator.cic/cgi-bin/validate.cgi?input=yes&url=';
 //##/ADMIN##
 

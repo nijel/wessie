@@ -97,6 +97,7 @@
   <item url="admin/options_admin.php" />
   <item url="admin/files.php" />
   <item url="admin/files_upload.php" />
+  <item url="admin/admin_blue.css" />
  </project>
 </webproject>
 <!-- $Id$ -->

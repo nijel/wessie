@@ -39,6 +39,7 @@ Header('Content-Type: text/html; charset='.$admin_charset);
     <link rel="home" href="<?php echo $site_home?>" />
     <link rel="copyright" href="mailto:<?php echo $wessie_author?>" />
     <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
+    <link rel="Alternate StyleSheet" href="./admin_blue.css" title="Blue" type="text/css" media="screen" />
     <script language="JavaScript" type="text/javascript" src="./admin.js"></script>
 </head>
 <body class="help">

@@ -50,7 +50,7 @@ function add_childs($child_id,$depth,$lng){
 global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
     $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
     $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path,$lng;
-global $db_connection,$table_menu,$table_page,$table_prepend_name,$category,$even,$lang_name,$admin_highlight_list;
+global $db_connection,$table_menu,$table_page,$table_prepend_name,$category,$even,$lang_name;
 global $listed_items;
 
 if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$table_prepend_name.$table_menu

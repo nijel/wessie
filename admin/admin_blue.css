@@ -24,11 +24,11 @@
 //
 // $Id$ */
 
-body,td,th,p,h1 {
-    color: #000000;
+body,td,th,p,h1,h2,h3,h4,h5,h6,h7 {
+    color: #e0e0c0;
 }
 body {
-    background-color: #ddddaa;
+    background-color: #555588;
     background-image: url("../img/wessie_vertical_long.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -36,22 +36,22 @@ body {
     margin-left: 32px;
 }
 tr.even,tr.even_hand {
-    background-color: #eeeecc;
+    background-color: #665588;
 }
 tr.odd,tr.odd_hand {
-    background-color: #ddddbb;
+    background-color: #556688;
 }
 tr.even_light,tr.odd_light,tr.even_hand_light,tr.odd_hand_light {
-    background-color: #ffffcc;
+    background-color: #5566aa;
 }
-tr.even_hand,tr.odd_hand {
+tr.even_hand,tr.odd_hand,tr.even_hand_light,tr.odd_hand_light {
     cursor: hand;
 }
 table.filter {
     border: none;
 }
 td.filtercontent {
-    background-color: #eeeecc;
+    background-color: #5566aa;
     vertical-align: middle;
     padding: 5px 5px 5px 5px;
 }
@@ -70,17 +70,15 @@ input,select {
 }
 input.info,input.browse,input.delete,input.return,input.text,input.go,input.save,input.reset,textarea.text,input.ok,select.select,input.check,input.login,input.radio,input.file {
     color: #000000;
-    background-color: #ccccaa;
+    background-color: #99aaee;
 }
-
-select.select_disabled,input.check_disabled{
+select.select_disabled,input.check_disabled {
     color: #dddddd;
-    background-color: #aaaa88;
+    background-color: #6688bb;
 }
-
 input.required,textarea.required,input.username,input.password {
     color: #000000;
-    background-color: #ddddbb;
+    background-color: #aabbff;
 }
 label.radios {
     text-align: left;
@@ -89,20 +87,20 @@ a {
     text-decoration: none;
 }
 a:link {
-    color: #0000FF;
+    color: #00dddd;
 }
 a:active {
     color: #CCFF66;
 }
 a:visited {
-    color: #0000CC;
+    color: #00bbbb;
 }
 a:hover {
     text-decoration: underline;
 }
 a.disabled {
-    color: #000000;
-}   
+    color: #009999;
+}
 div.close {
     clear:right;
     float:right;
@@ -140,16 +138,16 @@ table.tabs td.normal,table.tabs td.normal_light {
     border-bottom: none;
     cursor: hand;
 }
-table.tabs td.selected, table.tabs td.selected_light {
-    background-color: #eeeebb;
+table.tabs td.selected,table.tabs td.selected_light {
+    background-color: #5566aa;
     font-weight: bold;
     border-left: 2px #000000 solid;
     border-right: 2px #000000 solid;
     border-top: 2px #000000 solid;
     border-bottom: none;
 }
-table.tabs td.normal_light, table.tabs td.selected_light {
-    background-color: #ffffcc;
+table.tabs td.normal_light,table.tabs td.selected_light {
+    background-color: #5566aa;
 }
 table.data {
     border: none;
@@ -227,7 +225,7 @@ h1 {
     font-size: large;
 }
 h1 a:link,h1 a:active,h1 a:visited,h1 a:hover {
-    color: #000000;
+    color: #e0e0c0;
 }
 table.filelist {
     border: none;

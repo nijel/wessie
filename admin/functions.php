@@ -471,9 +471,9 @@ function config_del_options($pattern){
 }
 
 function make_row($even){
-    global $admin_highlight_list;
-    echo '<tr '.(($even == 1)?'class="even"':'class="odd"');
-    highlighter($admin_highlight_list);
+    $class=(($even == 1)?'even':'odd');
+    echo '<tr class="'.$class.'" ';
+    highlighter($class.'_light',$class);
     echo '>';
 }
 
@@ -482,24 +482,25 @@ function make_cell($data,$url='',$class=''){
 }
 
 function make_row_js($even,$js,$class_even='even',$class_odd='odd'){
-    global $admin_highlight_list;
-    echo '<tr '.(($even == 1)?'class="'.$class_even.'"':'class="'.$class_odd.'"');
-    echo '<tr onclick="'.$js.'" '.(($even == 1)?'class="even"':'class="odd"');
-    highlighter($admin_highlight_list);
-    echo'>';
+    $class=(($even == 1)?$class_even:$class_odd);
+    echo '<tr onclick="'.$js.'" class="'.$class.'" ';
+    highlighter($class.'_light',$class);
+    echo '>';
 }
 
 function make_tab_item($href,$text,$url){
-    global $SCRIPT_NAME,$admin_highlight_tabs;
-    echo '<td'.(strpos($SCRIPT_NAME,$url)?' class="selected"':'');
-    highlighter($admin_highlight_tabs);
-    echo ' onclick="window.location.replace(\''.$href.'\')"><a href="'.$href.'">'.$text.'</a></td>'."\n";
+    global $SCRIPT_NAME;
+    $class=(strpos($SCRIPT_NAME,$url)?'selected':'normal');
+    echo '<td class="'.$class.'" ';
+    highlighter($class.'_light',$class);
+    echo ' onclick="window.location.replace(\''.$href.'\')"><a href="'.$href.'">'.$text."</a></td>\n";
 }
 
 function make_tab_item_window($href,$text,$url){
-    global $SCRIPT_NAME,$admin_highlight_tabs;
-    echo '<td'.(strpos($SCRIPT_NAME,$url)?' class="selected"':'');
-    highlighter($admin_highlight_tabs);
+    global $SCRIPT_NAME;
+    $class=(strpos($SCRIPT_NAME,$url)?'selected':'normal');
+    echo '<td class="'.$class.'" ';
+    highlighter($class.'_light',$class);
     echo ' onclick="window.open(\''.$href.'\',\'\',\'menubar=no,location=no,status=no,toolbar=no,width=400,height=400\');return false"><a href="'.$href.'" target="_blank">'.$text.'</a></td>'."\n";
 }
 
@@ -522,10 +523,9 @@ function human_readable_size($size){
         return (round($size*10/1073741824)/10).' GB';
     }
 }
-
-function highlighter($color='#00ff00'){
-    if ($color!=''){
-        echo ' onmouseover="highlight(this,\''.$color.'\');" onmouseout="unhighlight(this);"';
+function highlighter($class1,$class2){
+    if ($class1!=''&&$class2!=''){
+        echo ' onmouseover="this.className = \''.$class1.'\';" onmouseout="this.className = \''.$class2.'\';"';
     }
 }
 ?>

@@ -74,6 +74,7 @@ if (isset($HTTP_POST_VARS['submit'])){
 <head>
     <meta http-equiv="Refresh" content="0; URL=<?php echo $url; ?>" />
     <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
+    <link rel="Alternate StyleSheet" href="./admin_blue.css" title="Blue" type="text/css" media="screen" />
 </head>
 <body>
 <a href="<?php echo $url; ?>">REDIRECT</a>
@@ -94,6 +95,7 @@ setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT
     <meta name="Generator" content="<?php echo $wessie_version.', Copyright (C) 2001 '.$wessie_author?>" />
     <link rel="copyright" href="mailto:<?php echo $wessie_author?>" />
     <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
+    <link rel="Alternate StyleSheet" href="./admin_blue.css" title="Blue" type="text/css" media="screen" />
     <link rel="home" href="<?php echo $site_home?>" />
     <script language="JavaScript" type="text/javascript" src="./admin.js"></script>
 </head>
