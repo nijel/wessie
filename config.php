@@ -109,6 +109,7 @@ $table_article = 'article';
 $table_download = 'download';
 $table_download_group = 'download_group';
 $table_users = 'users';
+$table_logged = 'logged';
 $table_stat = 'stat';
 //##/TABLES##
 

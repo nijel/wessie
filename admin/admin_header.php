@@ -77,7 +77,7 @@ if (isset($onunload)){
 <h1><?php echo $page_title_html; ?></h1>
 </td>
 <td class="right">
-User:<a href="user_self.php"><?php echo $fullname; ?></a><br />
+User:<a href="user_self.php"><?php echo $user_info['name']; ?></a><br />
 <a href="logout.php">Logout</a>
 </td>
 </tr>

@@ -24,18 +24,17 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-$page_name='Logout';
 
 require_once('../config.php');
+require_once('./auth.php');
 
 header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=logout');
 
+// Delete cookie
 setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),'', $admin_force_ssl || isset($HTTPS)); //delete cookie
 
-require_once('./admin_header.php');
+// Delete authentication in db
+if (!(mysql_query('DELETE FROM '.$db_prepend.$table_logged." where ip='".$user_info['ip']."' and user='".$HTTP_COOKIE_VARS['user']."' and hash='".$HTTP_COOKIE_VARS['hash']."'",$db_connection)))
+        do_error(1,'DELETE FROM '.$db_prepend.$table_logged.': '.mysql_error());
 
-if (!(mysql_query('UPDATE '.$db_prepend.$table_users." set ip= '0.0.0.0' where user='".$user."' limit 1",$db_connection)))
-        do_error(1,'UPDATE '.$db_prepend.$table_users.': '.mysql_error());
-
-require_once('./admin_footer.php');
 ?>

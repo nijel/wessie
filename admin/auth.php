@@ -39,13 +39,15 @@ if (isset($REQUEST_URI)){
 }
 
 if((!isset($HTTP_COOKIE_VARS['user']))||(!isset($HTTP_COOKIE_VARS['hash']))){
-header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=unauthorised' . $url);
-die();
+    header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=unauthorised' . $url);
+    die();
 }
+
 $user=opt_addslashes($HTTP_COOKIE_VARS['user']);
 $hash=$HTTP_COOKIE_VARS['hash'];
 
-if (!($id_result=mysql_query('SELECT count(user) as count from '.$db_prepend.$table_users.' where user="'.$user.'" and hash="'.$hash.'"',$db_connection)))
+// Check useername and hash
+if (!($id_result=mysql_query('SELECT count(user) as count from '.$db_prepend.$table_logged.' where user="'.$user.'" and hash="'.$hash.'"',$db_connection)))
     do_error(1,'SELECT '.$db_prepend.$table_users.': '.mysql_error());
 $auth=mysql_fetch_array($id_result);
 mysql_free_result($id_result);
@@ -53,7 +55,9 @@ if ($auth['count']!=1){
     Header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=unauthorised' . $url);
     die();
 }
-if (!($id_result=mysql_query('SELECT ip,perms,name from '.$db_prepend.$table_users.' where user="'.$user.'" and hash="'.$hash.'" and time>(NOW() - interval '.$admin_timeout.')',$db_connection)))
+
+// Check for expiration
+if (!($id_result=mysql_query('SELECT ip from '.$db_prepend.$table_logged.' where user="'.$user.'" and hash="'.$hash.'" and time>(NOW() - interval '.$admin_timeout.')',$db_connection)))
     do_error(1,'SELECT '.$db_prepend.$table_users.': '.mysql_error());
 if (mysql_num_rows($id_result)!=1){
     Header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=expired' . $url);
@@ -68,6 +72,7 @@ while (list ($header, $value) = each ($headers)) {
     }
 }
 
+// Check for IP
 $auth=mysql_fetch_array($id_result);
 mysql_free_result($id_result);
 if ($auth['ip']!=$ip){
@@ -80,6 +85,9 @@ if (!(mysql_query('UPDATE '.$db_prepend.$table_users." set time=NOW() where user
 
 setcookie ('hash',$hash ,time()+$admin_hash_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),'', $admin_force_ssl || isset($HTTPS));
 
+/*
+temporarily commented out because of major code changes
+
 $permissions = explode(':',$auth['perms']);
 
 if ($user!='admin' && !in_array(basename($SCRIPT_NAME),$permissions)){
@@ -90,6 +98,18 @@ if ($user!='admin' && !in_array(basename($SCRIPT_NAME),$permissions)){
     include_once('./admin_footer.php');
     exit;
 }
-$fullname = $auth['name'];
+*/
+
+if (!($id_result=mysql_query('SELECT mail, web, ugroup, name  from '.$db_prepend.$table_users.' where user="'.$user.'"',$db_connection)))
+    do_error(1,'SELECT '.$db_prepend.$table_users.': '.mysql_error());
+if (mysql_num_rows($id_result)!=1){
+    Header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=unauthorised' . $url);
+    die();
+}
+$user_info = mysql_fetch_array($id_result);
+mysql_free_result($id_result);
+
+
+$user_info['ip']  = $ip;
 
 ?>

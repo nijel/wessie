@@ -31,18 +31,34 @@ $remove_path='admin/';
 require_once('../init.php');
 require_once('../config.php');
 require_once('./functions.php');
+require_once('../db_connect.php');
 Header('Content-Type: text/html; charset='.$admin_charset);
 $page_title=$site_name[0].':Administration:Login';
 
-// enforce https also for redirects
+// Enforce https also for redirects
 if (isset($url) && ($admin_force_ssl || isset($HTTPS)))
     $url = ereg_replace('^http:','https:', $url);
+
+// On each login attempt clean all old hashes
+if (!(mysql_query('DELETE FROM '.$db_prepend.$table_logged.' where time<(NOW() - interval '.$admin_timeout.')', $db_connection)))
+    do_error(1,'DELETE FROM '.$db_prepend.$table_logged.': '.mysql_error());
+
+
+// Generate IP address identification
+$ip=$REMOTE_ADDR;
+$headers = getallheaders();
+while (list ($header, $value) = each ($headers)) {
+    if ($header=='X-Forwarded-For') {
+        $ip.=' ('.$value.')';
+    }
+}
+
 
 if (isset($HTTP_POST_VARS['submit'])){
     $pass=md5($HTTP_POST_VARS['pass']);
     $user=opt_addslashes($HTTP_POST_VARS['user']);
 
-    include_once('../db_connect.php');
+    // Check whether selected user exists
     if (!($id_result=mysql_query('SELECT count(user) as count from '.$db_prepend.$table_users.' where user="'.$user.'" and pass="'.$pass.'"',$db_connection)))
             do_error(1,'SELECT '.$db_prepend.$table_users.': '.mysql_error());
     $auth=mysql_fetch_array($id_result);
@@ -56,16 +72,9 @@ if (isset($HTTP_POST_VARS['submit'])){
     $hash=md5 (uniqid (rand()));
     setcookie ('hash',$hash ,time()+$admin_hash_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),'', $admin_force_ssl || isset($HTTPS));
 
-    $ip=$REMOTE_ADDR;
-    $headers = getallheaders();
-    while (list ($header, $value) = each ($headers)) {
-        if ($header=='X-Forwarded-For') {
-            $ip.=' ('.$value.')';
-        }
-    }
-
-    if (!(mysql_query('UPDATE '.$db_prepend.$table_users." set hash='".$hash."', time=NOW(), ip= '".$ip."' where user='".$user."' and pass='".$pass."' limit 1",$db_connection)))
-            do_error(1,'UPDATE '.$db_prepend.$table_users.': '.mysql_error());
+    // Store authetication info into table
+    if (!(mysql_query('REPLACE '.$db_prepend.$table_logged." set hash='".$hash."', time=NOW(), ip= '".$ip."', user='".$user."'",$db_connection)))
+        do_error(1,'REPLACE '.$db_prepend.$table_logged.': '.mysql_error());
 
     if (!isset($url)){
         $url = ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/index.php';
@@ -90,8 +99,9 @@ if (isset($HTTP_POST_VARS['submit'])){
     $user=opt_addslashes($HTTP_GET_VARS['user']);
 
     include_once('../db_connect.php');
-    if (!($id_result=mysql_query('SELECT count(user) as count from '.$db_prepend.$table_users.' where user="'.$user.'" and hash="'.$hash.'"',$db_connection)))
-            do_error(1,'SELECT '.$db_prepend.$table_users.': '.mysql_error());
+    if (!($id_result = mysql_query('SELECT count(user) as count from '.$db_prepend.$table_logged." where hash='".$hash."' and time>(NOW() - interval ".$admin_timeout.") and ip= '".$ip."' and user='".$user."'",$db_connection)))
+        do_error(1,'SELECT count(user) as count from '.$db_prepend.$table_logged.': '.mysql_error());
+
     $auth=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
     if ($auth['count']!=1){
