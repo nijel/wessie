@@ -27,7 +27,6 @@
 $page_name='Menu';
 require_once('./admin_header.php');
 ?>
-<br />
 <table class="filter">
   <tr>
     <td class="filtertext">
@@ -69,14 +68,7 @@ while ($item = mysql_fetch_array ($id_result)){
     if ((!isset($item['description']))||($item['description']=='')) $desc=$page['description'];
     else $desc=$item['description'];
 
-    if ($even == 1) {
-        echo '<tr class="even"';
-    } else {
-        echo '<tr class="odd"';
-    }
-    highlighter($admin_highlight_list);
-    echo'><td>';
-
+    make_row($even,'menu_edit.php?id='.$item['id'].'&amp;lng='.$item['lng']);
     $even = 1 - $even;
 
     echo $lang_name[$item['lng']];
@@ -90,7 +82,7 @@ while ($item = mysql_fetch_array ($id_result)){
     echo '</td><td>' . $item['expand'];
     echo '</td><td>' . $item['id'];
     echo '</td><td>' . $item['page'];
-    echo '</td><td>&nbsp;<a href="menu_edit.php?id=',$item['id'].'&amp;lng='.$item['lng'].'">Edit</a>&nbsp;|&nbsp;<a href="menu_edit.php?parent=',$item['id'].'&amp;lng='.$item['lng'].'">Add child</a>&nbsp;|&nbsp;<a href="menu_delete.php?id=',$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;</td></tr>'."\n";
+    echo '</td><td>&nbsp;<a href="menu_edit.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Edit</a>&nbsp;|&nbsp;<a href="menu_edit.php?parent=',$item['id'].'&amp;lng='.$item['lng'].'">Add child</a>&nbsp;|&nbsp;<a href="menu_delete.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;</td></tr>'."\n";
 
     add_childs($item['id'],$depth+1,$item['lng']);
 }

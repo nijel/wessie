@@ -26,13 +26,16 @@ form.filter {
 input,select {
     background-color: #ff0000;
 }
-input.delete,input.return,input.text,input.go,input.save,input.reset,textarea.text,input.ok,select.select,input.check,input.login {
+input.delete,input.return,input.text,input.go,input.save,input.reset,textarea.text,input.ok,select.select,input.check,input.login,input.radio {
     color: #000000;
     background-color: #ccccaa;
 }
 input.required,textarea.required,input.username,input.password {
     color: #000000;
     background-color: #ddddbb;
+}
+label.radios {
+    text-align: left;
 }
 a:link {
     color: #0000FF;
@@ -70,7 +73,7 @@ table.tabs {
     width: 100%;
     text-align: center;
     padding: 1px 1px 0px 1px;
-    margin: 0px 0px 0px 0px;
+    margin: 0px 0px 5px 0px;
 }
 table.tabs a:hover {
     text-decoration: none;
@@ -106,6 +109,11 @@ table.savereset {
 table.yesno {
     borded: none;
     text-align: center;
+    vertical-align: bottom;
+}
+table.yesno td {
+    text-align: center;
+    vertical-align: bottom;
 }
 table.login {
     border: none;
@@ -125,4 +133,16 @@ p.note {
     font-size: small;
     margin-bottom: 0px;
     margin-top: 0px;
+}
+p.message {
+    font-weight: bold;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    text-align: left;
+}
+p.radios {
+    text-align: left;
+}
+span.warning {
+    font-weight: bold;
 }

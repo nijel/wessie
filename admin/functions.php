@@ -105,7 +105,7 @@ function init_category_name(){
     $category_name_init=TRUE;
 }
 
-function category_edit($selected,$lng,$name='category',$add_any=FALSE,$class='select'){
+function category_edit($selected,$lng,$name='category',$add_any=FALSE,$class='select',$disabled=array()){
     global $category_name_init,$category_name_cache;
     if (!$category_name_init) init_category_name();
     echo '<select name="'.$name.'"'.($class!=''?' class="'.$class.'"':'').'>';
@@ -114,7 +114,9 @@ function category_edit($selected,$lng,$name='category',$add_any=FALSE,$class='se
     }
     reset($category_name_cache[$lng]);
     while (list ($key, $val) = each($category_name_cache[$lng])){
-        echo '<option'.($key==$selected?' selected="selected"':'').' value="'.$key.'">'.htmlspecialchars($val).'</option>';
+        if (!in_array($key,$disabled)){
+            echo '<option'.($key==$selected?' selected="selected"':'').' value="'.$key.'">'.htmlspecialchars($val).'</option>';
+        }
     }
     echo '</select>';
 }
@@ -205,6 +207,19 @@ function is_page_free($id,$lng){
     }
 }
 
+function is_category_free($id,$lng){
+    global $table_prepend_name,$table_category;
+    if (!$id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_category.' where  id='.$id.' and lng='.$lng)){
+        show_error("Can't get page info! (".mysql_error().')');
+        exit;
+    }
+    if (mysql_num_rows($id_result)!=0){
+        return FALSE;
+    } else {
+        return TRUE;
+    }
+}
+
 function get_page_translations($id){
     global $table_prepend_name,$table_page;
     if (!$id_result=mysql_query('SELECT lng from '.$table_prepend_name.$table_page.' where id='.$id)){
@@ -219,9 +234,54 @@ function get_page_translations($id){
     return $result;
 }
 
+function get_category_translations($id){
+    global $table_prepend_name,$table_category;
+    if (!$id_result=mysql_query('SELECT lng from '.$table_prepend_name.$table_category.' where id='.$id)){
+        show_error("Can't get category info! (".mysql_error().')');
+        exit;
+    }
+    $result=array();
+    while ($item = mysql_fetch_array ($id_result)) {
+        $result[$item['lng']]=$item['lng'];
+    }
+    mysql_free_result($id_result);
+    return $result;
+}
+
 function make_url($id,$lng){
     global $base_path;
     return $base_path.'../main.php/id='.$id.'/lng='.$lng;
+}
+
+function change_everywhere_category($from,$to,$lng){
+    global $table_prepend_name,$table_menu,$table_page;
+    if (!$id_result=mysql_query('UPDATE '.$table_prepend_name.$table_page.' set category='.$to.' where category='.$from.' AND lng='.$lng)){
+        show_error("Can't update category info! (".mysql_error().')');
+        exit;
+    }
+    if (!$id_result=mysql_query('UPDATE '.$table_prepend_name.$table_menu.' set category='.$to.' where category='.$from.' AND lng='.$lng)){
+        show_error("Can't update category info! (".mysql_error().')');
+        exit;
+    }
+}
+
+function delete_everywhere_category($id,$lng){
+    global $table_prepend_name,$table_menu,$table_page;
+    if (!$id_result=mysql_query('DELETE FROM '.$table_prepend_name.$table_page.' where category='.$id.' AND lng='.$lng)){
+        show_error("Can't update category info! (".mysql_error().')');
+        exit;
+    }
+    if (!$id_result=mysql_query('DELETE FROM '.$table_prepend_name.$table_menu.' where category='.$id.' AND lng='.$lng)){
+        show_error("Can't update category info! (".mysql_error().')');
+        exit;
+    }
+}
+
+function make_row($even,$url){
+    global $admin_highlight_list;
+    echo '<tr onclick="window.location.replace(\''.$url.'\')" '.(($even == 1)?'class="even"':'class="odd"');
+    highlighter($admin_highlight_list);
+    echo'><td>';
 }
 
 function highlighter($color='#00ff00'){
