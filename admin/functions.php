@@ -302,7 +302,7 @@ function make_url($id,$lng){
 
 function make_absolute_url($id,$lng){
     global $base_path,$SERVER_NAME, $languages;
-    return 'http://'.$SERVER_NAME.$base_path.'/../main.php/page'.$id.'.'.$languages[$lng].'.html';
+    return 'http://'.$SERVER_NAME.$base_path.'main.php/page'.$id.'.'.$languages[$lng].'.html';
 }
 
 
