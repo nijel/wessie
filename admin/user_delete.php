@@ -37,7 +37,7 @@ function delete_user(){
         exit;
     }
 
-    if (!mysql_query('DELETE FROM '.$db_prepend.$table_users.' where id="'.$id.'" limit 1')){
+    if (!mysql_query('DELETE FROM '.$db_prepend.$table_users.' where user="'.$id.'" limit 1')){
         show_error("Can't delete user! (".mysql_error().')');
         exit;
     }
