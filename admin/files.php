@@ -28,25 +28,6 @@ $page_name='File management';
 require_once('./download_header.php');
 require_once('./file_functions.php');
 $orig_pwd = getcwd();
-?>
-
-<table class="filter">
-  <tr>
-    <td class="filtertext">
-      Search for file (only in web tree):
-    </td>
-    <td class="filtercontent">
-      <form method="get" action="files.php" class="filter">
-        Filename:
-        <input type="text" name="search" <?php if(isset($search)){ echo 'value="'.$search.'"'; }?> class="text"/>
-        &nbsp;<input type="checkbox" name="regexp" <?php if(isset($regexp)){ echo "checked=\"checked\""; }?> class="check"/> regexp
-        &nbsp;<input type="checkbox" name="case" <?php if(isset($case)){ echo "checked=\"checked\""; }?> class="check"/> case sensitive
-        &nbsp;<input type="submit" value=" Go " class="go" />
-      </form>
-    </td>
-  </tr>
-</table><br />
-<?php
 
 if (isset($search) && trim($search) == '') unset($search);
 
@@ -67,6 +48,31 @@ if ($admin_fm_restrict && (strlen($dir) < $root_dir_len || strpos($dir,$root_dir
     $dir = $root_dir;
 }
 
+?>
+
+<table class="filter">
+  <tr>
+    <td class="filtertext">
+      Search for file:
+    </td>
+    <td class="filtercontent">
+      <form method="get" action="files.php" class="filter">
+        Filename:
+        <input type="text" name="search" <?php if(isset($search)){ echo 'value="'.$search.'"'; }?> class="text"/>
+        &nbsp;<input type="checkbox" name="regexp" <?php if(isset($regexp)){ echo "checked=\"checked\""; }?> class="check"/> regular expression
+        &nbsp;<input type="checkbox" name="case" <?php if(isset($case)){ echo "checked=\"checked\""; }?> class="check"/> case sensitive,
+        search in
+        <input type="radio" name="where" value="1" class="radio" <?php if ((!isset($where))||$where==1) echo "checked=\"checked\"";?>/> subfolders of current directory (<?php echo $dir; ?>)
+        <input type="radio" name="where" value="2" class="radio" <?php if (isset($where)&&$where==2) echo "checked=\"checked\"";?>/> web tree
+        &nbsp;<input type="submit" value=" Go " class="go" />
+        <input type="hidden" name="dir" value="<?php echo $dir; ?>">
+      </form>
+    </td>
+  </tr>
+</table><br />
+
+<?php
+
 echo 'Quickjump: <a href="files.php?'.(isset($case)?'case=&amp;':'').(isset($regexp)?'regexp=&amp;':'').'dir='.urlencode($root_dir).'">web tree root</a>';
 reset($admin_fm_quickjump);
 while (list ($key, $val) = each ($admin_fm_quickjump)){
@@ -76,20 +82,18 @@ while (list ($key, $val) = each ($admin_fm_quickjump)){
 }
 echo "<br/>\n";
 
+if (strlen($dir) < $root_dir_len){
+    $webdir = '<b>out of web tree!</b>';
+} else {
+    $webdir = substr($dir,$root_dir_len);
+    if ($webdir == '') $webdir = '/';
+}
+
 if (isset($search)) {
     $dirs = array();
-    $files = find_file($search,$root_dir,isset($regexp),isset($case));
-    $webdir = '.';
+    if (!isset($dir)||!isset($where)||$where==2) $dir=$root_dir;
+    $files = find_file($search,$dir,isset($regexp),isset($case));
 } else {
-    if (strlen($dir) < $root_dir_len){
-        $webdir = '<b>out of web tree!</b>';
-    } else {
-        $webdir = substr($dir,$root_dir_len);
-        if ($webdir == '') $webdir = '/';
-    }
-
-    echo 'Current directory: '.$webdir.' (real path: '.$dir.')<br/>';
-
     $files = array();
     $dirs = array();
 
@@ -98,6 +102,9 @@ if (isset($search)) {
         exit;
     }
 }
+
+echo 'Current directory: '.$webdir.' (real path: '.$dir.')<br/>';
+
 natsort($files);
 natsort($dirs);
 $list=add_file_info($dir,$dirs);
@@ -149,7 +156,7 @@ while (list ($key, $val) = each($list)){
         if (strncmp($root_dir,$dir.'/'.$filename,$root_dir_len)==0) $download_path = $webdir.$filename;
         else $download_path = '';
     }
-    make_cell($filename);
+    make_cell((isset($search)?'.':'').$filename);
 
     if($admin_fm_show_size) make_cell($size,'','size');
     if($admin_fm_show_type) make_cell($val['type']);
@@ -172,18 +179,21 @@ echo 'Listed files: '.$counter;
 
 ?>
 <?php
-if (is_writeable($dir)){
-?>
-<form action="files_upload.php" method="post" enctype="multipart/form-data">
-Upload file:
-<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $admin_fm_maxsize; ?>">
-<input type="file" name="file" class="file"/>
-<input type="hidden" name="dir" value="<?php echo $dir; ?>">
-<input type="submit" value=" Go " class="go" />
-</form>
-<?php
-} else {
-echo '<div class="error">Upload not possible, web server can not write to current directory!</div>';
+
+if (!isset($search)) {
+    if (is_writeable($dir)){
+        ?>
+        <form action="files_upload.php" method="post" enctype="multipart/form-data">
+        Upload file:
+        <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $admin_fm_maxsize; ?>">
+        <input type="file" name="file" class="file"/>
+        <input type="hidden" name="dir" value="<?php echo $dir; ?>">
+        <input type="submit" value=" Go " class="go" />
+        </form>
+        <?php
+    } else {
+        echo '<div class="error">Upload not possible, web server can not write to current directory!</div>';
+    }
 }
 chdir($orig_pwd);
 require_once('./admin_footer.php');
