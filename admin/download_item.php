@@ -56,7 +56,7 @@ if (isset($filter_group) && ($filter_group != 'any')) {
 
 if (!$id_result=mysql_query(
 'SELECT id, filename, remote, grp, count '.
-' from '.$table_prepend_name.$table_download.
+' from '.$db_prepend.$table_download.
 ' where '.$cond.
 ' order by id'))
     show_error("Can't select downloads! (".mysql_error().')');

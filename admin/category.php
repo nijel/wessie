@@ -65,7 +65,7 @@ if (isset($filter_desc) && ($filter_desc != '')) {
 
 if (!$id_result=mysql_query(
 'SELECT id, name, short, lng, description, page '.
-' from '.$table_prepend_name.$table_category.
+' from '.$db_prepend.$table_category.
 ' where '.$cond.
 ' order by '.$category_order.',lng'))
     show_error("Can't select categories! (".mysql_error().')');

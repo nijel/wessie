@@ -30,7 +30,7 @@ if (isset($action) && ($action=='save')){
     if (isset($add_a)) $addHtml |= 2;
     if (isset($add_p)) $addHtml |= 1;
     $param=addslashes("\$pars=$pars;\n\$sentences=$sentences;\n\$words=$words;\n\$letters=$letters;\n\$addHtml=$addHtml;");
-    if (!mysql_query('UPDATE '.$table_prepend_name.$table_page.' set name="'.$name.'",description="'.$description.'",keywords="'.$keywords.'",category='.$category.',param="'.$param.'" where id='.$page.' and lng='.$lng)){
+    if (!mysql_query('UPDATE '.$db_prepend.$table_page.' set name="'.$name.'",description="'.$description.'",keywords="'.$keywords.'",category='.$category.',param="'.$param.'" where id='.$page.' and lng='.$lng)){
         show_error("Can't save page info! (".mysql_error().')');
         exit;
     }
@@ -63,7 +63,7 @@ if (isset($action) && ($action=='save')){
     $action='create_new';
     if (!$id_result=mysql_query(
     'SELECT lng, id, name, description, count, category, param, keywords'.
-    ' from '.$table_prepend_name.$table_page.
+    ' from '.$db_prepend.$table_page.
     ' where lng='.$from_lng.' and id='.$id))
         show_error("Can't get page info! (".mysql_error().')');
     $page=mysql_fetch_array($id_result);
@@ -77,7 +77,7 @@ if (isset($action) && ($action=='save')){
     $action='save';
     if (!$id_result=mysql_query(
     'SELECT lng, id, name, description, count, category, param, keywords'.
-    ' from '.$table_prepend_name.$table_page.
+    ' from '.$db_prepend.$table_page.
     ' where lng='.$lng.' and id='.$id))
         show_error("Can't get page info! (".mysql_error().')');
     $page=mysql_fetch_array($id_result);

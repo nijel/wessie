@@ -30,14 +30,14 @@ require_once('./admin_header.php');
 require_once('./user_common.php');
 
 function delete_user(){
-    global $id,$lng,$table_prepend_name,$table_users;
+    global $id,$lng,$db_prepend,$table_users;
 
     if ($id == 'admin'){
         show_error('User admin can NOT be deleted!');
         exit;
     }
 
-    if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_users.' where id="'.$id.'" limit 1')){
+    if (!mysql_query('DELETE FROM '.$db_prepend.$table_users.' where id="'.$id.'" limit 1')){
         show_error("Can't delete user! (".mysql_error().')');
         exit;
     }
@@ -66,7 +66,7 @@ if ($id == 'admin'){
 
 if (!$id_result=mysql_query(
 'SELECT * '.
-' from '.$table_prepend_name.$table_users.
+' from '.$db_prepend.$table_users.
 ' where user="'.$id.'"'))
     show_error("Can't select user! (".mysql_error().')');
 $userdata=mysql_fetch_array($id_result);

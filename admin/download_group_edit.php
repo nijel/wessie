@@ -29,7 +29,7 @@ $page_name='Download group:Edit';
 require_once('./download_header.php');
 
 if (isset($action) && ($action=='save')){
-    if (!mysql_query('UPDATE '.$table_prepend_name.$table_download_group.' set name="'.$name.'" WHERE id='.$id)){
+    if (!mysql_query('UPDATE '.$db_prepend.$table_download_group.' set name="'.$name.'" WHERE id='.$id)){
         show_error("Can't save download group info! (".mysql_error().')');
         exit;
     }
@@ -37,11 +37,11 @@ if (isset($action) && ($action=='save')){
     include_once('./admin_footer.php');
     exit;
 }elseif(isset($action) && ($action=='create_new')){
-    if (!mysql_query('INSERT '.$table_prepend_name.$table_download_group.' set name="'.$name.'"'.(($id==-1)?'':(', id='.$id)))){
+    if (!mysql_query('INSERT '.$db_prepend.$table_download_group.' set name="'.$name.'"'.(($id==-1)?'':(', id='.$id)))){
         show_error("Can't save download group info! (".mysql_error().')');
         exit;
     }
-    if (!$id_result=mysql_query('SELECT id FROM '.$table_prepend_name.$table_download_group.' where name="'.$name.'"'.(($id==-1)?'':(' AND id='.$id)))){
+    if (!$id_result=mysql_query('SELECT id FROM '.$db_prepend.$table_download_group.' where name="'.$name.'"'.(($id==-1)?'':(' AND id='.$id)))){
         show_error("Can't get download group info! (".mysql_error().')');
         exit;
     }
@@ -67,7 +67,7 @@ if (isset($action) && ($action=='save')){
     $action='save';
     if (!$id_result=mysql_query(
     'SELECT id, name, count '.
-    ' from '.$table_prepend_name.$table_download_group.
+    ' from '.$db_prepend.$table_download_group.
     ' where id='.$id))
         show_error("Can't select download group! (".mysql_error().')');
     $download=mysql_fetch_array($id_result);

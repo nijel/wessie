@@ -36,11 +36,14 @@ error_reporting (E_ALL);
 // $db_pass            - password
 // $db_name            - name of database
 // $db_persistent      - use persistant connections?
+// $db_prepend         - prepended before each table name, this allows multiple
+//                       wessies running on one database
 $db_host = 'localhost';
 $db_user = 'wessie';
 $db_pass = 'wessie';
 $db_name = 'wessie';
 $db_persistent = TRUE;
+$db_prepend = '';
 //##/DATABASE##
 
 //##ERRORS##
@@ -93,11 +96,7 @@ $lang_time = 31536000;
 
 // all table names are fully customisable
 //##TABLES##
-// $table_prepend_name - prepended before each table name, this allows multiple
-//                       wessies running on one database
 // $table_*            - name for each table
-$table_prepend_name = '';
-
 $table_page = 'page';
 $table_category = 'category';
 $table_advert = 'advert';

@@ -111,8 +111,8 @@ setcookie($cookie_count,$cookie_to_set,time()+$session_time);
 setcookie($cookie_lang,$lng,time()+$lang_time);
 
 //read page
-if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_page.' where id='.$id.' and lng='.$lng.' limit 1',$db_connection)))
-    do_error(1,'SELECT '.$table_prepend_name.$table_page.': '.mysql_error());
+if (!($id_result=mysql_query('SELECT * from '.$db_prepend.$table_page.' where id='.$id.' and lng='.$lng.' limit 1',$db_connection)))
+    do_error(1,'SELECT '.$db_prepend.$table_page.': '.mysql_error());
 $page=mysql_fetch_array($id_result);
 if (!isset($page['id'])){
     log_error('Unknown page: '.$id);
@@ -123,8 +123,8 @@ mysql_free_result($id_result);
 
 //generate statistics
 if ($increase_count){
-    if (!(mysql_query('UPDATE '.$table_prepend_name.$table_page.' set count=count+1 where id='.$id.' and lng='.$lng.' limit 1',$db_connection)))
-        do_error(1,'UPDATE '.$table_prepend_name.$table_page.': '.mysql_error());
+    if (!(mysql_query('UPDATE '.$db_prepend.$table_page.' set count=count+1 where id='.$id.' and lng='.$lng.' limit 1',$db_connection)))
+        do_error(1,'UPDATE '.$db_prepend.$table_page.': '.mysql_error());
 
     $dow=date('w');
     if ($dow==0) $dow=7;
@@ -136,16 +136,16 @@ if ($increase_count){
     else $wno=(string)$wno;
 
     /* TODO: This needs some optimalisations!!! - shouldn't be executed every time, just once a week....*/
-    if (!(mysql_query('INSERT ignore '.$table_prepend_name.$table_stat." set count=1, category='week_no', item='$wno'",$db_connection)))
-        do_error(1,'INSERT ignore '.$table_prepend_name.$table_stat.': '.mysql_error());
+    if (!(mysql_query('INSERT ignore '.$db_prepend.$table_stat." set count=1, category='week_no', item='$wno'",$db_connection)))
+        do_error(1,'INSERT ignore '.$db_prepend.$table_stat.': '.mysql_error());
 
-    if (!(mysql_query('UPDATE '.$table_prepend_name.$table_stat." set count=count+1 where (category='time' and item='".strftime('%H')."') or (category='dow' and item='$dow') or (category='week_no' and item='$wno') or (category='os' and item='$os') or (category='browser' and item='$browser') or(category='lang' and item='$lng') or (category='total' and item='hits')",$db_connection)))
-            do_error(1,'UPDATE '.$table_prepend_name.$table_stat.': '.mysql_error());
+    if (!(mysql_query('UPDATE '.$db_prepend.$table_stat." set count=count+1 where (category='time' and item='".strftime('%H')."') or (category='dow' and item='$dow') or (category='week_no' and item='$wno') or (category='os' and item='$os') or (category='browser' and item='$browser') or(category='lang' and item='$lng') or (category='total' and item='hits')",$db_connection)))
+            do_error(1,'UPDATE '.$db_prepend.$table_stat.': '.mysql_error());
 }
 
 //read all categories (TODO: this should be cached)
-if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_category.' where lng='.$lng.' order by '.$category_order,$db_connection)))
-    do_error(1,'SELECT '.$table_prepend_name.$table_category.': '.mysql_error());
+if (!($id_result=mysql_query('SELECT * from '.$db_prepend.$table_category.' where lng='.$lng.' order by '.$category_order,$db_connection)))
+    do_error(1,'SELECT '.$db_prepend.$table_category.': '.mysql_error());
 
 $categories=array();
 while ($item = mysql_fetch_array ($id_result)) {
@@ -203,15 +203,15 @@ function make_url($id,$lng){
 }
 
 function download($which){
-global $table_prepend_name,$table_download,$table_download_group,$db_connection;
-    if (!($id_result=mysql_query("SELECT * from $table_prepend_name$table_download where id=$which limit 1",$db_connection)))
-        do_error(1,'SELECT '.$table_prepend_name.$table_download.'---'."SELECT * from $table_prepend_name$table_download where id=$which limit 1");
+global $db_prepend,$table_download,$table_download_group,$db_connection;
+    if (!($id_result=mysql_query("SELECT * from $db_prepend$table_download where id=$which limit 1",$db_connection)))
+        do_error(1,'SELECT '.$db_prepend.$table_download.'---'."SELECT * from $db_prepend$table_download where id=$which limit 1");
     $file=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
 
     if ($file['grp']!=0){
-        if (!($id_result=mysql_query("SELECT * from $table_prepend_name$table_download_group where id=".$file['grp']." limit 1",$db_connection)))
-            do_error(1,'SELECT '.$table_prepend_name.$table_download_group.'---'."SELECT * from $table_prepend_name$table_download_group where id=".$file['grp']." limit 1");
+        if (!($id_result=mysql_query("SELECT * from $db_prepend$table_download_group where id=".$file['grp']." limit 1",$db_connection)))
+            do_error(1,'SELECT '.$db_prepend.$table_download_group.'---'."SELECT * from $db_prepend$table_download_group where id=".$file['grp']." limit 1");
         $group=mysql_fetch_array($id_result);
         mysql_free_result($id_result);
         echo make_download($file,$group);
@@ -221,7 +221,7 @@ global $table_prepend_name,$table_download,$table_download_group,$db_connection;
 }
 
 function upper_menu(){
-    global $table_prepend_name,$table_category,$lng,$db_connection,$upper_menu_divisor,$page,$categories;
+    global $db_prepend,$table_category,$lng,$db_connection,$upper_menu_divisor,$page,$categories;
 
     $percent=(string)(int)100/count($categories).'%';
     $was_item=false;
@@ -233,10 +233,10 @@ function upper_menu(){
 }
 
 function top_pages(){
-    global $table_prepend_name,$table_category,$table_page,$lng,$db_connection,$top_pages_divisor,$top_pages_count,$categories;;
+    global $db_prepend,$table_category,$table_page,$lng,$db_connection,$top_pages_divisor,$top_pages_count,$categories;;
     if($top_pages_count>0){
-        $id_result=mysql_query('SELECT id,name,description,category from '.$table_prepend_name.$table_page.' where lng='.$lng.' order by count desc limit '.$top_pages_count) or
-            do_error(1,'SELECT '.$table_prepend_name.$table_page.': '.mysql_error());
+        $id_result=mysql_query('SELECT id,name,description,category from '.$db_prepend.$table_page.' where lng='.$lng.' order by count desc limit '.$top_pages_count) or
+            do_error(1,'SELECT '.$db_prepend.$table_page.': '.mysql_error());
 
         $was_item=false;
         while ($item = mysql_fetch_array ($id_result)) {
@@ -250,10 +250,10 @@ function top_pages(){
 }
 
 function advert(){
-    global $use_adverts,$table_prepend_name,$table_advert,$db_connection;
+    global $use_adverts,$db_prepend,$table_advert,$db_connection;
     if ($use_adverts){
-        $id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_advert.'',$db_connection) or
-            do_error(1,'SELECT id from '.$table_prepend_name.$table_advert);
+        $id_result=mysql_query('SELECT id from '.$db_prepend.$table_advert.'',$db_connection) or
+            do_error(1,'SELECT id from '.$db_prepend.$table_advert);
         $adverts=mysql_num_rows($id_result);
         mysql_free_result($id_result);
 
@@ -261,8 +261,8 @@ function advert(){
             srand ((double) microtime() * 1000000);
             $advert_id=($adverts==1)?0:rand(0,$adverts-1);
 
-            $id_result=mysql_query("SELECT code from $table_prepend_name$table_advert limit $advert_id,1",$db_connection) or
-                do_error(1,'SELECT '.$table_prepend_name.$table_advert);
+            $id_result=mysql_query("SELECT code from $db_prepend$table_advert limit $advert_id,1",$db_connection) or
+                do_error(1,'SELECT '.$db_prepend.$table_advert);
             $advert=mysql_fetch_array($id_result);
             mysql_free_result($id_result);
             echo $advert['code'];
@@ -294,7 +294,7 @@ function left_menu(){
         }
     }
 
-    global $lng,$id,$table_prepend_name,$table_menu,$table_page,$db_connection,$category;
+    global $lng,$id,$db_prepend,$table_menu,$table_page,$db_connection,$category;
     //cache must bu global, otherwise it would not be accessible by add_childs
     global $menu_item_cache,$menu_parent_cache,$menu_page_cache;
 
@@ -308,17 +308,17 @@ function left_menu(){
     $menu_page_cache=array();
 
     if (!($id_result=mysql_query("SELECT
-    $table_prepend_name$table_menu.id as id,
-    $table_prepend_name$table_menu.page as page,
-    if(strcmp($table_prepend_name$table_menu.name,''),$table_prepend_name$table_menu.name,$table_prepend_name$table_page.name) as name,
-    if(strcmp($table_prepend_name$table_menu.description,''),$table_prepend_name$table_menu.description,$table_prepend_name$table_page.description) as description,
-    $table_prepend_name$table_menu.category as category,
-    $table_prepend_name$table_menu.parent as parent,
-    $table_prepend_name$table_menu.expand as expand,
-    $table_prepend_name$table_menu.rank as rank
-    from $table_prepend_name$table_menu,$table_prepend_name$table_page
+    $db_prepend$table_menu.id as id,
+    $db_prepend$table_menu.page as page,
+    if(strcmp($db_prepend$table_menu.name,''),$db_prepend$table_menu.name,$db_prepend$table_page.name) as name,
+    if(strcmp($db_prepend$table_menu.description,''),$db_prepend$table_menu.description,$db_prepend$table_page.description) as description,
+    $db_prepend$table_menu.category as category,
+    $db_prepend$table_menu.parent as parent,
+    $db_prepend$table_menu.expand as expand,
+    $db_prepend$table_menu.rank as rank
+    from $db_prepend$table_menu,$db_prepend$table_page
     where menu.category=${category['id']} and menu.lng=$lng and menu.page=page.id and page.lng=$lng order by rank",$db_connection)))
-        do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
+        do_error(1,'SELECT '.$db_prepend.$table_menu.': '.mysql_error());
 
     //fill cache items
     while ($item = mysql_fetch_array ($id_result)){
@@ -405,17 +405,17 @@ function languages(){
 }
 
 function make_stat($which,$cond,$mul,$cvt="\$item['item']"){
-    global $db_connection,$table_stat,$table_prepend_name,$lng,$stat_start,$stat_end,$msg_unknown,$lang_name;
+    global $db_connection,$table_stat,$db_prepend,$lng,$stat_start,$stat_end,$msg_unknown,$lang_name;
 
     global_eval($stat_start);
 
-    if (!($id_result=mysql_query('SELECT count from '.$table_prepend_name.$table_stat." where category='total'",$db_connection)))
-        do_error(1,'SELECT '.$table_prepend_name.$table_stat.': '.mysql_error());
+    if (!($id_result=mysql_query('SELECT count from '.$db_prepend.$table_stat." where category='total'",$db_connection)))
+        do_error(1,'SELECT '.$db_prepend.$table_stat.': '.mysql_error());
     $item = mysql_fetch_array ($id_result);
     mysql_free_result($id_result);
     $total = $item['count'];
-    if (!($id_result=mysql_query('SELECT item,count from '.$table_prepend_name.$table_stat." where category='$which' $cond",$db_connection)))
-        do_error(1,'SELECT '.$table_prepend_name.$table_stat.': '.mysql_error());
+    if (!($id_result=mysql_query('SELECT item,count from '.$db_prepend.$table_stat." where category='$which' $cond",$db_connection)))
+        do_error(1,'SELECT '.$db_prepend.$table_stat.': '.mysql_error());
     while ($item = mysql_fetch_array ($id_result)){
         $percent=$item['count']*100/$total;
         eval('$name='.$cvt.';');

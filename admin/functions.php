@@ -54,6 +54,23 @@ global $wessie_author,$wessie_version,$wessie_copyright,$site_home,$admin_charse
 <?
 }
 
+$test = array();
+function get_filtered_vars($prefix){
+    global $test;
+    function do_filter($item,$key,$prefix) {
+        global $test;
+        if (strncmp($key, $prefix, strlen($prefix)) != 0)
+            unset($test[$key]);
+    }
+
+    $test = array();
+    $test = array_merge($test, $GLOBALS);
+
+    array_walk($test, 'do_filter','table_');
+    return $test;
+}
+
+
 function show_error($msg){
     echo '<p class="error">'.$msg.'</p>';
 }
@@ -126,8 +143,8 @@ function sized_edit($name,$content,$onchange=''){
 $download_group_name_init=FALSE;
 $download_group_name_cache=array();
 function init_download_group_name(){
-    global $table_prepend_name,$table_download_group,$db_connection,$download_group_name_init,$download_group_name_cache;
-    if (!($id_result=mysql_query('SELECT id,name from '.$table_prepend_name.$table_download_group,$db_connection)))
+    global $db_prepend,$table_download_group,$db_connection,$download_group_name_init,$download_group_name_cache;
+    if (!($id_result=mysql_query('SELECT id,name from '.$db_prepend.$table_download_group,$db_connection)))
         show_error(mysql_error());
     while ($item = mysql_fetch_array ($id_result)) {
         $download_group_name_cache[$item['id']]=$item['name'];
@@ -139,8 +156,8 @@ function init_download_group_name(){
 $category_name_init=FALSE;
 $category_name_cache=array();
 function init_category_name(){
-    global $table_prepend_name,$table_category,$db_connection,$category_name_init,$category_name_cache;
-    if (!($id_result=mysql_query('SELECT lng,id,name from '.$table_prepend_name.$table_category,$db_connection)))
+    global $db_prepend,$table_category,$db_connection,$category_name_init,$category_name_cache;
+    if (!($id_result=mysql_query('SELECT lng,id,name from '.$db_prepend.$table_category,$db_connection)))
         show_error(mysql_error());
     while ($item = mysql_fetch_array ($id_result)) {
         $category_name_cache[$item['lng']][$item['id']]=$item['name'];
@@ -185,8 +202,8 @@ function category_edit($selected,$lng,$name='category',$add_any=FALSE,$class='se
 }
 
 function page_edit($selected,$lng,$name='page',$show_details=FALSE,$class='select'){
-    global $table_prepend_name,$table_page,$db_connection;
-    if (!($id_result=mysql_query('SELECT id,name,category from '.$table_prepend_name.$table_page.' where lng='.$lng.' order by category',$db_connection)))
+    global $db_prepend,$table_page,$db_connection;
+    if (!($id_result=mysql_query('SELECT id,name,category from '.$db_prepend.$table_page.' where lng='.$lng.' order by category',$db_connection)))
         show_error(mysql_error());
 
     echo '<select name="'.$name.'"'.($class!=''?' class="'.$class.'"':'').'>';
@@ -265,12 +282,12 @@ function type_edit($selected=-1,$add_any=FALSE,$name='type',$disabled=array(),$c
 }
 
 function new_page($name,$type,$file,$description,$keywords,$lng,$category,$page){
-    global $table_prepend_name,$table_page;
-    if (!mysql_query('INSERT '.$table_prepend_name.$table_page.' set name="'.$name.'", type="'.$type.'", param="'.$file.'",description="'.$description.'",keywords="'.$keywords.'",category='.$category.',lng='.$lng.($page!=-1?', id='.$page:''))){
+    global $db_prepend,$table_page;
+    if (!mysql_query('INSERT '.$db_prepend.$table_page.' set name="'.$name.'", type="'.$type.'", param="'.$file.'",description="'.$description.'",keywords="'.$keywords.'",category='.$category.',lng='.$lng.($page!=-1?', id='.$page:''))){
         show_error("Can't create page! (".mysql_error().')');
         exit;
     }
-    if (!$id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_page.' where  name="'.$name.'" and type="'.$type.'" and param="'.$file.'" and description="'.$description.'" and keywords="'.$keywords.'" and category='.$category.' and lng='.$lng.($page!=-1?' and id='.$page:''))){
+    if (!$id_result=mysql_query('SELECT id from '.$db_prepend.$table_page.' where  name="'.$name.'" and type="'.$type.'" and param="'.$file.'" and description="'.$description.'" and keywords="'.$keywords.'" and category='.$category.' and lng='.$lng.($page!=-1?' and id='.$page:''))){
         show_error("Can't get back page info! (".mysql_error().')');
         exit;
     }
@@ -284,8 +301,8 @@ function new_page($name,$type,$file,$description,$keywords,$lng,$category,$page)
 }
 
 function is_page_free($id,$lng){
-    global $table_prepend_name,$table_page;
-    if (!$id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_page.' where  id='.$id.' and lng='.$lng)){
+    global $db_prepend,$table_page;
+    if (!$id_result=mysql_query('SELECT id from '.$db_prepend.$table_page.' where  id='.$id.' and lng='.$lng)){
         show_error("Can't get page info! (".mysql_error().')');
         exit;
     }
@@ -293,8 +310,8 @@ function is_page_free($id,$lng){
 }
 
 function is_category_free($id,$lng){
-    global $table_prepend_name,$table_category;
-    if (!$id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_category.' where  id='.$id.' and lng='.$lng)){
+    global $db_prepend,$table_category;
+    if (!$id_result=mysql_query('SELECT id from '.$db_prepend.$table_category.' where  id='.$id.' and lng='.$lng)){
         show_error("Can't get page info! (".mysql_error().')');
         exit;
     }
@@ -302,8 +319,8 @@ function is_category_free($id,$lng){
 }
 
 function is_download_free($id){
-    global $table_prepend_name,$table_download;
-    if (!$id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_download.' where  id='.$id)){
+    global $db_prepend,$table_download;
+    if (!$id_result=mysql_query('SELECT id from '.$db_prepend.$table_download.' where  id='.$id)){
         show_error("Can't get download info! (".mysql_error().')');
         exit;
     }
@@ -311,8 +328,8 @@ function is_download_free($id){
 }
 
 function is_download_group_free($id){
-    global $table_prepend_name,$table_download_group;
-    if (!$id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_download_group.' where  id='.$id)){
+    global $db_prepend,$table_download_group;
+    if (!$id_result=mysql_query('SELECT id from '.$db_prepend.$table_download_group.' where  id='.$id)){
         show_error("Can't get download group info! (".mysql_error().')');
         exit;
     }
@@ -320,8 +337,8 @@ function is_download_group_free($id){
 }
 
 function get_page_translations($id){
-    global $table_prepend_name,$table_page;
-    if (!$id_result=mysql_query('SELECT lng from '.$table_prepend_name.$table_page.' where id='.$id)){
+    global $db_prepend,$table_page;
+    if (!$id_result=mysql_query('SELECT lng from '.$db_prepend.$table_page.' where id='.$id)){
         show_error("Can't get page info! (".mysql_error().')');
         exit;
     }
@@ -334,8 +351,8 @@ function get_page_translations($id){
 }
 
 function get_category_translations($id){
-    global $table_prepend_name,$table_category;
-    if (!$id_result=mysql_query('SELECT lng from '.$table_prepend_name.$table_category.' where id='.$id)){
+    global $db_prepend,$table_category;
+    if (!$id_result=mysql_query('SELECT lng from '.$db_prepend.$table_category.' where id='.$id)){
         show_error("Can't get category info! (".mysql_error().')');
         exit;
     }
@@ -358,8 +375,8 @@ function make_absolute_url($id,$lng){
 
 
 function get_page_count($type){
-    global $table_prepend_name,$table_page;
-    if (!$id_result=mysql_query('SELECT count(*) as count from '.$table_prepend_name.$table_page." where type='".$type."'"))
+    global $db_prepend,$table_page;
+    if (!$id_result=mysql_query('SELECT count(*) as count from '.$db_prepend.$table_page." where type='".$type."'"))
         show_error("Can't select page count! (".mysql_error().')');
     $item = mysql_fetch_array ($id_result);
     mysql_free_result($id_result);
@@ -367,44 +384,44 @@ function get_page_count($type){
 }
 
 function change_everywhere_category($from,$to,$lng){
-    global $table_prepend_name,$table_menu,$table_page;
-    if (!$id_result=mysql_query('UPDATE '.$table_prepend_name.$table_page.' set category='.$to.' where category='.$from.' AND lng='.$lng)){
+    global $db_prepend,$table_menu,$table_page;
+    if (!$id_result=mysql_query('UPDATE '.$db_prepend.$table_page.' set category='.$to.' where category='.$from.' AND lng='.$lng)){
         show_error("Can't update category info! (".mysql_error().')');
         exit;
     }
-    if (!$id_result=mysql_query('UPDATE '.$table_prepend_name.$table_menu.' set category='.$to.' where category='.$from.' AND lng='.$lng)){
+    if (!$id_result=mysql_query('UPDATE '.$db_prepend.$table_menu.' set category='.$to.' where category='.$from.' AND lng='.$lng)){
         show_error("Can't update category info! (".mysql_error().')');
         exit;
     }
 }
 
 function delete_everywhere_category($id,$lng){
-    global $table_prepend_name,$table_menu,$table_page;
+    global $db_prepend,$table_menu,$table_page;
     delete_pages('category='.$id.' AND lng='.$lng);
-    if (!$id_result=mysql_query('DELETE FROM '.$table_prepend_name.$table_menu.' where category='.$id.' AND lng='.$lng)){
+    if (!$id_result=mysql_query('DELETE FROM '.$db_prepend.$table_menu.' where category='.$id.' AND lng='.$lng)){
         show_error("Can't update category info! (".mysql_error().')');
         exit;
     }
 }
 
 function change_downloads_download_group($from,$to){
-    global $table_prepend_name,$table_download;
-    if (!$id_result=mysql_query('UPDATE '.$table_prepend_name.$table_download.' set grp='.$to.' where grp='.$from)){
+    global $db_prepend,$table_download;
+    if (!$id_result=mysql_query('UPDATE '.$db_prepend.$table_download.' set grp='.$to.' where grp='.$from)){
         show_error("Can't update download info! (".mysql_error().')');
         exit;
     }
 }
 
 function delete_donwloads_download_group($id,$delete_files){
-    global $table_prepend_name,$table_download;
+    global $db_prepend,$table_download;
     if ($delete_files){
         if (!$id_result=mysql_query(
         'SELECT id, filename, remote, grp, count '.
-        ' from '.$table_prepend_name.$table_download.
+        ' from '.$db_prepend.$table_download.
         ' where grp='.$id))
             show_error("Can't select download! (".mysql_error().')');
 
-        if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_download.' where grp='.$id)){
+        if (!mysql_query('DELETE FROM '.$db_prepend.$table_download.' where grp='.$id)){
             show_error("Can't delete downloads! (".mysql_error().')');
             exit;
         }
@@ -421,7 +438,7 @@ function delete_donwloads_download_group($id,$delete_files){
         }
         mysql_free_result($id_result);
     }else{
-        if (!$id_result=mysql_query('DELETE FROM '.$table_prepend_name.$table_download.' where grp='.$id)){
+        if (!$id_result=mysql_query('DELETE FROM '.$db_prepend.$table_download.' where grp='.$id)){
             show_error("Can't update download info! (".mysql_error().')');
             exit;
         }
@@ -429,20 +446,20 @@ function delete_donwloads_download_group($id,$delete_files){
 }
 
 function delete_pages($condition){
-    global $table_prepend_name,$table_menu,$table_page;
-    if (!$id_result=mysql_query('SELECT id,type,lng,category FROM '.$table_prepend_name.$table_page.' where '.$condition)){
+    global $db_prepend,$table_menu,$table_page;
+    if (!$id_result=mysql_query('SELECT id,type,lng,category FROM '.$db_prepend.$table_page.' where '.$condition)){
         show_error("Can't get pages info! (".mysql_error().')');
         exit;
     }
 
     while ($item = mysql_fetch_array ($id_result)) {
-        if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_menu.' where page='.$item['id'].' AND lng='.$item['lng'])){
+        if (!mysql_query('DELETE FROM '.$db_prepend.$table_menu.' where page='.$item['id'].' AND lng='.$item['lng'])){
             show_error("Can't delete menu items! (".mysql_error().')');
             exit;
         }
 
         if ($item['type']!='file'){
-            if (!mysql_query('DELETE FROM '.$table_prepend_name.$GLOBALS['table_'.$item['type']].' where page='.$item['id'].' AND lng='.$item['lng'])){
+            if (!mysql_query('DELETE FROM '.$db_prepend.$GLOBALS['table_'.$item['type']].' where page='.$item['id'].' AND lng='.$item['lng'])){
                 show_error("Can't delete page details! (".mysql_error().')');
                 exit;
             }
@@ -450,7 +467,7 @@ function delete_pages($condition){
     }
     mysql_free_result($id_result);
 
-    if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_page.' where '.$condition)){
+    if (!mysql_query('DELETE FROM '.$db_prepend.$table_page.' where '.$condition)){
         show_error("Can't delete pages! (".mysql_error().')');
         exit;
     }

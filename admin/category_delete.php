@@ -29,9 +29,9 @@ $page_name='Ctagory:Delete';
 require_once('./admin_header.php');
 
 function delete_category(){
-    global $id,$lng,$table_prepend_name,$table_category;
+    global $id,$lng,$db_prepend,$table_category;
 
-    if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_category.' where id='.$id.' and lng='.$lng.' limit 1')){
+    if (!mysql_query('DELETE FROM '.$db_prepend.$table_category.' where id='.$id.' and lng='.$lng.' limit 1')){
         show_error("Can't delete category! (".mysql_error().')');
         exit;
     }
@@ -56,7 +56,7 @@ if (isset($action) && ($action=='delete') && isset($lng) && isset($id)){
 //    if ($admin_confirm_delete){
         if (!$id_result=mysql_query(
         'SELECT id, name, short, lng, description, page '.
-        ' from '.$table_prepend_name.$table_category.
+        ' from '.$db_prepend.$table_category.
         ' where lng='.$lng.' and id='.$id))
             show_error("Can't get category info! (".mysql_error().')');
 

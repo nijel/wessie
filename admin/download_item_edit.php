@@ -43,7 +43,7 @@ function check_remote(){
 
 <?php
 if (isset($action) && ($action=='save')){
-    if (!mysql_query('UPDATE '.$table_prepend_name.$table_download.' set filename="'.$filename.'", remote='.(isset($remote)?$remote:'0').', grp='.$grp.' WHERE id='.$id)){
+    if (!mysql_query('UPDATE '.$db_prepend.$table_download.' set filename="'.$filename.'", remote='.(isset($remote)?$remote:'0').', grp='.$grp.' WHERE id='.$id)){
         show_error("Can't save download info! (".mysql_error().')');
         exit;
     }
@@ -51,11 +51,11 @@ if (isset($action) && ($action=='save')){
     include_once('./admin_footer.php');
     exit;
 }elseif(isset($action) && ($action=='create_new')){
-    if (!mysql_query('INSERT '.$table_prepend_name.$table_download.' set filename="'.$filename.'"'.(($id==-1)?'':(', id='.$id)).', remote='.(isset($remote)?$remote:'0').', grp='.$grp)){
+    if (!mysql_query('INSERT '.$db_prepend.$table_download.' set filename="'.$filename.'"'.(($id==-1)?'':(', id='.$id)).', remote='.(isset($remote)?$remote:'0').', grp='.$grp)){
         show_error("Can't save download info! (".mysql_error().')');
         exit;
     }
-    if (!$id_result=mysql_query('SELECT id FROM '.$table_prepend_name.$table_download.' where filename="'.$filename.'"'.(($id==-1)?'':(' AND id='.$id)).' AND remote='.(isset($remote)?$remote:'0').' AND  grp='.$grp)){
+    if (!$id_result=mysql_query('SELECT id FROM '.$db_prepend.$table_download.' where filename="'.$filename.'"'.(($id==-1)?'':(' AND id='.$id)).' AND remote='.(isset($remote)?$remote:'0').' AND  grp='.$grp)){
         show_error("Can't get download info! (".mysql_error().')');
         exit;
     }
@@ -81,7 +81,7 @@ if (isset($action) && ($action=='save')){
     $action='save';
     if (!$id_result=mysql_query(
     'SELECT id, filename, remote, grp, count '.
-    ' from '.$table_prepend_name.$table_download.
+    ' from '.$db_prepend.$table_download.
     ' where id='.$id))
         show_error("Can't select download! (".mysql_error().')');
     $download=mysql_fetch_array($id_result);

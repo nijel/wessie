@@ -29,19 +29,19 @@ $page_name='Download:Delete';
 require_once('./download_header.php');
 
 function delete_download(){
-    global $id,$table_prepend_name,$table_download,$delete_file;
+    global $id,$db_prepend,$table_download,$delete_file;
 
     if (isset($delete_file) && ($delete_file==1)){
         if (!$id_result=mysql_query(
         'SELECT id, filename, remote, grp, count '.
-        ' from '.$table_prepend_name.$table_download.
+        ' from '.$db_prepend.$table_download.
         ' where id='.$id))
             show_error("Can't select download! (".mysql_error().')');
         $download=mysql_fetch_array($id_result);
         mysql_free_result($id_result);
     }
 
-    if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_download.' where id='.$id.' limit 1')){
+    if (!mysql_query('DELETE FROM '.$db_prepend.$table_download.' where id='.$id.' limit 1')){
         show_error("Can't delete download! (".mysql_error().')');
         exit;
     }
@@ -68,7 +68,7 @@ if (isset($action) && ($action=='delete') && isset($id)){
     if ($admin_confirm_delete){
         if (!$id_result=mysql_query(
         'SELECT id, filename, remote, grp, count '.
-        ' from '.$table_prepend_name.$table_download.
+        ' from '.$db_prepend.$table_download.
         ' where id='.$id))
             show_error("Can't select download! (".mysql_error().')');
         $download=mysql_fetch_array($id_result);

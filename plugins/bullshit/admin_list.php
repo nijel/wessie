@@ -48,7 +48,7 @@
 <?php
 
 if (isset($filter_lng) && $filter_lng!='any') {
-    $cond = ' and '.$table_prepend_name.$table_page.'.lng='.$filter_lng;
+    $cond = ' and '.$db_prepend.$table_page.'.lng='.$filter_lng;
 } else {
     $cond = '';
 }
@@ -61,7 +61,7 @@ if (isset($filter_desc) && ($filter_desc != '')) {
 
 if (!$id_result=mysql_query(
 'SELECT lng, id, name, description, count, category, param'.
-' from '.$table_prepend_name.$table_page.
+' from '.$db_prepend.$table_page.
 ' where type="bullshit" '.$cond.
 ' order by id,lng'))
     show_error("Can't select pages! (".mysql_error().')');

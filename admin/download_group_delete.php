@@ -29,9 +29,9 @@ $page_name='Download group:Delete';
 require_once('./download_header.php');
 
 function delete_download_group(){
-    global $id,$table_prepend_name,$table_download_group;
+    global $id,$db_prepend,$table_download_group;
 
-    if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_download_group.' where id='.$id.' limit 1')){
+    if (!mysql_query('DELETE FROM '.$db_prepend.$table_download_group.' where id='.$id.' limit 1')){
         show_error("Can't delete download group! (".mysql_error().')');
         exit;
     }
@@ -58,7 +58,7 @@ if (isset($action) && ($action=='delete') && isset($id)){
 //    if ($admin_confirm_delete){
         if (!$id_result=mysql_query(
         'SELECT id, name, count '.
-        ' from '.$table_prepend_name.$table_download_group.
+        ' from '.$db_prepend.$table_download_group.
         ' where id='.$id))
             show_error("Can't get download group info! (".mysql_error().')');
 

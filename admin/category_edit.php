@@ -31,7 +31,7 @@ require_once('./admin_header.php');
 if (isset($action) && ($action=='save')){
     //we should be able to edit/create category withou having any page
     if (!isset($page)) $page=0;
-    if (!mysql_query('UPDATE '.$table_prepend_name.$table_category.' set name="'.$name.'", page='.$page.', short="'.$short.'", description="'.$description.'" WHERE id='.$id.' AND lng='.$lng)){
+    if (!mysql_query('UPDATE '.$db_prepend.$table_category.' set name="'.$name.'", page='.$page.', short="'.$short.'", description="'.$description.'" WHERE id='.$id.' AND lng='.$lng)){
         show_error("Can't save article info! (".mysql_error().')');
         exit;
     }
@@ -41,11 +41,11 @@ if (isset($action) && ($action=='save')){
 }elseif(isset($action) && ($action=='create_new')){
     //we should be able to edit/create category withou having any page
     if (!isset($page)) $page=0;
-    if (!mysql_query('INSERT '.$table_prepend_name.$table_category.' set name="'.$name.'"'.(($id==-1)?'':(', id='.$id)).', lng='.$lng.', page='.$page.', short="'.$short.'", description="'.$description.'"')){
+    if (!mysql_query('INSERT '.$db_prepend.$table_category.' set name="'.$name.'"'.(($id==-1)?'':(', id='.$id)).', lng='.$lng.', page='.$page.', short="'.$short.'", description="'.$description.'"')){
         show_error("Can't save article info! (".mysql_error().')');
         exit;
     }
-    if (!$id_result=mysql_query('SELECT id FROM '.$table_prepend_name.$table_category.' where name="'.$name.'" and lng='.$lng.' and page='.$page.' and short="'.$short.'" and description="'.$description.'"')){
+    if (!$id_result=mysql_query('SELECT id FROM '.$db_prepend.$table_category.' where name="'.$name.'" and lng='.$lng.' and page='.$page.' and short="'.$short.'" and description="'.$description.'"')){
         show_error("Can't get article info! (".mysql_error().')');
         exit;
     }
@@ -71,7 +71,7 @@ if (isset($action) && ($action=='save')){
     $action='create_new';
     if (!$id_result=mysql_query(
     'SELECT id, name, short, lng, description, page '.
-    ' from '.$table_prepend_name.$table_category.
+    ' from '.$db_prepend.$table_category.
     ' where lng='.$from_lng.' and id='.$id))
         show_error("Can't get category info! (".mysql_error().')');
     $category=mysql_fetch_array($id_result);
@@ -85,7 +85,7 @@ if (isset($action) && ($action=='save')){
     $action='save';
     if (!$id_result=mysql_query(
     'SELECT id, name, short, lng, description, page '.
-    ' from '.$table_prepend_name.$table_category.
+    ' from '.$db_prepend.$table_category.
     ' where lng='.$lng.' and id='.$id))
         show_error("Can't get category info! (".mysql_error().')');
     $category=mysql_fetch_array($id_result);

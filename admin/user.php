@@ -66,7 +66,7 @@ if (isset($filter_web) && ($filter_web != '')) {
 }
 
 if (!$id_result=mysql_query(
-'SELECT * from '.$table_prepend_name.$table_users.
+'SELECT * from '.$db_prepend.$table_users.
 ' where '.$cond.
 ' order by user'))
     show_error("Can't select users! (".mysql_error().')');

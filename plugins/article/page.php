@@ -26,8 +26,8 @@
 // $Id$
 
 //Load article info from database
-if (!($id_result=mysql_query('SELECT UNIX_TIMESTAMP(last_change) as last_change, content from '.$table_prepend_name.$table_article.' where page='.$id.' and lng='.$lng.' limit 1',$db_connection)))
-    do_error(1,'SELECT '.$table_prepend_name.$table_article.': '.mysql_error());
+if (!($id_result=mysql_query('SELECT UNIX_TIMESTAMP(last_change) as last_change, content from '.$db_prepend.$table_article.' where page='.$id.' and lng='.$lng.' limit 1',$db_connection)))
+    do_error(1,'SELECT '.$db_prepend.$table_article.': '.mysql_error());
 $article=mysql_fetch_array($id_result);
 mysql_free_result($id_result);
 

@@ -29,9 +29,9 @@ $pageTypesInit=FALSE;
 $pageTypes=array();
 
 function readPageTypes(){
-    global $table_prepend_name,$table_page,$db_connection,$error,$pageTypesInit,$pageTypes;
+    global $db_prepend,$table_page,$db_connection,$error,$pageTypesInit,$pageTypes;
     echo 'Reading page types...';
-    if (!($id_result=mysql_query('DESCRIBE '.$table_prepend_name.$table_page,$db_connection))){
+    if (!($id_result=mysql_query('DESCRIBE '.$db_prepend.$table_page,$db_connection))){
         echo "\n".'<div class="error">Failed MySQL query: '.mysql_error().'</div>';
         $error .= 'Failed MySQL query!<br/>';
         return FALSE;
@@ -67,7 +67,7 @@ function readPageTypes(){
 }
 
 function savePageTypes(){
-    global $table_prepend_name,$table_page,$db_connection,$error,$pageTypesInit,$pageTypes;
+    global $db_prepend,$table_page,$db_connection,$error,$pageTypesInit,$pageTypes;
     echo 'Saving page types...';
     $text='';
     $del='';
@@ -78,7 +78,7 @@ function savePageTypes(){
     }
     echo $text;
 
-    if (!mysql_query('ALTER TABLE '.$table_prepend_name.$table_page.' CHANGE type type ENUM('.$text.')',$db_connection)){
+    if (!mysql_query('ALTER TABLE '.$db_prepend.$table_page.' CHANGE type type ENUM('.$text.')',$db_connection)){
         echo "\n".'<div class="error">Failed MySQL query: '.mysql_error().'</div>';
         $error .= 'Failed MySQL query!<br/>';
         return FALSE;

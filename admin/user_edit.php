@@ -40,7 +40,7 @@ if (isset($action) && ($action=='save')){
         $pwd = '';
     }
     if ($id == 'admin') $user_name='admin';
-    if (!mysql_query('UPDATE '.$table_prepend_name.$table_users.' set user="'.$user_name.'",name="'.$name.'",mail="'.$user_mail.'",web="'.$user_web.'",perms="'.implode(':',$user_perms).'"'.$pwd.' WHERE user="'.$id.'"')){
+    if (!mysql_query('UPDATE '.$db_prepend.$table_users.' set user="'.$user_name.'",name="'.$name.'",mail="'.$user_mail.'",web="'.$user_web.'",perms="'.implode(':',$user_perms).'"'.$pwd.' WHERE user="'.$id.'"')){
         show_error("Can't save user info! (".mysql_error().')');
         exit;
     }
@@ -58,7 +58,7 @@ if (isset($action) && ($action=='save')){
     } else {
         $pwd = ',pass="'.md5($user_pass_1).'"';
     }
-    if (!mysql_query('INSERT '.$table_prepend_name.$table_users.' set user="'.$user_name.'",name="'.$name.'",mail="'.$user_mail.'",web="'.$user_web.'",perms="'.implode(':',$user_perms).'"'.$pwd)){
+    if (!mysql_query('INSERT '.$db_prepend.$table_users.' set user="'.$user_name.'",name="'.$name.'",mail="'.$user_mail.'",web="'.$user_web.'",perms="'.implode(':',$user_perms).'"'.$pwd)){
         show_error("Can't save user info! (".mysql_error().')');
         exit;
     }
@@ -72,7 +72,7 @@ if (isset($action) && ($action=='save')){
     $action='save';
     if (!$id_result=mysql_query(
     'SELECT * '.
-    ' from '.$table_prepend_name.$table_users.
+    ' from '.$db_prepend.$table_users.
     ' where user="'.$id.'"'))
         show_error("Can't select user! (".mysql_error().')');
     $userdata=mysql_fetch_array($id_result);

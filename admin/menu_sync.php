@@ -51,9 +51,9 @@ if (isset($category)&&isset($lng_from)&&isset($lng_to)){
 
     $insert = isset($overwrite)?'REPLACE ':'INSERT IGNORE ';
 
-    if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$table_prepend_name.$table_menu
+    if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$db_prepend.$table_menu
             .' where lng='.$lng_from.' and '.($category=='any'?1:('category='.$category)).' order by lng,rank',$db_connection)))&&($child_id=0))
-        do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
+        do_error(1,'SELECT '.$db_prepend.$table_menu.': '.mysql_error());
 
     echo 'Synchronization progress:<pre>';
     while ($item = mysql_fetch_array ($id_result)){
@@ -61,8 +61,8 @@ if (isset($category)&&isset($lng_from)&&isset($lng_to)){
 
         reset ($target_lng);
         while (list ($key, $lng) = each ($target_lng)) {
-            if (!($id2_result=(mysql_query($insert . $table_prepend_name.$table_menu.' values ('.$item['id'].','.(isset($item['name'])?'"'.$item['name'].'"':'NULL').','.(isset($item['description'])?'"'.$item['description'].'"':'NULL').','.$item['page'].','.$item['category'].','.$item['parent'].','.$item['expand'].','.$lng.','.$item['rank'].')',$db_connection)))&&($child_id=0))
-                do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
+            if (!($id2_result=(mysql_query($insert . $db_prepend.$table_menu.' values ('.$item['id'].','.(isset($item['name'])?'"'.$item['name'].'"':'NULL').','.(isset($item['description'])?'"'.$item['description'].'"':'NULL').','.$item['page'].','.$item['category'].','.$item['parent'].','.$item['expand'].','.$lng.','.$item['rank'].')',$db_connection)))&&($child_id=0))
+                do_error(1,'SELECT '.$db_prepend.$table_menu.': '.mysql_error());
             echo '...to language ' . $lang_name[$lng] . '-' . (isset($overwrite)?'synchronized':(mysql_affected_rows()==1?'added':'already exists'));
         }
         echo "\n";

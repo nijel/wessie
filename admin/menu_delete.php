@@ -30,9 +30,9 @@ require_once('./admin_header.php');
 <?php
 
 function delete_menuitem(){
-    global $id,$lng,$table_prepend_name,$table_menu,$table_page;
+    global $id,$lng,$db_prepend,$table_menu,$table_page;
 
-    if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_menu.' where id='.$id.' and lng='.$lng.' limit 1')){
+    if (!mysql_query('DELETE FROM '.$db_prepend.$table_menu.' where id='.$id.' and lng='.$lng.' limit 1')){
         show_error("Can't delete menu item! (".mysql_error().')');
         exit;
     }
@@ -43,14 +43,14 @@ function delete_menuitem(){
 
 if (isset($id)&&isset($lng)&&!isset($action)){
     if ($admin_confirm_delete){
-        if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and id='.$id,$db_connection)))&&($child_id=0)){
+        if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$db_prepend.$table_menu.' where lng='.$lng.' and id='.$id,$db_connection)))&&($child_id=0)){
             show_error("Can't get menu item info! (".mysql_error().')');
             exit;
         }
         $item = mysql_fetch_array ($id_result);
         mysql_free_result($id_result);
 
-        if (!($id_result=mysql_query('SELECT name,description,category from '.$table_prepend_name.$table_page.' where lng='.$lng.' and id='.$item['page'].' limit 1',$db_connection))){
+        if (!($id_result=mysql_query('SELECT name,description,category from '.$db_prepend.$table_page.' where lng='.$lng.' and id='.$item['page'].' limit 1',$db_connection))){
             show_error("Can't get page info! (".mysql_error().')');
             exit;
         }

@@ -34,17 +34,17 @@ require_once('./errors.php');
 //connect to database
 require_once('./db_connect.php');
 
-if (!($id_result=mysql_query("SELECT * from $table_prepend_name$table_download where id=$id limit 1",$db_connection)))
-    do_error(1,'SELECT '.$table_prepend_name.$table_download.'---'."SELECT * from $table_prepend_name$table_download where id=$id limit 1");
+if (!($id_result=mysql_query("SELECT * from $db_prepend$table_download where id=$id limit 1",$db_connection)))
+    do_error(1,'SELECT '.$db_prepend.$table_download.'---'."SELECT * from $db_prepend$table_download where id=$id limit 1");
 $file=mysql_fetch_array($id_result);
 mysql_free_result($id_result);
 
 if ($file['grp']!=0){
-    if (!(mysql_query("UPDATE $table_prepend_name$table_download_group set count=count+1 where id=".$file['grp'],$db_connection)))
-        do_error(1,'UPDATE '.$table_prepend_name.$table_download_group.'---'."UPDATE $table_prepend_name$table_download_group set count=count+1 where id=".$file['grp']);
+    if (!(mysql_query("UPDATE $db_prepend$table_download_group set count=count+1 where id=".$file['grp'],$db_connection)))
+        do_error(1,'UPDATE '.$db_prepend.$table_download_group.'---'."UPDATE $db_prepend$table_download_group set count=count+1 where id=".$file['grp']);
 }
-if (!(mysql_query("UPDATE $table_prepend_name$table_download set count=count+1 where id=$id",$db_connection)))
-    do_error(1,'UPDATE '.$table_prepend_name.$table_download.'---'."UPDATE $table_prepend_name$table_download set count=count+1 where id=$id");
+if (!(mysql_query("UPDATE $db_prepend$table_download set count=count+1 where id=$id",$db_connection)))
+    do_error(1,'UPDATE '.$db_prepend.$table_download.'---'."UPDATE $db_prepend$table_download set count=count+1 where id=$id");
 if ($file['remote']==1){
     header('Location: '.$file['filename']);
 }else{

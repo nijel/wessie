@@ -50,15 +50,15 @@ function add_childs($child_id,$depth,$lng){
 global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
     $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
     $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path,$lng;
-global $db_connection,$table_menu,$table_page,$table_prepend_name,$category,$even,$lang_name;
+global $db_connection,$table_menu,$table_page,$db_prepend,$category,$even,$lang_name;
 global $listed_items;
 
-if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$table_prepend_name.$table_menu
+if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$db_prepend.$table_menu
         .' where '.($lng=='any'?1:('lng='.$lng)).' and parent='.$child_id.' and '.($category=='any'?1:('category='.$category)).' order by lng,rank',$db_connection)))&&($child_id=0))
     show_error("Can't select menu items! (".mysql_error().')');
 
 while ($item = mysql_fetch_array ($id_result)){
-    if (!($id2_result=mysql_query('SELECT name,description from '.$table_prepend_name.$table_page.' where lng='.$item['lng'].' and id='.$item['page'].' limit 1',$db_connection)))
+    if (!($id2_result=mysql_query('SELECT name,description from '.$db_prepend.$table_page.' where lng='.$item['lng'].' and id='.$item['page'].' limit 1',$db_connection)))
         show_error("Can't get page info! (".mysql_error().')');
     $page=mysql_fetch_array($id2_result);
     mysql_free_result($id2_result);

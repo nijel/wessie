@@ -26,11 +26,11 @@
 // $Id$
 
 if (isset($action) && ($action=='save')){
-    if (!mysql_query('UPDATE '.$table_prepend_name.$table_article.' set content="'.$content.'",last_change=NOW() where page='.$page.' and lng='.$lng)){
+    if (!mysql_query('UPDATE '.$db_prepend.$table_article.' set content="'.$content.'",last_change=NOW() where page='.$page.' and lng='.$lng)){
         show_error("Can't save article info! (".mysql_error().')');
         exit;
     }
-    if (!mysql_query('UPDATE '.$table_prepend_name.$table_page.' set name="'.$name.'",description="'.$description.'",keywords="'.$keywords.'",category='.$category.' where id='.$page.' and lng='.$lng)){
+    if (!mysql_query('UPDATE '.$db_prepend.$table_page.' set name="'.$name.'",description="'.$description.'",keywords="'.$keywords.'",category='.$category.' where id='.$page.' and lng='.$lng)){
         show_error("Can't save page info! (".mysql_error().')');
         exit;
     }
@@ -40,7 +40,7 @@ if (isset($action) && ($action=='save')){
 }elseif(isset($action) && ($action=='create_new')){
     $page=new_page($name,'article','',$description,$keywords,$lng,$category,$page);
 
-    if (!mysql_query('INSERT '.$table_prepend_name.$table_article.' set content="'.$content.'",last_change=NOW(), page='.$page.', lng='.$lng)){
+    if (!mysql_query('INSERT '.$db_prepend.$table_article.' set content="'.$content.'",last_change=NOW(), page='.$page.', lng='.$lng)){
         show_error("Can't save article info! (".mysql_error().')');
         exit;
     }
@@ -62,9 +62,9 @@ if (isset($action) && ($action=='save')){
 }elseif (isset($action) && ($action=='translate') && isset($from_lng) && isset($to_lng)){
     $action='create_new';
     if (!$id_result=mysql_query(
-    'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, name, description, keywords, count, category, content '.
-    ' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
-    ' where id=page and '.$table_prepend_name.$table_article.'.lng='.$table_prepend_name.$table_page.'.lng and '.$table_prepend_name.$table_article.'.lng='.$from_lng.' and id='.$id))
+    'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$db_prepend.$table_article.'.lng as lng, name, description, keywords, count, category, content '.
+    ' from '.$db_prepend.$table_article.','.$db_prepend.$table_page.
+    ' where id=page and '.$db_prepend.$table_article.'.lng='.$db_prepend.$table_page.'.lng and '.$db_prepend.$table_article.'.lng='.$from_lng.' and id='.$id))
         show_error("Can't get article info! (".mysql_error().')');
     $article=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
@@ -76,9 +76,9 @@ if (isset($action) && ($action=='save')){
 }elseif (isset($lng) && isset($id)){
     $action='save';
     if (!$id_result=mysql_query(
-    'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, name, description, keywords, count, category, content '.
-    ' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
-    ' where id=page and '.$table_prepend_name.$table_article.'.lng='.$table_prepend_name.$table_page.'.lng and '.$table_prepend_name.$table_article.'.lng='.$lng.' and id='.$id))
+    'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$db_prepend.$table_article.'.lng as lng, name, description, keywords, count, category, content '.
+    ' from '.$db_prepend.$table_article.','.$db_prepend.$table_page.
+    ' where id=page and '.$db_prepend.$table_article.'.lng='.$db_prepend.$table_page.'.lng and '.$db_prepend.$table_article.'.lng='.$lng.' and id='.$id))
         show_error("Can't get article info! (".mysql_error().')');
     $article=mysql_fetch_array($id_result);
     mysql_free_result($id_result);

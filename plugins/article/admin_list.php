@@ -48,7 +48,7 @@
 <?php
 
 if (isset($filter_lng) && $filter_lng!='any') {
-    $cond = ' and '.$table_prepend_name.$table_page.'.lng='.$filter_lng;
+    $cond = ' and '.$db_prepend.$table_page.'.lng='.$filter_lng;
 } else {
     $cond = '';
 }
@@ -60,9 +60,9 @@ if (isset($filter_desc) && ($filter_desc != '')) {
 }
 
 if (!$id_result=mysql_query(
-'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, id, name, description, count, category'.
-' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
-' where id=page and '.$table_prepend_name.$table_article.'.lng='.$table_prepend_name.$table_page.'.lng'.$cond.
+'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$db_prepend.$table_article.'.lng as lng, id, name, description, count, category'.
+' from '.$db_prepend.$table_article.','.$db_prepend.$table_page.
+' where id=page and '.$db_prepend.$table_article.'.lng='.$db_prepend.$table_page.'.lng'.$cond.
 ' order by page,lng'))
     show_error("Can't select articles and pages! (".mysql_error().')');
 

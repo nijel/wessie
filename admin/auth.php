@@ -45,16 +45,16 @@ die();
 $user=$HTTP_COOKIE_VARS['user'];
 $hash=$HTTP_COOKIE_VARS['hash'];
 
-if (!($id_result=mysql_query('SELECT count(user) as count from '.$table_prepend_name.$table_users.' where user="'.$user.'" and hash="'.$hash.'"',$db_connection)))
-    do_error(1,'SELECT '.$table_prepend_name.$table_users.': '.mysql_error());
+if (!($id_result=mysql_query('SELECT count(user) as count from '.$db_prepend.$table_users.' where user="'.$user.'" and hash="'.$hash.'"',$db_connection)))
+    do_error(1,'SELECT '.$db_prepend.$table_users.': '.mysql_error());
 $auth=mysql_fetch_array($id_result);
 mysql_free_result($id_result);
 if ($auth['count']!=1){
     Header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=unauthorised' . $url);
     die();
 }
-if (!($id_result=mysql_query('SELECT ip,perms,name from '.$table_prepend_name.$table_users.' where user="'.$user.'" and hash="'.$hash.'" and time>(NOW() - interval '.$admin_timeout.')',$db_connection)))
-    do_error(1,'SELECT '.$table_prepend_name.$table_users.': '.mysql_error());
+if (!($id_result=mysql_query('SELECT ip,perms,name from '.$db_prepend.$table_users.' where user="'.$user.'" and hash="'.$hash.'" and time>(NOW() - interval '.$admin_timeout.')',$db_connection)))
+    do_error(1,'SELECT '.$db_prepend.$table_users.': '.mysql_error());
 if (mysql_num_rows($id_result)!=1){
     Header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=expired' . $url);
     die();
@@ -75,8 +75,8 @@ if ($auth['ip']!=$ip){
     die();
 }
 
-if (!(mysql_query('UPDATE '.$table_prepend_name.$table_users." set time=NOW() where user='".$user."' and hash='".$hash."' limit 1",$db_connection)))
-    do_error(1,'UPDATE '.$table_prepend_name.$table_users.': '.mysql_error());
+if (!(mysql_query('UPDATE '.$db_prepend.$table_users." set time=NOW() where user='".$user."' and hash='".$hash."' limit 1",$db_connection)))
+    do_error(1,'UPDATE '.$db_prepend.$table_users.': '.mysql_error());
 
 setcookie ('hash',$hash ,time()+$admin_hash_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
 

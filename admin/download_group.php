@@ -51,7 +51,7 @@ if (isset($filter_name) && ($filter_name != '')) {
 
 if (!$id_result=mysql_query(
 'SELECT id, name, count '.
-' from '.$table_prepend_name.$table_download_group.
+' from '.$db_prepend.$table_download_group.
 ' where '.$cond.
 ' order by id'))
     show_error("Can't select download groups! (".mysql_error().')');

@@ -26,9 +26,9 @@
 // $Id$
 
 function delete_page(){
-    global $id,$lng,$table_prepend_name,$table_page,$form_done_url;
+    global $id,$lng,$db_prepend,$table_page,$form_done_url;
 
-    if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_page.' where id='.$id.' and lng='.$lng.' limit 1')){
+    if (!mysql_query('DELETE FROM '.$db_prepend.$table_page.' where id='.$id.' and lng='.$lng.' limit 1')){
         show_error("Can't delete page! (".mysql_error().')');
         exit;
     }
@@ -43,7 +43,7 @@ if (isset($action) && ($action=='delete') && isset($lng) && isset($id)){
     if ($admin_confirm_delete){
         if (!$id_result=mysql_query(
             'SELECT lng, id, name, description, count, category, param, keywords'.
-            ' from '.$table_prepend_name.$table_page.
+            ' from '.$db_prepend.$table_page.
             ' where lng='.$lng.' and id='.$id))
             show_error("Can't get page info! (".mysql_error().')');
         $page=mysql_fetch_array($id_result);

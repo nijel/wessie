@@ -26,13 +26,13 @@
 // $Id$
 
 function delete_article(){
-    global $id,$lng,$table_prepend_name,$table_article,$table_page,$form_done_url;
+    global $id,$lng,$db_prepend,$table_article,$table_page,$form_done_url;
 
-    if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_page.' where id='.$id.' and lng='.$lng.' limit 1')){
+    if (!mysql_query('DELETE FROM '.$db_prepend.$table_page.' where id='.$id.' and lng='.$lng.' limit 1')){
         show_error("Can't delete page! (".mysql_error().')');
         exit;
     }
-    if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_article.' where page='.$id.' and lng='.$lng.' limit 1')){
+    if (!mysql_query('DELETE FROM '.$db_prepend.$table_article.' where page='.$id.' and lng='.$lng.' limit 1')){
         show_error("Can't delete page! (".mysql_error().')');
         exit;
     }
@@ -46,9 +46,9 @@ if (isset($action) && ($action=='delete') && isset($lng) && isset($id)){
 }elseif (isset($lng) && isset($id)){
     if ($admin_confirm_delete){
         if (!$id_result=mysql_query(
-        'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, name, description, keywords, count, category, content '.
-        ' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
-        ' where id=page and '.$table_prepend_name.$table_article.'.lng='.$table_prepend_name.$table_page.'.lng and '.$table_prepend_name.$table_article.'.lng='.$lng.' and id='.$id))
+        'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$db_prepend.$table_article.'.lng as lng, name, description, keywords, count, category, content '.
+        ' from '.$db_prepend.$table_article.','.$db_prepend.$table_page.
+        ' where id=page and '.$db_prepend.$table_article.'.lng='.$db_prepend.$table_page.'.lng and '.$db_prepend.$table_article.'.lng='.$lng.' and id='.$id))
             show_error("Can't get article info! (".mysql_error().')');
         $article=mysql_fetch_array($id_result);
         mysql_free_result($id_result);
