@@ -28,17 +28,28 @@
 //Return content
 function get_content(){
     global $page;
-    if (!file_exists($page['param'])) do_error(5,$page['param']);
-    $fh=fopen($page['param'],'r');
-    $content=fread($fh, filesize($page['param']));
+
+    $filename='UNKNOWN';
+    $pre=FALSE;
+    eval($page['param']);
+
+    if (!file_exists($filename)) do_error(5,$filename);
+    $fh=fopen($filename,'r');
+    $content=fread($fh, filesize($filename));
     fclose($fh);
+    if ($pre) $content = '<pre>'.$content.'</pre>';
     return $content;
 }
 
 //Return last change
 function get_last_change(){
     global $page;
-    return filemtime($page['param']);
+
+    $filename='UNKNOWN';
+    $pre=FALSE;
+    eval($page['param']);
+
+    return filemtime($filename);
 }
 
 ?>

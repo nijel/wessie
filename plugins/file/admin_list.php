@@ -74,16 +74,20 @@ if (!$id_result=mysql_query(
 if (mysql_num_rows($id_result) == 0){
     echo "Nothing...";
 } else {
-    echo '<table class="data"><tr><th>Id</th><th>Name</th><th>Description</th><th>Filename</th><th>Language</th><th>Actions</th></tr>'."\n";
+    echo '<table class="data"><tr><th>Id</th><th>Name</th><th>Description</th><th>Filename</th><th>Pre</th><th>Language</th><th>Actions</th></tr>'."\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
         $url=$edit_url.'&amp;id='.$item['id'].'&amp;lng='.$item['lng'];
         make_row($even);
         $even = 1 - $even;
+        $filename='UNKNOWN';
+        $pre=FALSE;
+        eval($item['param']);
         echo make_cell($item['id'],$url);
         echo make_cell(htmlspecialchars($item['name']),$url);
         echo make_cell(htmlspecialchars($item['description']),$url);
-        echo make_cell(htmlspecialchars($item['param']),$url);
+        echo make_cell(htmlspecialchars($filename),$url);
+        echo make_cell($pre?'Yes':'No',$url);
         echo make_cell($lang_name[$item['lng']],$url);
         echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="'.$delete_url.'&amp;id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['id'],$item['lng']).'" target="_blank">View</a>&nbsp;'.((isset($admin_validator)&&($admin_validator!=''))?'|&nbsp;<a href="'.$admin_validator.urlencode(make_absolute_url($item['id'],$item['lng'])).'" target="_blank">Validate</a>&nbsp;':'').'</td></tr>'."\n";
     }
