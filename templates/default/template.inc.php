@@ -46,22 +46,22 @@
 </head>
 
 <body bgcolor="#000000" text="#FFFFFF" link="#EEEE00" alink="#FFFF00" vlink="#DDDD00">
-<table border="0" cellspacing="0" cellpadding="0" width="100%" align="center">
-  <tr bgcolor="#000050">
-    <?php upper_menu(); ?>
-  </tr>
-</table>
-
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
 <td align="center" valign="middle" width="200">
-<center><img src="<?php echo $base_path ; ?>img/wessie.png" align="middle" alt="wessie" width="179" height="95" border="0" /></center>
+<center><img src="<?php echo $base_path ; ?>img/wessie.png" align="middle" alt="wessie - web site system" width="200" height="100" border="0" /></center>
 </td>
 <td align="center" valign="middle"><?php top_pages(); ?></td>
 <td align="right" valign="middle" width="470">
   <?php advert(); ?>&nbsp;&nbsp;
 </td>
 </tr>
+</table>
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%" align="center">
+  <tr bgcolor="#000050">
+    <?php upper_menu(); ?>
+  </tr>
 </table>
 
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
@@ -82,14 +82,16 @@ content();
 </tr>
 
 <tr>
-<td valign="bottom"><br />
+<td valign="bottom">
+<br />
 <form action="<?php echo $search_url; ?>" method="get" target="_self">
   <?php search_hidden_options(); ?>
   <input type="text" name="<?php echo $search_param; ?>" size="15" />
   <input type="submit" value="<?php echo $msg_find; ?>" />
 </form>
 <br />
-<font size="-2"><?php languages(); ?></font> </td>
+<font size="-2"><?php languages(); ?></font>
+</td>
 </tr>
 
 <tr bgcolor="#000050">
@@ -108,5 +110,8 @@ content();
 </td>
 </tr>
 </table>
+
+
+
 </body>
 </html>
