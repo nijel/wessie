@@ -92,6 +92,21 @@ function sized_edit($name,$content){
     echo '<input type="text" name="'.$name.'" size="'.$GLOBALS['admin_'.$name.'_size'].'" value="'.htmlspecialchars($content).'" class="text" />';
 }
 
+
+
+$download_group_name_init=FALSE;
+$download_group_name_cache=array();
+function init_download_group_name(){
+    global $table_prepend_name,$table_download_group,$db_connection,$download_group_name_init,$download_group_name_cache;
+    if (!($id_result=mysql_query('SELECT id,name from '.$table_prepend_name.$table_download_group,$db_connection)))
+        show_error(mysql_error());
+    while ($item = mysql_fetch_array ($id_result)) {
+        $download_group_name_cache[$item['id']]=$item['name'];
+    }
+    mysql_free_result($id_result);
+    $download_group_name_init=TRUE;
+}
+
 $category_name_init=FALSE;
 $category_name_cache=array();
 function init_category_name(){
@@ -103,6 +118,22 @@ function init_category_name(){
     }
     mysql_free_result($id_result);
     $category_name_init=TRUE;
+}
+
+function download_group_edit($selected,$name='group',$add_any=FALSE,$class='select',$disabled=array()){
+    global $download_group_name_init,$download_group_name_cache;
+    if (!$download_group_name_init) init_download_group_name();
+    echo '<select name="'.$name.'"'.($class!=''?' class="'.$class.'"':'').'>';
+    if ($add_any){
+        echo '<option value="any">Any</option>';
+    }
+    reset($download_group_name_cache);
+    while (list ($key, $val) = each($download_group_name_cache)){
+        if (!in_array($key,$disabled)){
+            echo '<option'.($key==$selected?' selected="selected"':'').' value="'.$key.'">'.htmlspecialchars($val).'</option>';
+        }
+    }
+    echo '</select>';
 }
 
 function category_edit($selected,$lng,$name='category',$add_any=FALSE,$class='select',$disabled=array()){
@@ -153,6 +184,12 @@ function get_category_name($selected,$lng){
     global $category_name_init,$category_name_cache;
     if (!$category_name_init) init_category_name();
     return isset($category_name_cache[$lng][$selected])?$category_name_cache[$lng][$selected]:'';
+}
+
+function get_download_group_name($selected){
+    global $download_group_name_init,$download_group_name_cache;
+    if (!$download_group_name_init) init_download_group_name();
+    return isset($download_group_name_cache[$selected])?$download_group_name_cache[$selected]:'';
 }
 
 function language_edit($selected=-1,$add_any=FALSE,$name='lng',$disabled=array(),$class='select'){

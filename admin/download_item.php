@@ -37,6 +37,8 @@ require_once('./download_header.php');
       <form method="get" action="download_item.php" class="filter">
         Filename:
         <input type="text" name="filter_name" <?php if(isset($filter_name)){ echo 'value="'.$filter_name.'"'; }?> class="text"/>
+        &nbsp;Group:
+        <?php download_group_edit((isset($filter_group) && ($filter_group != 'any'))?$filter_group:-1,'filter_group',TRUE,'select') ?>
         &nbsp;<input type="submit" value=" Go " class="go" />
       </form>
     </td>
@@ -47,6 +49,9 @@ require_once('./download_header.php');
 $cond = '1';
 if (isset($filter_name) && ($filter_name != '')) {
     $cond.=' and filename like "%'.$filter_name.'%"';
+}
+if (isset($filter_group) && ($filter_group != 'any')) {
+    $cond.=' and grp='.$filter_group;
 }
 
 if (!$id_result=mysql_query(
@@ -63,15 +68,15 @@ if (mysql_num_rows($id_result) == 0){
     echo '<table class="data"><tr><th>Id</th><th>Filename</th><th>Group</th><th>Count</th><th>Actions</th></tr>'."\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
-        make_row($even,'download_edit.php?id='.$item['id']);
+        make_row($even,'download_item_edit.php?id='.$item['id']);
         $even = 1 - $even;
-        echo $item['id'].'</td><td>'.htmlspecialchars($item['filename']).'</td><td>'.$item['grp'].'</td><td>'.$item['count'].'</td>';
-        echo '<td>&nbsp;<a href="download_edit.php?id='.$item['id'].'">Edit</a>&nbsp;|&nbsp;<a href="download_delete.php?id='.$item['id'].'">Delete</a>&nbsp;|&nbsp;<a href="../download.php?id='.$item['id'].'" target="_blank">Download</a>&nbsp;</td></tr>'."\n";
+        echo $item['id'].'</td><td>'.htmlspecialchars($item['filename']).'</td><td>'.htmlspecialchars(get_download_group_name($item['grp'])).'</td><td>'.$item['count'].'</td>';
+        echo '<td>&nbsp;<a href="download_item_edit.php?id='.$item['id'].'">Edit</a>&nbsp;|&nbsp;<a href="download_item_delete.php?id='.$item['id'].'">Delete</a>&nbsp;|&nbsp;<a href="../download.php?id='.$item['id'].'" target="_blank">Download</a>&nbsp;</td></tr>'."\n";
     }
     echo "</table>\n";
 }
 ?>
-<form action="download_edit.php" method="get">
+<form action="download_item_edit.php" method="get">
 Create new download
 <input type="submit" value=" Go " class="go" />
 <input type="hidden" name="action" value="new" />

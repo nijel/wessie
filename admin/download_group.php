@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 // +----------------------------------------------------------------------+
-// | Web Site System version 0.1                                          |
+// | wessie - web site system                                             |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 2001 Michal Cihar                                      |
 // +----------------------------------------------------------------------+
@@ -26,5 +26,56 @@
 // $Id$
 $page_name='Download groups';
 require_once('./download_header.php');
+?>
+
+<table class="filter">
+  <tr>
+    <td class="filtertext">
+      Filter:
+    </td>
+    <td class="filtercontent">
+      <form method="get" action="download_group.php" class="filter">
+        Name:
+        <input type="text" name="filter_name" <?php if(isset($filter_name)){ echo 'value="'.$filter_name.'"'; }?> class="text"/>
+        &nbsp;<input type="submit" value=" Go " class="go" />
+      </form>
+    </td>
+  </tr>
+</table><br />
+<?php
+
+$cond = '1';
+if (isset($filter_name) && ($filter_name != '')) {
+    $cond.=' and name like "%'.$filter_name.'%"';
+}
+
+if (!$id_result=mysql_query(
+'SELECT id, name, count '.
+' from '.$table_prepend_name.$table_download_group.
+' where '.$cond.
+' order by id'))
+    show_error("Can't select download groups! (".mysql_error().')');
+
+if (mysql_num_rows($id_result) == 0){
+    echo "Nothing...";
+} else {
+    echo 'Listed download groups: '.mysql_num_rows($id_result);
+    echo '<table class="data"><tr><th>Id</th><th>Filename</th><th>Group</th><th>Count</th><th>Actions</th></tr>'."\n";
+    $even=1;
+    while ($item = mysql_fetch_array ($id_result)) {
+        make_row($even,'download_group_edit.php?id='.$item['id']);
+        $even = 1 - $even;
+        echo $item['id'].'</td><td>'.htmlspecialchars($item['name']).'</td><td>'.$item['count'].'</td>';
+        echo '<td>&nbsp;<a href="download_group_edit.php?id='.$item['id'].'">Edit</a>&nbsp;|&nbsp;<a href="download_group_delete.php?id='.$item['id'].'">Delete</a>&nbsp;|&nbsp;<a href="download_item.php?filter_group='.$item['id'].'">List</a>&nbsp;</td></tr>'."\n";
+    }
+    echo "</table>\n";
+}
+?>
+<form action="download_group_edit.php" method="get">
+Create new download
+<input type="submit" value=" Go " class="go" />
+<input type="hidden" name="action" value="new" />
+</form>
+<?php
 require_once('./admin_footer.php');
 ?>
