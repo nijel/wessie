@@ -37,11 +37,11 @@ if (isset($action) && $action=='save'){
         show_error('Can not modify configuration!');
         exit;
     }
-    if (!config_set_option('\$site_logo',"\$site_logo = '".$set_logo."';\n",'//##/DESIGN##')){
+    if (!config_set_option('\$site_logo',"\$site_logo = '".opt_stripslashes($set_logo)."';\n",'//##/DESIGN##')){
         show_error('Can not modify configuration!');
         exit;
     }
-    if (!config_set_option('\$site_logo_alt',"\$site_logo_alt = '".$set_logo_alt."';\n",'//##/DESIGN##')){
+    if (!config_set_option('\$site_logo_alt',"\$site_logo_alt = '".opt_stripslashes($set_logo_alt)."';\n",'//##/DESIGN##')){
         show_error('Can not modify configuration!');
         exit;
     }

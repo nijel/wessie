@@ -37,7 +37,7 @@ $root_dir_len = strlen($root_dir);
 if (!isset($dir)){
     $dir = $root_dir;
 }else{
-    $dir = stripslashes($dir);
+    $dir = opt_stripslashes($dir);
     if (!@chdir($dir)||!@is_dir($dir)){
         echo '<div class="error">Error: Selected directory ("'.$dir.'") not accessible!</div>';
         $dir = $root_dir;

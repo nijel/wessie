@@ -27,7 +27,7 @@
 
 if (isset($action) && ($action=='save')){
     $param=addslashes("\$filename='$filename';\n\$pre=".(isset($pre)?'TRUE':'FALSE').";\n\$code=".(isset($code)?'TRUE':'FALSE').";\n\$html=".(isset($html)?'TRUE':'FALSE').";\n\$highlight=".(isset($highlight)?'TRUE':'FALSE').";\n");
-    if (!mysql_query('UPDATE '.$db_prepend.$table_page.' set name="'.$name.'",description="'.$description.'",keywords="'.$keywords.'",category='.$category.',param="'.$param.'" where id='.$page.' and lng='.$lng)){
+    if (!mysql_query('UPDATE '.$db_prepend.$table_page.' set name="'.opt_addslashes($name).'",description="'.opt_addslashes($description).'",keywords="'.opt_addslashes($keywords).'",category='.$category.',param="'.$param.'" where id='.$page.' and lng='.$lng)){
         show_error("Can't save page info! (".mysql_error().')');
         exit;
     }

@@ -48,7 +48,7 @@ require_once('./download_header.php');
 
 $cond = '1';
 if (isset($filter_name) && ($filter_name != '')) {
-    $cond.=' and filename like "%'.$filter_name.'%"';
+    $cond.=' and filename like "%'.opt_addslashes($filter_name).'%"';
 }
 if (isset($filter_group) && ($filter_group != 'any')) {
     $cond.=' and grp='.$filter_group;

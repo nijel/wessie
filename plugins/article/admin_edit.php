@@ -26,11 +26,11 @@
 // $Id$
 
 if (isset($action) && ($action=='save')){
-    if (!mysql_query('UPDATE '.$db_prepend.$table_article.' set content="'.$content.'",last_change=NOW() where page='.$page.' and lng='.$lng)){
+    if (!mysql_query('UPDATE '.$db_prepend.$table_article.' set content="'.opt_addslashes($content).'",last_change=NOW() where page='.$page.' and lng='.$lng)){
         show_error("Can't save article info! (".mysql_error().')');
         exit;
     }
-    if (!mysql_query('UPDATE '.$db_prepend.$table_page.' set name="'.$name.'",description="'.$description.'",keywords="'.$keywords.'",category='.$category.' where id='.$page.' and lng='.$lng)){
+    if (!mysql_query('UPDATE '.$db_prepend.$table_page.' set name="'.opt_addslashes($name).'",description="'.opt_addslashes($description).'",keywords="'.opt_addslashes($keywords).'",category='.$category.' where id='.$page.' and lng='.$lng)){
         show_error("Can't save page info! (".mysql_error().')');
         exit;
     }
@@ -40,7 +40,7 @@ if (isset($action) && ($action=='save')){
 }elseif(isset($action) && ($action=='create_new')){
     $page=new_page($name,'article','',$description,$keywords,$lng,$category,$page);
 
-    if (!mysql_query('INSERT '.$db_prepend.$table_article.' set content="'.$content.'",last_change=NOW(), page='.$page.', lng='.$lng)){
+    if (!mysql_query('INSERT '.$db_prepend.$table_article.' set content="'.opt_addslashes($content).'",last_change=NOW(), page='.$page.', lng='.$lng)){
         show_error("Can't save article info! (".mysql_error().')');
         exit;
     }

@@ -58,10 +58,10 @@ if (isset($filter_type) && $filter_type!='any') {
     $cond .= ' and '.$db_prepend.$table_page.".type='".$filter_type."'";
 }
 if (isset($filter_name) && ($filter_name != '')) {
-    $cond.=' and name like "%'.$filter_name.'%"';
+    $cond.=' and name like "%'.opt_addslashes($filter_name).'%"';
 }
 if (isset($filter_desc) && ($filter_desc != '')) {
-    $cond.=' and description like "%'.$filter_desc.'%"';
+    $cond.=' and description like "%'.opt_addslashes($filter_desc).'%"';
 }
 
 if (!$id_result=mysql_query(

@@ -289,11 +289,11 @@ function type_edit($selected=-1,$add_any=FALSE,$name='type',$disabled=array(),$c
 
 function new_page($name,$type,$file,$description,$keywords,$lng,$category,$page){
     global $db_prepend,$table_page;
-    if (!mysql_query('INSERT '.$db_prepend.$table_page.' set name="'.$name.'", type="'.$type.'", param="'.$file.'",description="'.$description.'",keywords="'.$keywords.'",category='.$category.',lng='.$lng.($page!=-1?', id='.$page:''))){
+    if (!mysql_query('INSERT '.$db_prepend.$table_page.' set name="'.opt_addslashes($name).'", type="'.$type.'", param="'.opt_addslashes($file).'",description="'.opt_addslashes($description).'",keywords="'.opt_addslashes($keywords).'",category='.$category.',lng='.$lng.($page!=-1?', id='.$page:''))){
         show_error("Can't create page! (".mysql_error().')');
         exit;
     }
-    if (!$id_result=mysql_query('SELECT id from '.$db_prepend.$table_page.' where  name="'.$name.'" and type="'.$type.'" and param="'.$file.'" and description="'.$description.'" and keywords="'.$keywords.'" and category='.$category.' and lng='.$lng.($page!=-1?' and id='.$page:''))){
+    if (!$id_result=mysql_query('SELECT id from '.$db_prepend.$table_page.' where  name="'.opt_addslashes($name).'" and type="'.$type.'" and param="'.opt_addslashes($file).'" and description="'.opt_addslashes($description).'" and keywords="'.opt_addslashes($keywords).'" and category='.$category.' and lng='.$lng.($page!=-1?' and id='.$page:''))){
         show_error("Can't get back page info! (".mysql_error().')');
         exit;
     }
@@ -378,7 +378,6 @@ function make_absolute_url($id,$lng){
     global $base_path,$SERVER_NAME, $languages;
     return 'http://'.$SERVER_NAME.$base_path.'main.php/page'.$id.'.'.$languages[$lng].'.html';
 }
-
 
 function get_page_count($type){
     global $db_prepend,$table_page;
@@ -600,6 +599,23 @@ function human_readable_size($size){
         return (round($size*10/1073741824)/10).' GB';
     }
 }
+
+function opt_addslashes($str) {
+    if (get_magic_quotes_gpc()) {
+        return $str;
+    } else {
+        return addslashes($str);
+    }
+}
+
+function opt_stripslashes($str) {
+    if (get_magic_quotes_gpc()) {
+        return stripslashes($str);
+    } else {
+        return $str;
+    }
+}
+
 function highlighter($class1,$class2){
     if ($class1!=''&&$class2!=''){
         echo ' onmouseover="this.className = \''.$class1.'\';" onmouseout="this.className = \''.$class2.'\';"';

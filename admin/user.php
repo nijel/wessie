@@ -53,16 +53,16 @@ require_once('./user_common.php');
 
 $cond = '1';
 if (isset($filter_user) && $filter_user!='') {
-    $cond .= ' and user like "%'.$filter_user.'%"';
+    $cond .= ' and user like "%'.opt_addslashes($filter_user).'%"';
 }
 if (isset($filter_name) && ($filter_name != '')) {
-    $cond.=' and name like "%'.$filter_name.'%"';
+    $cond.=' and name like "%'.opt_addslashes($filter_name).'%"';
 }
 if (isset($filter_mail) && ($filter_mail != '')) {
-    $cond.=' and mail like "%'.$filter_mail.'%"';
+    $cond.=' and mail like "%'.opt_addslashes($filter_mail).'%"';
 }
 if (isset($filter_web) && ($filter_web != '')) {
-    $cond.=' and web like "%'.$filter_web.'%"';
+    $cond.=' and web like "%'.opt_addslashes($filter_web).'%"';
 }
 
 if (!$id_result=mysql_query(

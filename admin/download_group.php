@@ -46,7 +46,7 @@ require_once('./download_header.php');
 
 $cond = '1';
 if (isset($filter_name) && ($filter_name != '')) {
-    $cond.=' and name like "%'.$filter_name.'%"';
+    $cond.=' and name like "%'.opt_addslashes($filter_name).'%"';
 }
 
 if (!$id_result=mysql_query(

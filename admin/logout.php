@@ -24,8 +24,16 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-Header('Pragma: no-cache');
-Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");
-setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''), $SERVER_NAME); //delete cookie
+$page_name='Logout';
+
 header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=logout');
+
+setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''), $SERVER_NAME); //delete cookie
+
+require_once('./admin_header.php');
+
+if (!(mysql_query('UPDATE '.$db_prepend.$table_users." set ip= '0.0.0.0' where user='".$user."' limit 1",$db_connection)))
+        do_error(1,'UPDATE '.$db_prepend.$table_users.': '.mysql_error());
+
+require_once('./admin_footer.php');
 ?>

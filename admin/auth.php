@@ -42,7 +42,7 @@ if((!isset($HTTP_COOKIE_VARS['user']))||(!isset($HTTP_COOKIE_VARS['hash']))){
 header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=unauthorised' . $url);
 die();
 }
-$user=$HTTP_COOKIE_VARS['user'];
+$user=opt_addslashes($HTTP_COOKIE_VARS['user']);
 $hash=$HTTP_COOKIE_VARS['hash'];
 
 if (!($id_result=mysql_query('SELECT count(user) as count from '.$db_prepend.$table_users.' where user="'.$user.'" and hash="'.$hash.'"',$db_connection)))

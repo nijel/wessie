@@ -39,7 +39,7 @@ if (isset($action) && ($action=='save')){
     } else {
         $pwd = '';
     }
-    if (!mysql_query('UPDATE '.$db_prepend.$table_users.' set name="'.$name.'",mail="'.$user_mail.'",web="'.$user_web.'"'.$pwd.' WHERE user="'.$user.'"')){
+    if (!mysql_query('UPDATE '.$db_prepend.$table_users.' set name="'.opt_addslashes($name).'",mail="'.opt_addslashes($user_mail).'",web="'.opt_addslashes($user_web).'"'.$pwd.' WHERE user="'.$user.'"')){
         show_error("Can't save user info! (".mysql_error().')');
         exit;
     }

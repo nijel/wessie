@@ -41,7 +41,7 @@ if (!ereg('^((do_)?(delete|move|copy|chmod))|(mkdir)$',$action)){
     exit;
 }
 
-$fname = stripslashes($fname);
+$fname = opt_stripslashes($fname);
 
 $root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
 $root_dir_len = strlen($root_dir);
@@ -91,7 +91,7 @@ if ($action == 'move'){
         exit;
     }
 
-    $filename=stripslashes($filename);
+    $filename=otp_stripslashes($filename);
 
     chdir($dir);
     if (@is_dir($filename)) {
@@ -179,7 +179,7 @@ if ($action == 'move'){
         exit;
     }
 
-    $filename=stripslashes($filename);
+    $filename=opt_stripslashes($filename);
 
     chdir($dir);
     if (@is_dir($filename)) {

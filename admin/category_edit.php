@@ -31,7 +31,7 @@ require_once('./admin_header.php');
 if (isset($action) && ($action=='save')){
     //we should be able to edit/create category withou having any page
     if (!isset($page)) $page=0;
-    if (!mysql_query('UPDATE '.$db_prepend.$table_category.' set name="'.$name.'", page='.$page.', short="'.$short.'", description="'.$description.'" WHERE id='.$id.' AND lng='.$lng)){
+    if (!mysql_query('UPDATE '.$db_prepend.$table_category.' set name="'.opt_addslashes($name).'", page='.$page.', short="'.opt_addslashes($short).'", description="'.opt_addslashes($description).'" WHERE id='.$id.' AND lng='.$lng)){
         show_error("Can't save article info! (".mysql_error().')');
         exit;
     }
@@ -41,11 +41,11 @@ if (isset($action) && ($action=='save')){
 }elseif(isset($action) && ($action=='create_new')){
     //we should be able to edit/create category withou having any page
     if (!isset($page)) $page=0;
-    if (!mysql_query('INSERT '.$db_prepend.$table_category.' set name="'.$name.'"'.(($id==-1)?'':(', id='.$id)).', lng='.$lng.', page='.$page.', short="'.$short.'", description="'.$description.'"')){
+    if (!mysql_query('INSERT '.$db_prepend.$table_category.' set name="'.opt_addslashes($name).'"'.(($id==-1)?'':(', id='.$id)).', lng='.$lng.', page='.$page.', short="'.opt_addslashes($short).'", description="'.opt_addslashes($description).'"')){
         show_error("Can't save article info! (".mysql_error().')');
         exit;
     }
-    if (!$id_result=mysql_query('SELECT id FROM '.$db_prepend.$table_category.' where name="'.$name.'" and lng='.$lng.' and page='.$page.' and short="'.$short.'" and description="'.$description.'"')){
+    if (!$id_result=mysql_query('SELECT id FROM '.$db_prepend.$table_category.' where name="'.opt_addslashes($name).'" and lng='.$lng.' and page='.$page.' and short="'.opt_addslashes($short).'" and description="'.opt_addslashes($description).'"')){
         show_error("Can't get article info! (".mysql_error().')');
         exit;
     }

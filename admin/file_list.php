@@ -52,7 +52,7 @@ if ($restrict){
     $root_dir_len = 0;
 }
 
-if (isset($dir)) $dir = stripslashes($dir);
+if (isset($dir)) $dir = opt_stripslashes($dir);
 if (!isset($dir)||$dir==''||!@is_dir($dir)){
     $dir = $server_root_dir;
 }elseif (!@chdir($dir)){

@@ -68,8 +68,8 @@ if (isset($id)&&isset($lng)&&!isset($name)){
     $page=array('name'=>'','description'=>'','category'=>-1);
 } elseif (isset($id)&&isset($lng)&&isset($rank)){
     if (!($id_result=(mysql_query('UPDATE '.$db_prepend.$table_menu.
-            ' set name="'.$name.'"'.
-            ', description="'.$description.'"'.
+            ' set name="'.opt_addslashes($name).'"'.
+            ', description="'.opt_addslashes($description).'"'.
             ', page='.$page.
             ', category='.$category.
             ', parent='.$parent.
@@ -86,8 +86,8 @@ if (isset($id)&&isset($lng)&&!isset($name)){
     exit;
 } elseif (isset($lng)&&isset($rank)) {
     if (!($id_result=(mysql_query('INSERT '.$db_prepend.$table_menu.
-            ' set name="'.$name.'"'.
-            ', description="'.$description.'"'.
+            ' set name="'.opt_addslashes($name).'"'.
+            ', description="'.opt_addslashes($description).'"'.
             ', page='.$page.
             ', category='.$category.
             ', parent='.$parent.
@@ -100,8 +100,8 @@ if (isset($id)&&isset($lng)&&!isset($name)){
     }
     if (!($id_result=(mysql_query('SELECT id from '.$db_prepend.$table_menu.' where '.
             'name="'.$name.'"'.
-            ' and description="'.$description.'"'.
-            ' and page='.$page.
+            ' and description="'.opt_addslashes($description).'"'.
+            ' and page='.opt_addslashes($page).
             ' and category='.$category.
             ' and parent='.$parent.
             ' and expand='.$expand.

@@ -53,10 +53,10 @@ if (isset($filter_lng) && $filter_lng!='any') {
     $cond = '';
 }
 if (isset($filter_title) && ($filter_title != '')) {
-    $cond.=' and name like "%'.$filter_title.'%"';
+    $cond.=' and name like "%'.opt_addslashes($filter_title).'%"';
 }
 if (isset($filter_desc) && ($filter_desc != '')) {
-    $cond.=' and description like "%'.$filter_desc.'%"';
+    $cond.=' and description like "%'.opt_addslashes($filter_desc).'%"';
 }
 
 if (!$id_result=mysql_query(
