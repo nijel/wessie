@@ -110,8 +110,8 @@ function show_plugin_info(val,plugin_name,plugin_version,plugin_release_date,plu
         "Website: "+plugin_web+"\n"+
         plugin_credit+
         "Capabilities: \n"+
-        (plugin_page==1?"page\n":"")+
-        (plugin_function==1?"function\n":"")
+        (plugin_page==1?" - page\n":"")+
+        (plugin_function==1?" - function\n":"")
         );
     return true;
 }
@@ -157,7 +157,7 @@ while (list ($key, $val) = each($dirs)){
             $even = 1 - $even;
             make_cell($val,'');
             make_cell($plugin_name,'');
-            make_cell('<input name="plugins_function['.$val.']" value="1" type="checkbox" '.($plugin_function?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_function_plugins)?' checked="checked"':'').'/>'.($plugin_function?'<a onclick="window.open(\'plugin_help.php?type=function&amp;name='.$val.'\',\'\',\'menubar=no,location=no,status=no,toolbar=no,width='.$admin_help_width.',height='.$admin_help_height.'\');return false" href="plugin_help.php?type=function&amp;name='.$val.'" target="_blank">(help)</a>':''),'');
+            make_cell('<input name="plugins_function['.$val.']" value="1" type="checkbox" '.($plugin_function?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_function_plugins)?' checked="checked"':'').'/>'.($plugin_function?'<a onclick="window.open(\'plugin_help.php?type=function&amp;name='.$val.'\',\'\',\'scrollbar=yes,menubar=no,location=no,status=no,toolbar=no,width='.$admin_help_width.',height='.$admin_help_height.'\');return false" href="plugin_help.php?type=function&amp;name='.$val.'" target="_blank">(help)</a>':''),'');
             make_cell('<input name="plugins_page['.$val.']" value="1" type="checkbox" '.($plugin_page?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_page_plugins)?' checked="checked"':'').'/>'.($plugin_page?'('.get_page_count($val).')':''),'');
             make_cell('<select name="plugins_page_eval['.$val.']" '.($plugin_page?'class="select"':'class="select_disabled" disabled="disabled"').'><option value="1"'.(isset($page_plugins_options[$val]['eval'])&&$page_plugins_options[$val]['eval']?' selected="selected"':'').'>Yes</option><option value="0"'.(!isset($page_plugins_options[$val]['eval'])||!$page_plugins_options[$val]['eval']?' selected="selected"':'').'>No</option></select>');
             make_cell('<input type="button" class="browse" onclick="'."show_plugin_info('$val','$plugin_name','$plugin_version','$plugin_release_date','$plugin_author','$plugin_email','$plugin_web',".(isset($plugin_credit)&&$plugin_credit!=''?"'Credits: $plugin_credit\\n'":"''").','.(int)$plugin_page.','.(int)$plugin_function.')" value="&nbsp;?&nbsp;" />');

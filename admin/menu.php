@@ -71,19 +71,19 @@ while ($item = mysql_fetch_array ($id_result)){
 
     $url='menu_edit.php?id='.$item['id'].'&amp;lng='.$item['lng'];
     $spaces = '';
-    for ($i=0; $i<$depth; $i++) $spaces .= '&nbsp;&nbsp;';
+    for ($i=0; $i<$depth; $i++) $spaces .= '&nbsp;&nbsp;&nbsp;&nbsp;';
 
     make_row($even);
     $even = 1 - $even;
 
-    make_cell($languages[$item['lng']]['name'],$url);
-    make_cell(htmlspecialchars(get_category_name($item['category'],$item['lng'])),$url);
+    make_cell($item['id'],$url);
     make_cell($spaces.htmlspecialchars($name),$url);
+    make_cell(htmlspecialchars(get_category_name($item['category'],$item['lng'])),$url);
     make_cell(htmlspecialchars($desc),$url);
+    make_cell($languages[$item['lng']]['name'],$url);
     make_cell($depth,$url);
     make_cell($item['rank'],$url);
     make_cell($item['expand'],$url);
-    make_cell($item['id'],$url);
     make_cell($item['page'],$url);
     echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="menu_edit.php?parent=',$item['id'].'&amp;lng='.$item['lng'].'">Add child</a>&nbsp;|&nbsp;<a href="menu_delete.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;</td></tr>'."\n";
     $listed_items++;
@@ -99,7 +99,7 @@ if (!isset($category)){
     $lng='any';
 }
 
-echo '<table class="data"><tr><th>Language</th><th>Category</th><th>Title</th><th>Description</th><th>Depth</th><th>Rank</th><th>Expand</th><th>ID</th><th>Page</th><th>Actions</th></tr>'."\n";
+echo '<table class="data"><tr><th>ID</th><th>Title</th><th>Category</th><th>Description</th><th>Language</th><th>Depth</th><th>Rank</th><th>Expand</th><th>Page</th><th>Actions</th></tr>'."\n";
 $even=0;
 $listed_items=0;
 add_childs(0,0,$lng);
