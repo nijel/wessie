@@ -81,4 +81,6 @@ $msg_commentday = "zapsaný";
 $msg_athour = "v";
 $msg_wrote = "Zapsal(a)";
 $msg_anonym = "neznámý";
+
+$msg_unknown_size = 'Neznámá velikost; ';
 ?>

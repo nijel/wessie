@@ -69,6 +69,7 @@
   <item url="logs/error.log" />
   <item url="img/flags/cs.png" />
   <item url="img/flags/en.png" />
+  <item url="get.php" />
  </project>
 </webproject>
 <!-- $Id$ -->

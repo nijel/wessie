@@ -67,7 +67,9 @@ if (isset($PATH_INFO) && (!empty($PATH_INFO))){
 
 if (isset($SCRIPT_NAME)){
     $base_path = dirname($SCRIPT_NAME);
+    if ($base_path!='/') $base_path .= '/';
 } else {
     $base_path = '/';
 }
+$base_url='http://'.$SERVER_NAME.$base_path;
 ?>

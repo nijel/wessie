@@ -27,5 +27,5 @@
 
 require_once('./init.php');
 
-header('Location: http://'.$SERVER_NAME.$base_path.'main.php');
+header('Location: '.$base_url.'main.php');
 ?>

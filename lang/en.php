@@ -99,5 +99,7 @@ $msg_noteday = 'written on';
 $msg_commentday = 'written on';
 $msg_athour = 'at';
 $msg_wrote = 'Written&nbsp;by';
-$msg_anonym = 'anonymous'
+$msg_anonym = 'anonymous';
+
+$msg_unknown_size = 'Unknown size; ';
 ?>

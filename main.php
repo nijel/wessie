@@ -29,9 +29,17 @@
 error_reporting (E_ALL);
 //BEFORE publishing check all TEMPORARY words!
 
+//load configuration
 require_once('./config.php');
+//initialize variables from $PATH_INFO and set some wessie specific variables
 require_once('./init.php');
+//error handling
 require_once('./errors.php');
+//connect to database
+require_once('./db_connect.php');
+//client browser and os detection
+require_once('./browser.php');
+
 
 //if no language was explicitly defined, try to detect it
 if (!isset($lng)){
@@ -102,12 +110,6 @@ if (isset($HTTP_COOKIE_VARS[$cookie_count])){
 //set cookies (with visited pages and selected language)
 setcookie($cookie_count,$cookie_to_set,time()+$session_time);
 setcookie($cookie_lang,$lng,time()+$lang_time);
-
-//connect to database
-require_once('./db_connect.php');
-
-//client browser and os detection
-require_once('./browser.php');
 
 //read page
 if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_page.' where id='.$id.' and lng='.$lng.' limit 1',$db_connection)))

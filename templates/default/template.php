@@ -44,43 +44,49 @@ function title(){
 
 //Format of upper menu items
 function make_upper_menu_item($percent,$url,$name,$short,$description,$active){
-        $result='<th align="center" valign="middle" width="'.$percent.'"><a href="'.$url.'" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$description."'".';return true">';
-        if ($active){$result.='<font color="white">'.$name.'</font></a></th>';}
-        else {$result.=$name.'</a></th>';};
-        return $result;
+    $result='<th align="center" valign="middle" width="'.$percent.'"><a href="'.$url.'" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$description."'".';return true">';
+    if ($active){$result.='<font color="white">'.$name.'</font></a></th>';}
+    else {$result.=$name.'</a></th>';};
+    return $result;
 }
+
 $upper_menu_divisor="\n";
 
 
 //Format of top pages items:
 function make_top_pages_item($url,$name,$category,$category_short,$description){
-        $result='<a href="'.$url.'" title="'.$description.'"onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$description."'".';return true">';
-        $result.=$name.' <font size="-3">('.$category_short.')</font></a>';
-        return $result;
+    $result='<a href="'.$url.'" title="'.$description.'"onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$description."'".';return true">';
+    $result.=$name.' <font size="-3">('.$category_short.')</font></a>';
+    return $result;
 }
+
 $top_pages_divisor="<br />\n";
 
 //File dowload format:
 function make_download($file,$group=array('count'=>-1)){
-    global $msg_downloaded, $msg_times, $msg_downloads;
-        $fn=$file['filename'];
+    global $msg_downloaded, $msg_times, $msg_downloads,$DOCUMENT_ROOT,$msg_unknown_size,$base_path;
+    $grp=$group['count']==-1?'':'; '.$group['name'].' '.$msg_downloaded.' '.$group['count'].' '.$msg_times;
+    if ($file['remote']==1){
+        return '<a href="'.$base_path.'get.php?id='.$file['id'].'">'.basename($file['filename']).'</a> ('.$msg_unknown_size.$file['count'].' '.$msg_downloads.$grp.')';
+    }else{
+        $fn=$DOCUMENT_ROOT.'/'.$file['filename'];
         if (!file_exists($fn)){
-        	log_error("ERROR: File $fn (id:".$file['id'].') not found!');
-        	return $fn;
+            log_error("ERROR: File $fn (id:".$file['id'].') not found!');
+            return $fn;
         }else{
-                $size_b=filesize($fn);
-                $size_kb=round($size_b*10/1024)/10;
-                $size_mb=round($size_kb*10/1024)/10;
-                $size_gb=round($size_mb*10/1024)/10;
+            $size_b=filesize($fn);
+            $size_kb=round($size_b*10/1024)/10;
+            $size_mb=round($size_kb*10/1024)/10;
+            $size_gb=round($size_mb*10/1024)/10;
 
-                if ($size_b<1024) {$size=$size_b.' B';}
-                elseif ($size_b<1048576) {$size=$size_kb.' kB';}
-                elseif ($size_b<1073741824) {$size=$size_mb.' MB';}
-                else {$size=$size_gb.' GB';}
+            if ($size_b<1024) {$size=$size_b.' B';}
+            elseif ($size_b<1048576) {$size=$size_kb.' kB';}
+            elseif ($size_b<1073741824) {$size=$size_mb.' MB';}
+            else {$size=$size_gb.' GB';}
 
-                $grp=$group['count']==-1?'':'; '.$group['name'].' '.$msg_downloaded.' '.$group['count'].' '.$msg_times;
-                return '<a href="'.'get.php?id='.$file['id'].'">'.basename($fn).'</a> ('.$size.'; '.$file['count'].' '.$msg_downloads.$grp.')';
-}
+            return '<a href="'.$base_path.'get.php?id='.$file['id'].'">'.basename($fn).'</a> ('.$size.'; '.$file['count'].' '.$msg_downloads.$grp.')';
+        }
+    }
 }
 
 
