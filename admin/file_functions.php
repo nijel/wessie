@@ -61,8 +61,10 @@ function add_file_info($dir,$list){
         $result[$val]['ctime']=@filectime($dir.'/'.$val);
         $result[$val]['mtime']=@filemtime($dir.'/'.$val);
         $result[$val]['perms']=@fileperms($dir.'/'.$val);
-        $arr = posix_getpwuid(@fileowner($dir.'/'.$val));
+        $owner=@fileowner($dir.'/'.$val);
+        $arr = posix_getpwuid($owner);
         $result[$val]['owner']=$arr['name'];
+        $result[$val]['is_my']=(posix_getuid()==$owner)||(posix_geteuid()==$owner);
         $arr = posix_getgrgid(@filegroup($dir.'/'.$val));
         $result[$val]['group']=$arr['name'];
         $result[$val]['r']=@is_readable($dir.'/'.$val);
@@ -70,6 +72,7 @@ function add_file_info($dir,$list){
         $result[$val]['x']=@is_executable($dir.'/'.$val);
         $result[$val]['l']=@is_link($dir.'/'.$val);
         $result[$val]['type']=@filetype($dir.'/'.$val);
+
     }
     return $result;
 }

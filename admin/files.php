@@ -179,6 +179,7 @@ while (list ($key, $val) = each($list)){
         '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Move</a>':'<a href="files_action.php?action=move&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Move</a>').
         '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Copy</a>':'<a href="files_action.php?action=copy&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Copy</a>').
         '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Chmod</a>':'<a href="files_action.php?action=chmod&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Chmod</a>').
+        //||!$val['is_my']
         '');
 
     echo "</tr>\n";
@@ -194,16 +195,31 @@ echo 'Listed files: '.$counter;
 if (!isset($search)) {
     if (is_writeable($dir)){
         ?>
-        <form action="files_upload.php" method="post" enctype="multipart/form-data">
-        Upload file:
-        <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $admin_fm_maxsize; ?>" />
-        <input type="file" name="file" class="file" />
-        <input type="hidden" name="dir" value="<?php echo $dir; ?>" />
-        <input type="submit" value=" Go " class="go" />
-        </form>
+        <table class="two_col">
+        <tr>
+            <td>
+                <form action="files_upload.php" method="post" enctype="multipart/form-data">
+                Upload file:
+                <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $admin_fm_maxsize; ?>" />
+                <input type="file" name="file" class="file" />
+                <input type="hidden" name="dir" value="<?php echo $dir; ?>" />
+                <input type="submit" value=" Go " class="go" />
+                </form>
+            </td>
+            <td>
+                <form action="files_action.php" method="get">
+                Create directory:
+                <input type="name" name="name" class="file" />
+                <input type="hidden" name="fname" value="<?php echo $dir; ?>" />
+                <input type="hidden" name="action" value="mkdir" />
+                <input type="submit" value=" Go " class="go" />
+                </form>
+            </td>
+        </tr>
+        </table>
         <?php
     } else {
-        echo '<div class="error">Upload not possible, web server can not write to current directory!</div>';
+        echo '<div class="error">Upload and mkdir not possible, web server can not write to current directory!</div>';
     }
 }
 chdir($orig_pwd);

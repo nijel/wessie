@@ -204,6 +204,8 @@ $admin_fm_show_owner = FALSE;
 $admin_fm_show_group = FALSE;
 $admin_fm_quickjump = array('files');
 $admin_fm_maxsize = 10485760;
+$admin_fm_confirm_delete = TRUE;
+$admin_fm_mkdir_mode = 0777;
 //##/ADMIN_FILES##
 
 
