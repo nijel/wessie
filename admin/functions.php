@@ -451,18 +451,23 @@ function config_set_option($pattern,$newline,$add_before="\\?>",$fallback_add_be
     return FALSE;
 }
 
-function config_del_option($pattern){
+function config_del_options($pattern){
     global $configuration,$configuration_loaded;
 
     if (!$configuration_loaded) return FALSE;
 
+    $result=FALSE;
+
     for ($i=0; $i < count($configuration); $i++) {
         if (ereg($pattern, $configuration[$i])){
-            unset($configuration[$i]);
-            return TRUE;
+            for ($j=$i+1; $j < count($configuration); $j++) {
+                $configuration[$j-1]=$configuration[$j];
+            }
+            unset($configuration[$j]);
+            $result=TRUE;
         }
     }
-    return FALSE;
+    return $result;
 }
 
 function make_row($even){
@@ -489,6 +494,13 @@ function make_tab_item($href,$text,$url){
     echo '<td'.(strpos($SCRIPT_NAME,$url)?' class="selected"':'');
     highlighter($admin_highlight_tabs);
     echo ' onclick="window.location.replace(\''.$href.'\')"><a href="'.$href.'">'.$text.'</a></td>'."\n";
+}
+
+function make_tab_item_window($href,$text,$url,$name){
+    global $SCRIPT_NAME,$admin_highlight_tabs;
+    echo '<td'.(strpos($SCRIPT_NAME,$url)?' class="selected"':'');
+    highlighter($admin_highlight_tabs);
+    echo ' onclick="window.open(\''.$href.'\',\''.$name.'\')"><a href="'.$href.'" target="'.$name.'" onclick="window.open(\''.$href.'\',\''.$name.'\')">'.$text.'</a></td>'."\n";
 }
 
 function make_tab_start(){
