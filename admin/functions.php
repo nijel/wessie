@@ -105,10 +105,13 @@ function init_category_name(){
     $category_name_init=TRUE;
 }
 
-function category_edit($selected,$lng,$name='category'){
+function category_edit($selected,$lng,$name='category',$add_any=FALSE){
     global $category_name_init,$category_name_cache;
     if (!$category_name_init) init_category_name();
     echo '<select name="'.$name.'">';
+    if ($add_any){
+        echo '<option value="any">Any</option>';
+    }
     while (list ($key, $val) = each($category_name_cache[$lng])){
         echo '<option'.($key==$selected?' selected="selected"':'').' value="'.$key.'">'.htmlspecialchars($val).'</option>';
     }
@@ -146,7 +149,7 @@ function page_edit($selected,$lng,$name='page',$show_details=FALSE){
 function get_category_name($selected,$lng){
     global $category_name_init,$category_name_cache;
     if (!$category_name_init) init_category_name();
-    return $category_name_cache[$lng][$selected];
+    return isset($category_name_cache[$lng][$selected])?$category_name_cache[$lng][$selected]:'';
 }
 
 function language_edit($selected=-1,$add_any=FALSE,$name='lng',$disabled=array()){
@@ -156,13 +159,13 @@ function language_edit($selected=-1,$add_any=FALSE,$name='lng',$disabled=array()
 
     echo '<select name="'.$name.'">';
     if ($add_any){
-            echo '<option value="any">Any</option>';
+        echo '<option value="any">Any</option>';
     }
 
 
     while (list ($key, $val) = each($lang_name)){
         if (!in_array($key,$disabled)){
-            echo '<option'.($key==$selected?' selected="selected"':'').' value="'.$key.'">'.$val.'</option>';
+            echo '<option'.((($selected!='any')&&($key==$selected))?' selected="selected"':'').' value="'.$key.'">'.$val.'</option>';
         }
     }
 

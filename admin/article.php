@@ -28,7 +28,7 @@
 $page_name='Articles';
 require_once('./admin_header.php');
 ?>
-<a href="article_edit.php">New article</a><br /><br />
+<br />
 <table cellspacing="0" border="0" cellpadding="5">
   <tr>
     <td>

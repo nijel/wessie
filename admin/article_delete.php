@@ -74,8 +74,8 @@ Do you want to delete following article?<br />
   <tr>
     <td>
 <form action="article_delete.php" method="post">
-<input type="hidden" name="id" value="<?php echo $article['page']?>" />
-<input type="hidden" name="lng" value="<?php echo $article['lng']?>" />
+<input type="hidden" name="id" value="<?php echo $article['page']; ?>" />
+<input type="hidden" name="lng" value="<?php echo $article['lng']; ?>" />
 <input type="hidden" name="action" value="delete" />
 <input type="submit" value=" Yes " />
 </form>
