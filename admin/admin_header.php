@@ -102,5 +102,6 @@ make_tab_item('./download_item.php','Downloads','/download');
 make_tab_item('./plugin.php','Plugins','/plugin');
 make_tab_item('./user.php','Users','/user');
 make_tab_item('./options.php','Options','/option');
+make_tab_item_window('./help.php?'.urlencode(basename($SCRIPT_NAME)),'?','/help.php','help');
 make_tab_end();
 ?>
