@@ -1,5 +1,5 @@
 <!DOCTYPE webproject ><webproject>
- <project usePreviewPrefix="1" preview="http://wessie.cic/" previewPrefix="http://wessie.cic/" type="Local" name="wessie" >
+ <project usePreviewPrefix="1" preview="http://wessie.cic/" type="Local" previewPrefix="http://wessie.cic/" name="wessie" >
   <upload/>
   <author>Michal Cihar</author>
   <email>cihar@email.cz</email>
@@ -137,6 +137,14 @@
   <item url="admin/user_self.php" />
   <item url="admin/user_common.php" />
   <item url="admin/user_delete.php" />
+  <item url="templates/alcatel/" />
+  <item url="templates/alcatel/img/" />
+  <item url="templates/alcatel/img/back.png" />
+  <item url="templates/alcatel/img/logo.png" />
+  <item url="templates/alcatel/img/phones.png" />
+  <item url="templates/alcatel/styles.php" />
+  <item url="templates/alcatel/template.inc.php" />
+  <item url="templates/alcatel/template.php" />
  </project>
 </webproject>
 <!-- $Id$ -->

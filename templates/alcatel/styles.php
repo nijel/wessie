@@ -1,5 +1,5 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4: */
+/* vim: set expandtab tabstop=4 shiftwidth=4:
 // +----------------------------------------------------------------------+
 // | wessie - web site system                                             |
 // +----------------------------------------------------------------------+
@@ -23,64 +23,106 @@
 // | Authors: Michal Cihar <cihar at email dot cz>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id$
-setlocale(LC_ALL,'Czech');
-$charset='iso-8859-2';
-
-//Here will be [count] replaced by number of visits to page
-$msg_counter='Tuto stránku si prohlédlo <?php echo $count?> náv¹tìvníkù';
-
-$msg_unknown='Neznámý';
-
-$msg_mysqlerr = 'Chyba MySQL';
-$msg_mysqlcantconnect = 'Nepodaøilo se pøipojit do databáze';
-
-$msg_err = "Chyba";
-$msg_badweb = "nepodaøilo se otevøít web";
-$msg_badmail = "nevypadá jako správný email!";
-$msg_nonote = "nebyla zadána ádná poznámka!";
-$msg_redirect = "Probíhá pøesmìrování, pokud sele, pouijte tento odkaz";
-$msg_addnote = "Pøidat do knihy hostù";
-$msg_preview = "Náhled";
-$msg_prevsubmit = "Zobrazit náhled";
-$msg_addprev = "pøidávání do knihy hostù s náhledem";
-$msg_addprevh = "Kniha hostù";
-$msg_nomymail = "Tento email není povolen!";
-$msg_nomyname = "Toto jméno není povoleno!";
-$msg_showcomment = "Zobrazit komentáø";
-$msg_commentfor = "Komentáø k";
-$msg_commentnoteno = "poznámce èíslo";
-$msg_next = 'Dalích';
-$msg_previous = 'Pøedchozích';
-
-$msg_downloaded = 'sta¾eno';
-$msg_times = 'krát';
-$msg_downloads = 'stáhnutí';
-
-$msg_find = 'Najít';
-$msg_last_change = 'Poslední zmìna';
-$msg_ = '';
-$msg_ = '';
-$msg_ = '';
-$msg_ = '';
-$msg_ = '';
-$msg_ = '';
-$msg_ = '';
-
-$msg_gb = "Kniha hostù";
-$msg_name = "Jméno";
-$msg_mail = "Email";
-$msg_web = "Web";
-$msg_note = "Poznámka";
-$msg_comment = "Komentáø&nbsp;";
-$msg_submit = "Odeslat poznámku";
-$msg_reset = "Vymazat";
-$msg_noteno = "Poznámka èíslo";
-$msg_noteday = "zapsaná";
-$msg_commentday = "zapsaný";
-$msg_athour = "v";
-$msg_wrote = "Zapsal(a)";
-$msg_anonym = "neznámý";
-
-$msg_unknown_size = 'Neznámá velikost; ';
+// $Id$ */
+Header('Content-Type: text/css');
+//load configuration
+require_once('../../config.php');
+//initialize variables from $PATH_INFO and set some wessie specific variables
+$remove_path='templates/alcatel/';
+require_once('../../init.php');
 ?>
+
+body {
+    background-color: #e7ebf4;
+    background-image: url(<?php echo $base_path;?>templates/alcatel/img/back.png);
+    background-repeat: repeat-y;
+    margin: 0px;
+    padding: 0px;
+}
+
+img {
+    border: none;
+}
+
+a {
+    text-decoration: none;
+}
+a:link {
+    color: #0000FF;
+}
+a:active {
+    color: #CCFF66;
+}
+a:visited {
+    color: #0000CC;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+div.phones {
+    position: absolute;
+    left: 0px;
+    top: 10px;
+    z-index: 0;
+}
+
+div.title {
+    left: 150px;
+    position: absolute;
+    top: 20px;
+    z-index: 10;
+}
+
+div.text {
+    position:absolute;
+    top: 60px;
+    left: 170px;
+    right: 10px;
+    z-index: 20;
+}
+
+div.left {
+    position:absolute;
+    top: 160px;
+    left: 10px;
+    width: 140px;
+}
+
+div.leftbox {
+    width: 100%;
+    border: 1px solid black;
+    background-color: #f0f4ff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 3px;
+}
+
+div.powered {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div.docinfo {
+    margin-top: 20px;
+    text-align: center;
+    font-size: x-small;
+}
+
+span.root{
+}
+
+span.parent a{
+    color: #000000;
+    font-weight: bolder;
+}
+
+span.inactive{
+    font-weight: normal;
+}
+
+span.active{
+    font-weight: bolder;
+}

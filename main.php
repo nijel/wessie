@@ -107,8 +107,8 @@ if (isset($HTTP_COOKIE_VARS[$cookie_count])){
 }
 
 //set cookies (with visited pages and selected language)
-setcookie($cookie_count,$cookie_to_set,time()+$session_time);
-setcookie($cookie_lang,$lng,time()+$lang_time);
+setcookie($cookie_count,$cookie_to_set,time()+$session_time, $base_path);
+setcookie($cookie_lang,$lng,time()+$lang_time, $base_path);
 
 //read page
 if (!($id_result=mysql_query('SELECT * from '.$db_prepend.$table_page.' where id='.$id.' and lng='.$lng.' limit 1',$db_connection)))
@@ -274,6 +274,7 @@ function advert(){
     }
 }
 
+$first_item = false;
 function left_menu(){
 
     function add_childs($child_id,$depth,$parents){
@@ -296,7 +297,7 @@ function left_menu(){
 
     global $lng,$id,$db_prepend,$table_menu,$table_page,$db_connection,$category;
     //cache must bu global, otherwise it would not be accessible by add_childs
-    global $menu_item_cache,$menu_parent_cache,$menu_page_cache;
+    global $menu_item_cache,$menu_parent_cache,$menu_page_cache,$first_item;
 
     // cache alle menu items for current category and then print from array
 

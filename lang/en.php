@@ -28,7 +28,7 @@ setlocale(LC_ALL,'English');
 $charset='iso-8859-1';
 
 //Here will be [count] replaced by number of visits to page
-$msg_counter='This page was viewed by <font size="-1"><?php echo $count?></font> visitors';
+$msg_counter='This page was viewed by <?php echo $count?> visitors';
 
 $msg_unknown='Unknown';
 
