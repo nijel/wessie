@@ -52,9 +52,9 @@ if (isset($HTTP_POST_VARS['submit'])){
         die();
     }
 
-    if (!$admin_two_step_login) setcookie ('user', $user,time()+$admin_user_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
+    if (!$admin_two_step_login) setcookie ('user', $user,time()+$admin_user_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),$SERVER_NAME, $admin_force_ssl || isset($HTTPS));
     $hash=md5 (uniqid (rand()));
-    setcookie ('hash',$hash ,time()+$admin_hash_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
+    setcookie ('hash',$hash ,time()+$admin_hash_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),$SERVER_NAME, $admin_force_ssl || isset($HTTPS));
 
     $ip=$REMOTE_ADDR;
     $headers = getallheaders();
@@ -99,7 +99,7 @@ if (isset($HTTP_POST_VARS['submit'])){
         die();
     }
 
-    setcookie ('user', $user,time()+$admin_user_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
+    setcookie ('user', $user,time()+$admin_user_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),$SERVER_NAME, $admin_force_ssl || isset($HTTPS));
 
     if (!isset($url)){
         $url = ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/index.php';
@@ -117,7 +117,7 @@ if (isset($HTTP_POST_VARS['submit'])){
     die();
 
 }
-setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''), $SERVER_NAME); //delete cookie
+setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),$SERVER_NAME, $admin_force_ssl || isset($HTTPS)); //delete cookie
 
 show_html_head($page_title);
 ?>

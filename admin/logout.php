@@ -30,7 +30,7 @@ require_once('../config.php');
 
 header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=logout');
 
-setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''), $SERVER_NAME); //delete cookie
+setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),$SERVER_NAME, $admin_force_ssl || isset($HTTPS)); //delete cookie
 
 require_once('./admin_header.php');
 

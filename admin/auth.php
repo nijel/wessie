@@ -78,7 +78,7 @@ if ($auth['ip']!=$ip){
 if (!(mysql_query('UPDATE '.$db_prepend.$table_users." set time=NOW() where user='".$user."' and hash='".$hash."' limit 1",$db_connection)))
     do_error(1,'UPDATE '.$db_prepend.$table_users.': '.mysql_error());
 
-setcookie ('hash',$hash ,time()+$admin_hash_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
+setcookie ('hash',$hash ,time()+$admin_hash_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),$SERVER_NAME, $admin_force_ssl || isset($HTTPS));
 
 $permissions = explode(':',$auth['perms']);
 
