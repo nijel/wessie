@@ -24,13 +24,8 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-Header('Pragma: no-cache');
-Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");
-error_reporting (E_ALL);
 require_once('./auth.php');
 require_once('./functions.php');
-$page_title=$site_name[0].':Administration:'.$page_name;
-$page_title_html='<a href="../index.php">'.$site_name[0].'</a>:<a href="index.php">Administration</a>:'.$page_name;
 Header('Content-Type: text/html; charset='.$admin_charset);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -38,7 +33,7 @@ Header('Content-Type: text/html; charset='.$admin_charset);
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $admin_charset?>" />
-    <title><?php echo $page_title?></title>
+    <title>wessie:Help</title>
     <meta name="Author" content="<?php echo $wessie_author?>" />
     <meta name="Generator" content="<?php echo $wessie_version.', Copyright (C) 2001 '.$wessie_author?>" />
     <link rel="home" href="<?php echo $site_home?>" />
@@ -46,62 +41,18 @@ Header('Content-Type: text/html; charset='.$admin_charset);
     <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
     <script language="JavaScript" type="text/javascript" src="./admin.js"></script>
 </head>
-
+<body class="help">
+<div class="close"><a href="javascript:window.close()" onclick="window.close()">Close</a></div>
 <?php
-if (isset($onunload)){
-    echo '<body onunload="'.$onunload.'">';
+if (!isset($QUERY_STRING)){
+    echo '<span class="error">No help topic!</span>';
+}elseif ($QUERY_STRING==''){
+    echo '<span class="error">No help topic!</span>';
+}elseif ($QUERY_STRING=='plugin.php'){
+    echo 'plugin...';
 }else{
-    echo '<body>';
-} ?>
-<table class="upper">
-<tr>
-<td class="left">
-<?php
-    if ($fd = fopen('/proc/uptime', 'r')){
-        $ar_buf = split( ' ', fgets( $fd, 4096 ) );
-        fclose( $fd );
-
-        $sys_ticks = trim( $ar_buf[0] );
-
-        $min   = $sys_ticks / 60;
-        $hours = $min / 60;
-        $days  = floor( $hours / 24 );
-        $hours = floor( $hours - ($days * 24) );
-        $min   = floor( $min - ($days * 60 * 24) - ($hours * 60) );
-
-        if ( $days != 0 ) {
-                $result = $days.' d, ';
-        } else $result = '';
-        $result .= $hours.':'.sprintf('%02d',$min);
-        echo 'Uptime:&nbsp;'.$result;
-    }
-
-    if ( $fd = fopen('/proc/loadavg', 'r') ) {
-        $results = split( ' ', fgets( $fd, 4096 ) );
-        echo '<br />Load:&nbsp;'.$results[0].'&nbsp;'.$results[1].'&nbsp;'.$results[2];
-        fclose( $fd );
-    }
+    echo '<span class="error">Sorry, no help for this topic.</span>';
+}
 ?>
-</td>
-<td class="center">
-<h1><?php echo $page_title_html; ?></h1>
-</td>
-<td class="right">
-User:<?php echo $user; ?><br />
-<a href="logout.php">Logout</a>
-</td>
-</tr>
-</table>
-<?php
-make_tab_start();
-make_tab_item('./category.php','Categories','/category');
-make_tab_item('./menu.php','Menu','/menu');
-make_tab_item('./page.php','Pages','/page');
-make_tab_item('./article.php','Articles','/article');
-make_tab_item('./download_item.php','Downloads','/download');
-make_tab_item('./plugin.php','Plugins','/plugin');
-make_tab_item('./user.php','Users','/user');
-make_tab_item('./options.php','Options','/option');
-make_tab_item_window('./help.php?'.urlencode(basename($SCRIPT_NAME)),'?','/help.php');
-make_tab_end();
-?>
+</body>
+</html>

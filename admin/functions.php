@@ -496,11 +496,11 @@ function make_tab_item($href,$text,$url){
     echo ' onclick="window.location.replace(\''.$href.'\')"><a href="'.$href.'">'.$text.'</a></td>'."\n";
 }
 
-function make_tab_item_window($href,$text,$url,$name){
+function make_tab_item_window($href,$text,$url){
     global $SCRIPT_NAME,$admin_highlight_tabs;
     echo '<td'.(strpos($SCRIPT_NAME,$url)?' class="selected"':'');
     highlighter($admin_highlight_tabs);
-    echo ' onclick="window.open(\''.$href.'\',\''.$name.'\')"><a href="'.$href.'" target="'.$name.'" onclick="window.open(\''.$href.'\',\''.$name.'\')">'.$text.'</a></td>'."\n";
+    echo ' onclick="window.open(\''.$href.'\',\'\',\'menubar=no,location=no,status=no,toolbar=no,width=400,height=400\');return false"><a href="'.$href.'" target="_blank">'.$text.'</a></td>'."\n";
 }
 
 function make_tab_start(){
