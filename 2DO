@@ -8,6 +8,10 @@ add category editing
 
 add downloads editing + write download script
 
+cache results in admin/functions.php - at least get_category_name
+
+optimalise left menu - select all menu items for current category and then write it from array
+
 add pages listing + links to edit (this probably needs plugins working)
 
 top menu of administration - list also installed plugins, show multiple row
