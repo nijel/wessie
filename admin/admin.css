@@ -68,10 +68,16 @@ form.filter {
 input,select {
     background-color: #ff0000;
 }
-input.browse,input.delete,input.return,input.text,input.go,input.save,input.reset,textarea.text,input.ok,select.select,input.check,input.login,input.radio {
+input.info,input.browse,input.delete,input.return,input.text,input.go,input.save,input.reset,textarea.text,input.ok,select.select,input.check,input.login,input.radio {
     color: #000000;
     background-color: #ccccaa;
 }
+
+select.select_disabled,input.check_disabled{
+    color: #dddddd;
+    background-color: #aaaa88;
+}
+
 input.required,textarea.required,input.username,input.password {
     color: #000000;
     background-color: #ddddbb;
