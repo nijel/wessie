@@ -1,0 +1,45 @@
+<!DOCTYPE webproject ><webproject>
+ <project preview="http://wss/" type="Local" name="wss" >
+  <upload/>
+  <author>Michal Cihar</author>
+  <email>cihar@email.cz</email>
+  <item url="lang/cs.php" />
+  <item url="lang/en.php" />
+  <item url="config.php" />
+  <item url="db_connect.php" />
+  <item url="errors.php" />
+  <item url="index.php" />
+  <item url="2DO" />
+  <item url="README" />
+  <item url="VARIABLES" />
+  <item url="FUNCTIONS" />
+  <item url="main.php" />
+  <item url="admin.php" />
+  <item url="admin/index.php" />
+  <item url="admin/check_auth.php" />
+  <item url="admin/pages.php" />
+  <item url="admin/categories.php" />
+  <item url="admin/articles.php" />
+  <item url="admin/menu.php" />
+  <item url="admin/users.php" />
+  <item url="admin/downloads.php" />
+  <item url="admin/download_groups.php" />
+  <item url="img/WSS.png" />
+  <item url="img/WSS_banner.png" />
+  <item url="logs/error.log" />
+  <item url="sql/site.sql" />
+  <item url="templates/default/img/bar_left.png" />
+  <item url="templates/default/img/bar_middle.png" />
+  <item url="templates/default/img/bar_right.png" />
+  <item url="templates/default/template.html" />
+  <item url="templates/default/template.php" />
+  <item url="init.php" />
+  <item url="admin/admin_header.php" />
+  <item url="admin/admin_footer.php" />
+  <item url="browser.php" />
+  <item url="admin/auth.php" />
+  <item url="admin/options.php" />
+  <item url="admin/login.php" />
+  <item url="admin/logout.php" />
+ </project>
+</webproject>

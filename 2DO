@@ -1,0 +1,27 @@
+REBUILD TEMPLATE ENGINE!
+
+tags/functions:
+	10 product info + product page
+	10 links
+	5 discussions
+	5 mailing lists + more maillist support
+
+scripts:
+	2 administration
+	5 download script
+	1 banners - monitor views and CTRs
+	          - allow campaigns with n views / clicks?
+	          - allow per page/category/etc. ads
+	          - administration by client:
+	             - change img/url
+                 - view stats
+                 - start/stop
+
+other:
+	7 menu shouldn't be fully displayed for all pages
+	3 move variables like wss_version, wss_author, ... to separate file
+	1 custom error page
+
+configuration of:
+	3 HTTP headers
+	4 counter/stats working
