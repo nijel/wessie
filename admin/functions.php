@@ -234,6 +234,26 @@ function language_edit($selected=-1,$add_any=FALSE,$name='lng',$disabled=array()
     echo '</select>';
 }
 
+function type_edit($selected=-1,$add_any=FALSE,$name='type',$disabled=array(),$class='select'){
+    global $allowed_page_plugins;
+
+    reset($allowed_page_plugins);
+
+    echo '<select name="'.$name.'"'.($class!=''?' class="'.$class.'"':'').'>';
+    if ($add_any){
+        echo '<option value="any">Any</option>';
+    }
+
+
+    while (list ($key, $val) = each($allowed_page_plugins)){
+        if (!in_array($val,$disabled)){
+            echo '<option'.((($selected!='any')&&($val==$selected))?' selected="selected"':'').' value="'.$val.'">'.$val.'</option>';
+        }
+    }
+
+    echo '</select>';
+}
+
 function new_page($name,$type,$file,$description,$keywords,$lng,$category,$page){
     global $table_prepend_name,$table_page;
     if (!mysql_query('INSERT '.$table_prepend_name.$table_page.' set name="'.$name.'", type="'.$type.'", param="'.$file.'",description="'.$description.'",keywords="'.$keywords.'",category='.$category.',lng='.$lng.($page!=-1?', id='.$page:''))){
