@@ -70,7 +70,7 @@
 <body>
  <div class="topbox">
   <div class="top">
-    <?php echo $site_name_long[$lng]; ?>
+    <span class="title"><?php echo $site_name_long[$lng]; ?></span>
   </div>
  </div>
  <div class="leftbox"><div class="left"><?php left_menu(); ?></div></div>

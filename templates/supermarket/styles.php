@@ -55,8 +55,8 @@ div.top {
 	color: #FFFFFF;
 	padding: 2px;
 	margin: 20px;
+	font-size: x-large;
 	font-weight: bolder;
-	font-size: larger:
 }
 
 div.leftbox {
