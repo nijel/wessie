@@ -33,6 +33,11 @@ require_once('../config.php');
 require_once('./functions.php');
 Header('Content-Type: text/html; charset='.$admin_charset);
 $page_title=$site_name[0].':Administration:Login';
+
+// enforce https also for redirects
+if (isset($url) && ($admin_force_ssl || isset($HTTPS)))
+    $url = ereg_replace('^http:','https:', $url);
+
 if (isset($HTTP_POST_VARS['submit'])){
     $pass=md5($HTTP_POST_VARS['pass']);
     $user=opt_addslashes($HTTP_POST_VARS['user']);
@@ -43,7 +48,7 @@ if (isset($HTTP_POST_VARS['submit'])){
     $auth=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
     if ($auth['count']!=1){
-        Header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=badlogin');
+        Header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=badlogin');
         die();
     }
 
@@ -63,12 +68,12 @@ if (isset($HTTP_POST_VARS['submit'])){
             do_error(1,'UPDATE '.$db_prepend.$table_users.': '.mysql_error());
 
     if (!isset($url)){
-        $url = 'http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/index.php';
+        $url = ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/index.php';
 
     }
 
     if ($admin_two_step_login) {
-        $url2 = 'http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/login.php?step2=1&amp;user='.urlencode($user).'&amp;url='.urlencode($url);
+        $url2 = ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/login.php?step2=1&amp;user='.urlencode($user).'&amp;url='.urlencode($url);
     } else {
         $url2 = $url;
     }
@@ -90,14 +95,14 @@ if (isset($HTTP_POST_VARS['submit'])){
     $auth=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
     if ($auth['count']!=1){
-        Header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=badlogin');
+        Header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=badlogin');
         die();
     }
 
     setcookie ('user', $user,time()+$admin_user_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
 
     if (!isset($url)){
-        $url = 'http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/index.php';
+        $url = ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/index.php';
 
     }
 
@@ -165,6 +170,11 @@ if (isset($url)){
 </table>
 <input type="hidden" name="submit" value="1" />
 </form><br /><br />
+<hr width="100%" />
+<?php
+if (isset($HTTPS)) echo '<p class="info">Secure connection is being used.</p>';
+else echo '<p class="error">Warning: Non-secure connection is being used.</p><p class="info"><a href="https://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/login.php'.(isset($url) ? '?url='.urlencode($url) : '' ).'">Try to use it</a></p>';
+?>
 <hr width="100%" />
 <p class="note">Your browser must have cookies enabled to administrate this site.</p>
 </center>

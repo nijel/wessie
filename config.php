@@ -185,6 +185,7 @@ $admin_confirm_uninstall = TRUE;
 $admin_validator = 'http://validator.cic/cgi-bin/validate.cgi?input=yes&amp;url=';
 $admin_file_restrict = TRUE;
 $admin_two_step_login = TRUE;
+$admin_force_ssl = FALSE;
 //##/ADMIN##
 
 // file management options

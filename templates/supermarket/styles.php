@@ -67,14 +67,17 @@ div.leftbox {
 	width: 220px;
 }
 
-div.left {
+div.lefttext {
 	margin: 20px 0px 0px 20px;
 	border: 3px solid #000000;
 	background-color: #FFD14A;
 	color: #000000;
-	font-size: larger:
-	font-weight: bolder;
-	padding: 3.5em 2px 1em 2px
+	padding: 4em 2px 1em 2px;
+}
+
+div.lefttext span {
+	margin: 0px;
+	padding: 0px
 }
 
 div.bodybox {
@@ -86,14 +89,12 @@ div.bodybox {
 	z-index: 5;
 }
 
-div.body {
+div.bodytext {
 	margin: 20px 20px 20px 217px;
 	border: 3px solid #000000;
 	background-color: #AFB3B6;
-	font-size: larger:
-	font-weight: bolder;
 	color: #000000;
-	padding: 2.5em 5px 5px 5px
+	padding: 3em 5px 5px 5px
 }
 
 div.docinfo {
@@ -103,11 +104,11 @@ div.docinfo {
 	text-align: center;
 }
 
-div.body p {
+div.bodytext p {
 	margin-top: 0px;
 }
 
-div.body p:first-line {
+div.bodytext p:first-line {
 	padding-left: 15px;
 }
 
