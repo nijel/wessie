@@ -37,6 +37,8 @@ $sentences  - maximal sentences in paragraph
 $words      - maximal words in sentece
 $letters    - maximal letters in word
 $addHtml    - add some html into text
+               1 = add &lt;p&gt; and &lt;/p&gt; around each paragraph
+               2 = add &lt;p&gt; and &lt;/p&gt; randomly into text
 </code></pre></p>
 
 <h4>genParagraph</h4>
@@ -48,6 +50,8 @@ $sentences  - maximal sentences in paragraph
 $words      - maximal words in sentece
 $letters    - maximal letters in word
 $addHtml    - add some html into text
+               1 = add &lt;p&gt; and &lt;/p&gt; around each paragraph
+               2 = add &lt;p&gt; and &lt;/p&gt; randomly into text
 </code></pre></p>
 
 <h4>genSentence</h4>
@@ -58,6 +62,8 @@ function genSentence($words=20,$letters=15,$addHtml=3)
 $words      - maximal words in sentece
 $letters    - maximal letters in word
 $addHtml    - add some html into text
+               1 = add &lt;p&gt; and &lt;/p&gt; around each paragraph (no effect here)
+               2 = add &lt;p&gt; and &lt;/p&gt; randomly into text
 </code></pre></p>
 
 <h4>genWord</h4>
@@ -67,4 +73,6 @@ function genWord($letters=15,$addHtml=3)
 
 $letters    - maximal letters in word
 $addHtml    - add some html into text
+               1 = add &lt;p&gt; and &lt;/p&gt; around each paragraph (no effect here)
+               2 = add &lt;p&gt; and &lt;/p&gt; randomly into text
 </code></pre></p>
