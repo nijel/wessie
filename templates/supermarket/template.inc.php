@@ -73,9 +73,9 @@
     <?php echo $site_name_long[$lng]; ?>
   </div>
  </div>
- <div class="leftbox"><div class="left"><?php left_menu(); ?></div></div>
+ <div class="leftbox"><div class="lefttext"><?php left_menu(); ?></div></div>
  <div class="bodybox">
-  <div class="body">
+  <div class="bodytext">
    <?php content(); ?>
   </div>
   <div class="docinfo">
