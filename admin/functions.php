@@ -402,7 +402,7 @@ $configuration_loaded=FALSE;
 
 function config_read(){
     global $configuration,$SCRIPT_FILENAME,$configuration_loaded;
-    if (!($file = fopen($root_dir=dirname(dirname($SCRIPT_FILENAME)).'/config2.php', 'r')))
+    if (!($file = fopen($root_dir=dirname(dirname($SCRIPT_FILENAME)).'/config.php', 'r')))
         return FALSE;
     for ($i=0; !feof($file); $i++) {
         $configuration[$i] = fgets($file, 1024);
@@ -412,7 +412,7 @@ function config_read(){
 
 function config_write(){
     global $configuration,$SCRIPT_FILENAME,$configuration_loaded;
-    if (!($file = fopen($root_dir=dirname(dirname($SCRIPT_FILENAME)).'/config2.php', 'w')))
+    if (!($file = fopen($root_dir=dirname(dirname($SCRIPT_FILENAME)).'/config.php', 'w')))
         return FALSE;
     for ($i=0; $i < count($configuration); $i++) {
         if (isset($configuration[$i])) fwrite($file, $configuration[$i], 1024);
@@ -421,7 +421,7 @@ function config_write(){
 }
 
 //$newline must contain ;\n !
-function config_set_option($pattern,$newline,$add_before="\\?>"){
+function config_set_option($pattern,$newline,$add_before="\\?>",$fallback_add_before="\\?>"){
     global $configuration,$configuration_loaded;
 
     if (!$configuration_loaded) return FALSE;
@@ -434,6 +434,8 @@ function config_set_option($pattern,$newline,$add_before="\\?>"){
                 $configuration[$i]=$newline;
                 return TRUE;
             } elseif (ereg($add_before, $configuration[$i])){
+                $where_add=$i;
+            } elseif (($where_add==-1) && ereg($fallback_add_before, $configuration[$i])){
                 $where_add=$i;
             }
         }
