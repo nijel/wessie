@@ -190,6 +190,13 @@ $last_change = get_last_change();
 
 //functions:
 
+function global_eval($code) {
+    global $site_name,$lng,$site_author,$site_author_email,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
+        $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
+        $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
+    eval('?'.'>'.$code);
+}
+
 function make_url($id,$lng){
     global $base_path,$languages;
     return $base_path.'main.php/page'.$id.'.'.$languages[$lng].'.html';
@@ -214,29 +221,20 @@ global $table_prepend_name,$table_download,$table_download_group,$db_connection;
 }
 
 function upper_menu(){
-        global $site_name,$lng,$site_author,$site_author_email,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
-                $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
-                $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
+    global $table_prepend_name,$table_category,$lng,$db_connection,$upper_menu_divisor,$page,$categories;
 
-        global $table_prepend_name,$table_category,$lng,$db_connection,$upper_menu_divisor,$page,$categories;
-
-        $percent=(string)(int)100/count($categories).'%';
-        $was_item=false;
-        while ($item = each ($categories)) {
-            if ($was_item) {echo $upper_menu_divisor;}
-            $was_item=true;
-            eval('?'.'>'.make_upper_menu_item($percent,make_url($item['value']['page'],$lng),$item['value']['name'],$item['value']['short'],$item['value']['description'],$page['category']==$item['value']['id']).'<?php ');
-        }
+    $percent=(string)(int)100/count($categories).'%';
+    $was_item=false;
+    while ($item = each ($categories)) {
+        if ($was_item) {echo $upper_menu_divisor;}
+        $was_item=true;
+        global_eval(make_upper_menu_item($percent,make_url($item['value']['page'],$lng),$item['value']['name'],$item['value']['short'],$item['value']['description'],$page['category']==$item['value']['id']));
+    }
 }
 
 function top_pages(){
     global $table_prepend_name,$table_category,$table_page,$lng,$db_connection,$top_pages_divisor,$top_pages_count,$categories;;
     if($top_pages_count>0){
-        global $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
-                $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
-                $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
-
-
         $id_result=mysql_query('SELECT id,name,description,category from '.$table_prepend_name.$table_page.' where lng='.$lng.' order by count desc limit '.$top_pages_count) or
             do_error(1,'SELECT '.$table_prepend_name.$table_page.': '.mysql_error());
 
@@ -245,7 +243,7 @@ function top_pages(){
             if ($was_item) {echo $top_pages_divisor;}
             $was_item=true;
             $item_cat=$categories[$item['category']];
-            eval('?'.'>'.make_top_pages_item(make_url($item['id'],$lng),$item['name'],$item_cat['name'],$item_cat['short'],$item['description']).'<?php ');
+            global_eval(make_top_pages_item(make_url($item['id'],$lng),$item['name'],$item_cat['name'],$item_cat['short'],$item['description']));
         }
         mysql_free_result($id_result);
     }
@@ -279,9 +277,6 @@ function advert(){
 function left_menu(){
 
     function add_childs($child_id,$depth,$parents){
-        global $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
-            $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
-            $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
         global $first_item,$left_menu_divisor,$id,$category,$lng,$menu_item_cache,$menu_parent_cache,$menu_page_cache;
 
         if (isset($menu_parent_cache[$child_id]) && is_array($menu_parent_cache[$child_id])){
@@ -289,7 +284,7 @@ function left_menu(){
                 if (!$first_item) echo $left_menu_divisor;
                 else $first_item=false;
 
-                eval('?'.'>'.make_menu_item(make_url($menu_item_cache[$val]['page'],$lng),$menu_item_cache[$val]['name'],$category['name'],$category['short'],$menu_item_cache[$val]['description'],$menu_item_cache[$val]['page']==$id,$depth,isset($menu_parent_cache[$menu_item_cache[$val]['id']]) && in_array ($menu_item_cache[$val]['id'],$parents)).'<?php ');
+                global_eval(make_menu_item(make_url($menu_item_cache[$val]['page'],$lng),$menu_item_cache[$val]['name'],$category['name'],$category['short'],$menu_item_cache[$val]['description'],$menu_item_cache[$val]['page']==$id,$depth,isset($menu_parent_cache[$menu_item_cache[$val]['id']]) && in_array ($menu_item_cache[$val]['id'],$parents)));
 
                 //do we have any childs and should we list them?
                 if (isset($menu_parent_cache[$menu_item_cache[$val]['id']]) && (($menu_item_cache[$val]['expand']==1) || ($menu_item_cache[$val]['page']==$id) || in_array ($menu_item_cache[$val]['id'],$parents))){
@@ -350,72 +345,43 @@ function left_menu(){
 }
 
 function content(){
-global $content,
-    $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,
-    $page_title,$category_name,
-    $browser,$os,
-    $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
-    $site_logo,$site_logo_width,$site_logo_height,
-    $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path,
-    $allow_content_eval,$page_plugins_options,$page,$lng;
-
+    global $content,$allow_content_eval,$page_plugins_options,$page,$lng;
     if ($allow_content_eval && $page_plugins_options[$page['type']]['eval']){
-        eval('?'.'>'.$content.'<?php ');
+        global_eval($content);
     }else{
         echo $content;
     }
 }
 
 function counter(){
-global $msg_counter,$page;
-$count=$page['count'];
-eval('?'.'>'.$msg_counter.'<?php ');
+    global $msg_counter,$page;
+    $count=$page['count'];
+    eval('?'.'>'.$msg_counter);
 }
 
-function copyright(){global $copyright,$lng;echo $copyright[$lng];}
+function copyright(){
+    global $copyright,$lng;
+    echo $copyright[$lng];
+}
 
 function page_title(){
-global $page,
-    $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,
-    $page_title,$category_name,
-    $browser,$os,
-    $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
-    $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
-
-eval('?'.'>'.$page['name'].'<?php ');
+    global $page;
+    global_eval($page['name']);
 }
 
 function category_name(){
-global $category,
-    $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,
-    $page_title,$category_name,
-    $browser,$os,
-    $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
-    $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
-
-eval('?'.'>'.$category['name'].'<?php ');
+    global $category;
+    global_eval($category['name']);
 }
 
 function keywords(){
-global $page,
-    $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,
-    $page_title,$category_name,
-    $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
-    $browser,$os,
-    $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
-
-eval('?'.'>'.$page['keywords'].'<?php ');
+    global $page;
+    global_eval($page['keywords']);
 }
 
 function description(){
-global $page,
-    $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,
-    $page_title,$category_name,
-    $browser,$os,
-    $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
-    $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
-
-eval('?'.'>'.$page['description'].'<?php ');
+    global $page;
+    global_eval($page['description']);
 }
 
 function search_hidden_options(){
@@ -423,55 +389,49 @@ function search_hidden_options(){
 }
 
 function languages(){
-global $languages,$lang_name,$lang_main_page,$languages_divisor,$id,
-    $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,
-    $page_title,$category_name,
-    $browser,$os,
-    $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
-    $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
+    global $languages,$languages_divisor,$id;
 
-if (count($languages)==1){
-    $result='&nbsp;'; // if there is only one language it's useles to offer it
-}else{
-    $result='';
-    for($i=0;$i<count($languages);$i++){
-        if ($result!='') $result.=$languages_divisor;
-        $result.=make_language(make_url($id,$i),$i);
+    if (count($languages)==1){
+        $result='&nbsp;'; // if there is only one language it's useles to offer it
+    }else{
+        $result='';
+        reset($languages);
+        while(list($key,$val)=each($languages)){
+            if ($result!='') $result.=$languages_divisor;
+            $result.=make_language(make_url($id,$key),$key);
+        }
     }
+    global_eval($result);
 }
-eval('?'.'>'.$result.'<?php ');
-}
 
-function make_stat($which,$cond,$mul,$cvt="<?php echo \$item['item'] ?>"){
-global $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
-        $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
-        $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
-global $db_connection,$table_stat,$table_prepend_name,$lng,$stat_start,$stat_end,$msg_unknown,$lang_name;
+function make_stat($which,$cond,$mul,$cvt="\$item['item']"){
+    global $db_connection,$table_stat,$table_prepend_name,$lng,$stat_start,$stat_end,$msg_unknown,$lang_name;
 
-eval('?'.'>'.$stat_start.'<?php ');
+    global_eval($stat_start);
 
-if (!($id_result=mysql_query('SELECT count from '.$table_prepend_name.$table_stat." where category='total'",$db_connection)))
-    do_error(1,'SELECT '.$table_prepend_name.$table_stat.': '.mysql_error());
-$item = mysql_fetch_array ($id_result);
-mysql_free_result($id_result);
-$total = $item['count'];
-if (!($id_result=mysql_query('SELECT item,count from '.$table_prepend_name.$table_stat." where category='$which' $cond",$db_connection)))
-    do_error(1,'SELECT '.$table_prepend_name.$table_stat.': '.mysql_error());
-while ($item = mysql_fetch_array ($id_result)){
-    $percent=$item['count']*100/$total;
-    eval('?'.'>'.make_stat_item($cvt/*$item['item']*/,$percent*$mul,$percent,$item['count']).'<?php ');
-}
-mysql_free_result($id_result);
+    if (!($id_result=mysql_query('SELECT count from '.$table_prepend_name.$table_stat." where category='total'",$db_connection)))
+        do_error(1,'SELECT '.$table_prepend_name.$table_stat.': '.mysql_error());
+    $item = mysql_fetch_array ($id_result);
+    mysql_free_result($id_result);
+    $total = $item['count'];
+    if (!($id_result=mysql_query('SELECT item,count from '.$table_prepend_name.$table_stat." where category='$which' $cond",$db_connection)))
+        do_error(1,'SELECT '.$table_prepend_name.$table_stat.': '.mysql_error());
+    while ($item = mysql_fetch_array ($id_result)){
+        $percent=$item['count']*100/$total;
+        eval('$name='.$cvt.';');
+        global_eval(make_stat_item($name/*$item['item']*/,$percent*$mul,$percent,$item['count']));
+    }
+    mysql_free_result($id_result);
 
-eval('?'.'>'.$stat_end.'<?php ');
+    global_eval($stat_end);
 }
 
 function stat_os($mul=1){
-    make_stat('os','and count>0 order by count desc',$mul,"<?php echo \$item['item']!='?'?\$item['item']:\$msg_unknown ?>");
+    make_stat('os','and count>0 order by count desc',$mul,"(\$item['item']!='?'?\$item['item']:\$msg_unknown)");
 }
 
 function stat_browser($mul=1){
-    make_stat('browser','and count>0 order by count desc',$mul,"<?php echo \$item['item']!='?'?\$item['item']:\$msg_unknown ?>");
+    make_stat('browser','and count>0 order by count desc',$mul,"(\$item['item']!='?'?\$item['item']:\$msg_unknown)");
 }
 
 function stat_weeks($mul=1){
@@ -479,7 +439,7 @@ function stat_weeks($mul=1){
 }
 
 function stat_days($mul=1){
-    make_stat('dow','order by item',$mul,"<?php echo strftime('%A',mktime (0,0,0,5,6+\$item['item'],2001)) ?>");
+    make_stat('dow','order by item',$mul,"strftime('%A',mktime (0,0,0,5,6+\$item['item'],2001))");
 }
 
 function stat_hours($mul=1){
@@ -487,7 +447,7 @@ function stat_hours($mul=1){
 }
 
 function stat_langs($mul=1){
-    make_stat('lang','order by item',$mul,"<?php echo \$lang_name[\$item['item']] ?>");
+    make_stat('lang','order by item',$mul,"\$lang_name[\$item['item']]");
 }
 
 function wessie_icon(){
@@ -495,7 +455,10 @@ function wessie_icon(){
     echo '<a href="'.$wessie_url.'"><img src="' . $base_path . 'img/wessie_icon.png" align="middle" alt="powered by wessie" width="88" height="31" border="0" /></a>';
 }
 
-function special(){global $special,$lng;echo $special[$lng];}
+function special(){
+    global $special,$lng;
+    echo $special[$lng];
+}
 
-eval ('?'.'>'.$template.'<?php ');
+eval ('?'.'>'.$template);
 ?>
