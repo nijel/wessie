@@ -97,7 +97,7 @@ $special='';
 //whether site wants adverts
 $use_adverts=true;
 
-//which filed in database is used for ordering categories
+//which field in database is used for ordering categories
 $category_order='id';
 
 //charset in administration
@@ -127,5 +127,15 @@ $admin_validator='http://validator.cic/cgi-bin/validate.cgi?input=yes&url=';
 
 
 $show_error_detail=TRUE;
+
+//globally allow or deny of evaling of content
+$allow_content_eval=TRUE;
+
+//plugin configuration:
+$allowed_page_plugins=array('file','article');
+//allow or deny of evaling of content for each plugin
+$page_plugins_options['file']['eval']=FALSE;
+$page_plugins_options['article']['eval']=TRUE;
+$allowed_function_plugins=array();
 
 ?>

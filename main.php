@@ -345,8 +345,14 @@ global $content,
     $page_title,$category_name,
     $browser,$os,
     $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
-    $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
-eval('?'.'>'.$content.'<?php ');
+    $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path,
+    $allow_content_eval,$page_plugins_options,$page;
+
+    if ($allow_content_eval && $page_plugins_options[$page['type']]['eval']){
+        eval('?'.'>'.$content.'<?php ');
+    }else{
+        echo $content;
+    }
 }
 
 function counter(){
