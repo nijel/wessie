@@ -1,3 +1,257 @@
+2002-01-16 Wednesday 21:18  michal
+
+	added support for help in plugins: 
+	 - currently only for functions 
+	 - modified code to show help window to be configurable 
+	 - added help files for bullshit and icon plugin 
+
+2002-01-16 Wednesday 21:18  michal
+
+	removed useless todo for paths relative to server root in file
+	plugin 
+
+2002-01-16 Wednesday 21:15  michal
+
+	added support for help in plugins: 
+	 - currently only for functions 
+	 - modified code to show help window to be configurable 
+	 - added help files for bullshit and icon plugin 
+
+2002-01-15 Tuesday 20:08  michal
+
+	fixed download link behavio when not in restricted mode 
+
+2002-01-15 Tuesday 15:35  michal
+
+	updated to match current state 
+
+2002-01-15 Tuesday 14:43  michal
+
+	bullshit plugin supports editing and deleting 
+
+2002-01-15 Tuesday 14:42  michal
+
+	bullshit page supports editing and deleting 
+
+2002-01-15 Tuesday 14:12  michal
+
+	file plugin support deleting 
+
+2002-01-15 Tuesday 14:03  michal
+
+	updated todo to fit current state 
+
+2002-01-15 Tuesday 13:56  michal
+
+	many updates according to file page editing: 
+	 - added configuration for php highlighting 
+	 - file listing dialog supports walking ouside web tree 
+	 - added esiting of file page 
+	 - fixed some JavaScript issues in file listing dialog (esp.
+	 onUload) 
+	- few changes in urls and &amp; 
+	 - removed useless fields from plugin pages listing 
+	 - and maybe something more, but I don't remember it..  
+
+2002-01-15 Tuesday 13:55  michal
+
+	many updates according to file page editing: 
+	 - added configuration for php highlighting 
+	 - file listing dialog supports walking ouside web tree 
+	 - added esiting of file page 
+	 - fixed some JavaScript issues in file listing dialog (esp.
+	 onUload) 
+	- few changes in urls and &amp; 
+	 - removed useless fields from plugin pages listing 
+	 - and maybe something more, but I don't remember it..  
+
+2002-01-15 Tuesday 11:30  michal
+
+	added support for <pre> file listing 
+
+2002-01-15 Tuesday 11:21  michal
+
+	more changes in plugin pages listing: 
+	 - added filter_action with url where to post (or get) filter
+	 requests 
+	- added listing for bullshit and file pages 
+	 - small fixes in arrticle listing 
+
+2002-01-15 Tuesday 11:16  michal
+
+	few design fixes: 
+	 - top tabs are always same width (don't depend on being selected) 
+	 - added padding in data listing 
+
+2002-01-13 Sunday 21:27  michal
+
+	aricle*.php removed because useless 
+
+2002-01-13 Sunday 21:25  michal
+
+	editing and deleting for page plugins works 
+
+2002-01-13 Sunday 19:45  michal
+
+	made more clever ;-) 
+
+2002-01-13 Sunday 17:47  michal
+
+	started page plugin ediation support 
+
+2002-01-13 Sunday 17:46  michal
+
+	now generates correct html (no nested links) 
+
+2002-01-13 Sunday 17:31  michal
+
+	added support for asking whether to uninstall plugin 
+
+2002-01-13 Sunday 15:47  michal
+
+	added listing of pages 
+
+2002-01-13 Sunday 15:47  michal
+
+	fixed creating of tables 
+
+2002-01-13 Sunday 15:28  michal
+
+	fixed installation to work with custom table names 
+
+2002-01-13 Sunday 15:07  michal
+
+	now also creates and drops table 
+
+2002-01-13 Sunday 15:07  michal
+
+	updated functions to return TRUE on success 
+
+2002-01-13 Sunday 15:06  michal
+
+	updated dump 
+
+2002-01-13 Sunday 14:28  michal
+
+	added base support for installing/uninstalling, support for
+	creating/removing table is still missing 
+
+2002-01-13 Sunday 14:27  michal
+
+	added install/uninstall scripts 
+
+2002-01-12 Saturday 14:29  michal
+
+	install/uninstall script for this plugin 
+
+2002-01-12 Saturday 14:28  michal
+
+	added support for installing/uninstalling plugins 
+
+2002-01-12 Saturday 12:58  michal
+
+	added support for credits 
+
+2002-01-12 Saturday 12:58  michal
+
+	corrected regexp/strcmp search 
+
+2002-01-12 Saturday 12:57  michal
+
+	added sample sql query 
+
+2002-01-12 Saturday 12:57  michal
+
+	added bullshit plugin 
+
+2002-01-12 Saturday 11:48  michal
+
+	added links to delete/move/copy/chmod files, added labels to form 
+
+2002-01-12 Saturday 01:03  michal
+
+	fixed to be again XHTML 1.0 Transitional compliant 
+
+2002-01-11 Friday 22:10  michal
+
+	removed forgotten debugging code 
+
+2002-01-09 Wednesday 17:32  michal
+
+	updated project info 
+
+2002-01-09 Wednesday 17:30  michal
+
+	updated (mozilla moved to browsers) 
+
+2002-01-09 Wednesday 17:29  michal
+
+	updated sql dump 
+
+2002-01-09 Wednesday 17:27  michal
+
+	added to bottom powered by icons to show function plugin
+	functionality 
+
+2002-01-09 Wednesday 17:27  michal
+
+	fixed behavior when added new plugin 
+
+2002-01-09 Wednesday 17:26  michal
+
+	added function plugin loading 
+
+2002-01-09 Wednesday 17:26  michal
+
+	added icons plugi 
+
+2002-01-09 Wednesday 16:36  michal
+
+	added separate category for Mozilla (now differs Mozilla / old
+	Netscape) 
+
+2002-01-09 Wednesday 16:24  michal
+
+	copyright is no more genererated here, it's just taken from init.php 
+
+2002-01-09 Wednesday 16:23  michal
+
+	updated copyright info 
+
+2002-01-09 Wednesday 16:21  michal
+
+	html header is now printed by function show_html_header instead of
+	beeing in each file 
+
+2002-01-09 Wednesday 16:19  michal
+
+	added $wessie_copyright_email and $wessie_copyright 
+
+2002-01-09 Wednesday 11:41  michal
+
+	major code cleanup, all evals which need global variables moved to
+	one function 
+
+2002-01-08 Tuesday 23:49  michal
+
+	updated admin css: 
+	 - added alternate blue stylesheet (alternate CSS works correctly
+	 IMHO only in galeon) 
+	- highlighting is done by classes not directly by color 
+	 - cleaned up css code 
+
+2002-01-08 Tuesday 15:24  michal
+
+	enhanced searchin capabilites 
+
+2002-01-08 Tuesday 15:08  michal
+
+	browse_list.php renamed to file_list.php 
+
+2002-01-08 Tuesday 14:57  michal
+
+	css update - dates are right aligned and perms centered 
+
 2002-01-08 Tuesday 14:52  michal
 
 	added automatically generated changelog 
