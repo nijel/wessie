@@ -83,7 +83,6 @@ make_tab_start();
 make_tab_item('./category.php','Categories','/category');
 make_tab_item('./menu.php','Menu','/menu');
 make_tab_item('./page.php','Pages','/page');
-make_tab_item('./article.php','Articles','/article');
 make_tab_item('./download_item.php','Downloads','/download');
 make_tab_item('./plugin.php','Plugins','/plugin');
 make_tab_item('./user.php','Users','/user');
