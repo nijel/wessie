@@ -289,6 +289,11 @@ function make_url($id,$lng){
     global $base_path;
     return $base_path.'../main.php/id='.$id.'/lng='.$lng;
 }
+function make_absolute_url($id,$lng){
+    global $base_path,$SERVER_NAME;
+    return 'http://'.$SERVER_NAME.$base_path.'../main.php/id='.$id.'/lng='.$lng;
+}
+
 
 function change_everywhere_category($from,$to,$lng){
     global $table_prepend_name,$table_menu,$table_page;

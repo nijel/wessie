@@ -122,6 +122,8 @@ $admin_confirm_delete=TRUE;
 $admin_highlight_list='#ffffcc';
 $admin_highlight_tabs='#ffffcc';
 
+$admin_validator='http://validator.cic/cgi-bin/validate.cgi?input=yes&url=';
+
 
 $show_error_detail=TRUE;
 }
