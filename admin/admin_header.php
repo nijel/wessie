@@ -84,13 +84,13 @@ User:<a href="user_self.php"><?php echo $fullname; ?></a><br />
 </table>
 <?php
 make_tab_start();
-if (in_array('category.php',$permissions)) make_tab_item('./category.php','Categories','admin/category');
-if (in_array('menu.php',$permissions)) make_tab_item('./menu.php','Menu','admin/menu');
-if (in_array('page.php',$permissions)) make_tab_item('./page.php','Pages','admin/page');
-if (in_array('download_item.php',$permissions)) make_tab_item('./download_item.php','Downloads','admin/download','admin/files');
-if (in_array('plugin.php',$permissions)) make_tab_item('./plugin.php','Plugins','admin/plugin');
-if (in_array('user.php',$permissions)) make_tab_item('./user.php','Users','admin/user');
-if (in_array('options.php',$permissions)) make_tab_item('./options.php','Options','admin/option');
-if (in_array('help.php',$permissions)) make_tab_item_window('./help.php?'.urlencode(basename($SCRIPT_NAME)),'?','admin/help.php');
+if ($user=='admin' || in_array('category.php',$permissions)) make_tab_item('./category.php','Categories','admin/category');
+if ($user=='admin' || in_array('menu.php',$permissions)) make_tab_item('./menu.php','Menu','admin/menu');
+if ($user=='admin' || in_array('page.php',$permissions)) make_tab_item('./page.php','Pages','admin/page');
+if ($user=='admin' || in_array('download_item.php',$permissions)) make_tab_item('./download_item.php','Downloads','admin/download','admin/files');
+if ($user=='admin' || in_array('plugin.php',$permissions)) make_tab_item('./plugin.php','Plugins','admin/plugin');
+if ($user=='admin' || in_array('user.php',$permissions)) make_tab_item('./user.php','Users','admin/user');
+if ($user=='admin' || in_array('options.php',$permissions)) make_tab_item('./options.php','Options','admin/option');
+if ($user=='admin' || in_array('help.php',$permissions)) make_tab_item_window('./help.php?'.urlencode(basename($SCRIPT_NAME)),'?','admin/help.php');
 make_tab_end();
 ?>
