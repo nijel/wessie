@@ -5,12 +5,10 @@ KNOWN BUGS:
   currently none
   should we use ORIGINAL_REMOTE_ADDR as alternative to X-Forwarded-For?
 
-ORDERED by importance (order of starting work on it):
+NOT ORDERED by importance:
 ? = may be
 ! = important
 !! = very important
-
-admin: file management - write files_action.php for actions on file
 
 create plugins:
  - news
