@@ -32,6 +32,7 @@ error_reporting (E_ALL);
 require_once('./auth.php');
 require_once('./functions.php');
 $page_title=$site_name.':Administration:'.$page_name;
+$page_title_html='<a href="../index.php">'.$site_name.'</a>:<a href="index.php">Administration</a>:'.$page_name;
 Header('Content-Type: text/html; charset='.$admin_charset);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -80,10 +81,10 @@ Header('Content-Type: text/html; charset='.$admin_charset);
 ?>
 </td>
 <td class="center">
-<h2><?php echo $page_title?></h2>
+<h1><?php echo $page_title_html; ?></h1>
 </td>
 <td class="right">
-User:<?php echo $user?><br />
+User:<?php echo $user; ?><br />
 <a href="logout.php">Logout</a>
 </td>
 </tr>
