@@ -27,7 +27,6 @@
 // Main executed script
 
 error_reporting (E_ALL);
-//BEFORE publishing check all TEMPORARY words!
 
 //load configuration
 require_once('./config.php');
@@ -123,8 +122,7 @@ if (!isset($page['id'])){
 mysql_free_result($id_result);
 
 //generate statistics
-// true in following line is TEMPORARY (TODO - just for searching)
-if (true||$increase_count){
+if ($increase_count){
     if (!(mysql_query('UPDATE '.$table_prepend_name.$table_page.' set count=count+1 where id='.$id.' and lng='.$lng.' limit 1',$db_connection)))
         do_error(1,'UPDATE '.$table_prepend_name.$table_page.': '.mysql_error());
 
