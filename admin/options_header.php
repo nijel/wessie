@@ -30,6 +30,7 @@ require_once('./admin_header.php');
 make_tab_start();
 make_tab_item('./options_design.php','Design','admin/options_design');
 make_tab_item('./options_info.php','Information','admin/options_info');
+make_tab_item('./options_cookies.php','Cookies','admin/options_cookies');
 make_tab_item('./options_languages.php','Languages','admin/options_languages');
 make_tab_item('./options_database.php','Database','admin/options_database');
 make_tab_item('./options_errors.php','Errors','admin/options_errors');

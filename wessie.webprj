@@ -1,5 +1,5 @@
 <!DOCTYPE webproject ><webproject>
- <project usePreviewPrefix="1" preview="http://wessie.cic/" previewPrefix="http://wessie.cic/" type="Local" name="wessie" >
+ <project usePreviewPrefix="1" preview="http://wessie.cic/" type="Local" previewPrefix="http://wessie.cic/" name="wessie" >
   <upload/>
   <author>Michal Cihar</author>
   <email>cihar@email.cz</email>
@@ -149,6 +149,7 @@
   <item url="templates/supermarket/styles.php" />
   <item url="templates/supermarket/template.inc.php" />
   <item url="templates/supermarket/template.php" />
+  <item url="admin/options_cookies.php" />
  </project>
 </webproject>
 <!-- $Id$ -->

@@ -24,7 +24,7 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-$page_name='Options:Errors';
+$page_name='Options:Cookies';
 require_once('./options_header.php');
 if (isset($action) && $action=='save'){
     if (!config_read()){
@@ -32,30 +32,42 @@ if (isset($action) && $action=='save'){
         exit;
     }
 
-    if (!config_set_option('\$show_error_detail','$show_error_detail = '.(isset($set_show_error_detail)?'TRUE':'FALSE').";\n",'//##/ERRORS##')){
+    if (!config_set_option('\$cookie_count',"\$cookie_count = '".$set_cookie_count."';\n",'//##/COOKIES##')){
         show_error('Can not modify configuration!');
         exit;
     }
-    if (!config_set_option('\$error_log_file',"\$error_log_file = '".$set_error_log_file."';\n",'//##/ERRORS##')){
+    if (!config_set_option('\$cookie_lang',"\$cookie_lang = '".$set_cookie_lang."';\n",'//##/COOKIES##')){
         show_error('Can not modify configuration!');
         exit;
     }
+    if (!config_set_option('\$session_time',"\$session_time = ".$set_session_time.";\n",'//##/COOKIES##')){
+        show_error('Can not modify configuration!');
+        exit;
+    }
+    if (!config_set_option('\$lang_time',"\$lang_time = ".$set_lang_time.";\n",'//##/COOKIES##')){
+        show_error('Can not modify configuration!');
+        exit;
+    }
+
     if (!config_write()){
         show_error('Can not write configuration!');
         exit;
     }
 
-    show_info_box('Error configuration saved.');
+    show_info_box('Cookie configuration saved.');
     include_once('./admin_footer.php');
     exit;
 }
 
-echo '<form action="options_errors.php" method="get"><input type="hidden" name="action" value="save" /><table class="item">';
-echo "\n<tr><th>Show error details</th>\n";
-echo '<td><input type="checkbox" class="check" name="set_show_error_detail" '.($show_error_detail?'checked="checked"':'').' /></td>'."</tr>\n";
-echo "\n<tr><th>Error log filename</th>\n";
-echo '<td><input type="text" class="text" name="set_error_log_file" value="'.htmlentities($error_log_file).'" /></td>'."</tr>\n";
-
+echo '<form action="options_cookies.php" method="get"><input type="hidden" name="action" value="save" /><table class="item">';
+echo "\n<tr><th>Counter cookie name</th>\n";
+echo '<td><input type="text" class="text" name="set_cookie_count" value="'.htmlentities($cookie_count).'" /></td>'."</tr>\n";
+echo "\n<tr><th>Language cookie name</th>\n";
+echo '<td><input type="text" class="text" name="set_cookie_lang" value="'.htmlentities($cookie_lang).'" /></td>'."</tr>\n";
+echo "\n<tr><th>Session time</th>\n";
+echo '<td><input type="text" class="text" name="set_session_time" value="'.$session_time.'" /></td>'."</tr>\n";
+echo "\n<tr><th>Language cookie validity</th>\n";
+echo '<td><input type="text" class="text" name="set_lang_time" value="'.$lang_time.'" /></td>'."</tr>\n";
 ?>
 <tr><th></th><td>
 <table class="savereset">
