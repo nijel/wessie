@@ -96,19 +96,19 @@ if (isset($action) && ($action=='save')){
 }
 
 ?>
-<form action="article_edit.php" method="POST">
-<input type="hidden" name="action" value="<?php echo $action?>">
+<form action="article_edit.php" method="post">
+<input type="hidden" name="action" value="<?php echo $action?>" />
 <table border="0">
 <tr><th valign="top">
 Page ID:
 </th><td>
-<input type="hidden" name="page" value="<?php echo $article['page']?>">
+<input type="hidden" name="page" value="<?php echo $article['page']?>" />
 <?php echo ($article['page']!=-1?$article['page']:'Page not created yet')?>
 </td></tr>
 <tr><th valign="top">
 Language:
 </th><td>
-<input type="hidden" name="lng" value="<?php echo $article['lng']?>">
+<input type="hidden" name="lng" value="<?php echo $article['lng']?>" />
 <?php echo $lang_name[$article['lng']]?>
 </td></tr>
 <tr><th valign="top">
@@ -156,8 +156,8 @@ Content:
 </th><td>
 <table border="0" width="100%">
   <tr>
-    <td align="center"><input type="submit" value=" Save "></td>
-    <td align="center"><input type="reset" value=" Reset "></td>
+    <td align="center"><input type="submit" value=" Save " /></td>
+    <td align="center"><input type="reset" value=" Reset " /></td>
   </tr>
 </table>
 </td></tr>
@@ -168,13 +168,13 @@ Content:
 if ($action!='create_new'){
     $transl=get_page_translations($article['page']);
     if (sizeof($transl)<sizeof($lang_name)){
-        echo '<form action="article_edit.php" method="GET">';
+        echo '<form action="article_edit.php" method="get">';
         echo 'Translate to ';
-        echo '<input type="hidden" name="action" value="translate">';
-        echo '<input type="hidden" name="id" value="'.$article['page'].'">';
-        echo '<input type="hidden" name="from_lng" value="'.$lng.'">';
+        echo '<input type="hidden" name="action" value="translate" />';
+        echo '<input type="hidden" name="id" value="'.$article['page'].'" />';
+        echo '<input type="hidden" name="from_lng" value="'.$lng.'" />';
         language_edit(-1,FALSE,'to_lng',$transl);
-        echo '<input type="submit" value=" Go ">';
+        echo '<input type="submit" value=" Go " />';
         echo '</form>';
     }
 }

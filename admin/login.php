@@ -80,12 +80,12 @@ if (isset($HTTP_POST_VARS['submit'])){
                   "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title><?php echo $page_title?></title>
-    <link rel="home" href="<?php echo $site_home?>" />
     <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $admin_charset?>" />
+    <title><?php echo $page_title?></title>
     <meta name="Author" content="<?php echo $wss_author?>" />
-    <link rel="copyright" href="mailto:<?php echo $wss_author?>" />
     <meta name="Generator" content="<?php echo $wss_version.', Copyright (C) 2001 '.$wss_author?>" />
+    <link rel="copyright" href="mailto:<?php echo $wss_author?>" />
+    <link rel="home" href="<?php echo $site_home?>" />
   <script language="JavaScript" type="text/javascript">
   <!--
      if(top != self) { window.top.location.href=location; }
@@ -112,7 +112,7 @@ if ($QUERY_STRING=='expired'){?>
 <?php }elseif ($QUERY_STRING=='badlogin'){?>
 <b><font color="red">Bad login!</font></b><br />
 <?php }elseif ($QUERY_STRING=='logout'){?>
-<b>Logout successful!</b><br>
+<b>Logout successful!</b><br />
 <?php }
 //elseif ($QUERY_STRING==''){
 //}

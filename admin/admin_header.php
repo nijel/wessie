@@ -32,22 +32,24 @@ require_once('./functions.php');
 $page_title=$site_name.':Administration:'.$page_name;
 Header('Content-Type: text/html; charset='.$admin_charset);
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Final//EN">
-<HTML>
-<HEAD>
-    <TITLE><?php echo $page_title?></TITLE>
-    <link rel="home" href="<?php echo $site_home?>">
-    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=<?php echo $admin_charset?>">
-    <META NAME="Author" CONTENT="<?php echo $wss_author?>">
-    <link rel="copyright" href="mailto:<?php echo $wss_author?>">
-    <META NAME="Generator" CONTENT="<?php echo $wss_version.', Copyright (C) 2001 '.$wss_author?>">
-</HEAD>
-<body bgcolor="gray" text="white" link="#eeee00" alink="yellow" vlink="#dddd00">
-  <SCRIPT language="JavaScript">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                  "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $admin_charset?>" />
+    <title><?php echo $page_title?></title>
+    <meta name="Author" content="<?php echo $wss_author?>" />
+    <meta name="Generator" content="<?php echo $wss_version.', Copyright (C) 2001 '.$wss_author?>" />
+    <link rel="home" href="<?php echo $site_home?>" />
+    <link rel="copyright" href="mailto:<?php echo $wss_author?>" />
+  <script language="JavaScript" type="text/javascript">
   <!--
      if(top != self) { window.top.location.href=location; }
   //-->
-  </SCRIPT>
+  </script>
+</head>
+
+<body bgcolor="gray" text="white" link="#eeee00" alink="yellow" vlink="#dddd00">
 <table border="0" width="100%">
 <tr>
 <td align="center" width="200">
@@ -73,7 +75,7 @@ Header('Content-Type: text/html; charset='.$admin_charset);
 
     if ( $fd = fopen('/proc/loadavg', 'r') ) {
         $results = split( ' ', fgets( $fd, 4096 ) );
-        echo '<br>Load:&nbsp;'.$results[0].'&nbsp;'.$results[1].'&nbsp;'.$results[2];
+        echo '<br />Load:&nbsp;'.$results[0].'&nbsp;'.$results[1].'&nbsp;'.$results[2];
         fclose( $fd );
     }
 ?>
@@ -82,12 +84,12 @@ Header('Content-Type: text/html; charset='.$admin_charset);
 <h2><?php echo $page_title?></h2>
 </td>
 <td align="center" width="200">
-User:<?php echo $user?><br>
+User:<?php echo $user?><br />
 <a href="logout.php">Logout</a>
 </td>
 </tr>
 </table>
-<hr width="100%">
+<hr width="100%" />
 <table width="100%" border="0">
   <tr>
     <td width="2%">&nbsp;</td>
@@ -102,4 +104,4 @@ User:<?php echo $user?><br>
     <td width="2%">&nbsp;</td>
   </tr>
 </table>
-<hr width="100%">
+<hr width="100%" />

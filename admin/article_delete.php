@@ -69,21 +69,21 @@ if (isset($action) && ($action=='delete') && isset($lng) && isset($id)){
 }
 
 ?>
-Do you want to delete following article?<br>
+Do you want to delete following article?<br />
 <table border="0">
   <tr>
     <td>
-<form action="article_delete.php" method="POST">
-<input type="hidden" name="id" value="<?php echo $article['page']?>">
-<input type="hidden" name="lng" value="<?php echo $article['lng']?>">
-<input type="hidden" name="action" value="delete">
-<input type="submit" value=" Yes ">
+<form action="article_delete.php" method="post">
+<input type="hidden" name="id" value="<?php echo $article['page']?>" />
+<input type="hidden" name="lng" value="<?php echo $article['lng']?>" />
+<input type="hidden" name="action" value="delete" />
+<input type="submit" value=" Yes " />
 </form>
     </td>
     <td><?php make_return_button(' No ');?> </td>
   </tr>
 </table>
-<a href="<?php echo make_url($id,$lng)?>" target="_blank">Here</a> you can view article rendered in template.<br>
+<a href="<?php echo make_url($id,$lng)?>" target="_blank">Here</a> you can view article rendered in template.<br />
 
 <table border="0">
 <tr><th valign="top">

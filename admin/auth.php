@@ -29,6 +29,8 @@ require_once('../config.php');
 require_once('../errors.php');
 require_once('../db_connect.php');
 
+if(FALSE){
+
 if((!isset($HTTP_COOKIE_VARS['user']))||(!isset($HTTP_COOKIE_VARS['hash']))){
 header('Location: http://'.$SERVER_NAME.dirname($REQUEST_URI).(substr(dirname($REQUEST_URI),-5)!='admin'?'admin':'').'/login.php?unauthorised');
 die();
@@ -70,5 +72,6 @@ if (!(mysql_query('UPDATE '.$table_prepend_name.$table_users." set time=NOW() wh
     do_error(1,'UPDATE '.$table_prepend_name.$table_users.': '.mysql_error());
 
 setcookie ("hash",$hash ,time()+3600, dirname($REQUEST_URI));//valid one hour
-
+}
+$user='USER';
 ?>

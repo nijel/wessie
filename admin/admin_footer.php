@@ -25,5 +25,5 @@
 //
 // $Id$
 ?>
-</BODY>
-</HTML>
+</body>
+</html>

@@ -28,25 +28,25 @@
 $page_name='Articles';
 require_once('./admin_header.php');
 ?>
-<a href="article_edit.php">New article</a><br><br>
+<a href="article_edit.php">New article</a><br /><br />
 <table cellspacing="0" border="0" cellpadding="5">
   <tr>
     <td>
       Filter:
     </td>
     <td  bgcolor="#8f8f8f">
-      <form method="GET" action="article.php">
+      <form method="get" action="article.php">
         Language:
         <?php language_edit((isset($filter_lng) && ($filter_lng != 'any'))?$filter_lng:-1,TRUE,'filter_lng') ?>
         &nbsp;Title:
-        <input type="text" name="filter_title" <?php if(isset($filter_title)){ echo 'value="'.$filter_title.'"'; }?>>
+        <input type="text" name="filter_title" <?php if(isset($filter_title)){ echo 'value="'.$filter_title.'"'; }?> />
         &nbsp;Description:
-        <input type="text" name="filter_desc" <?php if(isset($filter_desc)){ echo 'value="'.$filter_desc.'"'; }?>>
-        &nbsp;<input type="submit">
+        <input type="text" name="filter_desc" <?php if(isset($filter_desc)){ echo 'value="'.$filter_desc.'"'; }?> />
+        &nbsp;<input type="submit" />
       </form>
     </td>
   </tr>
-</table><br>
+</table><br />
 <?php
 
 if (isset($filter_lng) && $filter_lng!='any') {
@@ -72,7 +72,7 @@ if (mysql_num_rows($id_result) == 0){
 echo "Nothing...";
 } else {
     echo 'Listed articles: '.mysql_num_rows($id_result);
-    echo "<table border=0><tr><th>Page</th><th>Title</th><th>Description</th><th>Language</th><th>Last change</th><th colspan=3>Action</th></tr>\n";
+    echo '<table border="0"><tr><th>Page</th><th>Title</th><th>Description</th><th>Language</th><th>Last change</th><th colspan="3">Action</th></tr>'."\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
         if ($even == 1) {
@@ -82,15 +82,15 @@ echo "Nothing...";
         }
         $even = 1 - $even;
         echo $item['page'].'</td><td>'.htmlspecialchars($item['name']).'</td><td>'.htmlspecialchars($item['description']).'</td><td>'.$lang_name[$item['lng']].'</td><td>'.strftime('%c',$item['last_change']).'</td>';
-        echo '<td><a href="article_edit.php?id=',$item['page'].'&lng='.$item['lng'].'">Edit</a></td><td><a href="article_delete.php?id=',$item['page'].'&lng='.$item['lng'].'">Delete</a></td><td><a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a></td>'."\n";
+        echo '<td><a href="article_edit.php?id=',$item['page'].'&amp;lng='.$item['lng'].'">Edit</a></td><td><a href="article_delete.php?id=',$item['page'].'&amp;lng='.$item['lng'].'">Delete</a></td><td><a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a></td></tr>'."\n";
     }
     echo "</table>\n";
 }
 ?>
-<form action="article_edit.php" method="GET">
+<form action="article_edit.php" method="get">
 Create new article, in language: <?php language_edit() ?>
-<input type="submit" value=" Go ">
-<input type="hidden" name="action" value="new">
+<input type="submit" value=" Go " />
+<input type="hidden" name="action" value="new" />
 </form>
 <?php
 require_once('./admin_footer.php');
