@@ -76,17 +76,17 @@ input.required,textarea.required,input.username,input.password {
 label.radios {
     text-align: left;
 }
+a {
+    text-decoration: none;
+}
 a:link {
     color: #0000FF;
-    text-decoration: none;
 }
 a:active {
     color: #CCFF66;
-    text-decoration: none;
 }
 a:visited {
     color: #0000CC;
-    text-decoration: none;
 }
 a:hover {
     text-decoration: underline;
@@ -95,7 +95,6 @@ table.upper {
     border: none;
     width: 100%;
     text-align: center;
-    border: none;
 }
 table.upper td.left{
     width: 200px;
@@ -104,9 +103,7 @@ table.upper td.right{
     width: 200px;
 }
 table.tabs {
-    border-left: none;
-    border-right: none;
-    border-top: none;
+    border: none;
     border-bottom: 1px solid #000000;
     width: 100%;
     text-align: center;
@@ -119,15 +116,16 @@ table.tabs a:hover {
 table.tabs td {
     padding: 2px 10px 2px 10px;
     margin: 1px 1px 0px 1px;
-    border-left: 1px solid #000000;
-    border-right: 1px solid #000000;
-    border-top: 1px solid #000000;
+    border: 1px solid #000000;
     border-bottom: 0px none;
     cursor: hand;
 }
 table.tabs td.selected {
     background-color: #eeeebb;
     font-weight: bold;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
 }
 table.data {
     border: none;
@@ -146,7 +144,7 @@ table.savereset {
     text-align: center;
 }
 table.yesno {
-    borded: none;
+    border: none;
     text-align: center;
     vertical-align: bottom;
 }
@@ -157,23 +155,28 @@ table.yesno td {
 table.login {
     border: none;
 }
-p.error {
+.error {
     font-weight: bold;
     color: red;
+}
+p.error {
     margin-bottom: 0px;
     margin-top: 0px;
 }
-span.error {
+.warning {
     font-weight: bold;
-    color: red;
+}
+.info {
+    font-weight: bold;
 }
 p.info {
-    font-weight: bold;
     margin-bottom: 0px;
     margin-top: 0px;
 }
-p.note {
+.note {
     font-size: small;
+}
+p.note {
     margin-bottom: 0px;
     margin-top: 0px;
 }
@@ -186,30 +189,20 @@ p.message {
 p.radios {
     text-align: left;
 }
-span.warning {
-    font-weight: bold;
-}
-span.note {
-    font-size: small;
-}
 h1 {
     font-size: large;
 }
 h1 a:link {
     color: #000000;
-    text-decoration: none;
 }
 h1 a:active {
     color: #000000;
-    text-decoration: none;
 }
 h1 a:visited {
     color: #000000;
-    text-decoration: none;
 }
 h1 a:hover {
     color: #000000;
-    text-decoration: underline;
 }
 table.filelist {
     border: none;
