@@ -6,7 +6,7 @@ Document version: $Id$
 1. download latest wessie version
 2. untar/unzip it into some directory that can be viewed through web
 3. check whether you have all required software to run wessie:
-     - PHP => 4.0.4pl1
+     - PHP => 4.0.5
      - MySQL => 3.23.23
 4. create mysql database that will wessie use and add there user - for example
    by using following SQL commands:
