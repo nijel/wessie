@@ -318,7 +318,7 @@ function left_menu(){
     $db_prepend$table_menu.expand as expand,
     $db_prepend$table_menu.rank as rank
     from $db_prepend$table_menu,$db_prepend$table_page
-    where menu.category=${category['id']} and menu.lng=$lng and menu.page=page.id and page.lng=$lng order by rank",$db_connection)))
+    where $db_prepend$table_menu.category=${category['id']} and $db_prepend$table_menu.lng=$lng and $db_prepend$table_menu.page=$db_prepend$table_page.id and $db_prepend$table_page.lng=$lng order by rank",$db_connection)))
         do_error(1,'SELECT '.$db_prepend.$table_menu.': '.mysql_error());
 
     //fill cache items
