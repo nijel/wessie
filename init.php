@@ -31,4 +31,32 @@ $wss_author_email='cihar@email.cz';
 $wss_url='http://cicom.tsx.org';
 $search_url='search.php';
 $search_param='q';
+
+// extract parameter value, when specified "seacrh engine friendly"
+// (index.php/param1=value1/param2=value2
+
+if (isset($PATH_INFO) && (!empty($PATH_INFO))){
+    $info_vars = split('/',$PATH_INFO);
+    while ($item = each ($info_vars)) {
+        $current_var = split('=',$item['value']);
+        if (isset($current_var[0]) && isset($current_var[1])){
+            $current_var[1] = urldecode($current_var[1]);
+            if (ereg('^[0-9]*$',$current_var[1])){
+                eval('$'.$current_var[0]."=".$current_var[1].';');
+            } else {
+                eval('$'.$current_var[0]."='".$current_var[1]."';");
+            }
+        }
+    }
+    unset($info_vars);
+}
+
+
+// obtain base path for current file
+
+if (isset($SCRIPT_NAME)){
+    $base_path = strrev(strstr(strrev($SCRIPT_NAME),'/'));
+} else {
+    $base_path = '/';
+}
 ?>

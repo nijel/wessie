@@ -134,7 +134,7 @@ if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_page.' 
 $page=mysql_fetch_array($id_result);
 if (!isset($page['id'])){
     log_error('Unknown page: '.$id);
-    header('Location: http://'.$SERVER_NAME.dirname($REQUEST_URI)=='/'?'':dirname($REQUEST_URI).'/main.php');
+    header('Location: http://'.$base_path.'main.php');
     bye();
 }
 mysql_free_result($id_result);
@@ -156,7 +156,7 @@ mysql_free_result($id_result);
 //read category
 if (!isset ( $categories[$page['category']] ) ) {
     log_error('Unknown category: '.$page['category']);
-    header('Location: http://'.$SERVER_NAME.dirname($REQUEST_URI).'/main.php');
+    header('Location: http://'.$base_path.'main.php');
     bye();
 } else {
     $category=$categories[$page['category']];
@@ -226,7 +226,7 @@ global $table_prepend_name,$table_download,$table_download_group,$db_connection;
 function upper_menu(){
         global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wss_version,$wss_author,$browser,$os,
                 $wss_author_email,$wss_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
-                $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
+                $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
         global $table_prepend_name,$table_category,$lng,$db_connection,$upper_menu_divisor,$page,$categories;
 
@@ -235,14 +235,14 @@ function upper_menu(){
         while ($item = each ($categories)) {
             if ($was_item) {echo $upper_menu_divisor;}
             $was_item=true;
-            eval('?'.'>'.make_upper_menu_item($percent,'main.php?id='.$item['value']['page'].'&lng='.$lng,$item['value']['name'],$item['value']['short'],$item['value']['description'],$page['category']==$item['value']['id']).'<?php ');
+            eval('?'.'>'.make_upper_menu_item($percent,$base_path.'main.php/id='.$item['value']['page'].'/lng='.$lng,$item['value']['name'],$item['value']['short'],$item['value']['description'],$page['category']==$item['value']['id']).'<?php ');
         }
 }
 
 function top_pages(){
         global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wss_version,$wss_author,$browser,$os,
                 $wss_author_email,$wss_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
-                $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
+                $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
         global $table_prepend_name,$table_category,$table_page,$lng,$db_connection,$top_pages_divisor,$top_pages_count,$categories;;
 
@@ -254,7 +254,7 @@ function top_pages(){
             if ($was_item) {echo $top_pages_divisor;}
             $was_item=true;
             $item_cat=$categories[$item['category']];
-            eval('?'.'>'.make_top_pages_item('main.php?id='.$item['id'].'&lng='.$lng,$item['name'],$item_cat['name'],$item_cat['short'],$item['description']).'<?php ');
+            eval('?'.'>'.make_top_pages_item($base_path.'main.php/id='.$item['id'].'/lng='.$lng,$item['name'],$item_cat['name'],$item_cat['short'],$item['description']).'<?php ');
         }
         mysql_free_result($id_result);
 }
@@ -286,7 +286,7 @@ global $lng,$id,$table_prepend_name,$table_menu,$db_connection;
 function add_childs($child_id,$depth,$parents){
 global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wss_version,$wss_author,$browser,$os,
         $wss_author_email,$wss_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
-        $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
+        $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 global $first_item,$left_menu_divisor,$id,$category,$db_connection,$table_menu,$table_page,$table_prepend_name,$lng;
 
 if (!($id_result=(mysql_query('SELECT id,name,description,page,category,parent,expand from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and parent='.$child_id.' and category='.$category['id'],$db_connection)))&&($child_id=0))
@@ -306,7 +306,7 @@ while ($item = mysql_fetch_array ($id_result)){
         if ((!isset($item['description']))||($item['description']=='')) $desc=$page['description'];
         else $desc=$item['description'];
 
-        eval('?'.'>'.make_menu_item('main.php?id='.$item['page'].'&lng='.$lng,$name,$category['name'],$category['short'],$desc,$item['page']==$id,$depth).'<?php ');
+        eval('?'.'>'.make_menu_item($base_path.'main.php/id='.$item['page'].'/lng='.$lng,$name,$category['name'],$category['short'],$desc,$item['page']==$id,$depth).'<?php ');
         if (($item['expand']==1) || ($item['page']==$id) || in_array ($item['id'],$parents)){
             add_childs($item['id'],$depth+1,$parents);
         }
@@ -342,7 +342,7 @@ global $content,
         $page_title,$category_name,
         $browser,$os,
         $wss_version,$wss_author,$wss_author_email,$wss_url,
-        $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
+        $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 eval('?'.'>'.$content.'<?php ');
 }
 
@@ -360,7 +360,7 @@ global $page,
         $page_title,$category_name,
         $browser,$os,
         $wss_version,$wss_author,$wss_author_email,$wss_url,
-        $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
+        $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
 eval('?'.'>'.$page['name'].'<?php ');
 }
@@ -371,7 +371,7 @@ global $category,
         $page_title,$category_name,
         $browser,$os,
         $wss_version,$wss_author,$wss_author_email,$wss_url,
-        $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
+        $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
 eval('?'.'>'.$category['name'].'<?php ');
 }
@@ -382,7 +382,7 @@ global $page,
         $page_title,$category_name,
         $wss_version,$wss_author,$wss_author_email,$wss_url,
         $browser,$os,
-        $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
+        $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
 eval('?'.'>'.$page['keywords'].'<?php ');
 }
@@ -393,7 +393,7 @@ global $page,
     $page_title,$category_name,
     $browser,$os,
     $wss_version,$wss_author,$wss_author_email,$wss_url,
-    $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
+    $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
 eval('?'.'>'.$page['description'].'<?php ');
 }
@@ -408,14 +408,14 @@ global $languages,$lang_name,$lang_main_page,$languages_divisor,$id,
         $page_title,$category_name,
         $browser,$os,
         $wss_version,$wss_author,$wss_author_email,$wss_url,
-        $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
+        $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 if (count($languages)==1){
     $result='&nbsp;'; // if there is only one language it's useles to offer it
 }else{
     $result='';
     for($i=0;$i<count($languages);$i++){
         if ($result!='') $result.=$languages_divisor;
-        $result.=make_language('main.php?id='.$id.'&lng='.$i,$lang_name[$i]);
+        $result.=make_language($base_path.'main.php/id='.$id.'/lng='.$i,$lang_name[$i]);
     }
 }
 eval('?'.'>'.$result.'<?php ');
@@ -424,7 +424,7 @@ eval('?'.'>'.$result.'<?php ');
 function make_stat($which,$cond,$mul,$cvt="<?php echo \$item['item'] ?>"){
 global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wss_version,$wss_author,$browser,$os,
         $wss_author_email,$wss_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
-        $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
+        $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 global $db_connection,$table_stat,$table_prepend_name,$lng,$stat_start,$stat_end,$msg_unknown,$lang_name;
 
 eval('?'.'>'.$stat_start.'<?php ');

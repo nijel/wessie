@@ -111,7 +111,8 @@ $languages_divisor=' | ';
 
 //Statistics format:
 function make_stat_item($name,$width,$percent,$count){
-        $bar_name='templates/default/img/bar';
+	global $base_path;
+        $bar_name=$base_path.'templates/default/img/bar';
         $bar_ext='png';
         $bar_height='16';
         $bar_width='7';

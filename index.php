@@ -24,5 +24,8 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-header('Location: http://'.$SERVER_NAME.(dirname($REQUEST_URI)=='/'?'':dirname($REQUEST_URI)).'/main.php');
+
+require_once('./init.php');
+
+header('Location: http://'.$base_path.'main.php');
 ?>
