@@ -1,7 +1,7 @@
 <!DOCTYPE webproject ><webproject>
  <project preview="http://wessie.cic/" type="Local" name="wessie" >
   <upload/>
-  <author>Michal Èihaø</author>
+  <author>Michal Cihar</author>
   <email>cihar@email.cz</email>
   <item url="lang/cs.php" />
   <item url="lang/en.php" />
