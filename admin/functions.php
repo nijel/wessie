@@ -66,9 +66,9 @@ function get_filtered_vars($prefix){
     }
 
     $test = array();
-    $test = array_merge($test, $GLOBALS);
+    $test = array_merge($test, $GLOBALS); /* to make copy */
 
-    array_walk($test, 'do_filter','table_');
+    array_walk($test, 'do_filter',$prefix);
     return $test;
 }
 
@@ -541,6 +541,7 @@ function config_del_options($pattern){
             }
             unset($configuration[$j]);
             $result=TRUE;
+            $i--;
         }
     }
     return $result;

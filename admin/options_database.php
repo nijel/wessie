@@ -70,13 +70,13 @@ if (isset($action) && $action=='save'){
         exit;
     }
 
-    show_info_box('Database configuraton saved. <br />When you press button. new configuration will be used also for this session and if you changed anything related to authorisation, your will have to login again.');
+    show_info_box('Database configuration saved. <br />When you press button. new configuration will be used also for this session and if you changed anything related to authorisation, your will have to login again.');
     include_once('./admin_footer.php');
     exit;
 }
 
 show_warning('When you change database settings, all data may be inaccessible from web and you will have to transfer it to other MySQL account or edit configuration file (config.php) directly to set correct values.');
-echo '<form action="options_database.php" method="get"><input type="hidden" name="action" value="save"><table class="item">';
+echo '<form action="options_database.php" method="get"><input type="hidden" name="action" value="save" /><table class="item">';
 echo "\n<tr><th>Host</th>\n";
 echo '<td><input type="text" class="text" name="set_host" value="'.$db_host.'" /></td>'."</tr>\n";
 echo "\n<tr><th>User</th>\n";

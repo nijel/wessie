@@ -17,8 +17,6 @@ create plugins:
  - discussions
 
 admin: add options editing, sections:
-        - languages + default pages
-        - db + table names
         - site config
         - admin config
 

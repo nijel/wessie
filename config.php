@@ -26,8 +26,10 @@
 // $Id$
 error_reporting (E_ALL);
 // Config script for wessie
-// lines like following are not needed, but they allows to keep a bit of order
-// in this file, when it is being modified by php script
+// Lines with //## are not needed, but they allow to keep a bit of order
+// in this file, when it is being modified by php script.
+// While editing by hand, please keep each option on separate line and
+// use single quotes (') for strings, otherwise editing via web may be broken.
 
 // MySQL database settings
 //##DATABASE##
@@ -56,29 +58,31 @@ $show_error_detail = TRUE;
 //##/ERRORS##
 
 //##LANGUAGES##
-// $languages array    - shortcuts for languages, they should be official = same as
-//                       send browser as Accept-language
-// $lang_name array    - names of languages, just for displaying
-// $lang_img array     - path (relative to root of wessie) to image for earch language
-// $lang_alias array   - used for decoding from Accept-language and PATH_INFO
 // $default_lang       - fallback language, when detection from Accept-language fails
 // $lang_file          - name of file with language-specific data, you can use inside
 //                       any php variables, that will be in time of evaluation
 //                       accessible, for example ${lang} = language shortcut,
 //                       ${lng} = language id
+// $languages array    - data about languages:
+//              short  - shortcut - this should be the official one = same as
+//                       send browser as Accept-language
+//              name   - names of languages, just for displaying
+//              page   - default page for language
+//              image  - path (relative to root of wessie) to image for earch language
+// $lang_alias array   - used for decoding from Accept-language and PATH_INFO
+$default_lang = 0;
+$lang_file = './lang/${lang}.php';
 $languages[0]['short'] = 'en';
 $languages[0]['name'] = 'English';
 $languages[0]['image'] = 'img/flags/en.png';
-$languages[0]['page'] = 1;
+$languages[0]['page'] = '1';
+$lang_alias['en'] = 0;
 $languages[1]['short'] = 'cs';
 $languages[1]['name'] = 'Cesky';
 $languages[1]['image'] = 'img/flags/cs.png';
-$languages[1]['page'] = 1;
-$default_lang = 0;
-$lang_alias['en'] = 0;
+$languages[1]['page'] = '1';
 $lang_alias['cs'] = 1;
 $lang_alias['cz'] = 1;
-$lang_file = './lang/${lang}.php';
 //##/LANGUAGES##
 
 //##COOKIES##
