@@ -1,3 +1,45 @@
+2002-01-20 Sunday 20:45  michal
+
+	fixed typo in database options 
+
+2002-01-20 Sunday 20:42  michal
+
+	design editing now includes setting of php.ini highlighting 
+
+2002-01-20 Sunday 20:18  michal
+
+	we are in year 2002 so copyright should be also from this year ;-) 
+
+2002-01-20 Sunday 20:17  michal
+
+	added design editing 
+
+2002-01-20 Sunday 18:53  michal
+
+	fixed and expanded <link> section in templates 
+
+2002-01-20 Sunday 18:07  michal
+
+	database options can be configured via web 
+
+2002-01-20 Sunday 17:47  michal
+
+	database configuration started: 
+	 - created editing form (saving not yet) 
+	 - $table_prepend_name renamed to $db_prepend and modev to database
+	 section in config.php 
+	- added function to get variables that start with specified name 
+
+2002-01-20 Sunday 14:51  michal
+
+	previous patch forgot that admin can do anything and don't have any
+	permissions, now fixed 
+
+2002-01-20 Sunday 14:48  michal
+
+	header contains only links to pages that are allowed for current
+	user 
+
 2002-01-20 Sunday 14:43  michal
 
 	todo synced with real state 
