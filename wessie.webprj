@@ -40,5 +40,6 @@
   <item url="admin/options.php" />
   <item url="admin/login.php" />
   <item url="admin/logout.php" />
+  <item url="admin/article_edit.php" />
  </project>
 </webproject>

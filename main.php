@@ -66,6 +66,8 @@ if (!isset($lng)){
             if (($lng==-1)||(!file_exists($lang_file_name))) $lng=$default_lang;
         }else{
             $lng=$default_lang;
+            $lang=$languages[$lng];
+            eval('$lang_file_name="'.$lang_file.'";');
         }
     }
 }else{
