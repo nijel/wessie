@@ -24,48 +24,74 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
+// Error handling code
+
+include_once('config.php');
+
 function log_error($what){
-global $error_log_file;
-$fh=fopen($error_log_file,'a');
-fwrite($fh,'--- '. GMDate('D, d M Y H:i:s')." ---\n");
-fwrite($fh,$what."\n");
-fclose($fh);
+    global $error_log_file;
+    $fh=fopen($error_log_file,'a');
+    fwrite($fh,date("Ymd").'-'.date("H:i:s").':'.$what."\n");
+    fclose($fh);
 }
 
-function do_error($err_no,$err_nfo){
-/*
-1 - database
-2 - language file
-*/
-global $SERVER_PROTOCOL, $site_name;
-header ($SERVER_PROTOCOL.' 503 Service temporarily unavailable');
-echo "<html><head><title>$site_name</title></head><body>
-<h2> $site_name site is temporary unavailable</h2>
-<h3> $SERVER_PROTOCOL 503 Service temporarily unavailable</h3>";
-//<!--";
-$err_msg="Internal error $err_no: ";
-switch ($err_no){
-	case 1:
-		$err_msg.='Error occured while working with database!';
-		break;
-	case 2:
-		$err_msg.='Error occured while loading language file!';
-		break;
-	case 3:
-		$err_msg.='Error occured while loading template file!';
-		break;
-	case 4:
-		$err_msg.='Error occured while loading data file!';
-		break;
-	default:
-		$err_msg.='Unknown error';
-}
-$err_msg.="\nError info: $err_nfo\n";
-echo $err_msg;
-log_error($err_msg);
-echo '<br>This site has currently some technical problems. Please try connecting later.<br>
-There is no need to contact administrator, because he surely knows about this....
-</body></html>';
-exit;
+function do_error($err_type=0,$err_nfo=''){
+    global $SERVER_PROTOCOL, $site_name, $show_error_detail, $base_path, $SERVER_NAME;
+
+    $err_names[0] = 'fallback and default';
+    $err_names[1] = 'missing language file';
+    $err_names[2] = 'bad SQL';
+    $err_names[3] = 'page not found';
+    $err_names[4] = 'missing template file';
+    $err_names[5] = 'missing content file';
+    $err_names[6] = 'cannot connect to MySQL';
+    $err_name = isset($err_names[$err_type])?$err_names[$err_type]:$err_names[0];
+
+    $headers[0] = '503 Service temporarily unavailable';
+    $headers[1] = '404 Not found';
+    $headers[2] = '503 Service temporarily unavailable';
+    $headers[3] = '404 Not found';
+    $headers[4] = '503 Service temporarily unavailable';
+    $headers[5] = '503 Service temporarily unavailable';
+    $headers[6] = '503 Service temporarily unavailable';
+
+    $header = $SERVER_PROTOCOL . ' ' . (isset($headers[$err_type])?$headers[$err_type]:$headers[0]);
+    $http_err_type = substr((isset($headers[$err_type])?$headers[$err_type]:$headers[0]),0,1);
+
+    $messages[0] = 'Internal server error';
+    $messages[1] = 'Requested language version is not available.';
+    $messages[2] = 'Internal server error';
+    $messages[3] = 'Requested page was not found';
+    $messages[4] = 'Internal server error';
+    $messages[5] = 'Internal server error';
+    $messages[6] = 'Internal server error';
+    $message = isset($messages[$err_type])?$messages[$err_type]:$messages[0];
+
+
+
+
+    //header ($header);
+    echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">'."\n".
+        '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">'.
+        "\n<head><title>$site_name</title></head><body>\n".
+        "<h2>$site_name</h2>\n<h3>$header</h3>\n".
+        "<p>$message</p>\n";
+
+    if ($http_err_type == 5){
+        echo "<br />\nThis page has currently some technical problems. Please try looking on oher page or connecting later.<br />";
+        if (isset($base_path)){
+            echo 'You can try visiting main page of this site: <a href="http://'.$SERVER_NAME.$base_path.'main.php">http://'.$SERVER_NAME.$base_path.'main.php</a><br />'."\n";
+        }
+        echo "There is no need to contact administrator, because he surely knows about this....<br />\n";
+    }
+
+    echo $show_error_detail?"<p>Error details:<br />\n<code>\n":"<!--Error details:\n";
+    echo $err_name;
+    echo $show_error_detail?"<br />\n":"\n";
+    echo $err_nfo;
+    echo $show_error_detail?"\n</code>\n</p>":"\n-->";
+    log_error($err_type.' ['.$err_name.'] - '.$err_nfo);
+    echo '</body></html>';
+    exit;
 }
 ?>
