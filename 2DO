@@ -33,6 +33,7 @@ add options editing, sections:
 
 add consistency checks (when page removed, there should retain no references to it - at least in system part - menus, default pages etc.)
 
+fix bugs
 
 insert new row for week stat at the start of week - some cache!!!!!
 cache for categories?
