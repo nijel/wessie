@@ -83,8 +83,8 @@ while (list ($key, $val) = each($list)){
     if ($val['is_dir']){
         if (@chdir($dir.'/'.$val['filename'])){
             if (strncmp($root_dir,getcwd(),$root_dir_len)==0){
-                make_row_js($even,"window.location.replace('browse_list.php?dir=".urlencode(getcwd())."');",'even_hand','odd_hand');
-                $filename='<a href="browse_list.php?dir='.urlencode(getcwd()).'">'.$val['filename'].'</a>';
+                make_row_js($even,"window.location.replace('file_list.php?dir=".urlencode(getcwd())."');",'even_hand','odd_hand');
+                $filename='<a href="file_list.php?dir='.urlencode(getcwd()).'">'.$val['filename'].'</a>';
                 $size='DIR';
             }else{
                 make_row_js($even,"window.alert('This directory is outside web tree!');");

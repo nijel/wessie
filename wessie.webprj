@@ -58,7 +58,7 @@
   <item url="admin/download_item_edit.php" />
   <item url="admin/download_item_delete.php" />
   <item url="admin/file_functions.php" />
-  <item url="admin/browse_list.php" />
+  <item url="admin/file_list.php" />
   <item url="admin/download_group_delete.php" />
   <item url="admin/download_group_edit.php" />
   <item url="img/wessie_vertical_long.png" />
@@ -95,6 +95,8 @@
   <item url="admin/options_database.php" />
   <item url="admin/options_errors.php" />
   <item url="admin/options_admin.php" />
+  <item url="admin/files.php" />
+  <item url="admin/files_upload.php" />
  </project>
 </webproject>
 <!-- $Id$ -->

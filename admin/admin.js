@@ -41,7 +41,7 @@ function unhighlight(what){
 
 function open_browse_window(dir){
     close_browse_window=1;
-    browse_window=window.open('./browse_list.php?dir='+dir,'Select file','personalbar=0,status=0,dependent=1,toolbar=0,height=400,width=472,innerHeight=400,innerWidth=462');
+    browse_window=window.open('./file_list.php?dir='+dir,'Select file','personalbar=0,status=0,dependent=1,toolbar=0,height=400,width=472,innerHeight=400,innerWidth=462');
     return true;
 }
 
