@@ -3,12 +3,14 @@ $Id$
 ORDERED by importance (order of starting work on it):
 
 finish menu editing
+-sync lang versions
 
 add category editing
 
 add downloads editing + write download script
 
 optimalise left menu - select all menu items for current category and then write it from array
+- use only ane select for menu+page tables
 
 add pages listing + links to edit (this probably needs plugins working)
 
