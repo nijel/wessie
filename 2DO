@@ -1,13 +1,17 @@
 $Id$
 
+plugin functionality!
+
 insert new row for week stat at the start of week - some cache!!!!!
 cache for categories?
-valid from?
 
 
-functions:
+WHAT? valid from?
+
+
+plugins:
 	5 discussions
-	5 mailing lists + more maillist support
+	5 mailing lists
 
 scripts:
 	2 administration
