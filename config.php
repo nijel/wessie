@@ -147,8 +147,8 @@ $site_author[0] = 'Michal Cihar';
 $site_author[1] = 'Michal Èihaø';
 $site_name[0] = 'wessie Demo';
 $site_name[1] = 'ukázka wessie';
-$copyright[0] = 'Copyright &copy; 2001 <a href="mailto:'.$site_author_email.'">'.$site_author[0].'</a>';
-$copyright[1] = 'Copyright &copy; 2001 <a href="mailto:'.$site_author_email.'">'.$site_author[1].'</a>';
+$copyright[0] = 'Copyright &copy; 2001-2002 <a href="mailto:'.$site_author_email.'">'.$site_author[0].'</a>';
+$copyright[1] = 'Copyright &copy; 2001-2002 <a href="mailto:'.$site_author_email.'">'.$site_author[1].'</a>';
 $special[0] = '';
 $special[1] = '';
 //##/INFO##

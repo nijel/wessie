@@ -29,7 +29,7 @@ $wessie_version='wessie '.$wessie_version_only;
 $wessie_author='Michal Cihar';
 $wessie_author_email='cihar@email.cz';
 $wessie_copyright=$wessie_version.', Copyright (C) 2001-2002 '.$wessie_author;
-$wessie_copyright_email=$wessie_version.', Copyright (C) 2001-2002 <a href="'.$wessie_author_email.'">'.$wessie_author.'</a>';
+$wessie_copyright_email=$wessie_version.', Copyright (C) 2001-2002 <a href="mailto:'.$wessie_author_email.'">'.$wessie_author.'</a>';
 $wessie_url='http://cicom.kgb.cz';
 $search_url='search.php';
 $search_param='q';
