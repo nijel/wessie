@@ -61,34 +61,37 @@ if (isset($HTTP_POST_VARS['submit'])){
     if (!(mysql_query('UPDATE '.$table_prepend_name.$table_users." set hash='".$hash."', time=NOW(), ip= '".$ip."' where user='".$user."' and pass='".$pass."' limit 1",$db_connection)))
             do_error(1,'UPDATE '.$table_prepend_name.$table_users.': '.mysql_error());
 
-?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Final//EN">
-<HTML>
-<HEAD>
-   <META HTTP-EQUIV="Refresh" CONTENT="0;url=http://<?php echo $SERVER_NAME.dirname($REQUEST_URI)?>/index.php">
-</HEAD>
-<BODY>
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                  "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+   <meta http-equiv="Refresh" content="0;url=http://<?php echo $SERVER_NAME.dirname($REQUEST_URI)?>/index.php" />
+</head>
+<body>
 <a href="http://<?php echo $SERVER_NAME.dirname($REQUEST_URI)?>/index.php">REDIRECT</a>
-</BODY>
-</HTML>
+</body>
+</html>
 <?php
     die();
 }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Final//EN">
-<HTML>
-<HEAD>
-    <TITLE><?php echo $page_title?></TITLE>
-    <link rel="home" href="<?php echo $site_home?>">
-    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=<?php echo $admin_charset?>">
-    <META NAME="Author" CONTENT="<?php echo $wss_author?>">
-    <link rel="copyright" href="mailto:<?php echo $wss_author?>">
-    <META NAME="Generator" CONTENT="<?php echo $wss_version.', Copyright (C) 2001 '.$wss_author?>">
-  <SCRIPT language="JavaScript">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                  "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title><?php echo $page_title?></title>
+    <link rel="home" href="<?php echo $site_home?>" />
+    <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $admin_charset?>" />
+    <meta name="Author" content="<?php echo $wss_author?>" />
+    <link rel="copyright" href="mailto:<?php echo $wss_author?>" />
+    <meta name="Generator" content="<?php echo $wss_version.', Copyright (C) 2001 '.$wss_author?>" />
+  <script language="JavaScript" type="text/javascript">
   <!--
      if(top != self) { window.top.location.href=location; }
   //-->
-  </SCRIPT>
-</HEAD>
+  </script>
+</head>
 <body bgcolor="gray" text="white" link="#eeee00" alink="yellow" vlink="#dddd00">
 <table border="0" width="100%">
 <tr>
@@ -97,42 +100,43 @@ if (isset($HTTP_POST_VARS['submit'])){
 </td>
 </tr>
 </table>
-<hr width="100%">
+<hr width="100%" />
 <center>
 <?php
 if ($QUERY_STRING=='expired'){?>
-<b><font color="red">Your login has expired!</font></b><br>
+<b><font color="red">Your login has expired!</font></b><br />
 <?php }elseif ($QUERY_STRING=='badip'){?>
-<b><font color="red">You changed ip address!</font></b><br>
+<b><font color="red">You changed ip address!</font></b><br />
 <?php }elseif ($QUERY_STRING=='unauthorised'){?>
-<b><font color="red">You are not authorised to access this!</font></b><br>
+<b><font color="red">You are not authorised to access this!</font></b><br />
 <?php }elseif ($QUERY_STRING=='badlogin'){?>
-<b><font color="red">Bad login!</font></b><br>
+<b><font color="red">Bad login!</font></b><br />
 <?php }elseif ($QUERY_STRING=='logout'){?>
 <b>Logout successful!</b><br>
 <?php }
 //elseif ($QUERY_STRING==''){
 //}
 ?>
-You must login before accessing administration.<br>
-<br><form action="login.php" method="POST">
+You must login before accessing administration.<br />
+<br />
+<form action="login.php" method="post">
 <table>
   <tr>
     <th>Username:</th>
-    <td><input type="text" name="user" value="<?php echo isset($user)?$user:''?>"></td>
+    <td><input type="text" name="user" value="<?php echo isset($user)?$user:''?>" /></td>
   </tr>
   <tr>
     <th>Password:</th>
-    <td><input type="password" name="pass"></td>
+    <td><input type="password" name="pass" /></td>
   </tr>
   <tr>
-    <td colspan="2" align="center"><input type="reset" value=" Reset ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value=" Login "></td>
+    <td colspan="2" align="center"><input type="reset" value=" Reset " />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value=" Login " /></td>
   </tr>
 </table>
-<input type="hidden" name="submit" value=1>
-</form><br><br>
-<hr width="100%">
+<input type="hidden" name="submit" value="1" />
+</form><br /><br />
+<hr width="100%" />
 <small>Your browser must have cookies enabled to administrate this site.</small>
 </center>
-</BODY>
-</HTML>
+</body>
+</html>

@@ -32,6 +32,9 @@ $wss_url='http://cicom.tsx.org';
 $search_url='search.php';
 $search_param='q';
 
+//nasty hack to be XHTML compliant
+$SERVER_SIGNATURE = strtr($SERVER_SIGNATURE, array('ADDRESS'=>'address'));
+
 // extract parameter value, when specified "seacrh engine friendly"
 // (index.php/param1=value1/param2=value2
 

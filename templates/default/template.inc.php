@@ -1,14 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                   "DTD/xhtml1-transitional.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang; ?>" lang="<?php echo $lang; ?>">
 <head>
-<!--html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs"-->
-  <title><?php title(); ?></title>
-  <link rel="home" href="<?php echo $site_home; ?>" />
   <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
   <meta http-equiv="Content-Language" content="<?php echo $lang; ?>" />
-  <meta name="author" content="<?php echo $site_author; ?>" />
+  <title><?php title(); ?></title>
+  <link rel="home" href="<?php echo $site_home; ?>" />
   <link rel="copyright" href="mailto:<?php echo $site_author_email; ?>" />
+  <meta name="author" content="<?php echo $site_author; ?>" />
   <meta name="keywords" content="<?php keywords(); ?>" />
   <meta name="description" content="<?php description(); ?>" />
   <meta name="generator" content="<?php echo $wss_version.', Copyright (C) 2001 '.$wss_author; ?>" />
