@@ -92,7 +92,7 @@ if (mysql_num_rows($id_result) == 0){
         make_cell($size,$url);
         make_cell(htmlspecialchars(get_download_group_name($item['grp'])),$url);
         make_cell($item['count'],$url);
-        echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="download_item_delete.php?id='.$item['id'].'">Delete</a>&nbsp;|&nbsp;<a href="../get.php?id='.$item['id'].'" target="_blank">Download</a>&nbsp;</td></tr>'."\n";
+        echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="download_item_delete.php?id='.$item['id'].'">Delete</a>&nbsp;|&nbsp;<a href="../get.php/'.$item['id'].'/'.basename($item['filename']).'" target="_blank">Download</a>&nbsp;</td></tr>'."\n";
     }
     echo "</table>\n";
 }

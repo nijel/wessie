@@ -67,7 +67,7 @@ function make_download($file,$group=array('count'=>-1)){
     global $msg_downloaded, $msg_times, $msg_downloads,$DOCUMENT_ROOT,$msg_unknown_size,$base_path;
     $grp=$group['count']==-1?'':'; '.$group['name'].' '.$msg_downloaded.' '.$group['count'].' '.$msg_times;
     if ($file['remote']==1){
-        return '<a href="'.$base_path.'get.php?id='.$file['id'].'">'.basename($file['filename']).'</a> ('.$msg_unknown_size.$file['count'].' '.$msg_downloads.$grp.')';
+        return '<a href="'.$base_path.'get.php/'.$file['id'].'/'.basename($file['filename']).'">'.basename($file['filename']).'</a> ('.$msg_unknown_size.$file['count'].' '.$msg_downloads.$grp.')';
     }else{
         $fn=$DOCUMENT_ROOT.'/'.$file['filename'];
         if (!file_exists($fn)){
@@ -84,7 +84,7 @@ function make_download($file,$group=array('count'=>-1)){
             elseif ($size_b<1073741824) {$size=$size_mb.' MB';}
             else {$size=$size_gb.' GB';}
 
-            return '<a href="'.$base_path.'get.php?id='.$file['id'].'">'.basename($fn).'</a> ('.$size.'; '.$file['count'].' '.$msg_downloads.$grp.')';
+            return '<a href="'.$base_path.'get.php/'.$file['id'].'/'.basename($file['filename']).'">'.basename($fn).'</a> ('.$size.'; '.$file['count'].' '.$msg_downloads.$grp.')';
         }
     }
 }
