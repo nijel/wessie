@@ -58,17 +58,6 @@ if (!isset($lng)){
                     eval('$lang_file_name="'.$lang_file.'";');
                     if (($lng!=-1)&&(file_exists($lang_file_name))) break;
                 }
-/*                if (in_array($curr_lang,$languages)){
-                    for ($j=0;$j<count($languages);$j++){
-                        if (strcasecmp($languages[$j],$curr_lang)==0){
-                            $lng=$j;
-                            break;
-                        }
-                    }
-                    $lang=$languages[$lng];
-                    eval('$lang_file_name="'.$lang_file.'";');
-                    if (($lng!=-1)&&(file_exists($lang_file_name))) break;
-                }*/
             }
             if (($lng==-1)||(!file_exists($lang_file_name))) $lng=$default_lang;
         }else{
