@@ -113,6 +113,14 @@ content();
 </td>
 </tr>
 </table>
-
+<center><br />
+<?php
+powered_wessie();
+echo '&nbsp;';
+powered_php();
+echo '&nbsp;';
+powered_mysql();
+?>
+</center>
 </body>
 </html>
