@@ -177,9 +177,9 @@ while (list ($key, $val) = each($list)){
         '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">cp</a>':'<a href="files_action.php?action=copy&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">cp</a>').*/
         '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Delete</a>':'<a href="files_action.php?action=delete&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Delete</a>').
         '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Move</a>':'<a href="files_action.php?action=move&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Move</a>').
-        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Copy</a>':'<a href="files_action.php?action=copy&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Copy</a>').
-        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Chmod</a>':'<a href="files_action.php?action=chmod&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Chmod</a>').
-        //||!$val['is_my']
+        '&nbsp;|&nbsp;'.($val['filename']=='..'||$val['is_dir']?'<a class="disabled">Copy</a>':'<a href="files_action.php?action=copy&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Copy</a>').
+        '&nbsp;|&nbsp;'.($val['filename']=='..'||!$val['is_my']?'<a class="disabled">Chmod</a>':'<a href="files_action.php?action=chmod&amp;fname='.urlencode($dir.'/'.$val['filename']).'">Chmod</a>').
+        //
         '');
 
     echo "</tr>\n";
