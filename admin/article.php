@@ -42,7 +42,7 @@ require_once('./admin_header.php');
         <input type="text" name="filter_title" <?php if(isset($filter_title)){ echo 'value="'.$filter_title.'"'; }?> />
         &nbsp;Description:
         <input type="text" name="filter_desc" <?php if(isset($filter_desc)){ echo 'value="'.$filter_desc.'"'; }?> />
-        &nbsp;<input type="submit" />
+        &nbsp;<input type="submit" value=" Go "/>
       </form>
     </td>
   </tr>
