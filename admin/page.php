@@ -77,7 +77,7 @@ if (mysql_num_rows($id_result) == 0){
     echo '<table class="data"><tr><th>Id</th><th>Name</th><th>Description</th><th>Language</th><th>Type</th><th>Actions</th></tr>'."\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
-        $url='page_edit.php?id='.$item['id'].'&amp;lng='.$item['lng'];
+        $url='page_edit.php?type='.$item['type'].'&amp;id='.$item['id'].'&amp;lng='.$item['lng'];
         make_row($even);
         $even = 1 - $even;
         echo make_cell($item['id'],$url);
@@ -91,7 +91,7 @@ if (mysql_num_rows($id_result) == 0){
     echo 'Listed pages: '.mysql_num_rows($id_result);
 }
 ?>
-<form action="article_edit.php" method="get">
+<form action="page_edit.php" method="get">
 Create new page type: <?php type_edit() ?>, in language: <?php language_edit() ?>
 <input type="submit" value=" Go " class="go" />
 <input type="hidden" name="action" value="new" />
