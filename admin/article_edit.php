@@ -40,29 +40,70 @@ if (isset($action) && ($action=='save')){
     show_info_box('Article saved',array('lng'=>$lng,'id'=>$page));
     include_once('./admin_footer.php');
     exit;
-}
+}elseif(isset($action) && ($action=='create_new')){
+    $page=new_page($name,'article','',$description,$keywords,$lng,$category,$page);
 
-if (!$id_result=mysql_query(
-'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, name, description, keywords, count, category, content '.
-' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
-' where id=page and '.$table_prepend_name.$table_article.'.lng='.$table_prepend_name.$table_page.'.lng and '.$table_prepend_name.$table_article.'.lng='.$lng.' and id='.$id))
-    show_error("Can't get article info! (".mysql_error().')');
-$article=mysql_fetch_array($id_result);
-if (!isset($article['page'])){
+    if (!mysql_query('INSERT '.$table_prepend_name.$table_article.' set content="'.$content.'",last_change=NOW(), page='.$page.', lng='.$lng)){
+        show_error("Can't save article info! (".mysql_error().')');
+        exit;
+    }
+    show_info_box('Article created',array('lng'=>$lng,'id'=>$page));
+    include_once('./admin_footer.php');
+    exit;
+}elseif (isset($action) && ($action=='new') && isset($lng)){
+    $action='create_new';
+    if (isset($page)){
+        if (!is_page_free($page,$lng)){
+            show_error_box('This page allready exists!');
+            include_once('./admin_footer.php');
+            exit();
+        }
+    } else {
+        $page=-1;
+    }
+    $article=array('name'=>'','description'=>'','keywords'=>'','content'=>'','category'=>-1,'lng'=>$lng,'page'=>$page);
+}elseif (isset($action) && ($action=='translate') && isset($from_lng) && isset($to_lng)){
+    $action='create_new';
+    if (!$id_result=mysql_query(
+    'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, name, description, keywords, count, category, content '.
+    ' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
+    ' where id=page and '.$table_prepend_name.$table_article.'.lng='.$table_prepend_name.$table_page.'.lng and '.$table_prepend_name.$table_article.'.lng='.$from_lng.' and id='.$id))
+        show_error("Can't get article info! (".mysql_error().')');
+    $article=mysql_fetch_array($id_result);
+    mysql_free_result($id_result);
+    if (!isset($article['page'])){
+        show_error_box("This page desn't  exist!");
+        exit();
+    }
+    $article['lng']=$to_lng;
+}elseif (isset($lng) && isset($id)){
+    $action='edit';
+    if (!$id_result=mysql_query(
+    'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, name, description, keywords, count, category, content '.
+    ' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
+    ' where id=page and '.$table_prepend_name.$table_article.'.lng='.$table_prepend_name.$table_page.'.lng and '.$table_prepend_name.$table_article.'.lng='.$lng.' and id='.$id))
+        show_error("Can't get article info! (".mysql_error().')');
+    $article=mysql_fetch_array($id_result);
+    mysql_free_result($id_result);
+    if (!isset($article['page'])){
+        show_error_box("This page desn't  exist!");
+        exit();
+    }
+}else{
+    show_error_box();
+    include_once('./admin_footer.php');
     exit();
 }
-mysql_free_result($id_result);
-
 
 ?>
 <form action="article_edit.php" method="POST">
-<input type="hidden" name="action" value="save">
+<input type="hidden" name="action" value="<?php echo $action?>">
 <table border="0">
 <tr><th valign="top">
 Page ID:
 </th><td>
 <input type="hidden" name="page" value="<?php echo $article['page']?>">
-<?php echo $article['page']?>
+<?php echo ($article['page']!=-1?$article['page']:'Page not created yet')?>
 </td></tr>
 <tr><th valign="top">
 Language:
@@ -73,7 +114,13 @@ Language:
 <tr><th valign="top">
 Last change:
 </th><td>
-<?php echo strftime('%c',$article['last_change'])?>
+<?php
+if($action=='create_new'){
+    echo 'New article';
+}else{
+    echo strftime('%c',$article['last_change']);
+}
+?>
 </td></tr>
 <tr><th valign="top">
 Title:
@@ -117,6 +164,22 @@ Content:
 </table>
 
 </form>
+<?php
+if ($action!='create_new'){
+    $transl=get_page_translations($article['page']);
+    if (sizeof($transl)<sizeof($lang_name)){
+        echo '<form action="article_edit.php" method="GET">';
+        echo 'Translate to ';
+        echo '<input type="hidden" name="action" value="translate">';
+        echo '<input type="hidden" name="id" value="'.$article['page'].'">';
+        echo '<input type="hidden" name="from_lng" value="'.$lng.'">';
+        language_edit(-1,FALSE,'to_lng',$transl);
+        echo '<input type="submit" value=" Go ">';
+        echo '</form>';
+    }
+}
+?>
+
 <?php
 require_once('./admin_footer.php');
 ?>
