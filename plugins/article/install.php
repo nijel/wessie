@@ -26,5 +26,19 @@
 // $Id$
 include_once('./plugins/common.php');
 
-addPageType('article');
+if (addPageType('article')) {
+
+    echo 'Creating table article...';
+    if (!$id_result=mysql_query("CREATE TABLE article (
+    content text NOT NULL,
+    last_change timestamp NOT NULL,
+    page smallint unsigned NOT NULL default '0',
+    lng tinyint unsigned NOT NULL default '0',
+    PRIMARY KEY  (page,lng))",$db_connection)) {
+        echo "\n".'<div class="error">Failed creating new table!</div>';
+        $error .= 'Failed creating new table!<br/>';
+    } else {
+        echo "DONE\n";
+    }
+}
 ?>

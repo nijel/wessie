@@ -26,5 +26,14 @@
 // $Id$
 include_once('./plugins/common.php');
 
-delPageType('article');
+if (delPageType('article')) {
+
+    echo 'Dropping table article...';
+    if (!$id_result=mysql_query("DROP TABLE article",$db_connection)) {
+        echo "\n".'<div class="error">Failed creating new table!</div>';
+        $error .= 'Failed dropping table!<br/>';
+    } else {
+        echo "DONE\n";
+    }
+}
 ?>
