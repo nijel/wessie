@@ -73,8 +73,8 @@ function do_error($err_type=0,$err_nfo=''){
     global $SERVER_PROTOCOL, $site_name, $show_error_detail, $base_path, $SERVER_NAME;
 
     $err_names[0] = 'fallback and default';
-    $err_names[1] = 'missing language file';
-    $err_names[2] = 'bad SQL';
+    $err_names[1] = 'bad SQL';
+    $err_names[2] = 'missing language file';
     $err_names[3] = 'page not found';
     $err_names[4] = 'missing template file';
     $err_names[5] = 'missing content file';
@@ -82,8 +82,8 @@ function do_error($err_type=0,$err_nfo=''){
     $err_name = isset($err_names[$err_type])?$err_names[$err_type]:$err_names[0];
 
     $headers[0] = '503 Service temporarily unavailable';
-    $headers[1] = '404 Not found';
-    $headers[2] = '503 Service temporarily unavailable';
+    $headers[1] = '503 Service temporarily unavailable';
+    $headers[2] = '404 Not found';
     $headers[3] = '404 Not found';
     $headers[4] = '503 Service temporarily unavailable';
     $headers[5] = '503 Service temporarily unavailable';
@@ -93,8 +93,8 @@ function do_error($err_type=0,$err_nfo=''){
     $http_err_type = substr((isset($headers[$err_type])?$headers[$err_type]:$headers[0]),0,1);
 
     $messages[0] = 'Internal server error';
-    $messages[1] = 'Requested language version is not available.';
-    $messages[2] = 'Internal server error';
+    $messages[1] = 'Internal server error';
+    $messages[2] = 'Requested language version is not available.';
     $messages[3] = 'Requested page was not found';
     $messages[4] = 'Internal server error';
     $messages[5] = 'Internal server error';
