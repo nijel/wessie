@@ -27,6 +27,7 @@
 Header('Pragma: no-cache');
 Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");
 error_reporting (E_ALL);
+$remove_path='admin/';
 require_once('../init.php');
 require_once('../config.php');
 Header('Content-Type: text/html; charset='.$admin_charset);

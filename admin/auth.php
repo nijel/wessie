@@ -24,6 +24,7 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
+$remove_path='admin/';
 require_once('../init.php');
 require_once('../config.php');
 require_once('../errors.php');

@@ -51,9 +51,9 @@ if (isset($PATH_INFO) && (!empty($PATH_INFO))){
             }
         }else{
             if (ereg ('page([0-9]*)\.html?',$item['value'] , $regs)) {
-                $id=$regs[1];
+                $id=(int)$regs[1];
             } elseif (ereg ('page([0-9]*)\.([a-z]*)\.html?',$item['value'] , $regs)) {
-                $id=$regs[1];
+                $id=(int)$regs[1];
                 $lng=isset($lang_alias[$regs[2]])?$lang_alias[$regs[2]]:$default_lang;
             } elseif (ereg ('^([0-9]*)$',$item['value'])){
                 $id=(int)$item['value'];
@@ -69,7 +69,11 @@ if (isset($PATH_INFO) && (!empty($PATH_INFO))){
 
 if (isset($SCRIPT_NAME)){
     $base_path = dirname($SCRIPT_NAME);
-    if ($base_path!='/') $base_path .= '/';
+    if ($base_path!='/') {
+        $base_path .= '/';
+        if (isset($remove_path) && (strcmp(substr($base_path,-strlen($remove_path)),$remove_path)==0))
+            $base_path=substr($base_path,0,strlen($base_path)-strlen($remove_path));
+    }
 } else {
     $base_path = '/';
 }
