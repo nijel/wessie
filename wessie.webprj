@@ -63,6 +63,10 @@
   <item url="admin/download_item_delete.php" />
   <item url="admin/file_functions.php" />
   <item url="admin/browse_list.php" />
+  <item url="admin/download_group_delete.php" />
+  <item url="admin/download_group_edit.php" />
+  <item url="img/wessie_vertical_long.png" />
+  <item url="logs/error.log" />
  </project>
 </webproject>
 <!-- $Id$ -->
