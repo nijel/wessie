@@ -113,6 +113,10 @@
   <item url="admin/plugin_status.php" />
   <item url="plugins/bullshit/install.php" />
   <item url="plugins/bullshit/uninstall.php" />
+  <item url="plugins/article/install.php" />
+  <item url="plugins/article/uninstall.php" />
+  <item url="plugins/file/install.php" />
+  <item url="plugins/file/uninstall.php" />
  </project>
 </webproject>
 <!-- $Id$ -->

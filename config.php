@@ -211,7 +211,7 @@ $admin_description_cols = 80;
 
 //##PLUGIN_COMMON##
 $allow_content_eval = TRUE;
-$installed_plugins = array('article', 'file', 'bullshit');
+$installed_plugins = array('article', 'bullshit', 'file');
 //##/PLUGIN_COMMON##
 
 //plugin configuration:
