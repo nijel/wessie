@@ -172,16 +172,27 @@ if (!isset($page['id'])){
 mysql_free_result($id_result);
 
 
-//read category
-if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_category.' where id='.$page['category'].' and lng='.$lng.' limit 1',$db_connection)))
+
+//read all categories (TODO: this should be cached)
+if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_category.' where lng='.$lng,$db_connection)))
     do_error(1,'SELECT '.$table_prepend_name.$table_category.': '.mysql_error());
-$category=mysql_fetch_array($id_result);
-if (!isset($category['id'])){
+
+$categories=array();
+while ($item = mysql_fetch_array ($id_result)) {
+    $categories[$item['id']]=$item;
+}
+
+mysql_free_result($id_result);
+
+
+//read category
+if (!isset ( $categories[$page['category']] ) ) {
     log_error('Unknown category: '.$page['category']);
     header('Location: http://'.$SERVER_NAME.dirname($REQUEST_URI).'/main.php');
     bye();
+} else {
+    $category=$categories[$page['category']];
 }
-mysql_free_result($id_result);
 
 //language file
 if (!isset($lng)){
@@ -249,21 +260,15 @@ function upper_menu(){
                 $wss_author_email,$wss_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
                 $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
 
-        global $table_prepend_name,$table_category,$lng,$db_connection,$upper_menu_divisor,$page;
+        global $table_prepend_name,$table_category,$lng,$db_connection,$upper_menu_divisor,$page,$categories;
 
-        if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_category.' where lng='.$lng,$db_connection)))
-            do_error(1,'SELECT '.$table_prepend_name.$table_category.': '.mysql_error());
-        $percent=(string)(int)100/mysql_num_rows($id_result).'%';
-
+        $percent=(string)(int)100/count($categories).'%';
         $was_item=false;
-        while ($item = mysql_fetch_array ($id_result)) {
+        while ($item = each ($categories)) {
             if ($was_item) {echo $upper_menu_divisor;}
-                $was_item=true;
-
-                eval('?'.'>'.make_upper_menu_item($percent,'main.php?id='.$item['page'].'&lng='.$lng,$item['name'],$item['short'],$item['description'],$page['category']==$item['id']).'<?php ');
+            $was_item=true;
+            eval('?'.'>'.make_upper_menu_item($percent,'main.php?id='.$item['value']['page'].'&lng='.$lng,$item['value']['name'],$item['value']['short'],$item['value']['description'],$page['category']==$item['value']['id']).'<?php ');
         }
-
-        mysql_free_result($id_result);
 }
 
 function top_pages(){
@@ -271,7 +276,7 @@ function top_pages(){
                 $wss_author_email,$wss_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
                 $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
 
-        global $table_prepend_name,$table_category,$table_page,$lng,$db_connection,$top_pages_divisor,$top_pages_count;
+        global $table_prepend_name,$table_category,$table_page,$lng,$db_connection,$top_pages_divisor,$top_pages_count,$categories;;
 
         $id_result=mysql_query('SELECT id,name,description,category from '.$table_prepend_name.$table_page.' where lng='.$lng.' order by count desc limit '.$top_pages_count) or
             do_error(1,'SELECT '.$table_prepend_name.$table_page.': '.mysql_error());
@@ -279,14 +284,9 @@ function top_pages(){
         $was_item=false;
         while ($item = mysql_fetch_array ($id_result)) {
             if ($was_item) {echo $top_pages_divisor;}
-                $was_item=true;
-
-                $id2_result=mysql_query('SELECT name,short from '.$table_prepend_name.$table_category.' where id='.$item['category'].' and lng='.$lng.' limit 1',$db_connection) or
-                        do_error(1,'SELECT '.$table_prepend_name.$table_category.': '.mysql_error());
-            $item_cat=mysql_fetch_array($id2_result);
-            mysql_free_result($id2_result);
-
-                eval('?'.'>'.make_top_pages_item('main.php?id='.$item['id'].'&lng='.$lng,$item['name'],$item_cat['name'],$item_cat['short'],$item['description']).'<?php ');
+            $was_item=true;
+            $item_cat=$categories[$item['category']];
+            eval('?'.'>'.make_top_pages_item('main.php?id='.$item['id'].'&lng='.$lng,$item['name'],$item_cat['name'],$item_cat['short'],$item['description']).'<?php ');
         }
         mysql_free_result($id_result);
 }
