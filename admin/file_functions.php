@@ -27,6 +27,7 @@
 
 require_once('./functions.php');
 
+
 function read_folder($path,&$dirs,&$files){
     $list=array();
     if ($dir = @opendir($path)) {

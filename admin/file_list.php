@@ -54,6 +54,7 @@ if ($restrict){
     $root_dir_len = 0;
 }
 
+if (isset($dir)) $dir = stripslashes($dir);
 if (!isset($dir)||$dir==''||!@is_dir($dir)){
     $dir = $server_root_dir;
 }elseif (!@chdir($dir)){
@@ -80,7 +81,7 @@ if (!read_folder($dir,$dirs,$files)){
 }
 if ($limit=='dirs') {
     $files=array();
-    echo "<a href=\"javascript:gE('filename',window.opener).value='$dir/';window.close();\">Select current directory</a>";
+    echo "<a href=\"javascript:gE('filename',window.opener).value='".addslashes(htmlentities($dir))."/';window.close();\">Select current directory</a>";
 }
 natsort($files);
 natsort($dirs);

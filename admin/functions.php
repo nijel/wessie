@@ -26,7 +26,7 @@
 // $Id$
 
 function show_html_head($title,$special=''){
-global $wessie_author,$wessie_version,$wessie_copyright,$site_home,$admin_charset;
+global $wessie_author,$wessie_version,$wessie_copyright,$site_home,$admin_charset,$base_path;;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                   "DTD/xhtml1-transitional.dtd">
@@ -66,7 +66,7 @@ function show_error_box($msg='Wrong parameters!',$params=array(),$action=''){
   <form method="get" action="<?php echo $action?>">
 <?php
 while (list ($key, $val) = each($params)){
-    echo '<input type="hidden" name="'.$key.'" value="'.$val.'" />';
+    echo '<input type="hidden" name="'.$key.'" value="'.htmlentities($val).'" />';
 }?>
     <input type="submit" value=" OK " class="ok" />
   </form>
@@ -104,7 +104,7 @@ function show_info_box($msg,$params=array(),$action=''){
     <b><?php echo $msg?></b><br />
 <?php
 while (list ($key, $val) = each($params)){
-    echo '<input type="hidden" name="'.$key.'" value="'.$val.'" />';
+    echo '<input type="hidden" name="'.$key.'" value="'.htmlentities($val).'" />';
 }?>
     <input type="submit" value=" OK " class="ok" />
   </form>

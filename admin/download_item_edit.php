@@ -110,7 +110,7 @@ Download ID:
 <tr><th>
 Filename:
 </th><td>
-<?php sized_edit('filename', $download['filename'], 'check_remote();') ?><input type="button" class="browse" onclick="open_browse_window('<?php echo dirname(dirname($SCRIPT_FILENAME)).(($download['filename']!='')?dirname($download['filename']):dirname(dirname($SCRIPT_FILENAME)));?>');" value="..." />
+<?php sized_edit('filename', $download['filename'], 'check_remote();') ?><input type="button" class="browse" onclick="open_browse_window('<?php echo addslashes(htmlentities(dirname(dirname($SCRIPT_FILENAME)))).(($download['filename']!='')?dirname($download['filename']):dirname(dirname($SCRIPT_FILENAME)));?>');" value="..." />
 
 </td></tr>
 <tr><th>
