@@ -95,7 +95,7 @@ make_tab_edit('./category.php','Categories','/category');
 make_tab_edit('./menu.php','Menu','/menu');
 make_tab_edit('./page.php','Pages','/page');
 make_tab_edit('./article.php','Articles','/article');
-make_tab_edit('./download.php','Downloads','/download');
+make_tab_edit('./download_item.php','Downloads','/download');
 make_tab_edit('./plugin.php','Plugins','/plugin');
 make_tab_edit('./user.php','Users','/user');
 make_tab_edit('./options.php','Options','/option');
