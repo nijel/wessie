@@ -105,7 +105,7 @@ require_once('./db_connect.php');
 require_once('./browser.php');
 
 //generate statistics
-// true in following line is TEMPORARY
+// true in following line is TEMPORARY (TODO - just for searching)
 if (true||$increase_count){
     if (!(mysql_query('UPDATE '.$table_prepend_name.$table_page.' set count=count+1 where id='.$id.' and lng='.$lng.' limit 1',$db_connection)))
         do_error(1,'UPDATE '.$table_prepend_name.$table_page.': '.mysql_error());

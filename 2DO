@@ -2,6 +2,7 @@ $Id$
 
 insert new row for week stat at the start of week - some cache!!!!!
 cache for categories?
+valid from?
 
 
 functions:
