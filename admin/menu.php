@@ -105,7 +105,7 @@ $listed_items=0;
 add_childs(0,0,$lng);
 ?>
 </table>
-<?php echo 'Listed downloads: '.$listed_items; ?>
+<?php echo 'Listed menu items: '.$listed_items; ?>
 <br />
 <form action="menu_edit.php" method="get">
 Create new menu item, in language: <?php language_edit($lng); ?>
