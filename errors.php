@@ -26,8 +26,36 @@
 // $Id$
 // Error handling code
 
-include_once('config.php');
+/**
+ * Load configuration
+ */
+$confing_file='./config.php';
+if (file_exists($confing_file)) {
+    include_once($confing_file);
+} else {
+    for ($i=0; $i<3; $i++){
+        $confing_file = '../' . $confing_file;
+        if (file_exists($confing_file)) {
+            include_once($confing_file);
+            break;
+        }
+    }
+}
+/**
+ * Set configuration to default values if config.php wasn't included
+ */
+if (!isset($site_name)){
+    $error_log_file='./logs/error.log';
+    $site_name='wessie';
+    $show_error_detail=FALSE;
+}
 
+
+/**
+ * Logs error
+ *
+ * @param   string   message to be logged
+ */
 function log_error($what){
     global $error_log_file;
     $fh=fopen($error_log_file,'a');
@@ -35,6 +63,12 @@ function log_error($what){
     fclose($fh);
 }
 
+/**
+ * Performs error - send to client error message and logs it
+ *
+ * @param   int      error type
+ * @param   string   error description
+ */
 function do_error($err_type=0,$err_nfo=''){
     global $SERVER_PROTOCOL, $site_name, $show_error_detail, $base_path, $SERVER_NAME;
 
