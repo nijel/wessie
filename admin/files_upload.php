@@ -34,10 +34,12 @@ $root_dir_len = strlen($root_dir);
 
 if (!isset($dir)||!isset($file)){
     show_error_box('Error: Not enough parameters!<br/>This may be caused by attempting to upload too large file');
+    chdir($orig_pwd);
     include_once('./admin_footer.php');
     exit();
 }elseif (!@is_dir($dir)||!@chdir($dir)){
     show_error_box('Error: Selected directory ("'.$dir.'") not accessible!');
+    chdir($orig_pwd);
     include_once('./admin_footer.php');
     exit();
 }else{
@@ -46,6 +48,7 @@ if (!isset($dir)||!isset($file)){
 
 if ($admin_fm_restrict && (strlen($dir) < $root_dir_len || strpos($dir,$root_dir) === false)) {
     show_error_box('Error: Directory restriction does not allow you to work in selected directory ("'.$dir.'")!');
+    chdir($orig_pwd);
     include_once('./admin_footer.php');
     exit();
 }
@@ -64,6 +67,7 @@ if (move_uploaded_file ($file, $dir.'/'.$file_name)){
     exit;
 }else{
     show_error_box("File couldn't be uploaded!");
+    chdir($orig_pwd);
     include_once('./admin_footer.php');
     exit();
 }

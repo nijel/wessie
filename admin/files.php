@@ -57,13 +57,13 @@ if ($admin_fm_restrict && (strlen($dir) < $root_dir_len || strpos($dir,$root_dir
     </td>
     <td class="filtercontent">
       <form method="get" action="files.php" class="filter">
-        Filename:
-        <input type="text" name="search" <?php if(isset($search)){ echo 'value="'.$search.'"'; }?> class="text"/>
-        &nbsp;<input type="checkbox" name="regexp" <?php if(isset($regexp)){ echo "checked=\"checked\""; }?> class="check"/> regular expression
-        &nbsp;<input type="checkbox" name="case" <?php if(isset($case)){ echo "checked=\"checked\""; }?> class="check"/> case sensitive,
-        search in
-        <input type="radio" name="where" value="1" class="radio" <?php if ((!isset($where))||$where==1) echo "checked=\"checked\"";?>/> subfolders of current directory (<?php echo $dir; ?>)
-        <input type="radio" name="where" value="2" class="radio" <?php if (isset($where)&&$where==2) echo "checked=\"checked\"";?>/> web tree
+        <label>Filename:
+        <input type="text" name="search" <?php if(isset($search)){ echo 'value="'.$search.'"'; }?> class="text"/></label>
+        &nbsp;<label><input type="checkbox" name="regexp" <?php if(isset($regexp)){ echo "checked=\"checked\""; }?> class="check"/> regular expression</label>
+        &nbsp;<label><input type="checkbox" name="case" <?php if(isset($case)){ echo "checked=\"checked\""; }?> class="check"/> case sensitive</label>
+        <br>search in
+        <label><input type="radio" name="where" value="1" class="radio" <?php if ((!isset($where))||$where==1) echo "checked=\"checked\"";?>/> subfolders of current directory (<?php echo $dir; ?>)</label>
+        <label><input type="radio" name="where" value="2" class="radio" <?php if (isset($where)&&$where==2) echo "checked=\"checked\"";?>/> web tree</label>
         &nbsp;<input type="submit" value=" Go " class="go" />
         <input type="hidden" name="dir" value="<?php echo $dir; ?>" />
       </form>
@@ -137,14 +137,14 @@ while (list ($key, $val) = each($list)){
                 else $download_path = '';
             }else{
                 make_row_js($even,"window.alert('This directory is outside web tree!');");
-                $filename=($val['filename']=='..'?'.. [one level up]':$val['filename']);
+                $filename='<a class="disabled">'.($val['filename']=='..'?'.. [one level up]':$val['filename']).'</a>';
                 $size='<span class="error">DIR</span>';
                 $download_path = '';
             }
             $val['x']=TRUE;
         }else{
             make_row_js($even,"window.alert('You do not have permission to enter this directory!');");
-            $filename=($val['filename']=='..'?'.. [one level up]':$val['filename']);
+            $filename='<a class="disabled">'.($val['filename']=='..'?'.. [one level up]':$val['filename']).'</a>';
             $size='<span class="error">DIR</span>';
             $download_path = '';
             $val['x']=FALSE;
@@ -168,7 +168,15 @@ while (list ($key, $val) = each($list)){
     if($admin_fm_show_owner) make_cell($val['owner']);
     if($admin_fm_show_group) make_cell($val['group']);
 
-    make_cell(($download_path==''?'<a class="disabled">Download</a>':'<a href="'.$download_path.'">Download</a>'));
+    make_cell(($download_path==''?'<a class="disabled">Download</a>':'<a href="'.$download_path.'">Download</a>').
+/*        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">rm</a>':'<a href="files_action.php?action=delete&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">rm</a>').
+        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">mv</a>':'<a href="files_action.php?action=move&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">mv</a>').
+        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">cp</a>':'<a href="files_action.php?action=copy&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">cp</a>').*/
+        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Delete</a>':'<a href="files_action.php?action=delete&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">Delete</a>').
+        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Move</a>':'<a href="files_action.php?action=move&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">Move</a>').
+        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Copy</a>':'<a href="files_action.php?action=copy&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">Copy</a>').
+        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">Chmod</a>':'<a href="files_action.php?action=chmod&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">Chmod</a>').
+        '');
 
     echo "</tr>\n";
     $counter++;
