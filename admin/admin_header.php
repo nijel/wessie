@@ -24,6 +24,8 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
+error_reporting (E_ALL);
+
 Header('Pragma: no-cache');
 Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");
 error_reporting (E_ALL);
