@@ -133,15 +133,15 @@ function find_file($pattern,$path,$regexp,$case){
                     if ($file != '.' && $file != '..') {
                         if ($regexp) {
                             if ($case) {
-                                if ( !(strstr($file,$pattern) === false)) $list[] = $val['rel'].'/'.$file;
-                            } else {
-                                if ( !(stristr($file,$pattern) === false)) $list[] = $val['rel'].'/'.$file;
-                            }
-                        } else {
-                            if ($case) {
                                 if (ereg($pattern,$file)) $list[] = $val['rel'].'/'.$file;
                             } else {
                                 if (eregi($pattern,$file)) $list[] = $val['rel'].'/'.$file;
+                            }
+                        } else {
+                            if ($case) {
+                                if ( !(strstr($file,$pattern) === false)) $list[] = $val['rel'].'/'.$file;
+                            } else {
+                                if ( !(stristr($file,$pattern) === false)) $list[] = $val['rel'].'/'.$file;
                             }
                         }
                         if (is_dir($val['path'].'/'.$file))
