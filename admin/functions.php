@@ -26,13 +26,13 @@
 // $Id$
 
 function show_error($msg){
-    echo '<font color="#ff0000"><b>'.$msg.'</b></font><br />';
+    echo '<p class="error">'.$msg.'</p>';
 }
 
 function show_error_box($msg='Wrong parameters!',$params=array(),$action=''){
 ?>
 <div align="center">
-  <font color="#ff0000"><b><?php echo $msg?></b></font><br />
+  <p class="error"><?php echo $msg?></p>
 
 <?php if($action!=''){?>
   <form method="get" action="<?php echo $action?>">

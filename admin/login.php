@@ -41,7 +41,7 @@ if (isset($HTTP_POST_VARS['submit'])){
     $auth=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
     if ($auth['count']!=1){
-        Header('Location: http://'.$SERVER_NAME.dirname($REQUEST_URI).'/login.php?badlogin');
+        Header('Location: http://'.$SERVER_NAME.dirname($REQUEST_URI).'/login.php?failure=badlogin');
         die();
     }
 
@@ -71,7 +71,8 @@ if (isset($HTTP_POST_VARS['submit'])){
                   "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-   <meta http-equiv="Refresh" content="0; URL=<?php echo $url; ?>" />
+    <meta http-equiv="Refresh" content="0; URL=<?php echo $url; ?>" />
+    <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
 </head>
 <body>
 <a href="<?php echo $url; ?>">REDIRECT</a>
@@ -90,17 +91,14 @@ if (isset($HTTP_POST_VARS['submit'])){
     <meta name="Author" content="<?php echo $wessie_author?>" />
     <meta name="Generator" content="<?php echo $wessie_version.', Copyright (C) 2001 '.$wessie_author?>" />
     <link rel="copyright" href="mailto:<?php echo $wessie_author?>" />
+    <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
     <link rel="home" href="<?php echo $site_home?>" />
-  <script language="JavaScript" type="text/javascript">
-  <!--
-     if(top != self) { window.top.location.href=location; }
-  //-->
-  </script>
+    <script language="JavaScript" type="text/javascript" src="./admin.js"></script>
 </head>
-<body bgcolor="gray" text="white" link="#eeee00" alink="yellow" vlink="#dddd00">
-<table border="0" width="100%">
+<body>
+<table class="upper">
 <tr>
-<td align="center">
+<td>
 <h2><?php echo $page_title?></h2>
 </td>
 </tr>
@@ -111,19 +109,19 @@ if (isset($HTTP_POST_VARS['submit'])){
 
 if (isset($failure)){
     if ($failure=='expired'){
-        echo '<b><font color="red">Your login has expired!</font></b><br />';
+        echo '<p class="error">Your login has expired!</p>';
     }elseif ($failure=='badip'){
-        echo '<b><font color="red">You changed ip address!</font></b><br />';
+        echo '<p class="error">You changed ip address!</p>';
     }elseif ($failure=='unauthorised'){
-        echo '<b><font color="red">You are not authorised to access this!</font></b><br />';
+        echo '<p class="error">You are not authorised to access this!</p>';
     }elseif ($failure=='badlogin'){
-        echo '<b><font color="red">Bad login!</font></b><br />';
+        echo '<p class="error">Bad login!</p>';
     }elseif ($failure=='logout'){
-        echo '<b>Logout successful!</b><br />';
+        echo '<p class="info">Logout successful!</p>';
     }
 }
 ?>
-You must login before accessing administration.<br />
+<p class="info">You must login before accessing administration.</p>
 <br />
 <form action="login.php" method="post">
 <?php
@@ -131,23 +129,23 @@ if (isset($url)){
     echo '<input type="hidden" name="url" value="' . $url . '" />';
 }
 ?>
-<table>
+<table class="login">
   <tr>
     <th>Username:</th>
-    <td><input type="text" name="user" value="<?php echo isset($user)?$user:''?>" /></td>
+    <td><input type="text" name="user" value="<?php echo isset($user)?$user:''?>" class="username" /></td>
   </tr>
   <tr>
     <th>Password:</th>
-    <td><input type="password" name="pass" /></td>
+    <td><input type="password" name="pass" class="password" /></td>
   </tr>
   <tr>
-    <td colspan="2" align="center"><input type="reset" value=" Reset " />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value=" Login " /></td>
+    <td colspan="2" align="center"><input type="reset" value=" Reset " class="reset" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value=" Login " class="login" /></td>
   </tr>
 </table>
 <input type="hidden" name="submit" value="1" />
 </form><br /><br />
 <hr width="100%" />
-<small>Your browser must have cookies enabled to administrate this site.</small>
+<p class="note">Your browser must have cookies enabled to administrate this site.</p>
 </center>
 </body>
 </html>

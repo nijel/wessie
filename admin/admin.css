@@ -26,11 +26,11 @@ form.filter {
 input,select {
     background-color: #ff0000;
 }
-input.delete,input.return,input.text,input.go,input.save,input.reset,textarea.text,input.ok,select.select,input.check {
+input.delete,input.return,input.text,input.go,input.save,input.reset,textarea.text,input.ok,select.select,input.check,input.login {
     color: #000000;
     background-color: #ccccaa;
 }
-input.required,textarea.required {
+input.required,textarea.required,input.username,input.password {
     color: #000000;
     background-color: #ddddbb;
 }
@@ -99,11 +99,30 @@ table.item th {
     text-align: left;
 }
 table.savereset {
-    borded: none;
+    border: none;
     width: 100%;
     text-align: center;
 }
 table.yesno {
     borded: none;
     text-align: center;
+}
+table.login {
+    border: none;
+}
+p.error {
+    font-weight: bold;
+    color: red;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+p.info {
+    font-weight: bold;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+p.note {
+    font-size: small;
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
