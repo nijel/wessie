@@ -25,6 +25,8 @@
 //
 // $Id$
 
+$server_root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
+
 function show_html_head($title,$special=''){
 global $wessie_author,$wessie_version,$wessie_copyright,$site_home,$admin_charset,$base_path,$admin_default_css;
 ?>

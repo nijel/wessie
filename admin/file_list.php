@@ -44,8 +44,6 @@ else $restrict=FALSE;
 if (!isset($limit)) $limit='limit';
 require_once('./file_functions.php');
 
-$server_root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
-
 if ($restrict){
     $root_dir = $server_root_dir;
     $root_dir_len = strlen($root_dir);

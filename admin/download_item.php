@@ -68,10 +68,10 @@ if (mysql_num_rows($id_result) == 0){
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
         if ($item['remote']==0){
-            if (!file_exists('../'.$item['filename'])){
+            if (!file_exists($server_root_dir.$item['filename'])){
                 $size='<span class="error">Not found</span>';
             }else{
-                $size=human_readable_size(filesize('../'.$item['filename']));
+                $size=human_readable_size(filesize($server_root_dir.$item['filename']));
             }
         }else{
             $file = @fopen ($item['filename'], 'r');
