@@ -51,7 +51,8 @@ if(isset($HTTP_USER_AGENT)){
         (eregi('infoseek|search|spider', $HTTP_USER_AGENT))
             ) $browser = 'Search Indexer';
     elseif(eregi('bot|scanner|ApacheBench', $HTTP_USER_AGENT)) $browser = 'Bot';
-    elseif(ereg('Nav|Gold|Mozilla|Netscape|Gecko', $HTTP_USER_AGENT)) $browser = 'Netscape';
+    elseif(ereg('Gecko|Galeon', $HTTP_USER_AGENT)) $browser = 'Mozilla';
+    elseif(ereg('Nav|Gold|Mozilla|Netscape', $HTTP_USER_AGENT)) $browser = 'Netscape';
     else $browser = '?';
 
 
