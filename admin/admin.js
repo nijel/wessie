@@ -53,9 +53,9 @@ function delwin(){
 function open_browse_window(dir,param){
     close_browse_window = 1;
     if (!param) param='limit';
-    browse_window = window.open('./file_list.php?limit='+param+'&dir='+dir,'Select file','personalbar=0,status=0,dependent=1,toolbar=0,height=400,width=472,innerHeight=400,innerWidth=462');
+    browse_window = window.open('./file_list.php?limit='+param+'&dir='+dir,'Select_file','scrollbar=auto,personalbar=no,status=no,dependent=yes,toolbar=no,height=400,width=472,innerHeight=400,innerWidth=462');
+    return true;
 }
-//    return true;
 
 /* Following part is taken from Riki Fridrich (http://acid.nfo.sk) and a bit modified: */
 function gE(e,f){

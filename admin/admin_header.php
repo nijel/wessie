@@ -47,7 +47,7 @@ if (isset($onunload)){
 <tr>
 <td class="left">
 <?php
-    if ($fd = fopen('/proc/uptime', 'r')){
+    if ($fd = @fopen('/proc/uptime', 'r')){
         $ar_buf = split( ' ', fgets( $fd, 4096 ) );
         fclose( $fd );
 
@@ -66,7 +66,7 @@ if (isset($onunload)){
         echo 'Uptime:&nbsp;'.$result;
     }
 
-    if ( $fd = fopen('/proc/loadavg', 'r') ) {
+    if ( $fd = @fopen('/proc/loadavg', 'r') ) {
         $results = split( ' ', fgets( $fd, 4096 ) );
         echo '<br />Load:&nbsp;'.$results[0].'&nbsp;'.$results[1].'&nbsp;'.$results[2];
         fclose( $fd );

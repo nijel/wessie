@@ -578,7 +578,7 @@ function make_tab_item_window($href,$text,$url){
     $class=(strpos($SCRIPT_NAME,$url)?'selected':'normal');
     echo '<td class="'.$class.'" ';
     highlighter($class.'_light',$class);
-    echo ' onclick="window.open(\''.$href.'\',\'\',\'menubar=no,location=no,status=no,toolbar=no,width='.$admin_help_width.',height='.$admin_help_height.'\');return false"><a href="'.$href.'" target="_blank">'.$text.'</a></td>'."\n";
+    echo ' onclick="window.open(\''.$href.'\',\'\',\'scrollbar=auto,menubar=no,location=no,status=no,toolbar=no,width='.$admin_help_width.',height='.$admin_help_height.'\');return false"><a href="'.$href.'" target="_blank">'.$text.'</a></td>'."\n";
 }
 
 function make_tab_start(){

@@ -100,7 +100,7 @@ if ($user!='admin' && !in_array(basename($SCRIPT_NAME),$permissions)){
 }
 */
 
-if (!($id_result=mysql_query('SELECT mail, web, ugroup, name  from '.$db_prepend.$table_users.' where user="'.$user.'"',$db_connection)))
+if (!($id_result=mysql_query('SELECT mail, web, roles, name  from '.$db_prepend.$table_users.' where user="'.$user.'"',$db_connection)))
     do_error(1,'SELECT '.$db_prepend.$table_users.': '.mysql_error());
 if (mysql_num_rows($id_result)!=1){
     Header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=unauthorised' . $url);
@@ -111,5 +111,7 @@ mysql_free_result($id_result);
 
 
 $user_info['ip']  = $ip;
+$user_info['user']  = $user;
+$user_info['hash']  = $hash;
 
 ?>
