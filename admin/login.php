@@ -108,19 +108,20 @@ if (isset($HTTP_POST_VARS['submit'])){
 <hr width="100%" />
 <center>
 <?php
-if ($QUERY_STRING=='expired'){?>
-<b><font color="red">Your login has expired!</font></b><br />
-<?php }elseif ($QUERY_STRING=='badip'){?>
-<b><font color="red">You changed ip address!</font></b><br />
-<?php }elseif ($QUERY_STRING=='unauthorised'){?>
-<b><font color="red">You are not authorised to access this!</font></b><br />
-<?php }elseif ($QUERY_STRING=='badlogin'){?>
-<b><font color="red">Bad login!</font></b><br />
-<?php }elseif ($QUERY_STRING=='logout'){?>
-<b>Logout successful!</b><br />
-<?php }
-//elseif ($QUERY_STRING==''){
-//}
+
+if (isset($failure)){
+    if ($failure=='expired'){
+        echo '<b><font color="red">Your login has expired!</font></b><br />';
+    }elseif ($failure=='badip'){
+        echo '<b><font color="red">You changed ip address!</font></b><br />';
+    }elseif ($failure=='unauthorised'){
+        echo '<b><font color="red">You are not authorised to access this!</font></b><br />';
+    }elseif ($failure=='badlogin'){
+        echo '<b><font color="red">Bad login!</font></b><br />';
+    }elseif ($failure=='logout'){
+        echo '<b>Logout successful!</b><br />';
+    }
+}
 ?>
 You must login before accessing administration.<br />
 <br />
