@@ -29,10 +29,40 @@ error_reporting (E_ALL);
 // lines like following are not needed, but they allows to keep a bit of order
 // in this file, when it is being modified by php script
 
+//##DATABASE##
+// MySQL database settings
+// $db_host            - host where to connect
+// $db_user            - username
+// $db_pass            - password
+// $db_name            - name of database
+// $db_persistent      - use persistant connections?
+$db_host='localhost';
+$db_user='wessie';
+$db_pass='wessie';
+$db_name='wessie';
+$db_persistent=TRUE;
+//##/DATABASE##
+
+//##ERRORS##
+// $error_log_file     - error log filename, this path must be absolute and file
+//                       must be writable by user under which scripts will run
+// $show_error_detail  - show error details on error page, if disabled just
+//                       comment is added
 $error_log_file='/vs/wessie/logs/error.log';
+$show_error_detail=TRUE;
+//##/ERRORS##
 
-$site_started=mktime(0,0,0,1,13,2001); //Recommended to be time 0:0:0
-
+//##LANGUAGES##
+// $languages array    - shortcuts for languages, they should be official = same as
+//                       send browser as Accept-language
+// $lang_name array    - names of languages, just for displaying
+// $lang_img array     - path (relative to root of wessie) to image for earch language
+// $lang_alias array   - used for decoding from Accept-language and PATH_INFO
+// $default_lang       - fallback language, when detection from Accept-language fails
+// $lang_file          - name of file with language-specific data, you can use inside
+//                       any php variables, that will be in time of evaluation
+//                       accessible, for example ${lang}=language shortcut,
+//                       ${lng}=language id
 $languages[0]='en';
 $lang_name[0]='English';
 $lang_img[0]='img/flags/en.png';
@@ -45,109 +75,116 @@ $default_lang=0;
 $lang_alias['en']=0;
 $lang_alias['cs']=1;
 $lang_alias['cz']=1;
-//language file, use ${lang} for specifying language name
 $lang_file='./lang/${lang}.php';
+//##/LANGUAGES##
 
-//Site main design template (defaultly language independant or use ${lang} for specifying language name):
-$template_file='./templates/default/template.php';
-//$template_file='./templates/styles/template.php';
-
+//##COOKIES##
+// $cookie_count       - name of cookie that is used for counting user visits
+// $cookie_lang        - name of cookie that is used for storing user prefered language
+// $session_time       - how long takes one session - by default when user didn't load
+//                       any page from site then he is counted as new
+// $lang_time          - how long will stay cookie identifying preffered user's language
 $cookie_count='wessie_count';
 $cookie_lang='wessie_lang';
+$session_time=3600;
+$lang_time=31536000;
+//##/COOKIES##
 
-$session_time=3600;  // how long $cookie_count should be held (1 hour)
-$lang_time=31536000;  // how long $cookie_lang should be held (1 year)
 
-$db_host='localhost'; // Host where MySQL is running
-$db_user='wessie'; // User name
-$db_pass='wessie'; // User password
-$db_name='wessie'; // Database name that is used by wessie
-$db_persistent=true; //true = use persistent connections, otherwise don't use
+//##TABLES##
+// all table names are fully customisable
+// $table_prepend_name - prepended before each table name, this allows multiple
+//                       wessies running on one database
+// $table_*            - name for each table
+$table_prepend_name='';
 
-$table_prepend_name=''; //prepended before each table name this allows multiple wessie running on one database
-
-// if you change following variables, you have to chage table names in MySQL!
 $table_page='page';
 $table_category='category';
 $table_advert='advert';
 $table_menu='menu';
 $table_article='article';
-$table_product='product';
 $table_download='download';
 $table_download_group='download_group';
-$table_prog_lng='prog_lng';
-$table_prod_cat='prod_cat';
-$table_link='link';
-$table_link_cat='link_cat';
-$table_discuss='discuss';
-$table_note='note';
 $table_users='users';
-$table_maillist='maillist';
 $table_stat='stat';
+//##/TABLES##
 
-$site_author[0]='Michal Cihar';
-$site_author[1]='Michal Èihaø';
-$site_author_email='cihar@email.cz';
-
-$site_home='http://wessie.cic';
-
+//##DESIGN##
+// $template_name      - name of used template, it must be in templates directory
+//                       this name can contain any php variable that is defined in time
+//                       of evaulating, for example ${lang}=language shortcut,
+//                       ${lng}=language id
+// $site_logo          - logo of site
+// $site_logo_alt      - alt for logo
+// $site_logo_width    - width of that logo
+// $site_logo_height   - height of that logo
+// $category_order     - which field in database is used for ordering categories
+// $use_adverts        - use advertisement?
+$template_name='default';
 $site_logo='img/wessie.png';
 $site_logo_alt='wessie - web site system';
-
 $site_logo_width=200;
 $site_logo_height=100;
+$category_order='id';
+$use_adverts=TRUE;
+//##/DESIGN##
 
-//$site_logo='img/wessie_vertical_long.png';
-//$site_logo_width=20;
-
+//##INFO##
+// some information about site
+// $site_home          - home of site, this doesn't have to be directory (or server)
+//                       where wessie is installed, it should be really home
+//                       page of your site
+// $site_started       - time where site was started, used for weekly statisctics
+// $site_author_email  - authors email
+// $site_author array  - array of authors names for each language
+// $site_name array    - array of site names for each language
+// $copyright array    - array of copyrights for each language
+// $special array      - array of special info that is displayed on top of each page
+$site_home='http://wessie.cic';
+$site_started=mktime(0,0,0,1,13,2001); //Recommended to be time 0:0:0
+$site_author_email='cihar@email.cz';
+$site_author[0]='Michal Cihar';
+$site_author[1]='Michal Èihaø';
 $site_name[0]='wessie Demo';
 $site_name[1]='ukázka wessie';
-
 $copyright[0]='Copyright &copy; 2001 <a href="mailto:'.$site_author_email.'">'.$site_author[0].'</a>';
 $copyright[1]='Copyright &copy; 2001 <a href="mailto:'.$site_author_email.'">'.$site_author[1].'</a>';
+$special[0]='';
+$special[1]='';
+//##/INFO##
 
-// Content of this variable is inserted on EACH page before content
-// You can ye this for some special actions
-$special='';
 
-//whether site wants adverts
-$use_adverts=true;
-
-//which field in database is used for ordering categories
-$category_order='id';
-
-//charset in administration
+//##ADMIN##
+// $admin_charset      - charset in administration
+// $admin_timeout      - how long is logged in admin valid, used in SQL query so
+//                       check MySQL documentation for details on time specification
+// $admin_confirm_delete - confirm deleting in administration?
+// $admin_highlight_* - highlighting of list items and tabs on mouse over,
+//                      if empty item is not highlighted
+// $admin_validator    - link to validate page, at the end is appended url
 $admin_charset='iso-8859-2';
-
-//how long is logged in admin valid, check MySQL documentation for details on time specification
 $admin_timeout='20 MINUTE';
+$admin_confirm_delete=TRUE;
+$admin_highlight_list='#ffffcc';
+$admin_highlight_tabs='#ffffcc';
+$admin_validator='http://validator.cic/cgi-bin/validate.cgi?input=yes&url=';
+//##/ADMIN##
 
+//##ADMIN_SIZES##
 //size of edits in administration
-$admin_name_size=80;  //page name
-$admin_short_size=80;  //page name
-$admin_filename_size=80;  //page name
+$admin_name_size=80;
+$admin_short_size=80;
+$admin_filename_size=80;
 $admin_content_rows=30;
 $admin_content_cols=80;
 $admin_keywords_rows=2;
 $admin_keywords_cols=80;
 $admin_description_rows=2;
 $admin_description_cols=80;
+//##/ADMIN_SIZES##
 
-$admin_confirm_delete=TRUE;
-
-//highlighting of items on mouse over, if empty item is not highlighted
-$admin_highlight_list='#ffffcc';
-$admin_highlight_tabs='#ffffcc';
-
-$admin_validator='http://validator.cic/cgi-bin/validate.cgi?input=yes&url=';
-
-
-$show_error_detail=TRUE;
-
-//plugin options
-
-//globally allow or deny of evaling of content
 //##PLUGIN_COMMON##
+// $allow_content_eval - globally allow or deny of evaling of content
 $allow_content_eval=TRUE;
 //##/PLUGIN_COMMON##
 
@@ -162,5 +199,4 @@ $allowed_function_plugins=array();
 $page_plugins_options['article']['eval']=TRUE;
 $page_plugins_options['file']['eval']=FALSE;
 //##/PLUGIN_OPTIONS##
-
 ?>

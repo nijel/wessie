@@ -167,7 +167,7 @@ if (!isset ( $categories[$page['category']] ) ) {
 }
 
 //template file
-eval('$template_file_name="'.$template_file.'";');
+eval('$template_file_name="./templates/'.$template_name.'/template.php";');
 require_once($template_file_name);
 
 eval('$template_file_name="'.$template_data.'";');
@@ -497,7 +497,7 @@ function wessie_icon(){
     echo '<a href="'.$wessie_url.'"><img src="' . $base_path . 'img/wessie_icon.png" align="middle" alt="powered by wessie" width="88" height="31" border="0" /></a>';
 }
 
-function special(){global $special;echo $special;}
+function special(){global $special,$lng;echo $special[$lng];}
 
 eval ('?'.'>'.$template.'<?php ');
 ?>
