@@ -3,6 +3,7 @@ $Id$
 KNOWN BUGS:
 
   currently none
+  use ORIGINAL_REMOTE_ADDR?
 
 ORDERED by importance (order of starting work on it):
 ? = may be
@@ -13,7 +14,7 @@ admin: add pages listing + links to edit (this probably needs plugins working)
 
 admin+user: !! plugin functionality
 
-admin: top menu of administration - list also installed plugins, show multiple row (maybe allready done)
+admin: top menu of administration - list also installed plugins, show multiple row (maybe already done)
 
 create plugins:
  - news
