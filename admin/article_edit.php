@@ -77,7 +77,7 @@ if (isset($action) && ($action=='save')){
     }
     $article['lng']=$to_lng;
 }elseif (isset($lng) && isset($id)){
-    $action='edit';
+    $action='save';
     if (!$id_result=mysql_query(
     'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, name, description, keywords, count, category, content '.
     ' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
