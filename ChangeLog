@@ -1,0 +1,709 @@
+2002-01-08 Tuesday 14:50  michal
+
+	added file management, currently allows only listing and uploading 
+
+2002-01-08 Tuesday 14:45  michal
+
+	fixed way of redirects 
+
+2002-01-08 Tuesday 11:43  michal
+
+	both make_row_js and make_row don't add <td> (previously make_row_js
+	added and make_row didn't) 
+
+2002-01-08 Tuesday 11:38  michal
+
+	fixed function human_readable_size 
+
+2002-01-08 Tuesday 11:30  michal
+
+	store tpo config with ' = ' not just = 
+
+2002-01-08 Tuesday 11:19  michal
+
+	fixed root_path to work also when wessie is not in root directory 
+
+2002-01-08 Tuesday 10:59  michal
+
+	added item counting in menu item count moved to end 
+
+2001-12-18 Tuesday 19:17  michal
+
+	added pages for options 
+
+2001-12-18 Tuesday 18:57  michal
+
+	started work on options 
+
+2001-12-18 Tuesday 18:46  michal
+
+	configurable cookie expiration in administration 
+
+2001-12-18 Tuesday 18:38  michal
+
+	counter now should count only sessions 
+
+2001-12-18 Tuesday 18:36  michal
+
+	reorganised config.php added support for multilanguage specials 
+
+2001-12-18 Tuesday 15:13  michal
+
+	added help script and modiifed how is displayed 
+
+2001-12-18 Tuesday 14:46  michal
+
+	corrected plugin allowing mechanism plugin editing now works 
+
+2001-12-18 Tuesday 14:45  michal
+
+	corrected config deleting function started support for help 
+
+2001-12-18 Tuesday 14:44  michal
+
+	started support for help 
+
+2001-12-18 Tuesday 13:11  michal
+
+	added info about plugin 
+
+2001-12-18 Tuesday 13:11  michal
+
+	functional plugin listing 
+
+2001-12-18 Tuesday 12:35  michal
+
+	changed filename from config2 to config added fallback for adding
+	line in config 
+
+2001-12-18 Tuesday 12:07  michal
+
+	config.php editing is working 
+
+2001-12-18 Tuesday 11:58  michal
+
+	converted EOL to \n (fromdos) 
+
+2001-12-18 Tuesday 11:54  michal
+
+	started support for modifying config.php 
+
+2001-12-18 Tuesday 11:08  michal
+
+	fixed bug in browser.php when HTTP_USER_AGENT is not set 
+
+2001-12-18 Tuesday 10:58  michal
+
+	added support for $site_logo* in default template 
+
+2001-12-18 Tuesday 10:58  michal
+
+	added in config site_logo_alt 
+
+2001-12-18 Tuesday 10:57  michal
+
+	added bug 
+
+2001-12-18 Tuesday 10:30  michal
+
+	fall back to default template 
+
+2001-12-16 Sunday 14:22  michal
+
+	added new template new parameter when creating menu item new in
+	config.php: $site_logo* $site_logo* used in templates 
+
+2001-12-16 Sunday 11:52  michal
+
+	now transparent and smaller 
+
+2001-12-15 Saturday 21:00  michal
+
+	left_menu() behaves correctly when no menu item defined 
+
+2001-12-15 Saturday 20:56  michal
+
+	advert() behaves correctly when no ad defined 
+
+2001-12-15 Saturday 20:53  michal
+
+	make_absolute_url fixed 
+
+2001-12-15 Saturday 20:51  michal
+
+	make_url is now just alias for make_absolute_url 
+
+2001-12-15 Saturday 20:40  michal
+
+	multilanguage support for site_name adn site_author 
+
+2001-12-15 Saturday 20:36  michal
+
+	multilanguage support for site_name adn site_author 
+
+2001-12-15 Saturday 20:14  michal
+
+	we should be able to edit/create category withou having any page 
+
+2001-12-15 Saturday 20:09  michal
+
+	some fixes 
+
+2001-12-15 Saturday 20:09  michal
+
+	auth is now enabled 
+
+2001-12-15 Saturday 20:09  michal
+
+	fixed some typos 
+
+2001-12-11 Tuesday 14:54  michal
+
+	now allowed absolute includes by $DOCUMENT_ROOT.$base_path 
+
+2001-12-11 Tuesday 14:53  michal
+
+	updated to new plugin structure 
+
+2001-12-11 Tuesday 14:19  michal
+
+	forgot to give it in cvs....  
+
+2001-12-11 Tuesday 14:10  michal
+
+	started working on plugins, now works for displaying pages new
+	variable $last_change 
+
+2001-12-11 Tuesday 13:35  michal
+
+	switched to quanta 2.0 
+
+2001-12-11 Tuesday 13:34  michal
+
+	added necessary require_onces 
+
+2001-12-10 Monday 15:24  michal
+
+	menu listing optimalised, now at least 10% faster menu items are now
+	stored in arrays and prited from it only one select instead of
+	plenty used before - page info is also acquired (when needed) in
+	that query 
+
+2001-12-10 Monday 15:23  michal
+
+	defaults to pconnect 
+
+2001-12-10 Monday 13:13  michal
+
+	make code formatting nicer ;-) 
+
+2001-12-10 Monday 13:11  michal
+
+	init.php now accepts also /[0-9]*, where [0-9]* is assigned to id 
+	modified link to get.php to use new init.php feature and to allow
+	save by Shift+click 
+
+2001-12-10 Monday 13:10  michal
+
+	init.php now accepts also /[0-9]*, where [0-9]* is assigned to id 
+
+2001-12-10 Monday 12:53  michal
+
+	added downloading script fixed references to images added variable
+	$base_url which contains full url to wessie root fixed working of
+	remote downloads formatting changes in default template fixed small
+	bug in listing of downloads in administration 
+
+2001-12-06 Thursday 15:25  michal
+
+	added support for more friendly urls (main.php/page100.en.html) 
+
+2001-12-06 Thursday 15:25  michal
+
+	updated 
+
+2001-12-06 Thursday 15:12  michal
+
+	fixed <img ...> to <img ... /> 
+
+2001-12-03 Monday 14:59  michal
+
+	updated 
+
+2001-12-03 Monday 14:47  michal
+
+	added basic support for language images, but this needs more work...  
+
+2001-12-03 Monday 13:48  michal
+
+	update...  
+
+2001-12-03 Monday 13:48  michal
+
+	download group editing and deleting is working 
+
+2001-12-03 Monday 13:47  michal
+
+	download group editing and deleting is working modified listing of
+	items, now td's have onclick which goes to editing made some cleanup
+	in functions.php 
+
+2001-11-26 Monday 23:50  michal
+
+	stripped useless lines and made some size optimalisation (use
+	cascading) 
+
+2001-11-26 Monday 23:38  michal
+
+	added wessie logo to background 
+
+2001-11-26 Monday 00:06  michal
+
+	corrected behavior, when user wanted non existing directory 
+
+2001-11-26 Monday 00:01  michal
+
+	added support for browsing in local files, when selecting file in
+	download 
+
+2001-11-26 Monday 00:00  michal
+
+	made some optimalisations 
+
+2001-11-25 Sunday 21:08  michal
+
+	added download editing 
+
+2001-11-25 Sunday 21:06  michal
+
+	fixed typo 
+
+2001-11-25 Sunday 18:52  michal
+
+	added link to validation on articles listing 
+
+2001-11-25 Sunday 18:41  michal
+
+	added remote attribute for download and size column in downloads 
+
+2001-11-25 Sunday 17:50  michal
+
+	added links to header, header is now <h1> and it has stylesheet 
+
+2001-11-25 Sunday 17:40  michal
+
+	corrected header to be valid in css 
+
+2001-11-25 Sunday 17:39  michal
+
+	added header 
+
+2001-11-25 Sunday 17:38  michal
+
+	corrected bug in header 
+
+2001-11-25 Sunday 17:35  michal
+
+	listing of downloads works 
+
+2001-11-25 Sunday 17:33  michal
+
+	header for downloads added 
+
+2001-11-25 Sunday 14:15  michal
+
+	corrected include 
+
+2001-11-25 Sunday 14:13  michal
+
+	download has own header 
+
+2001-11-25 Sunday 14:09  michal
+
+	download renamed 
+
+2001-11-25 Sunday 14:06  michal
+
+	updated....  
+
+2001-11-25 Sunday 13:58  michal
+
+	renamed...  
+
+2001-11-25 Sunday 13:55  michal
+
+	renamed some files and started download editing 
+
+2001-11-25 Sunday 12:59  michal
+
+	deleting of category now deletes (I hope) everything what it should
+	delete 
+
+2001-11-25 Sunday 12:42  michal
+
+	updated dump 
+
+2001-11-25 Sunday 12:38  michal
+
+	update....  
+
+2001-11-25 Sunday 12:38  michal
+
+	customisable order of category listing 
+
+2001-11-25 Sunday 12:35  michal
+
+	category editing works 
+
+2001-11-25 Sunday 12:35  michal
+
+	changed way of listing rows 
+
+2001-11-24 Saturday 19:39  michal
+
+	styles also in login.php + removed tags <font> 
+
+2001-11-24 Saturday 19:24  michal
+
+	design is now defined in styles, not directly in html 
+
+2001-11-19 Monday 22:05  michal
+
+	updated project info 
+
+2001-11-19 Monday 20:35  michal
+
+	fixed way of displaying errors in administration 
+
+2001-11-19 Monday 20:34  michal
+
+	categories listing works 
+
+2001-11-11 Sunday 18:20  michal
+
+	update 
+
+2001-11-11 Sunday 18:07  michal
+
+	added devel template 
+
+2001-11-11 Sunday 18:07  michal
+
+	updated+added $Id$ 
+
+2001-11-11 Sunday 18:02  michal
+
+	chnage 
+
+2001-11-09 Friday 18:26  michal
+
+	changes reverted 
+
+2001-11-09 Friday 18:23  michal
+
+	change 
+
+2001-10-30 Tuesday 21:11  michal
+
+	menu synchronization added 
+
+2001-10-30 Tuesday 21:10  michal
+
+	updated ;o) 
+
+2001-10-24 Wednesday 23:47  michal
+
+	ApacheBench is recognised as Bot on Linux/Unix 
+
+2001-10-24 Wednesday 23:25  michal
+
+	oops, I forgot to rename page 
+
+2001-10-24 Wednesday 22:53  michal
+
+	bugfixes+started sync support 
+
+2001-10-24 Wednesday 22:53  michal
+
+	bugfix 
+
+2001-10-24 Wednesday 22:35  michal
+
+	updated dump - menu structure changed a bit 
+
+2001-10-24 Wednesday 22:34  michal
+
+	updated 
+
+2001-10-24 Wednesday 22:33  michal
+
+	deleting works 
+
+2001-10-24 Wednesday 22:33  michal
+
+	fixed some problems 
+
+2001-10-24 Wednesday 22:32  michal
+
+	bugfixes 
+
+2001-10-24 Wednesday 21:22  michal
+
+	something done 
+
+2001-10-24 Wednesday 21:18  michal
+
+	forgotten file 
+
+2001-10-24 Wednesday 20:57  michal
+
+	menu editing works...  
+
+2001-10-24 Wednesday 20:21  michal
+
+	updated 
+
+2001-10-24 Wednesday 20:20  michal
+
+	fixed wrong errorcodes (1<=>2) reformated source 
+
+2001-10-24 Wednesday 19:58  michal
+
+	login redirects to page where authorisation check failed 
+
+2001-10-24 Wednesday 19:54  michal
+
+	update 
+
+2001-10-24 Wednesday 19:21  michal
+
+	fixed error reporting 
+
+2001-10-24 Wednesday 01:03  michal
+
+	added tasks which should be done first 
+
+2001-10-24 Wednesday 01:03  michal
+
+	changes in defaults ;o) 
+
+2001-10-24 Wednesday 01:02  michal
+
+	headers moved in one place added rank for menu 
+
+2001-10-24 Wednesday 01:02  michal
+
+	changed button text 
+
+2001-10-24 Wednesday 01:01  michal
+
+	error reporting 
+
+2001-10-24 Wednesday 01:01  michal
+
+	bugfix 
+
+2001-10-24 Wednesday 01:00  michal
+
+	menu administration started - works listing 
+
+2001-10-24 Wednesday 01:00  michal
+
+	improved way how config.inc.php is included added some doc 
+
+2001-10-24 Wednesday 00:58  michal
+
+	version enhanced 
+
+2001-10-17 Wednesday 01:12  michal
+
+	small changes 
+
+2001-10-17 Wednesday 01:11  michal
+
+	forgotten quotes ;o) 
+
+2001-10-17 Wednesday 00:56  michal
+
+	language detection optimalisation finished 
+
+2001-10-17 Wednesday 00:49  michal
+
+	new dump....  
+
+2001-10-17 Wednesday 00:49  michal
+
+	changed required php version 
+
+2001-10-17 Wednesday 00:49  michal
+
+	changed error reporting 
+
+2001-10-17 Wednesday 00:49  michal
+
+	added error option 
+
+2001-10-17 Wednesday 00:49  michal
+
+	changed log format and error reporting 
+
+2001-10-17 Wednesday 00:49  michal
+
+	changed url 
+
+2001-10-17 Wednesday 00:49  michal
+
+	changed design (menu moved ;o)) and added header 
+
+2001-10-16 Tuesday 23:12  michal
+
+	wessie images 
+
+2001-10-16 Tuesday 22:18  michal
+
+	switched to wessie 
+
+2001-10-10 Wednesday 22:46  michal
+
+	update...  
+
+2001-10-10 Wednesday 22:46  michal
+
+	renamed db field file to param 
+
+2001-10-10 Wednesday 19:28  michal
+
+	OOPS I forget to remove temporary code...  
+
+2001-10-10 Wednesday 19:27  michal
+
+	switching to XHMTL continues...  
+
+2001-10-10 Wednesday 18:42  michal
+
+	switching to XHMTL continues...  
+
+2001-10-10 Wednesday 18:26  michal
+
+	chaned structure 
+
+2001-10-10 Wednesday 18:23  michal
+
+	switched to XHMTL 
+
+2001-10-10 Wednesday 18:20  michal
+
+	switched XHTML 
+
+2001-10-09 Tuesday 23:38  michal
+
+	corrected redirects 
+
+2001-09-08 Saturday 22:27  michal
+
+	Corrected link....  
+
+2001-09-08 Saturday 22:20  michal
+
+	Added article deleting 
+
+2001-09-08 Saturday 21:53  michal
+
+	Changed URL to view 
+
+2001-09-08 Saturday 21:36  michal
+
+	Article creating and translating is working 
+
+2001-09-08 Saturday 19:01  michal
+
+	Article editing is working 
+
+2001-09-04 Tuesday 21:48  michal
+
+	i want some docs ;o) 
+
+2001-09-04 Tuesday 21:45  michal
+
+	some files were added ...  
+
+2001-09-04 Tuesday 21:44  michal
+
+	updated ;o) 
+
+2001-09-04 Tuesday 21:31  michal
+
+	URL generation moved to one function (make_url) 
+
+2001-09-04 Tuesday 21:23  michal
+
+	Updated to "search engine friendly URL"
+	(index.php/param1=value1/param2=value2) 
+
+2001-09-04 Tuesday 19:51  michal
+
+	plugin init (just structure) 
+
+2001-08-15 Wednesday 00:37  michal
+
+	little changes....  
+
+2001-08-13 Monday 21:14  michal
+
+	code cleanup 
+
+2001-08-13 Monday 21:13  michal
+
+	Content-Language 
+
+2001-08-13 Monday 21:03  michal
+
+	optimalised reading of categories - just one query insted of plenty
+	(one for all, one for current page, one for each top page) this
+	should be later cached.....  
+
+2001-08-13 Monday 20:38  michal
+
+	corrected and optimalised stats (2 queries insted of 8), still
+	something to improve! updated 2DO 
+
+2001-08-01 Wednesday 22:02  michal
+
+	todo: language tag 
+
+2001-07-25 Wednesday 23:52  michal
+
+	zaklad editace ;o) 
+
+2001-07-25 Wednesday 22:55  michal
+
+	admin starts...  
+
+2001-07-25 Wednesday 22:54  michal
+
+	admin work started....  
+
+2001-07-25 Wednesday 22:54  michal
+
+	some bugfixes.....  
+
+2001-07-22 Sunday 20:46  michal
+
+	article administration 
+
+2001-07-22 Sunday 17:53  michal
+
+	Article editing is working 
+
+2001-07-22 Sunday 17:53  michal
+
+	basic PEAR compatibility 
+
+2001-07-22 Sunday 15:16  michal
+
+	Initial revision 
+
+2001-07-22 Sunday 15:16  michal
+
+	init 
+
