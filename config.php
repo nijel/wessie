@@ -97,6 +97,9 @@ $special='';
 //whether site wants adverts
 $use_adverts=true;
 
+//which filed in database is used for ordering categories
+$category_order='id';
+
 //charset in administration
 $admin_charset='iso-8859-2';
 
@@ -105,6 +108,7 @@ $admin_timeout='20 MINUTE';
 
 //size of edits in administration
 $admin_name_size=80;  //page name
+$admin_short_size=80;  //page name
 $admin_content_rows=30;
 $admin_content_cols=80;
 $admin_keywords_rows=2;
@@ -113,6 +117,11 @@ $admin_description_rows=2;
 $admin_description_cols=80;
 
 $admin_confirm_delete=TRUE;
+
+//highlighting of items on mouse over, if empty item is not highlighted
+$admin_highlight_list='#ffffcc';
+$admin_highlight_tabs='#ffffcc';
+
 
 $show_error_detail=TRUE;
 }

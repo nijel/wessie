@@ -144,7 +144,7 @@ if (true||$increase_count){
 }
 
 //read all categories (TODO: this should be cached)
-if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_category.' where lng='.$lng,$db_connection)))
+if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_category.' where lng='.$lng.' order by '.$category_order,$db_connection)))
     do_error(1,'SELECT '.$table_prepend_name.$table_category.': '.mysql_error());
 
 $categories=array();
