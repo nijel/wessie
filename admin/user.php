@@ -26,6 +26,8 @@
 // $Id$
 $page_name='Users';
 require_once('./admin_header.php');
+require_once('./user_common.php');
+
 ?>
 <table class="filter">
   <tr>
@@ -82,7 +84,7 @@ if (mysql_num_rows($id_result) == 0){
         echo make_cell(htmlspecialchars($item['name']),$url);
         echo make_cell('<a href="mailto:'.htmlspecialchars($item['mail']).'">'.htmlspecialchars($item['mail']).'</a>');
         echo make_cell('<a href="'.htmlspecialchars($item['web']).'" target="_blank">'.htmlspecialchars($item['web']).'</a>');
-        echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="user_delete.php?id='.$item['user'].'">Delete</a></td></tr>'."\n";
+        echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;'.($item['user']=='admin'?'<a class="disabled">Delete</a>':'<a href="user_delete.php?id='.$item['user'].'">Delete</a>').'</td></tr>'."\n";
     }
     echo "</table>\n";
     echo 'Listed users: '.mysql_num_rows($id_result);

@@ -25,7 +25,7 @@
 //
 // $Id$
 
-$page_name='User:Edit';
+$page_name='User:Own info';
 require_once('./admin_header.php');
 require_once('./user_common.php');
 
@@ -39,36 +39,15 @@ if (isset($action) && ($action=='save')){
     } else {
         $pwd = '';
     }
-    if ($id == 'admin') $user_name='admin';
-    if (!mysql_query('UPDATE '.$table_prepend_name.$table_users.' set user="'.$user_name.'",name="'.$name.'",mail="'.$user_mail.'",web="'.$user_web.'",perms="'.implode(':',$user_perms).'"'.$pwd.' WHERE user="'.$id.'"')){
+    if (!mysql_query('UPDATE '.$table_prepend_name.$table_users.' set name="'.$name.'",mail="'.$user_mail.'",web="'.$user_web.'"'.$pwd.' WHERE user="'.$user.'"')){
         show_error("Can't save user info! (".mysql_error().')');
         exit;
     }
-    show_info_box('User saved',array('id'=>$id));
+    show_info_box('User saved',array());
     include_once('./admin_footer.php');
     exit;
-}elseif(isset($action) && ($action=='create_new')){
-    if ($user_pass_1 != $user_pass_2) {
-        show_error('Both passowrds must be same!');
-        exit;
-    }
-    if ($user_pass_1 == ''){
-        show_error('You must set password for new user!');
-        exit;
-    } else {
-        $pwd = ',pass="'.md5($user_pass_1).'"';
-    }
-    if (!mysql_query('INSERT '.$table_prepend_name.$table_users.' set user="'.$user_name.'",name="'.$name.'",mail="'.$user_mail.'",web="'.$user_web.'",perms="'.implode(':',$user_perms).'"'.$pwd)){
-        show_error("Can't save user info! (".mysql_error().')');
-        exit;
-    }
-    show_info_box('User created',array('id'=>$user_name));
-    include_once('./admin_footer.php');
-    exit;
-}elseif (isset($action) && ($action=='new')){
-    $action='create_new';
-    $userdata=array('name'=>'','user'=>'','mail'=>'','web'=>'','perms'=>'index.php:help.php:user_self.php');
-}elseif (isset($id)){
+}else{
+    $id=$user;
     $action='save';
     if (!$id_result=mysql_query(
     'SELECT * '.
@@ -81,23 +60,18 @@ if (isset($action) && ($action=='save')){
         show_error_box("This user doesn't  exist!");
         exit();
     }
-}else{
-    show_error_box();
-    include_once('./admin_footer.php');
-    exit();
 }
 
 $userdata['perms_arr'] = explode(':',$userdata['perms']);;
 ?>
 
-<form action="user_edit.php" method="post" name="edit">
+<form action="user_self.php" method="post" name="edit">
 <input type="hidden" name="action" value="<?php echo $action?>" />
 <table class="item">
 <tr><th>
 User name:
 </th><td>
-<input type="text" name="user_name" <?php echo ($userdata['user']=='admin')?'class="text_disabled" disabled="disabled"':'class="text"';?> value="<?php echo htmlspecialchars($userdata['user']);?>" />
-<input type="hidden" name="id" value="<?php echo htmlspecialchars($userdata['user']);?>" />
+<input type="text" name="user_name" class="text_disabled" disabled="disabled" value="<?php echo htmlspecialchars($userdata['user']);?>" />
 </td></tr>
 <tr><th>
 Name:
@@ -128,13 +102,13 @@ Web:
 Permissions:
 </th><td>
 <?php
+
 if ($userdata['user']=='admin'){
     echo 'Administrator has automatically permission to do anything';
 } else {
     while (list($key,$val) = each($allperms)){
-        echo '<label class="checks"><input class="check" type="checkbox" '.(in_array($val,$userdata['perms_arr'])?'checked="checked"':'').' name="user_perms[]" value="'.$val.'" />'.$val."</label><br />\n";
+        echo '<label class="checks"><input class="check_disabled" disabled="disabled" type="checkbox" '.(in_array($val,$userdata['perms_arr'])?'checked="checked"':'').' name="user_perms[]" value="'.$val.'" />'.$val."</label><br />\n";
     }
-    echo "<a href=\"javascript:set_checkboxes('edit','user_perms[]',1);\">Check all</a>&nbsp;|&nbsp;<a href=\"javascript:set_checkboxes('edit','user_perms[]',0);\">Uncheck all</a>";
 }
 ?>
 </td></tr>

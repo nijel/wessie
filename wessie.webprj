@@ -1,5 +1,5 @@
 <!DOCTYPE webproject ><webproject>
- <project usePreviewPrefix="1" preview="http://wessie.cic/" type="Local" previewPrefix="http://wessie.cic/" name="wessie" >
+ <project usePreviewPrefix="1" preview="http://wessie.cic/" previewPrefix="http://wessie.cic/" type="Local" name="wessie" >
   <upload/>
   <author>Michal Cihar</author>
   <email>cihar@email.cz</email>
@@ -134,6 +134,9 @@
   <item url="favicon.ico" />
   <item url="img/favicon.png" />
   <item url="admin/user_edit.php" />
+  <item url="admin/user_self.php" />
+  <item url="admin/user_common.php" />
+  <item url="admin/user_delete.php" />
  </project>
 </webproject>
 <!-- $Id$ -->
