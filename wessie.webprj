@@ -70,6 +70,21 @@
   <item url="img/flags/cs.png" />
   <item url="img/flags/en.png" />
   <item url="get.php" />
+  <item url="admin/" />
+  <item url="devel/" />
+  <item url="img/" />
+  <item url="img/flags/" />
+  <item url="lang/" />
+  <item url="logs/" />
+  <item url="plugins/" />
+  <item url="plugins/functions/" />
+  <item url="plugins/functions/random_text/" />
+  <item url="plugins/pages/" />
+  <item url="plugins/pages/random_page/" />
+  <item url="sql/" />
+  <item url="templates/" />
+  <item url="templates/default/" />
+  <item url="templates/default/img/" />
  </project>
 </webproject>
 <!-- $Id$ -->
