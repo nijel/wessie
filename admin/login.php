@@ -30,6 +30,7 @@ error_reporting (E_ALL);
 $remove_path='admin/';
 require_once('../init.php');
 require_once('../config.php');
+require_once('./functions.php');
 Header('Content-Type: text/html; charset='.$admin_charset);
 $page_title=$site_name[0].':Administration:Login';
 if (isset($HTTP_POST_VARS['submit'])){
@@ -67,15 +68,8 @@ if (isset($HTTP_POST_VARS['submit'])){
 
     }
 
+    show_html_head('REDIRECT','<meta http-equiv="Refresh" content="0; URL='.$url.'" />');
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                  "DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <meta http-equiv="Refresh" content="0; URL=<?php echo $url; ?>" />
-    <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
-    <link rel="Alternate StyleSheet" href="./admin_blue.css" title="Blue" type="text/css" media="screen" />
-</head>
 <body>
 <a href="<?php echo $url; ?>">REDIRECT</a>
 </body>
@@ -84,21 +78,9 @@ if (isset($HTTP_POST_VARS['submit'])){
     die();
 }
 setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''), $SERVER_NAME); //delete cookie
+
+show_html_head($page_title);
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                  "DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $admin_charset?>" />
-    <title><?php echo $page_title?></title>
-    <meta name="Author" content="<?php echo $wessie_author?>" />
-    <meta name="Generator" content="<?php echo $wessie_version.', Copyright (C) 2001 '.$wessie_author?>" />
-    <link rel="copyright" href="mailto:<?php echo $wessie_author?>" />
-    <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
-    <link rel="Alternate StyleSheet" href="./admin_blue.css" title="Blue" type="text/css" media="screen" />
-    <link rel="home" href="<?php echo $site_home?>" />
-    <script language="JavaScript" type="text/javascript" src="./admin.js"></script>
-</head>
 <body>
 <table class="upper">
 <tr>

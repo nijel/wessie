@@ -32,23 +32,8 @@ require_once('./functions.php');
 $page_title=$site_name[0].':Administration:'.$page_name;
 $page_title_html='<a href="../index.php">'.$site_name[0].'</a>:<a href="index.php">Administration</a>:'.$page_name;
 Header('Content-Type: text/html; charset='.$admin_charset);
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-                  "DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $admin_charset?>" />
-    <title><?php echo $page_title?></title>
-    <meta name="Author" content="<?php echo $wessie_author?>" />
-    <meta name="Generator" content="<?php echo $wessie_version.', Copyright (C) 2001 '.$wessie_author?>" />
-    <link rel="home" href="<?php echo $site_home?>" />
-    <link rel="copyright" href="mailto:<?php echo $wessie_author?>" />
-    <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
-    <link rel="Alternate StyleSheet" href="./admin_blue.css" title="Blue" type="text/css" media="screen" />
-    <script language="JavaScript" type="text/javascript" src="./admin.js"></script>
-</head>
+show_html_head($page_title);
 
-<?php
 if (isset($onunload)){
     echo '<body onunload="'.$onunload.'">';
 }else{

@@ -25,6 +25,27 @@
 //
 // $Id$
 
+function show_html_head($title,$special=''){
+global $wessie_author,$wessie_version,$wessie_copyright,$site_home,$admin_charset;
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                  "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $admin_charset?>" />
+    <title><?php echo $title?></title>
+    <meta name="Author" content="<?php echo $wessie_author?>" />
+    <meta name="Generator" content="<?php echo $wessie_copyright?>" />
+    <link rel="home" href="<?php echo $site_home?>" />
+    <link rel="copyright" href="mailto:<?php echo $wessie_author?>" />
+    <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
+    <link rel="Alternate StyleSheet" href="./admin_blue.css" title="Blue" type="text/css" media="screen" />
+    <script language="JavaScript" type="text/javascript" src="./admin.js"></script>
+<?php echo $special; ?>
+</head>
+<?
+}
+
 function show_error($msg){
     echo '<p class="error">'.$msg.'</p>';
 }
