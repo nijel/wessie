@@ -105,7 +105,7 @@ $left_menu_divisor="<br />\n";
 //Language choice format:
 function make_language($url,$id){
     global $languages, $lang_name, $lang_img, $lang_main_page,$base_path;
-    return '<a href="'.$url.'" target="_self" title="'.$lang_name[$id].'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$lang_name[$id]."'".';return true"><img src="'.$base_path.$lang_img[$id].'" alt="'.$languages[$id].'" align="middle" border="0">'.$lang_name[$id].'</a>';
+    return '<a href="'.$url.'" target="_self" title="'.$lang_name[$id].'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$lang_name[$id]."'".';return true"><img src="'.$base_path.$lang_img[$id].'" alt="'.$languages[$id].'" align="middle" border="0" />'.$lang_name[$id].'</a>';
 }
 $languages_divisor=' | ';
 $languages_divisor="<br />\n";
