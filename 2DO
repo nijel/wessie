@@ -11,7 +11,6 @@ ORDERED by importance (order of starting work on it):
 !! = very important
 
 file plugin:
- - add function
  - add posibility to include file relative to server root
 
 admin: file management - write files_action.php for actions on file

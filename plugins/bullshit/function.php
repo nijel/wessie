@@ -57,7 +57,7 @@ function genBullshit($pars=5,$sentences=15,$words=20,$letters=15,$addHtml=3) {
     return $text;
 }
 
-function genParagraph($sentences,$words,$letters,$addHtml) {
+function genParagraph($sentences=15,$words=20,$letters=15,$addHtml=3) {
     $par = "";
     if (($addHtml & 1) == 1) {
         $par .= "<p>";
@@ -80,7 +80,7 @@ function genParagraph($sentences,$words,$letters,$addHtml) {
     return $par;
 }
 
-function genSentence($words,$letters,$addHtml) {
+function genSentence($words=20,$letters=15,$addHtml=3) {
     $sentence = "";
     $was_a = FALSE;
     $first = TRUE;
@@ -110,7 +110,7 @@ function genSentence($words,$letters,$addHtml) {
     return $sentence.'.';
 }
 
-function genWord($letters,$addHtml) {
+function genWord($letters=15,$addHtml=3) {
     $vowel = 0;
     $consonant = 0;
     $word = "";

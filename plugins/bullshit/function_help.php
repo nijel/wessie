@@ -24,22 +24,47 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-
-function powered_mysql(){
-    make_powered('mysql','http://www.mysql.com','MySQL');
-}
-
-function powered_php(){
-    make_powered('php','http://www.php.net','PHP');
-}
-
-function powered_wessie(){
-    global $wessie_url;
-    make_powered('wessie',$wessie_url,'wessie');
-}
-
-function make_powered($what,$url,$msg){
-    global $base_path;
-    echo '<a href="'.$url.'"><img src="' . $base_path . 'plugins/icons/img/powered_'.$what.'.png" align="middle" alt="Powered by '.$msg.'" width="88" height="31" border="0" /></a>';
-}
 ?>
+<h3>Bullshit functions</h3>
+
+<h4>genBullshit</h4>
+<p>Generates bullshit text.</p>
+<p><pre><code>
+function genBullshit($pars=5,$sentences=15,$words=20,$letters=15,$addHtml=3)
+
+$pars       - number of paragraphs to generate
+$sentences  - maximal sentences in paragraph
+$words      - maximal words in sentece
+$letters    - maximal letters in word
+$addHtml    - add some html into text
+</code></pre></p>
+
+<h4>genParagraph</h4>
+<p>Generates one paragraph of bullshit text.</p>
+<p><pre><code>
+function genParagraph($sentences=15,$words=20,$letters=15,$addHtml=3)
+
+$sentences  - maximal sentences in paragraph
+$words      - maximal words in sentece
+$letters    - maximal letters in word
+$addHtml    - add some html into text
+</code></pre></p>
+
+<h4>genSentence</h4>
+<p>Generates one sentence of bullshit text.</p>
+<p><pre><code>
+function genSentence($words=20,$letters=15,$addHtml=3)
+
+$words      - maximal words in sentece
+$letters    - maximal letters in word
+$addHtml    - add some html into text
+</code></pre></p>
+
+<h4>genWord</h4>
+<p>Generates one word of bullshit text.</p>
+<p><pre><code>
+function genWord($letters=15,$addHtml=3)
+
+$letters    - maximal letters in word
+$addHtml    - add some html into text
+</code></pre></p>

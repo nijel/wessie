@@ -24,22 +24,34 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-
-function powered_mysql(){
-    make_powered('mysql','http://www.mysql.com','MySQL');
-}
-
-function powered_php(){
-    make_powered('php','http://www.php.net','PHP');
-}
-
-function powered_wessie(){
-    global $wessie_url;
-    make_powered('wessie',$wessie_url,'wessie');
-}
-
-function make_powered($what,$url,$msg){
-    global $base_path;
-    echo '<a href="'.$url.'"><img src="' . $base_path . 'plugins/icons/img/powered_'.$what.'.png" align="middle" alt="Powered by '.$msg.'" width="88" height="31" border="0" /></a>';
-}
 ?>
+<h3>Powered by icon functions</h3>
+
+<h4>powered_wessie</h4>
+<p>Adds html code for displaying icon &quot;Powered by wessie&quot;.</p>
+<p><pre><code>
+function powered_wessie()
+</code></pre></p>
+
+<h4>powered_php</h4>
+<p>Adds html code for displaying icon &quot;Powered by PHP&quot;.</p>
+<p><pre><code>
+function powered_php()
+</code></pre></p>
+
+<h4>powered_mysql</h4>
+<p>Adds html code for displaying icon &quot;Powered by MySQL&quot;.</p>
+<p><pre><code>
+function powered_mysql()
+</code></pre></p>
+
+<h4>make_powered</h4>
+<p>Adds html code for displaying custom powered by icon.</p>
+<p><pre><code>
+function make_powered($what,$url,$msg)
+
+$what       - name of icon to display (it must be in plugins/icons/img
+              directory and must have name powered_$what.png
+$url        - url of link
+$msg        - name of product, used in alt text after &quot;Powered by&quot;
+</code></pre></p>

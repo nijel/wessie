@@ -127,6 +127,9 @@
   <item url="plugins/file/admin_delete.php" />
   <item url="plugins/bullshit/admin_edit.php" />
   <item url="plugins/bullshit/admin_delete.php" />
+  <item url="plugins/bullshit/function_help.php" />
+  <item url="admin/plugin_help.php" />
+  <item url="plugins/icons/function_help.php" />
  </project>
 </webproject>
 <!-- $Id$ -->

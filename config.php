@@ -190,6 +190,7 @@ $admin_file_restrict = FALSE;
 // $admin_fm_maxsize    - maximal size of upload in admnistration, this doe
 //                        cannot be larget than upload_max_filesize in php.ini!
 $admin_fm_restrict = TRUE;
+$admin_fm_restrict = FALSE;
 $admin_fm_show_size = TRUE;
 $admin_fm_show_type = TRUE;
 $admin_fm_show_mtime = TRUE;
@@ -217,6 +218,8 @@ $admin_keywords_rows = 2;
 $admin_keywords_cols = 80;
 $admin_description_rows = 2;
 $admin_description_cols = 80;
+$admin_help_width=600;
+$admin_help_height=400;
 //##/ADMIN_SIZES##
 
 //##PLUGIN_COMMON##

@@ -24,22 +24,27 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-
-function powered_mysql(){
-    make_powered('mysql','http://www.mysql.com','MySQL');
-}
-
-function powered_php(){
-    make_powered('php','http://www.php.net','PHP');
-}
-
-function powered_wessie(){
-    global $wessie_url;
-    make_powered('wessie',$wessie_url,'wessie');
-}
-
-function make_powered($what,$url,$msg){
-    global $base_path;
-    echo '<a href="'.$url.'"><img src="' . $base_path . 'plugins/icons/img/powered_'.$what.'.png" align="middle" alt="Powered by '.$msg.'" width="88" height="31" border="0" /></a>';
-}
+require_once('./auth.php');
+require_once('./functions.php');
+Header('Content-Type: text/html; charset='.$admin_charset);
+show_html_head('wessie:Help');
 ?>
+<body class="help">
+<div class="close"><a href="javascript:window.close()" onclick="window.close()">Close</a></div>
+<?php
+
+if ($type!='function'){
+    show_error_box('Error: Bad type!');
+    include_once('./admin_footer.php');
+    exit;
+}
+
+if (file_exists('../plugins/'.$name.'/'.$type.'_help.php')){
+    require_once('../plugins/'.$name.'/'.$type.'_help.php');
+} else {
+    echo '<span class="error">Sorry, no help available for this plugin and type.</span>';
+}
+
+?>
+</body>
+</html>

@@ -39,7 +39,7 @@ if (!isset($QUERY_STRING)){
 }elseif ($QUERY_STRING=='plugin.php'){
     echo 'plugin...';
 }else{
-    echo '<span class="error">Sorry, no help for this topic.</span>';
+    echo '<span class="error">Sorry, no help available for this topic.</span>';
 }
 ?>
 </body>
