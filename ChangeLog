@@ -1,3 +1,36 @@
+2002-01-20 Sunday 14:43  michal
+
+	todo synced with real state 
+
+2002-01-20 Sunday 14:42  michal
+
+	user administration finished: 
+	 - added deleting 
+	 - user can change his password adn some info about himself 
+	 - refused deleting of admin 
+	 - list of available permissions moved to separate file 
+
+2002-01-20 Sunday 14:19  michal
+
+	plenty changes according to acl: 
+	 - added user editing 
+	 - acl now works 
+	 - no more fixed user name to admin ;-) 
+	 - renamed admin.css to admin_yellow.css, this was added as
+	 alteranate stylesheet and default stylesheet is configurable 
+	- added links in user list to mail and web 
+	 - in top of page added link to change users properties 
+
+2002-01-20 Sunday 12:33  michal
+
+	added information about addHtml to help 
+
+2002-01-20 Sunday 12:27  michal
+
+	started support for ACL: 
+	 - admin is superuser and can not be restricted 
+	 - perms are file-based 
+
 2002-01-20 Sunday 12:08  michal
 
 	updated 
