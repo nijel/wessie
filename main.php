@@ -136,7 +136,7 @@ if ($increase_count){
     else $wno=(string)$wno;
 
     /* TODO: This needs some optimalisations!!! - shouldn't be executed every time, just once a week....*/
-    if (!(mysql_query('INSERT ignore '.$db_prepend.$table_stat." set count=1, category='week_no', item='$wno'",$db_connection)))
+    if (!(mysql_query('INSERT ignore '.$db_prepend.$table_stat." set count=0, category='week_no', item='$wno'",$db_connection)))
         do_error(1,'INSERT ignore '.$db_prepend.$table_stat.': '.mysql_error());
 
     if (!(mysql_query('UPDATE '.$db_prepend.$table_stat." set count=count+1 where (category='time' and item='".strftime('%H')."') or (category='dow' and item='$dow') or (category='week_no' and item='$wno') or (category='os' and item='$os') or (category='browser' and item='$browser') or(category='lang' and item='$lng') or (category='total' and item='hits')",$db_connection)))
