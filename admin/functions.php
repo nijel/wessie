@@ -516,7 +516,7 @@ function human_readable_size($size){
         return $size.' B';
     }elseif ($size<1048576) {
         return (round($size*10/1024)/10).' kB';
-    }elseif ($size_b<1073741824) {
+    }elseif ($size<1073741824) {
         return (round($size*10/1048576)/10).' MB';
     }else{
         return (round($size*10/1073741824)/10).' GB';
