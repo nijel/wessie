@@ -397,6 +397,55 @@ function delete_pages($condition){
 
 }
 
+$configuration=array();
+$configuration_loaded=FALSE;
+
+function config_read(){
+    global $configuration,$SCRIPT_FILENAME,$configuration_loaded;
+    if (!($file = fopen($root_dir=dirname(dirname($SCRIPT_FILENAME)).'/config2.php', "r")))
+        return FALSE;
+    for ($i=0; !feof($file); $i++) {
+        $configuration[$i] = fgets($file, 1024);
+    }
+    return $configuration_loaded=fclose($file);
+}
+
+function config_write(){
+    global $configuration,$SCRIPT_FILENAME,$configuration_loaded;
+    if (!($file = fopen($root_dir=dirname(dirname($SCRIPT_FILENAME)).'/config2.php', "w")))
+        return FALSE;
+    for ($i=0; $i < count($configuration); $i++) {
+        fwrite($file, $configuration[$i], 1024);
+    }
+    return fclose($file);
+}
+
+//$newline must contain ;\n !
+function config_set_option($pattern,$newline,$add_before='\?>'){
+    global $configuration,$configuration_loaded;
+
+    if (!$configuration_loaded) return FALSE;
+
+    $where_add=-1;
+
+    for ($i=0; $i < count($configuration); $i++) {
+        if (ereg($pattern, $configuration[$i])){
+            $configuration[$i]=$newline;
+            return TRUE;
+        } elseif (ereg($add_before, $configuration[$i])){
+            $where_add=$i;
+        }
+    }
+    if ($where_add!=-1){
+        for ($i=count($configuration); $i >$where_add; $i--) {
+            $configuration[$i]=$configuration[$i-1];
+        }
+        $configuration[$where_add]=$newline;
+        return TRUE;
+    }
+    return FALSE;
+}
+
 function make_row($even){
     global $admin_highlight_list;
     echo '<tr '.(($even == 1)?'class="even"':'class="odd"');
