@@ -73,7 +73,6 @@ if (!$id_result=mysql_query(
 if (mysql_num_rows($id_result) == 0){
     echo "Nothing...";
 } else {
-    echo 'Listed categories: '.mysql_num_rows($id_result);
     echo '<table class="data"><tr><th>Id</th><th>Name</th><th>Short</th><th>Description</th><th>Language</th><th>Page</th><th>Actions</th></tr>'."\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
@@ -89,6 +88,7 @@ if (mysql_num_rows($id_result) == 0){
         echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="category_delete.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;</td></tr>'."\n";
     }
     echo "</table>\n";
+    echo 'Listed categories: '.mysql_num_rows($id_result);
 }
 ?>
 <form action="category_edit.php" method="get">

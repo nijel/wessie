@@ -64,7 +64,6 @@ if (!$id_result=mysql_query(
 if (mysql_num_rows($id_result) == 0){
     echo "Nothing...";
 } else {
-    echo 'Listed downloads: '.mysql_num_rows($id_result);
     echo '<table class="data"><tr><th>Id</th><th>Filename</th><th>Remote</th><th>Size</th><th>Group</th><th>Count</th><th>Actions</th></tr>'."\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
@@ -95,6 +94,7 @@ if (mysql_num_rows($id_result) == 0){
         echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="download_item_delete.php?id='.$item['id'].'">Delete</a>&nbsp;|&nbsp;<a href="../get.php/'.$item['id'].'/'.basename($item['filename']).'" target="_blank">Download</a>&nbsp;</td></tr>'."\n";
     }
     echo "</table>\n";
+    echo 'Listed downloads: '.mysql_num_rows($id_result);
 }
 ?>
 <form action="download_item_edit.php" method="get">

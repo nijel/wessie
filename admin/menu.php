@@ -51,6 +51,7 @@ global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_ti
     $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
     $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path,$lng;
 global $db_connection,$table_menu,$table_page,$table_prepend_name,$category,$even,$lang_name,$admin_highlight_list;
+global $listed_items;
 
 if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$table_prepend_name.$table_menu
         .' where '.($lng=='any'?1:('lng='.$lng)).' and parent='.$child_id.' and '.($category=='any'?1:('category='.$category)).' order by lng,rank',$db_connection)))&&($child_id=0))
@@ -85,6 +86,7 @@ while ($item = mysql_fetch_array ($id_result)){
     make_cell($item['id'],$url);
     make_cell($item['page'],$url);
     echo '</td><td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="menu_edit.php?parent=',$item['id'].'&amp;lng='.$item['lng'].'">Add child</a>&nbsp;|&nbsp;<a href="menu_delete.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;</td></tr>'."\n";
+    $listed_items++;
 
     add_childs($item['id'],$depth+1,$item['lng']);
 }
@@ -99,9 +101,11 @@ if (!isset($category)){
 
 echo '<table class="data"><tr><th>Language</th><th>Category</th><th>Title</th><th>Description</th><th>Depth</th><th>Rank</th><th>Expand</th><th>ID</th><th>Page</th><th>Actions</th></tr>'."\n";
 $even=0;
+$listed_items=0;
 add_childs(0,0,$lng);
 ?>
 </table>
+<?php echo 'Listed downloads: '.$listed_items; ?>
 <br />
 <form action="menu_edit.php" method="get">
 Create new menu item, in language: <?php language_edit($lng); ?>
