@@ -43,4 +43,5 @@ function get_last_change(){
     return $article['last_change'];
 }
 
+
 ?>
