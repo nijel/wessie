@@ -46,8 +46,10 @@ if (file_exists($confing_file)) {
  */
 if (!isset($site_name)){
     $error_log_file='./logs/error.log';
-    $site_name='wessie';
+    $error_site_name='wessie';
     $show_error_detail=FALSE;
+} else {
+    $error_site_name=$site_name[isset($lng)?$lng:0];
 }
 
 
@@ -70,7 +72,7 @@ function log_error($what){
  * @param   string   error description
  */
 function do_error($err_type=0,$err_nfo=''){
-    global $SERVER_PROTOCOL, $site_name, $show_error_detail, $base_path, $SERVER_NAME;
+    global $SERVER_PROTOCOL, $error_site_name, $show_error_detail, $base_path, $SERVER_NAME;
 
     $err_names[0] = 'fallback and default';
     $err_names[1] = 'bad SQL';
@@ -110,8 +112,8 @@ function do_error($err_type=0,$err_nfo=''){
     //header ($header);
     echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">'."\n".
         '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">'.
-        "\n<head><title>$site_name</title></head><body>\n".
-        "<h2>$site_name</h2>\n<h3>$header</h3>\n".
+        "\n<head><title>$error_site_name</title></head><body>\n".
+        "<h2>$error_site_name</h2>\n<h3>$header</h3>\n".
         "<p>$message</p>\n";
 
     if ($http_err_type == 5){

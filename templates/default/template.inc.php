@@ -34,7 +34,7 @@
   <title><?php title(); ?></title>
   <link rel="home" href="<?php echo $site_home; ?>" />
   <link rel="copyright" href="mailto:<?php echo $site_author_email; ?>" />
-  <meta name="author" content="<?php echo $site_author; ?>" />
+  <meta name="author" content="<?php echo $site_author[$lng]; ?>" />
   <meta name="keywords" content="<?php keywords(); ?>" />
   <meta name="description" content="<?php description(); ?>" />
   <meta name="generator" content="<?php echo $wessie_version.', Copyright (C) 2001 '.$wessie_author; ?>" />

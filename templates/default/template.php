@@ -34,8 +34,8 @@ $top_pages_count=4;
 
 //Format of title:
 function title(){
-    global $site_name,$category,$page;
-    echo $site_name.' - ';
+    global $site_name,$category,$page,$lng;
+    echo $site_name[$lng].' - ';
     eval('?'.'>'.$category['name'].'<?php ');
     echo ' - ';
     eval('?'.'>'.$page['name'].'<?php ');

@@ -31,7 +31,7 @@ $remove_path='admin/';
 require_once('../init.php');
 require_once('../config.php');
 Header('Content-Type: text/html; charset='.$admin_charset);
-$page_title=$site_name.':Administration:Login';
+$page_title=$site_name[0].':Administration:Login';
 if (isset($HTTP_POST_VARS['submit'])){
     $pass=$HTTP_POST_VARS['pass'];
     $user=$HTTP_POST_VARS['user'];

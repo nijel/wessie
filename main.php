@@ -212,7 +212,7 @@ global $table_prepend_name,$table_download,$table_download_group,$db_connection;
 }
 
 function upper_menu(){
-        global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
+        global $site_name,$lng,$site_author,$site_author_email,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
                 $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
                 $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
@@ -228,7 +228,7 @@ function upper_menu(){
 }
 
 function top_pages(){
-        global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
+        global $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
                 $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
                 $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
@@ -271,7 +271,7 @@ if ($use_adverts){
 function left_menu(){
 
     function add_childs($child_id,$depth,$parents){
-        global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
+        global $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
             $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
             $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
         global $first_item,$left_menu_divisor,$id,$category,$lng,$menu_item_cache,$menu_parent_cache,$menu_page_cache;
@@ -341,12 +341,12 @@ function left_menu(){
 
 function content(){
 global $content,
-    $site_name,$site_author,$site_author_email,$site_name,$site_home,
+    $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,
     $page_title,$category_name,
     $browser,$os,
     $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
     $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path,
-    $allow_content_eval,$page_plugins_options,$page;
+    $allow_content_eval,$page_plugins_options,$page,$lng;
 
     if ($allow_content_eval && $page_plugins_options[$page['type']]['eval']){
         eval('?'.'>'.$content.'<?php ');
@@ -361,11 +361,11 @@ $count=$page['count'];
 eval('?'.'>'.$msg_counter.'<?php ');
 }
 
-function copyright(){global $copyright;echo $copyright;}
+function copyright(){global $copyright,$lng;echo $copyright[$lng];}
 
 function page_title(){
 global $page,
-    $site_name,$site_author,$site_author_email,$site_name,$site_home,
+    $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,
     $page_title,$category_name,
     $browser,$os,
     $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
@@ -376,7 +376,7 @@ eval('?'.'>'.$page['name'].'<?php ');
 
 function category_name(){
 global $category,
-    $site_name,$site_author,$site_author_email,$site_name,$site_home,
+    $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,
     $page_title,$category_name,
     $browser,$os,
     $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
@@ -387,7 +387,7 @@ eval('?'.'>'.$category['name'].'<?php ');
 
 function keywords(){
 global $page,
-    $site_name,$site_author,$site_author_email,$site_name,$site_home,
+    $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,
     $page_title,$category_name,
     $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
     $browser,$os,
@@ -398,7 +398,7 @@ eval('?'.'>'.$page['keywords'].'<?php ');
 
 function description(){
 global $page,
-    $site_name,$site_author,$site_author_email,$site_name,$site_home,
+    $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,
     $page_title,$category_name,
     $browser,$os,
     $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
@@ -413,7 +413,7 @@ function search_hidden_options(){
 
 function languages(){
 global $languages,$lang_name,$lang_main_page,$languages_divisor,$id,
-    $site_name,$site_author,$site_author_email,$site_name,$site_home,
+    $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,
     $page_title,$category_name,
     $browser,$os,
     $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
@@ -432,7 +432,7 @@ eval('?'.'>'.$result.'<?php ');
 }
 
 function make_stat($which,$cond,$mul,$cvt="<?php echo \$item['item'] ?>"){
-global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
+global $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
         $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
         $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 global $db_connection,$table_stat,$table_prepend_name,$lng,$stat_start,$stat_end,$msg_unknown,$lang_name;
