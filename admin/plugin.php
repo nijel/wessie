@@ -134,11 +134,21 @@ unset($files); //we don't need them
 natsort($dirs);
 
 $count=0;
-echo '<table class="data"><tr><th>Directory</th><th>Name</th><th>Function</th><th>Page</th><th>Eval</th><th>Info</th></tr>'."\n";
+echo '<table class="data"><tr><th>Directory</th><th>Name</th><th>Function</th><th>Page</th><th>Eval</th><th>Info</th><th>Status</th></tr>'."\n";
 $even=1;
 while (list ($key, $val) = each($dirs)){
     if ($val!='..'){
         if(file_exists($dir.'/'.$val.'/main.php')){
+            // Load some defaults
+            $plugin_name='Unknown';
+            $plugin_version='Unknown';
+            $plugin_release_date='Unknown';
+            $plugin_author='Unknown';
+            $plugin_email='Unknown';
+            $plugin_web='Unknown';
+            $plugin_page=FALSE;
+            $plugin_function=FALSE;
+            $need_install=FALSE;
             $plugin_credit='';
             include($dir.'/'.$val.'/main.php');
             $count++;
@@ -150,7 +160,16 @@ while (list ($key, $val) = each($dirs)){
             make_cell('<input name="plugins_function['.$val.']" value="1" type="checkbox" '.($plugin_function?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_function_plugins)?' checked="checked"':'').'/>','');
             make_cell('<input name="plugins_page['.$val.']" value="1" type="checkbox" '.($plugin_page?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_page_plugins)?' checked="checked"':'').'/>','');
             make_cell('<select name="plugins_page_eval['.$val.']" '.($plugin_page?'class="select"':'class="select_disabled" disabled="disabled"').'><option value="1"'.(isset($page_plugins_options[$val]['eval'])&&$page_plugins_options[$val]['eval']?' selected="selected"':'').'>Yes</option><option value="0"'.(!isset($page_plugins_options[$val]['eval'])||!$page_plugins_options[$val]['eval']?' selected="selected"':'').'>No</option></select>');
-            make_cell('<input type="button" class="browse" onclick="'."show_plugin_info('$val','$plugin_name','$plugin_version','$plugin_release_date','$plugin_author','$plugin_email','$plugin_web',".(isset($plugin_credit)&&$plugin_credit!=''?"'Credits: $plugin_credit\\n'":"''").','.(int)$plugin_page.','.(int)$plugin_function.')" value="?" />');
+            make_cell('<input type="button" class="browse" onclick="'."show_plugin_info('$val','$plugin_name','$plugin_version','$plugin_release_date','$plugin_author','$plugin_email','$plugin_web',".(isset($plugin_credit)&&$plugin_credit!=''?"'Credits: $plugin_credit\\n'":"''").','.(int)$plugin_page.','.(int)$plugin_function.')" value="&nbsp;?&nbsp;" />');
+            if ($need_install) {
+                if (in_array($val,$installed_plugins)) {
+                    make_cell('Installed (<a href="plugin_status.php?action=uninstall&amp;name='.$val.'">Uninstall</a>)');
+                } else {
+                    make_cell('NOT installed (<a href="plugin_status.php?action=install&amp;name='.$val.'">Install</a>)');
+                }
+            } else {
+                make_cell('Ready (no installation required)');
+            }
             echo "</tr>\n";
         }
     }
@@ -158,7 +177,7 @@ while (list ($key, $val) = each($dirs)){
 ?>
 
 <tr>
-<td colspan="6">
+<td colspan="7">
     Listed plugins: <?php echo $count; ?><br />
     Allow anywhere evaling content of page:
     <select name="allow_page_eval" class="select">

@@ -32,4 +32,5 @@ $plugin_email='cihar at email dot cz';
 $plugin_web='http://cicom.host.sk';
 $plugin_page=FALSE;
 $plugin_function=TRUE;
+$need_install=FALSE;
 ?>

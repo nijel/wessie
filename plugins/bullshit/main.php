@@ -33,4 +33,5 @@ $plugin_web='http://cicom.host.sk';
 $plugin_credit='Inspired by simmilar thing in JavaScript by Riki Fridrich <acid at pobox dot sk>';
 $plugin_page=TRUE;
 $plugin_function=TRUE;
+$need_install=TRUE;
 ?>
