@@ -171,7 +171,7 @@ while (list ($key, $val) = each($list)){
     if($admin_fm_show_owner) make_cell($val['owner']);
     if($admin_fm_show_group) make_cell($val['group']);
 
-    make_cell(($download_path==''?'<a class="disabled">Download</a>':'<a href="'.htmlentities($download_path).'">Download</a>').
+    make_cell(($download_path==''?'<a class="disabled">Download</a>':'<a href="'.htmlspecialchars($download_path).'">Download</a>').
 /*        '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">rm</a>':'<a href="files_action.php?action=delete&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">rm</a>').
         '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">mv</a>':'<a href="files_action.php?action=move&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">mv</a>').
         '&nbsp;|&nbsp;'.($val['filename']=='..'?'<a class="disabled">cp</a>':'<a href="files_action.php?action=copy&amp;dir='.urlencode($dir).'&amp;name='.urlencode($val['filename']).'">cp</a>').*/

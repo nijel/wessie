@@ -86,7 +86,7 @@ function show_error_box($msg='Wrong parameters!',$params=array(),$action=''){
   <form method="get" action="<?php echo $action?>">
 <?php
 while (list ($key, $val) = each($params)){
-    echo '<input type="hidden" name="'.$key.'" value="'.htmlentities($val).'" />';
+    echo '<input type="hidden" name="'.$key.'" value="'.htmlspecialchars($val).'" />';
 }?>
     <input type="submit" value=" OK " class="ok" />
   </form>
@@ -128,7 +128,7 @@ function show_info_box($msg,$params=array(),$action=''){
     <b><?php echo $msg?></b><br />
 <?php
 while (list ($key, $val) = each($params)){
-    echo '<input type="hidden" name="'.$key.'" value="'.htmlentities($val).'" />';
+    echo '<input type="hidden" name="'.$key.'" value="'.htmlspecialchars($val).'" />';
 }?>
     <input type="submit" value=" OK " class="ok" />
   </form>

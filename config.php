@@ -146,18 +146,18 @@ $top_pages_count = 4;
 // $site_name_long array - array of long site names for each language
 // $copyright array    - array of copyrights for each language
 // $special array      - array of special info that is displayed on top of each page
-$site_home = 'http://wessie.cic';
-$site_started = mktime(0,0,0,1,13,2001); //Recommended to be time 0:0:0
-$site_author_email = 'cihar@email.cz';
+$site_home = 'http://wessie.cicom.cic';
+$site_started = mktime(0,0,0,1,13,2001);
+$site_author_email = 'cihar@centrum.cz';
 $site_author[0] = 'Michal Cihar';
-$site_author[1] = 'Michal Èihaø';
 $site_name[0] = 'wessie Demo';
-$site_name[1] = 'ukázka wessie';
 $site_name_long[0] = 'demonstration how wessie can work';
-$site_name_long[1] = 'ukázka jak mù¾e wessie pracovat';
-$copyright[0] = 'Copyright &copy; 2001-2002 <a href="mailto:'.$site_author_email.'">'.$site_author[0].'</a>';
-$copyright[1] = 'Copyright &copy; 2001-2002 <a href="mailto:'.$site_author_email.'">'.$site_author[1].'</a>';
+$copyright[0] = 'Copyright &copy; 2001-2002 <a href="mailto:<?php echo $site_author_email;?>"><?php echo $site_author[0];?></a>';
 $special[0] = '';
+$site_author[1] = 'Michal Èihaø';
+$site_name[1] = 'ukázka wessie';
+$site_name_long[1] = 'ukázka jak mù¾e wessie pracovat';
+$copyright[1] = 'Copyright &copy; 2001-2002 <a href="mailto:<?php echo $site_author_email;?>"><?php echo $site_author[0];?></a>';
 $special[1] = '';
 //##/INFO##
 

@@ -366,7 +366,7 @@ function counter(){
 
 function copyright(){
     global $copyright,$lng;
-    echo $copyright[$lng];
+    global_eval($copyright[$lng]);
 }
 
 function page_title(){

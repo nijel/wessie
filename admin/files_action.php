@@ -77,8 +77,8 @@ if ($action == 'move'){
     <form action="files_action.php" method="post">
     Move file <?php echo $fname;?> to:<br />
     <input type="hidden" name="action" value="do_move" />
-    <?php sized_edit('filename','') ?><input type="button" class="browse" onclick="open_browse_window('<?php echo addslashes(htmlentities(dirname($fname)));?>','dirs');" value="..." /><br />
-    <input type="hidden" name="fname" value="<?php echo htmlentities($fname); ?>" />
+    <?php sized_edit('filename','') ?><input type="button" class="browse" onclick="open_browse_window('<?php echo addslashes(htmlspecialchars(dirname($fname)));?>','dirs');" value="..." /><br />
+    <input type="hidden" name="fname" value="<?php echo htmlspecialchars($fname); ?>" />
     <input type="submit" value=" Go " class="go" />
     </form>
 
@@ -165,8 +165,8 @@ if ($action == 'move'){
     <form action="files_action.php" method="post">
     Copy file <?php echo $fname;?> to:<br />
     <input type="hidden" name="action" value="do_copy" />
-    <?php sized_edit('filename','') ?><input type="button" class="browse" onclick="open_browse_window('<?php echo addslashes(htmlentities(dirname($fname)));?>','dirs');" value="..." /><br />
-    <input type="hidden" name="fname" value="<?php echo htmlentities($fname); ?>" />
+    <?php sized_edit('filename','') ?><input type="button" class="browse" onclick="open_browse_window('<?php echo addslashes(htmlspecialchars(dirname($fname)));?>','dirs');" value="..." /><br />
+    <input type="hidden" name="fname" value="<?php echo htmlspecialchars($fname); ?>" />
     <input type="submit" value=" Go " class="go" />
     </form>
 
@@ -276,16 +276,16 @@ if ($action == 'move'){
     }
 } elseif ($action == 'delete'){
     if (@is_dir($fname)){
-        echo 'Do you want to delete directory '.htmlentities($fname).' (it must be empty)?';
+        echo 'Do you want to delete directory '.htmlspecialchars($fname).' (it must be empty)?';
     } else {
-        echo 'Do you want to delete file '.htmlentities($fname).'?';
+        echo 'Do you want to delete file '.htmlspecialchars($fname).'?';
     }
     ?>
     <table class="yesno">
     <tr>
         <td>
     <form action="files_action.php" method="post" class="delete">
-    <input type="hidden" name="fname" value="<?php echo htmlentities($fname); ?>" />
+    <input type="hidden" name="fname" value="<?php echo htmlspecialchars($fname); ?>" />
     <input type="hidden" name="action" value="do_delete" /><br />
     <input type="submit" value=" Yes " class="delete" />
     </form>
@@ -354,7 +354,7 @@ if ($action == 'move'){
     <form action="files_action.php" method="post">
     Change mode of file <?php echo $fname;?>
     <input type="hidden" name="action" value="do_chmod" />
-    <input type="hidden" name="fname" value="<?php echo htmlentities($fname); ?>" />
+    <input type="hidden" name="fname" value="<?php echo htmlspecialchars($fname); ?>" />
     <p class="checks">
     Owner (<?php
     $arr = posix_getpwuid(fileowner($fname));

@@ -99,7 +99,7 @@ if (isset($action) && $action=='save'){
     }
 
     if (!config_write()){
-        show_error('Can not write configuration!');
+        show_error('Can not write configuration!<br/>Now you should go to site information page and add there information in this language.');
         exit;
     }
 
@@ -138,7 +138,7 @@ language_edit($default_lang,FALSE,'set_default_lang');
 echo '</td>'."</tr>\n";
 
 echo "\n<tr><th>Language file</th>\n";
-echo '<td colspan="5"><input type="text" class="text" name="set_lang_file" value="'.htmlentities($lang_file).'" /></td>'."</tr>\n";
+echo '<td colspan="5"><input type="text" class="text" name="set_lang_file" value="'.htmlspecialchars($lang_file).'" /></td>'."</tr>\n";
 
 echo '<tr><th>Id</th>';
 echo '<th>Short</th>';
@@ -150,10 +150,10 @@ echo '<th>Alias(es)</th></tr>';
 reset($languages);
 while (list($key,$val) = each($languages)){
     echo '<tr><th>'.$key.'</th>';
-    echo '<td><input type="text" class="text" name="set_languages['.$key."][short]".'" value="'.htmlentities($val['short']).'" /></td>'."\n";
-    echo '<td><input type="text" class="text" name="set_languages['.$key."][name]".'" value="'.htmlentities($val['name']).'" /></td>'."\n";
-    echo '<td><input type="text" class="text" name="set_languages['.$key."][image]".'" value="'.htmlentities($val['image']).'" /></td>'."\n";
-    echo '<td><input type="text" class="text" name="set_languages['.$key."][page]".'" value="'.htmlentities($val['page']).'" /></td>'."\n";
+    echo '<td><input type="text" class="text" name="set_languages['.$key."][short]".'" value="'.htmlspecialchars($val['short']).'" /></td>'."\n";
+    echo '<td><input type="text" class="text" name="set_languages['.$key."][name]".'" value="'.htmlspecialchars($val['name']).'" /></td>'."\n";
+    echo '<td><input type="text" class="text" name="set_languages['.$key."][image]".'" value="'.htmlspecialchars($val['image']).'" /></td>'."\n";
+    echo '<td><input type="text" class="text" name="set_languages['.$key."][page]".'" value="'.htmlspecialchars($val['page']).'" /></td>'."\n";
     echo '<td><input type="text" class="text" name="set_aliases['.$key.']" value="';
     reset($lang_alias);
     $first = true;
