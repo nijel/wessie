@@ -102,12 +102,13 @@ if (isset($action) && ($action=='save')){
 ?>
 <script language="JavaScript" type="text/javascript">
 <!--
-function show_plugin_info(val,plugin_name,plugin_version,plugin_release_date,plugin_author,plugin_email,plugin_web,plugin_page,plugin_function){
+function show_plugin_info(val,plugin_name,plugin_version,plugin_release_date,plugin_author,plugin_email,plugin_web,plugin_credit,plugin_page,plugin_function){
     window.alert(
         "Name: "+plugin_name+"\n"+
         "Version: "+plugin_version+"; released: "+plugin_release_date+"\n"+
         "Author: "+plugin_author+"; his email: "+plugin_email+"\n"+
         "Website: "+plugin_web+"\n"+
+        plugin_credit+
         "Capabilities: \n"+
         (plugin_page==1?"page\n":"")+
         (plugin_function==1?"function\n":"")
@@ -138,6 +139,7 @@ $even=1;
 while (list ($key, $val) = each($dirs)){
     if ($val!='..'){
         if(file_exists($dir.'/'.$val.'/main.php')){
+            $plugin_credit='';
             include($dir.'/'.$val.'/main.php');
             $count++;
 
@@ -148,7 +150,7 @@ while (list ($key, $val) = each($dirs)){
             make_cell('<input name="plugins_function['.$val.']" value="1" type="checkbox" '.($plugin_function?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_function_plugins)?' checked="checked"':'').'/>','');
             make_cell('<input name="plugins_page['.$val.']" value="1" type="checkbox" '.($plugin_page?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_page_plugins)?' checked="checked"':'').'/>','');
             make_cell('<select name="plugins_page_eval['.$val.']" '.($plugin_page?'class="select"':'class="select_disabled" disabled="disabled"').'><option value="1"'.(isset($page_plugins_options[$val]['eval'])&&$page_plugins_options[$val]['eval']?' selected="selected"':'').'>Yes</option><option value="0"'.(!isset($page_plugins_options[$val]['eval'])||!$page_plugins_options[$val]['eval']?' selected="selected"':'').'>No</option></select>');
-            make_cell('<input type="button" class="browse" onclick="'."show_plugin_info('$val','$plugin_name','$plugin_version','$plugin_release_date','$plugin_author','$plugin_email','$plugin_web',".(int)$plugin_page.','.(int)$plugin_function.')" value="?" />');
+            make_cell('<input type="button" class="browse" onclick="'."show_plugin_info('$val','$plugin_name','$plugin_version','$plugin_release_date','$plugin_author','$plugin_email','$plugin_web',".(isset($plugin_credit)&&$plugin_credit!=''?"'Credits: $plugin_credit\\n'":"''").','.(int)$plugin_page.','.(int)$plugin_function.')" value="?" />');
             echo "</tr>\n";
         }
     }
