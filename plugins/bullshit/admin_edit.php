@@ -115,7 +115,7 @@ Page ID:
 Language:
 </th><td>
 <input type="hidden" name="lng" value="<?php echo $page['lng']?>" />
-<?php echo $lang_name[$page['lng']]?>
+<?php echo $languages[$page['lng']]['name']; ?>
 </td></tr>
 <tr><th>
 Name:
@@ -185,7 +185,7 @@ Add randomly <code>&lt;a&gt;</code>:
 <?php
 if ($action!='create_new'){
     $transl=get_page_translations($page['id']);
-    if (sizeof($transl)<sizeof($lang_name)){
+    if (sizeof($transl)<sizeof($languages)){
         echo '<form action="'.$form_action.'" method="get">';
         echo 'Translate to ';
         echo '<input type="hidden" name="action" value="translate" />';

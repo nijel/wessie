@@ -28,8 +28,6 @@ user: insert new row for week stat at the start of week - some cache!!!!!
 
 user: ? cache for categories
 
-cicom/cihar test implementation
-
 admin+user: banners
          - monitor views and CTRs
          - allow campaigns with n views / clicks?
@@ -47,5 +45,3 @@ admin+user: cofigurable counter/stats working
 admin+user: update documentation (FUNCTIONS, VARIABLES, README, some help, ...)
 
 admin+user: split functions.php, and to new files add something from main.php
-
-user+admin: ? remake working with languages ????

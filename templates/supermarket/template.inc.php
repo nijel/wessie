@@ -35,8 +35,8 @@
     <link rel="icon" href="<?php echo $base_path;?>img/favicon.png" type="image/png" />
     <link rel="home" href="<?php echo $site_home; ?>" />
     <link rel="up" href="<?php echo link_up(); ?>" />
-    <link rel="Copyright" href="mailto:<?php echo $site_author_email; ?>" title="<?php echo $site_name;?> Feedback" />
-    <link rev="Made" href="mailto:<?php echo $site_author_email; ?>" title="<?php echo $site_name;?> Feedback" />
+    <link rel="Copyright" href="mailto:<?php echo $site_author_email; ?>" title="<?php echo $site_name[$lng];?> Feedback" />
+    <link rev="Made" href="mailto:<?php echo $site_author_email; ?>" title="<?php echo $site_name[$lng];?> Feedback" />
     <link rel="StyleSheet" type="text/css" media="screen" href="<?php echo $base_path;?>templates/supermarket/styles.php" />
     <meta name="author" content="<?php echo $site_author[$lng]; ?>" />
     <meta name="keywords" content="<?php keywords(); ?>" />

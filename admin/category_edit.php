@@ -117,7 +117,7 @@ Category ID:
 Language:
 </th><td>
 <input type="hidden" name="lng" value="<?php echo $category['lng']?>" />
-<?php echo $lang_name[$category['lng']]?>
+<?php echo $languages[$category['lng']]['name']?>
 </td></tr>
 <tr><th>
 Name:
@@ -155,7 +155,7 @@ Description:
 <?php
 if ($action!='create_new'){
     $transl=get_category_translations($category['id']);
-    if (sizeof($transl)<sizeof($lang_name)){
+    if (sizeof($transl)<sizeof($languages)){
         echo '<form action="category_edit.php" method="get">';
         echo 'Translate to ';
         echo '<input type="hidden" name="action" value="translate" />';

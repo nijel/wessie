@@ -92,7 +92,7 @@ Page ID:
 <tr><th>
 Language:
 </th><td>
-<?php echo $lang_name[$article['lng']]?>
+<?php echo $languages[$article['lng']]['name']?>
 </td></tr>
 <tr><th>
 Last change:

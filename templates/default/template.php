@@ -108,8 +108,8 @@ $left_menu_divisor="<br />\n";
 
 //Language choice format:
 function make_language($url,$id){
-    global $languages, $lang_name, $lang_img, $lang_main_page,$base_path;
-    return '<a href="'.$url.'" target="_self" title="'.$lang_name[$id].'"><img src="'.$base_path.$lang_img[$id].'" alt="'.$languages[$id].'" align="middle" border="0" />'.$lang_name[$id].'</a>';
+    global $languages, $base_path;
+    return '<a href="'.$url.'" target="_self" title="'.$languages[$id]['name'].'"><img src="'.$base_path.$languages[$id]['image'].'" alt="'.$languages[$id]['short'].'" align="middle" border="0" />'.$languages[$id]['name'].'</a>';
 }
 
 $languages_divisor=' | ';

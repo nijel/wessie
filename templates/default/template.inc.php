@@ -36,8 +36,8 @@
     <link rel="home" href="<?php echo $site_home; ?>" />
     <link rel="up" href="<?php echo link_up(); ?>" />
     <link rel="contents" href="<?php echo link_start(); ?>" />
-    <link rel="Copyright" href="mailto:<?php echo $site_author_email; ?>" title="<?php echo $site_name;?> Feedback" />
-    <link rev="Made" href="mailto:<?php echo $site_author_email; ?>" title="<?php echo $site_name;?> Feedback" />
+    <link rel="Copyright" href="mailto:<?php echo $site_author_email; ?>" title="<?php echo $site_name[$lng];?> Feedback" />
+    <link rev="Made" href="mailto:<?php echo $site_author_email; ?>" title="<?php echo $site_name[$lng];?> Feedback" />
 
     <meta name="author" content="<?php echo $site_author[$lng]; ?>" />
     <meta name="keywords" content="<?php keywords(); ?>" />

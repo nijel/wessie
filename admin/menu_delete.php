@@ -100,7 +100,7 @@ Do you want to delete following menu item?<br />
 <tr><th>
 Language:
 </th><td>
-<?php echo $lang_name[$item['lng']]?>
+<?php echo $languages[$item['lng']]['name']?>
 </td></tr>
 <tr><th>Rank</th><td><?php echo $item['rank']; ?></td><td></td></tr>
 <tr><th>Expand</th><td>

@@ -95,7 +95,7 @@ Page ID:
 <tr><th>
 Language:
 </th><td>
-<?php echo $lang_name[$page['lng']]?>
+<?php echo $languages[$page['lng']]['name']?>
 </td></tr>
 <tr><th>
 Name:

@@ -248,9 +248,9 @@ function get_download_group_name($selected){
 }
 
 function language_edit($selected=-1,$add_any=FALSE,$name='lng',$disabled=array(),$class='select'){
-    global $lang_name;
+    global $languages;
 
-    reset($lang_name);
+    reset($languages);
 
     echo '<select name="'.$name.'"'.($class!=''?' class="'.$class.'"':'').'>';
     if ($add_any){
@@ -258,9 +258,9 @@ function language_edit($selected=-1,$add_any=FALSE,$name='lng',$disabled=array()
     }
 
 
-    while (list ($key, $val) = each($lang_name)){
+    while (list ($key, $val) = each($languages)){
         if (!in_array($key,$disabled)){
-            echo '<option'.((($selected!='any')&&($key==$selected))?' selected="selected"':'').' value="'.$key.'">'.$val.'</option>';
+            echo '<option'.((($selected!='any')&&($key==$selected))?' selected="selected"':'').' value="'.$key.'">'.$val['name'].'</option>';
         }
     }
 
@@ -376,7 +376,7 @@ function make_url($id,$lng){
 
 function make_absolute_url($id,$lng){
     global $base_path,$SERVER_NAME, $languages, $admin_force_ssl;
-    return ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.$base_path.'main.php/page'.$id.'.'.$languages[$lng].'.html';
+    return ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.$base_path.'main.php/page'.$id.'.'.$languages[$lng]['short'].'.html';
 }
 
 function get_page_count($type){

@@ -105,7 +105,7 @@ Category ID:
 <tr><th>
 Language:
 </th><td>
-<?php echo $lang_name[$category['lng']]?>
+<?php echo $languages[$category['lng']]['name']?>
 </td></tr>
 <tr><th>
 Title:

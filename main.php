@@ -44,7 +44,7 @@ require_once('./browser.php');
 if (!isset($lng)){
     if (isset($HTTP_COOKIE_VARS[$cookie_lang])){
             $lng=$HTTP_COOKIE_VARS[$cookie_lang];
-        $lang=$languages[$lng];
+        $lang=$languages[$lng]['short'];
         eval('$lang_file_name="'.$lang_file.'";');
     }
     if ((!isset($lng)) || (!file_exists($lang_file_name))){
@@ -57,19 +57,19 @@ if (!isset($lng)){
                 $curr_lang=$curr_lang[0]; //this ignores q=0.5
                 if (isset($lang_alias[$curr_lang])){
                     $lng=$lang_alias[$curr_lang];
-                    $lang=$languages[$lng];
+                    $lang=$languages[$lng]['short'];
                     eval('$lang_file_name="'.$lang_file.'";');
                     if (($lng!=-1)&&(file_exists($lang_file_name))) break;
                 }
             }
             if (($lng==-1)||(!file_exists($lang_file_name))) {
                 $lng=$default_lang;
-                $lang=$languages[$lng];
+                $lang=$languages[$lng]['short'];
                 eval('$lang_file_name="'.$lang_file.'";');
             }
         }else{
             $lng=$default_lang;
-            $lang=$languages[$lng];
+            $lang=$languages[$lng]['short'];
             eval('$lang_file_name="'.$lang_file.'";');
         }
     }
@@ -77,7 +77,7 @@ if (!isset($lng)){
     if (((int)$lng == 0) && ($lng != '0') && isset($lang_alias[$lng])){
         $lng=$lang_alias[$lng];
     }
-    @$lang=$languages[$lng];
+    @$lang=$languages[$lng]['short'];
     eval('$lang_file_name="'.$lang_file.'";');
 }
 
@@ -93,7 +93,7 @@ Header('Content-Type: text/html; charset='.$charset);
 
 //if no id specified, go to default page
 if (!isset($id)){
-    $id=$lang_main_page[$lng];
+    $id=$languages[$lng]['page'];
 }
 
 //read cookie and determine whether it is new user
@@ -203,7 +203,7 @@ function global_eval($code) {
 
 function make_url($id,$lng){
     global $base_path,$languages;
-    return $base_path.'main.php/page'.$id.'.'.$languages[$lng].'.html';
+    return $base_path.'main.php/page'.$id.'.'.$languages[$lng]['short'].'.html';
 }
 
 function download($which){
@@ -380,13 +380,13 @@ function category_name(){
 }
 
 function link_up(){
-    global $category,$id,$lng,$lang_main_page,$site_home;
-    return ($category['page'] != $id)?make_url($category['page'],$lng):(($id == $lang_main_page[$lng])?$site_home:make_url($lang_main_page[$lng],$lng));
+    global $category,$id,$lng,$languages,$site_home;
+    return ($category['page'] != $id)?make_url($category['page'],$lng):(($id == $languages[$lng]['page'])?$site_home:make_url($languages[$lng]['page'],$lng));
 }
 
 function link_start(){
-    global $lng,$lang_main_page;
-    return make_url($lang_main_page[$lng],$lng);
+    global $lng,$languages;
+    return make_url($languages[$lng]['page'],$lng);
 }
 
 function keywords(){
@@ -420,7 +420,7 @@ function languages(){
 }
 
 function make_stat($which,$cond,$mul,$cvt="\$item['item']"){
-    global $db_connection,$table_stat,$db_prepend,$lng,$stat_start,$stat_end,$msg_unknown,$lang_name;
+    global $db_connection,$table_stat,$db_prepend,$lng,$stat_start,$stat_end,$msg_unknown,$languages;
 
     global_eval($stat_start);
 
@@ -462,7 +462,7 @@ function stat_hours($mul=1){
 }
 
 function stat_langs($mul=1){
-    make_stat('lang','order by item',$mul,"\$lang_name[\$item['item']]");
+    make_stat('lang','order by item',$mul,"\$languages[\$item['item']]['name']");
 }
 
 function wessie_icon(){

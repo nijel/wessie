@@ -63,7 +63,7 @@ if (isset($category)&&isset($lng_from)&&isset($lng_to)){
         while (list ($key, $lng) = each ($target_lng)) {
             if (!($id2_result=(mysql_query($insert . $db_prepend.$table_menu.' values ('.$item['id'].','.(isset($item['name'])?'"'.opt_addslashes($item['name']).'"':'NULL').','.(isset($item['description'])?'"'.opt_addslashes($item['description']).'"':'NULL').','.$item['page'].','.$item['category'].','.$item['parent'].','.$item['expand'].','.$lng.','.$item['rank'].')',$db_connection)))&&($child_id=0))
                 do_error(1,'INSERT '.$db_prepend.$table_menu.': '.mysql_error());
-            echo '...to language ' . $lang_name[$lng] . '-' . (isset($overwrite)?'synchronized':(mysql_affected_rows()==1?'added':'already exists'));
+            echo '...to language ' . $languages[$lng]['name'] . '-' . (isset($overwrite)?'synchronized':(mysql_affected_rows()==1?'added':'already exists'));
         }
         echo "\n";
     }

@@ -145,7 +145,7 @@ if ($item['parent']!=0){
 <tr><th>
 Language:
 </th><td>
-<?php echo $lang_name[$item['lng']]?>
+<?php echo $languages[$item['lng']]['name']; ?>
 </td></tr>
 <tr><th>Rank</th><td><input type="text" name="rank" value="<?php echo $item['rank']; ?>" class="text" /></td><td></td></tr>
 <tr><th>Expand</th><td><select name="expand" class="select">

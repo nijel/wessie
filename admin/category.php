@@ -83,7 +83,7 @@ if (mysql_num_rows($id_result) == 0){
         make_cell(htmlspecialchars($item['name']),$url);
         make_cell(htmlspecialchars($item['short']),$url);
         make_cell(htmlspecialchars($item['description']),$url);
-        make_cell($lang_name[$item['lng']],$url);
+        make_cell($languages[$item['lng']]['name'],$url);
         make_cell($item['page'],$url);
         echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="category_delete.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;</td></tr>'."\n";
     }

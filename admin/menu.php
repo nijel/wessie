@@ -50,7 +50,7 @@ function add_childs($child_id,$depth,$item_lng){
 global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
     $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
     $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path,$lng;
-global $db_connection,$table_menu,$table_page,$db_prepend,$category,$even,$lang_name;
+global $db_connection,$table_menu,$table_page,$db_prepend,$category,$even, $languages;
 global $listed_items;
 
 if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$db_prepend.$table_menu
@@ -76,7 +76,7 @@ while ($item = mysql_fetch_array ($id_result)){
     make_row($even);
     $even = 1 - $even;
 
-    make_cell($lang_name[$item['lng']],$url);
+    make_cell($languages[$item['lng']]['name'],$url);
     make_cell(htmlspecialchars(get_category_name($item['category'],$item['lng'])),$url);
     make_cell($spaces.htmlspecialchars($name),$url);
     make_cell(htmlspecialchars($desc),$url);
