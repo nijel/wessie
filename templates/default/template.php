@@ -34,11 +34,11 @@ $top_pages_count=4;
 
 //Format of title:
 function title(){
-        global $site_name,$category,$page;
-        echo $site_name.' - ';
-        eval('?'.'>'.$category['name'].'<?php ');
-        echo ' - ';
-        eval('?'.'>'.$page['name'].'<?php ');
+    global $site_name,$category,$page;
+    echo $site_name.' - ';
+    eval('?'.'>'.$category['name'].'<?php ');
+    echo ' - ';
+    eval('?'.'>'.$page['name'].'<?php ');
 }
 
 
@@ -92,19 +92,20 @@ function make_download($file,$group=array('count'=>-1)){
 
 //Left menu format
 function make_menu_item($url,$name,$category,$category_short,$description,$active,$depth){
-        if ($depth==0) {
-                if ($active) $result='&nbsp;<span style="font-weight:bold;font-size:110%;">'.$name.'</span>';
-                else $result='&nbsp;<a href="'.$url.'" style="font-weight:bold;font-size:110%;" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'$description'".';return true">'.$name.'</a>';
-        } else{
-                if ($active) $result='&nbsp;&nbsp;&nbsp;'.$name;
-                else $result='&nbsp;&nbsp;&nbsp;<a href="'.$url.'" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'$description'".';return true">'.$name.'</a>';
-        }
-        while ($depth > 1){
-                $result='&nbsp;&nbsp;'.$result;
-                $depth--;
-        }
-        return $result;
+    if ($depth==0) {
+        if ($active) $result='&nbsp;<span style="font-weight:bold;font-size:110%;">'.$name.'</span>';
+        else $result='&nbsp;<a href="'.$url.'" style="font-weight:bold;font-size:110%;" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'$description'".';return true">'.$name.'</a>';
+    } else{
+        if ($active) $result='&nbsp;&nbsp;&nbsp;'.$name;
+        else $result='&nbsp;&nbsp;&nbsp;<a href="'.$url.'" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'$description'".';return true">'.$name.'</a>';
+    }
+    while ($depth > 1){
+        $result='&nbsp;&nbsp;'.$result;
+        $depth--;
+    }
+    return $result;
 }
+
 $left_menu_divisor="<br />\n";
 
 
@@ -113,19 +114,22 @@ function make_language($url,$id){
     global $languages, $lang_name, $lang_img, $lang_main_page,$base_path;
     return '<a href="'.$url.'" target="_self" title="'.$lang_name[$id].'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$lang_name[$id]."'".';return true"><img src="'.$base_path.$lang_img[$id].'" alt="'.$languages[$id].'" align="middle" border="0" />'.$lang_name[$id].'</a>';
 }
+
 $languages_divisor=' | ';
 $languages_divisor="<br />\n";
 
 
 //Statistics format:
 function make_stat_item($name,$width,$percent,$count){
-	global $base_path;
-        $bar_name=$base_path.'templates/default/img/bar';
-        $bar_ext='png';
-        $bar_height='16';
-        $bar_width='7';
-        return '<tr><td width="100"><b>'.$name.'</b></td><td><img alt="" src="'.$bar_name.'_left.'.$bar_ext.'" height="'.$bar_height.'" width="'.$bar_width.'" border="0" /><img alt="" src="'.$bar_name.'_middle.'.$bar_ext.'" height="'.$bar_height.'" width="'.round($width).'" border="0" /><img alt="" src="'.$bar_name.'_right.'.$bar_ext.'" height="'.$bar_height.'" width="'.$bar_width.'" border="0" />&nbsp;&nbsp;</td><td>'.round($percent,2).'% ('.$count.')</td></tr>';
+    global $base_path;
+    $bar_name=$base_path.'templates/default/img/bar';
+    $bar_ext='png';
+    $bar_height='16';
+    $bar_width='7';
+    return '<tr><td width="100"><b>'.$name.'</b></td><td><img alt="" src="'.$bar_name.'_left.'.$bar_ext.'" height="'.$bar_height.'" width="'.$bar_width.'" border="0" /><img alt="" src="'.$bar_name.'_middle.'.$bar_ext.'" height="'.$bar_height.'" width="'.round($width).'" border="0" /><img alt="" src="'.$bar_name.'_right.'.$bar_ext.'" height="'.$bar_height.'" width="'.$bar_width.'" border="0" />&nbsp;&nbsp;</td><td>'.round($percent,2).'% ('.$count.')</td></tr>';
 }
+
 $stat_start='<table>';
 $stat_end='</table>';
+
 ?>
