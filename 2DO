@@ -16,8 +16,6 @@ create plugins:
  - mail lists
  - discussions
 
-admin+user: add users + ACL + administration of it
-
 admin: add options editing, sections:
         - languages + default pages
         - db + table names
