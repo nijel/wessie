@@ -106,6 +106,10 @@
   <item url="plugins/icons/img/powered_mysql.png" />
   <item url="plugins/icons/img/powered_php.png" />
   <item url="plugins/icons/img/powered_wessie.png" />
+  <item url="plugins/bullshit/" />
+  <item url="plugins/bullshit/function.php" />
+  <item url="plugins/bullshit/main.php" />
+  <item url="plugins/bullshit/page.php" />
  </project>
 </webproject>
 <!-- $Id$ -->

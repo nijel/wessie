@@ -215,13 +215,14 @@ $allow_content_eval = TRUE;
 
 //plugin configuration:
 //##PLUGIN_ALLOWED##
-$allowed_page_plugins = array('article','file');
-$allowed_function_plugins = array('icons');
+$allowed_page_plugins = array('article','bullshit','file');
+$allowed_function_plugins = array('bullshit','icons');
 //##/PLUGIN_ALLOWED##
 
 //allow or deny of evaling of content for each plugin
 //##PLUGIN_OPTIONS##
 $page_plugins_options['article']['eval'] = TRUE;
 $page_plugins_options['file']['eval'] = FALSE;
+$page_plugins_options['bullshit']['eval'] = FALSE;
 //##/PLUGIN_OPTIONS##
 ?>
