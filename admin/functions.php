@@ -112,6 +112,7 @@ function category_edit($selected,$lng,$name='category',$add_any=FALSE){
     if ($add_any){
         echo '<option value="any">Any</option>';
     }
+    reset($category_name_cache[$lng]);
     while (list ($key, $val) = each($category_name_cache[$lng])){
         echo '<option'.($key==$selected?' selected="selected"':'').' value="'.$key.'">'.htmlspecialchars($val).'</option>';
     }
