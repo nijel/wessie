@@ -1,14 +1,14 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Final//EN">
 <HTML>
 <HEAD>
-    <TITLE><?title()?></TITLE>
-    <link rel="home" href="<?echo $site_home?>">
-    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=<?echo $charset?>">
-    <META NAME="Author" CONTENT="<?echo $site_author?>">
-    <link rel="copyright" href="mailto:<?echo $site_author_email?>">
-    <meta name="keywords" content="<?keywords()?>">
-    <meta name="description" content="<?description()?>">
-    <META NAME="Generator" CONTENT="<?echo $wss_version.', Copyright (C) 2001 '.$wss_author?>">
+    <TITLE><?php title()?></TITLE>
+    <link rel="home" href="<?php echo $site_home?>">
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=<?php echo $charset?>">
+    <META NAME="Author" CONTENT="<?php echo $site_author?>">
+    <link rel="copyright" href="mailto:<?php echo $site_author_email?>">
+    <meta name="keywords" content="<?php keywords()?>">
+    <meta name="description" content="<?php description()?>">
+    <META NAME="Generator" CONTENT="<?php echo $wss_version.', Copyright (C) 2001 '.$wss_author?>">
   <SCRIPT language="JavaScript">
   <!--
      if(top != self) { window.top.location.href=location; }
@@ -18,7 +18,7 @@
 <BODY BGCOLOR="#000000" TEXT="#FFFFFF" LINK="#EEEE00" ALINK="#FFFF00" VLINK="#DDDD00" TOPMARGIN="0" BOTTOMMARGIN="0" RIGHTMARGIN="0" LEFTMARGIN="0">
 <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%" ALIGN="center">
 <TR BGCOLOR="#000050">
-<?upper_menu()?>
+<?php upper_menu()?>
 </TR>
 </TABLE>
 <TABLE WIDTH="100%" BORDER="0" CELLSPACING="0" CELLPADDING="0">
@@ -27,40 +27,40 @@
 <IMG SRC="img/WSS.png" ALIGN="center" ALT="WSS" WIDTH="179" HEIGHT="95" BORDER="0">
 </TD>
 <TD ALIGN="center" VALIGN="MIDDLE">
-<?top_pages()?>
+<?php top_pages()?>
 </TD>
 <TD ALIGN="right" VALIGN="MIDDLE"  width="470">
-<?advert()?>&nbsp;&nbsp;
+<?php advert()?>&nbsp;&nbsp;
 </TD>
 </TR>
 </TABLE>
 <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%">
 <TR>
 <TD WIDTH="200" align="left" valign="top">
-<?left_menu()?>
+<?php left_menu()?>
 </TD>
 <TD ALIGN="left" VALIGN="TOP" rowspan="2">
 <table cellpadding=5 cellspacing=0 border=0>
 <tr><td>
-<?special()?>
-<?content()?>
+<?php special()?>
+<?php content()?>
 </td></tr></table>
 </TD>
 </TR>
 <tr><td valign="bottom"><br>
-<form action="<?echo $search_url?>" method="get" target="_self">
-<?search_hidden_options()?>
-<input type="text" name="<?echo $search_param?>" size="15">
-<input type="submit" value="<?echo $msg_find?>">
+<form action="<?php echo $search_url?>" method="get" target="_self">
+<?php search_hidden_options()?>
+<input type="text" name="<?php echo $search_param?>" size="15">
+<input type="submit" value="<?php echo $msg_find?>">
 </form><br>
-<font size="-2"><?languages()?></font>
+<font size="-2"><?php languages()?></font>
 </td></tr>
 <tr BGCOLOR="#000050">
 <td height="20" width="200">&nbsp;</td>
 <TD height="20" ALIGN="CENTER">
 <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0" WIDTH="100%"><TR>
-<td align="left"><font size="-3"><?counter()?></font>&nbsp;</td>
-<td align="right"><font size="-3"><?copyright()?></font>&nbsp;</td></tr>
+<td align="left"><font size="-3"><?php counter()?></font>&nbsp;</td>
+<td align="right"><font size="-3"><?php copyright()?></font>&nbsp;</td></tr>
 </TABLE>
 </td></tr>
 </TABLE>

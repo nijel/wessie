@@ -16,7 +16,6 @@
   <item url="main.php" />
   <item url="admin.php" />
   <item url="admin/index.php" />
-  <item url="admin/check_auth.php" />
   <item url="admin/pages.php" />
   <item url="admin/categories.php" />
   <item url="admin/articles.php" />

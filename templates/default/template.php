@@ -1,9 +1,30 @@
-<?
-////////////////////////////////////////////////////////
+<?php
+/* vim: set expandtab tabstop=4 shiftwidth=4: */
+// +----------------------------------------------------------------------+
+// | Web Site System version 0.1                                          |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2001 Michal Cihar                                      |
+// +----------------------------------------------------------------------+
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 2 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to the Free Software          |
+// | Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 |
+// | USA                                                                  |
+// +----------------------------------------------------------------------+
+// | Authors: Michal Cihar <cihar at email dot cz>                        |
+// +----------------------------------------------------------------------+
+//
+// $Id$
 // Template definition file for WSS - Web Site System //
-//        Version 0.1   Released 6.1.2001             //
-//        Copyright (c) 2001 Michal Cihar             //
-////////////////////////////////////////////////////////
 
 //File containing default template:
 $template_data='./templates/default/template.html';
@@ -15,9 +36,9 @@ $top_pages_count=4;
 function title(){
         global $site_name,$category,$page;
         echo $site_name.' - ';
-        eval('?'.'>'.$category['name'].'<?');
+        eval('?'.'>'.$category['name'].'<?php ');
         echo ' - ';
-        eval('?'.'>'.$page['name'].'<?');
+        eval('?'.'>'.$page['name'].'<?php ');
 }
 
 

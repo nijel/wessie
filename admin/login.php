@@ -1,4 +1,29 @@
-<?
+<?php
+/* vim: set expandtab tabstop=4 shiftwidth=4: */
+// +----------------------------------------------------------------------+
+// | Web Site System version 0.1                                          |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2001 Michal Cihar                                      |
+// +----------------------------------------------------------------------+
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 2 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to the Free Software          |
+// | Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 |
+// | USA                                                                  |
+// +----------------------------------------------------------------------+
+// | Authors: Michal Cihar <cihar at email dot cz>                        |
+// +----------------------------------------------------------------------+
+//
+// $Id$
 Header('Pragma: no-cache');
 Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");
 error_reporting (E_ALL);
@@ -39,24 +64,24 @@ if (isset($HTTP_POST_VARS['submit'])){
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Final//EN">
 <HTML>
 <HEAD>
-   <META HTTP-EQUIV="Refresh" CONTENT="0;url=http://<?echo $SERVER_NAME.dirname($REQUEST_URI)?>/index.php">
+   <META HTTP-EQUIV="Refresh" CONTENT="0;url=http://<?php echo $SERVER_NAME.dirname($REQUEST_URI)?>/index.php">
 </HEAD>
 <BODY>
 </BODY>
 </HTML>
-<?
+<?php
     die();
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Final//EN">
 <HTML>
 <HEAD>
-    <TITLE><?echo $page_title?></TITLE>
-    <link rel="home" href="<?echo $site_home?>">
-    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=<?echo $admin_charset?>">
-    <META NAME="Author" CONTENT="<?echo $wss_author?>">
-    <link rel="copyright" href="mailto:<?echo $wss_author?>">
-    <META NAME="Generator" CONTENT="<?echo $wss_version.', Copyright (C) 2001 '.$wss_author?>">
+    <TITLE><?php echo $page_title?></TITLE>
+    <link rel="home" href="<?php echo $site_home?>">
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=<?php echo $admin_charset?>">
+    <META NAME="Author" CONTENT="<?php echo $wss_author?>">
+    <link rel="copyright" href="mailto:<?php echo $wss_author?>">
+    <META NAME="Generator" CONTENT="<?php echo $wss_version.', Copyright (C) 2001 '.$wss_author?>">
   <SCRIPT language="JavaScript">
   <!--
      if(top != self) { window.top.location.href=location; }
@@ -67,24 +92,24 @@ if (isset($HTTP_POST_VARS['submit'])){
 <table border="0" width="100%">
 <tr>
 <td align="center">
-<h2><?echo $page_title?></h2>
+<h2><?php echo $page_title?></h2>
 </td>
 </tr>
 </table>
 <hr width="100%">
 <center>
-<?
+<?php
 if ($QUERY_STRING=='expired'){?>
 <b><font color="red">Your login has expired!</font></b><br>
-<?}elseif ($QUERY_STRING=='badip'){?>
+<?php }elseif ($QUERY_STRING=='badip'){?>
 <b><font color="red">You changed ip address!</font></b><br>
-<?}elseif ($QUERY_STRING=='unauthorised'){?>
+<?php }elseif ($QUERY_STRING=='unauthorised'){?>
 <b><font color="red">You are not authorised to access this!</font></b><br>
-<?}elseif ($QUERY_STRING=='badlogin'){?>
+<?php }elseif ($QUERY_STRING=='badlogin'){?>
 <b><font color="red">Bad login!</font></b><br>
-<?}elseif ($QUERY_STRING=='logout'){?>
+<?php }elseif ($QUERY_STRING=='logout'){?>
 <b>Logout successful!</b><br>
-<?}
+<?php }
 //elseif ($QUERY_STRING==''){
 //}
 ?>
@@ -93,7 +118,7 @@ You must login before accessing administration.<br>
 <table>
   <tr>
     <th>Username:</th>
-    <td><input type="text" name="user" value="<?echo isset($user)?$user:''?>"></td>
+    <td><input type="text" name="user" value="<?php echo isset($user)?$user:''?>"></td>
   </tr>
   <tr>
     <th>Password:</th>

@@ -1,25 +1,29 @@
-<?
-/****************************************************************************/
-/*                       WSS - Web Site System                              */
-/****************************************************************************/
-/*                                                                          */
-/* Version 0.1 released 20.5.2001                                           */
-/* Copyright (c) 2001 Michal Cihar                                          */
-/*                                                                          */
-/* This program is free software; you can redistribute it and/or modify     */
-/* it under the terms of the GNU General Public License as published by     */
-/* the Free Software Foundation; either version 2 of the License, or        */
-/* (at your option) any later version.                                      */
-/*                                                                          */
-/* This program is distributed in the hope that it will be useful,          */
-/* but WITHOUT ANY WARRANTY; without even the implied warranty of           */
-/* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            */
-/* GNU General Public License for more details.                             */
-/*                                                                          */
-/* You should have received a copy of the GNU General Public License        */
-/* along with this program; if not, write to the Free Software              */
-/* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA */
-/****************************************************************************/
+<?php
+/* vim: set expandtab tabstop=4 shiftwidth=4: */
+// +----------------------------------------------------------------------+
+// | Web Site System version 0.1                                          |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 2001 Michal Cihar                                      |
+// +----------------------------------------------------------------------+
+// | This program is free software; you can redistribute it and/or modify |
+// | it under the terms of the GNU General Public License as published by |
+// | the Free Software Foundation; either version 2 of the License, or    |
+// | (at your option) any later version.                                  |
+// |                                                                      |
+// | This program is distributed in the hope that it will be useful,      |
+// | but WITHOUT ANY WARRANTY; without even the implied warranty of       |
+// | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the        |
+// | GNU General Public License for more details.                         |
+// |                                                                      |
+// | You should have received a copy of the GNU General Public License    |
+// | along with this program; if not, write to the Free Software          |
+// | Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 |
+// | USA                                                                  |
+// +----------------------------------------------------------------------+
+// | Authors: Michal Cihar <cihar at email dot cz>                        |
+// +----------------------------------------------------------------------+
+//
+// $Id$
 
 error_reporting (E_ALL);
 //BEFORE publishing check all TEMPORARY words!
@@ -242,7 +246,7 @@ function upper_menu(){
             if ($was_item) {echo $upper_menu_divisor;}
                 $was_item=true;
 
-                eval('?'.'>'.make_upper_menu_item($percent,'main.php?id='.$item['page'].'&lng='.$lng,$item['name'],$item['short'],$item['description'],$page['category']==$item['id']).'<?');
+                eval('?'.'>'.make_upper_menu_item($percent,'main.php?id='.$item['page'].'&lng='.$lng,$item['name'],$item['short'],$item['description'],$page['category']==$item['id']).'<?php ');
         }
 
         mysql_free_result($id_result);
@@ -268,7 +272,7 @@ function top_pages(){
             $item_cat=mysql_fetch_array($id2_result);
             mysql_free_result($id2_result);
 
-                eval('?'.'>'.make_top_pages_item('main.php?id='.$item['id'].'&lng='.$lng,$item['name'],$item_cat['name'],$item_cat['short'],$item['description']).'<?');
+                eval('?'.'>'.make_top_pages_item('main.php?id='.$item['id'].'&lng='.$lng,$item['name'],$item_cat['name'],$item_cat['short'],$item['description']).'<?php ');
         }
         mysql_free_result($id_result);
 }
@@ -320,7 +324,7 @@ while ($item = mysql_fetch_array ($id_result)){
         if ((!isset($item['description']))||($item['description']=='')) $desc=$page['description'];
         else $desc=$item['description'];
 
-        eval('?'.'>'.make_menu_item('main.php?id='.$item['page'].'&lng='.$lng,$name,$category['name'],$category['short'],$desc,$item['page']==$id,$depth).'<?');
+        eval('?'.'>'.make_menu_item('main.php?id='.$item['page'].'&lng='.$lng,$name,$category['name'],$category['short'],$desc,$item['page']==$id,$depth).'<?php ');
         if (($item['expand']==1) || ($item['page']==$id) || in_array ($item['id'],$parents)){
             add_childs($item['id'],$depth+1,$parents);
         }
@@ -357,13 +361,13 @@ global $content,
         $browser,$os,
         $wss_version,$wss_author,$wss_author_email,$wss_url,
         $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
-eval('?'.'>'.$content.'<?');
+eval('?'.'>'.$content.'<?php ');
 }
 
 function counter(){
 global $msg_counter,$page;
 $count=$page['count'];
-eval('?'.'>'.$msg_counter.'<?');
+eval('?'.'>'.$msg_counter.'<?php ');
 }
 
 function copyright(){global $copyright;echo $copyright;}
@@ -376,7 +380,7 @@ global $page,
         $wss_version,$wss_author,$wss_author_email,$wss_url,
         $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
 
-eval('?'.'>'.$page['name'].'<?');
+eval('?'.'>'.$page['name'].'<?php ');
 }
 
 function category_name(){
@@ -387,7 +391,7 @@ global $category,
         $wss_version,$wss_author,$wss_author_email,$wss_url,
         $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
 
-eval('?'.'>'.$category['name'].'<?');
+eval('?'.'>'.$category['name'].'<?php ');
 }
 
 function keywords(){
@@ -398,7 +402,7 @@ global $page,
         $browser,$os,
         $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
 
-eval('?'.'>'.$page['keywords'].'<?');
+eval('?'.'>'.$page['keywords'].'<?php ');
 }
 
 function description(){
@@ -409,7 +413,7 @@ global $page,
     $wss_version,$wss_author,$wss_author_email,$wss_url,
     $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
 
-eval('?'.'>'.$page['description'].'<?');
+eval('?'.'>'.$page['description'].'<?php ');
 }
 
 function search_hidden_options(){
@@ -432,16 +436,16 @@ if (count($languages)==1){
         $result.=make_language('main.php?id='.$id.'&lng='.$i,$lang_name[$i]);
     }
 }
-eval('?'.'>'.$result.'<?');
+eval('?'.'>'.$result.'<?php ');
 }
 
-function make_stat($which,$cond,$mul,$cvt="<? echo \$item['item'] ?>"){
+function make_stat($which,$cond,$mul,$cvt="<?php echo \$item['item'] ?>"){
 global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wss_version,$wss_author,$browser,$os,
         $wss_author_email,$wss_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
         $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER;
 global $db_connection,$table_stat,$table_prepend_name,$lng,$stat_start,$stat_end,$msg_unknown,$lang_name;
 
-eval('?'.'>'.$stat_start.'<?');
+eval('?'.'>'.$stat_start.'<?php ');
 
 if (!($id_result=mysql_query('SELECT count from '.$table_prepend_name.$table_stat." where category='total'",$db_connection)))
         do_error(1,'SELECT '.$table_prepend_name.$table_stat.': '.mysql_error());
@@ -452,19 +456,19 @@ if (!($id_result=mysql_query('SELECT item,count from '.$table_prepend_name.$tabl
         do_error(1,'SELECT '.$table_prepend_name.$table_stat.': '.mysql_error());
 while ($item = mysql_fetch_array ($id_result)){
         $percent=$item['count']*100/$total;
-        eval('?'.'>'.make_stat_item($cvt/*$item['item']*/,$percent*$mul,$percent,$item['count']).'<?');
+        eval('?'.'>'.make_stat_item($cvt/*$item['item']*/,$percent*$mul,$percent,$item['count']).'<?php ');
 }
 mysql_free_result($id_result);
 
-eval('?'.'>'.$stat_end.'<?');
+eval('?'.'>'.$stat_end.'<?php ');
 }
 
 function stat_os($mul=1){
-make_stat('os','and count>0 order by count desc',$mul,"<? echo \$item['item']!='?'?\$item['item']:\$msg_unknown ?>");
+make_stat('os','and count>0 order by count desc',$mul,"<?php echo \$item['item']!='?'?\$item['item']:\$msg_unknown ?>");
 }
 
 function stat_browser($mul=1){
-make_stat('browser','and count>0 order by count desc',$mul,"<? echo \$item['item']!='?'?\$item['item']:\$msg_unknown ?>");
+make_stat('browser','and count>0 order by count desc',$mul,"<?php echo \$item['item']!='?'?\$item['item']:\$msg_unknown ?>");
 }
 
 function stat_weeks($mul=1){
@@ -472,7 +476,7 @@ make_stat('week_no','order by item',$mul);
 }
 
 function stat_days($mul=1){
-make_stat('dow','order by item',$mul,"<? echo strftime('%A',mktime (0,0,0,5,6+\$item['item'],2001)) ?>");
+make_stat('dow','order by item',$mul,"<?php echo strftime('%A',mktime (0,0,0,5,6+\$item['item'],2001)) ?>");
 }
 
 function stat_hours($mul=1){
@@ -480,10 +484,10 @@ make_stat('time','order by item',$mul);
 }
 
 function stat_langs($mul=1){
-make_stat('lang','order by item',$mul,"<? echo \$lang_name[\$item['item']] ?>");
+make_stat('lang','order by item',$mul,"<?php echo \$lang_name[\$item['item']] ?>");
 }
 
 function special(){global $special;echo $special;}
 
-eval ('?'.'>'.$template.'<?');
+eval ('?'.'>'.$template.'<?php ');
 ?>
