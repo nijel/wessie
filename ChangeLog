@@ -1,3 +1,57 @@
+2002-01-20 Sunday 12:08  michal
+
+	updated 
+
+2002-01-20 Sunday 12:06  michal
+
+	links to copy and chmod are enabled only if it is possible to use
+	 it: 
+	- we don't support copying of directories 
+	 - chmoded can be only own file (yeah and also when uid/euid=0, but
+	 this should never be true on webserver) 
+
+2002-01-20 Sunday 12:02  michal
+
+	file action is working: 
+	 - rename file 
+	 - copy file 
+	 - delete file/directory 
+	 - chmod 
+	 - mkdir 
+
+2002-01-19 Saturday 22:02  michal
+
+	more things changed: 
+	 - support for renaming files 
+	 - in file management work filenames with ' and " 
+	 - started fixing of scripts to handle correctly ' and " in
+	 parameters 
+
+2002-01-18 Friday 21:10  michal
+
+	favicons work 
+
+2002-01-18 Friday 20:43  michal
+
+	added some tags to heads to: 
+	 - avoid of using some silly M$IE 6 features 
+	 - support for favicon 
+
+2002-01-18 Friday 20:14  michal
+
+	top pages configuration moved from template to config removed plenty
+	of onmouseover and onmouseout code that changed statusbar (I really
+	don't know why I wrote it there, while in my browser this behaviour
+	is prohibited ;-)) 
+
+2002-01-18 Friday 20:13  michal
+
+	top pages configuration moved from template to config 
+
+2002-01-18 Friday 20:12  michal
+
+	added forgotten / in <link> tag to confirm XHMTL 
+
 2002-01-16 Wednesday 22:36  michal
 
 	basic support for file actions in administration: 
