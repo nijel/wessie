@@ -27,7 +27,7 @@
 // Template definition file for WSS - Web Site System //
 
 //File containing default template:
-$template_data='./templates/default/template.html';
+$template_data='./templates/default/template.inc.php';
 
 //Number of top pages to display
 $top_pages_count=4;
@@ -44,7 +44,7 @@ function title(){
 
 //Format of upper menu items
 function make_upper_menu_item($percent,$url,$name,$short,$description,$active){
-        $result='<th align="center" valign="middle" width="'.$percent.'%"><a href="'.$url.'" title="'.$description.'"onMouseOut="window.status='."''".';return true" onMouseOver="window.status='."'".$description."'".';return true">';
+        $result='<th align="center" valign="middle" width="'.$percent.'"><a href="'.$url.'" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$description."'".';return true">';
         if ($active){$result.='<font color="white">'.$name.'</font></a></th>';}
         else {$result.=$name.'</a></th>';};
         return $result;
@@ -54,11 +54,11 @@ $upper_menu_divisor="\n";
 
 //Format of top pages items:
 function make_top_pages_item($url,$name,$category,$category_short,$description){
-        $result='<a href="'.$url.'" title="'.$description.'"onMouseOut="window.status='."''".';return true" onMouseOver="window.status='."'".$description."'".';return true">';
-        $result.=$name.' <font size=-3>('.$category_short.')</font></a>';
+        $result='<a href="'.$url.'" title="'.$description.'"onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$description."'".';return true">';
+        $result.=$name.' <font size="-3">('.$category_short.')</font></a>';
         return $result;
 }
-$top_pages_divisor="<br>\n";
+$top_pages_divisor="<br />\n";
 
 //File dowload format:
 function make_download($file,$group=array('count'=>-1)){
@@ -88,10 +88,10 @@ function make_download($file,$group=array('count'=>-1)){
 function make_menu_item($url,$name,$category,$category_short,$description,$active,$depth){
         if ($depth==0) {
                 if ($active) $result='&nbsp;<span style="font-weight:bold;font-size:110%;">'.$name.'</span>';
-                else $result='&nbsp;<a href="'.$url.'" style="font-weight:bold;font-size:110%;" title="'.$description.'" onMouseOut="window.status='."''".';return true" onMouseOver="window.status='."'$description'".';return true">'.$name.'</a>';
+                else $result='&nbsp;<a href="'.$url.'" style="font-weight:bold;font-size:110%;" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'$description'".';return true">'.$name.'</a>';
         } else{
                 if ($active) $result='&nbsp;&nbsp;&nbsp;'.$name;
-                else $result='&nbsp;&nbsp;&nbsp;<a href="'.$url.'" title="'.$description.'" onMouseOut="window.status='."''".';return true" onMouseOver="window.status='."'$description'".';return true">'.$name.'</a>';
+                else $result='&nbsp;&nbsp;&nbsp;<a href="'.$url.'" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'$description'".';return true">'.$name.'</a>';
         }
         while ($depth > 1){
                 $result='&nbsp;&nbsp;'.$result;
@@ -99,12 +99,12 @@ function make_menu_item($url,$name,$category,$category_short,$description,$activ
         }
         return $result;
 }
-$left_menu_divisor="<br>\n";
+$left_menu_divisor="<br />\n";
 
 
 //Language choice format:
 function make_language($url,$name){
-        return '<a href="'.$url.'" target="_self" title="'.$name.'" onMouseOut="window.status='."''".';return true" onMouseOver="window.status='."'$name'".';return true">'.$name.'</a>';
+        return '<a href="'.$url.'" target="_self" title="'.$name.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'$name'".';return true">'.$name.'</a>';
 }
 $languages_divisor=' | ';
 
@@ -116,7 +116,7 @@ function make_stat_item($name,$width,$percent,$count){
         $bar_ext='png';
         $bar_height='16';
         $bar_width='7';
-        return '<tr><td width=100><b>'.$name.'</b></td><td><img src="'.$bar_name.'_left.'.$bar_ext.'" height='.$bar_height.' width='.$bar_width.'><img src="'.$bar_name.'_middle.'.$bar_ext.'" height='.$bar_height.' width='.round($width).'><img src="'.$bar_name.'_right.'.$bar_ext.'" height='.$bar_height.' width='.$bar_width.'>&nbsp;&nbsp;</td><td>'.round($percent,2).'% ('.$count.')</td></tr>';
+        return '<tr><td width="100"><b>'.$name.'</b></td><td><img alt="" src="'.$bar_name.'_left.'.$bar_ext.'" height="'.$bar_height.'" width="'.$bar_width.'" border="0" /><img alt="" src="'.$bar_name.'_middle.'.$bar_ext.'" height="'.$bar_height.'" width="'.round($width).'" border="0" /><img alt="" src="'.$bar_name.'_right.'.$bar_ext.'" height="'.$bar_height.'" width="'.$bar_width.'" border="0" />&nbsp;&nbsp;</td><td>'.round($percent,2).'% ('.$count.')</td></tr>';
 }
 $stat_start='<table>';
 $stat_end='</table>';
