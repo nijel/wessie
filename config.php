@@ -126,8 +126,8 @@ $site_logo_alt = 'wessie - web site system';
 $site_logo_width = 200;
 $site_logo_height = 100;
 $category_order = 'id';
-$use_adverts = TRUE;
-$top_pages_count = 4;
+$use_adverts = FALSE;
+$top_pages_count = 3;
 //##/DESIGN##
 
 // some information about site

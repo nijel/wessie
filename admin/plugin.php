@@ -56,7 +56,7 @@ if (isset($action) && ($action=='save')){
     $page_plugins='';
     config_del_options('\$page_plugins_options[^[]*\[[^[]*\]\[\'eval\'\]=');
     while (list ($key, $val) = each($dirs)){
-        if ($val!='..'){
+        if ($val{0}!='.' && $val!='CVS'){
             if(file_exists($dir.'/'.$val.'/main.php')){
                 include($dir.'/'.$val.'/main.php');
                 if ($plugin_function && isset($plugins_function[$val]) && $plugins_function[$val]==1){
@@ -137,7 +137,7 @@ $count=0;
 echo '<table class="data"><tr><th>Directory</th><th>Name</th><th>Function</th><th>Page</th><th>Eval</th><th>Info</th><th>Status</th></tr>'."\n";
 $even=1;
 while (list ($key, $val) = each($dirs)){
-    if ($val!='..'){
+    if ($val{0}!='.' && $val!='CVS'){
         if(file_exists($dir.'/'.$val.'/main.php')){
             // Load some defaults
             $plugin_name='Unknown';
