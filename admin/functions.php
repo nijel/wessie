@@ -486,7 +486,7 @@ function make_row_js($even,$js,$class_even='even',$class_odd='odd'){
     echo '<tr '.(($even == 1)?'class="'.$class_even.'"':'class="'.$class_odd.'"');
     echo '<tr onclick="'.$js.'" '.(($even == 1)?'class="even"':'class="odd"');
     highlighter($admin_highlight_list);
-    echo'><td>';
+    echo'>';
 }
 
 function make_tab_item($href,$text,$url){

@@ -101,7 +101,7 @@ while (list ($key, $val) = each($list)){
         make_row_js($even,"gE('filename',window.opener).value='".substr($dir.'/'.$filename,$root_dir_len)."';window.opener.check_remote();window.close();");
         $size=$val['hsize'];
     }
-    echo $filename.'</td><td class="size">'.$size."</td></tr>\n";
+    echo '<td>'.$filename.'</td><td class="size">'.$size."</td></tr>\n";
 }
 
 ?>
