@@ -27,6 +27,78 @@
 $page_name='Plugins';
 require_once('./admin_header.php');
 require_once('./file_functions.php');
+
+if (isset($action) && ($action=='save')){
+    $files=array();
+    $dirs=array();
+
+    $dir = dirname(dirname($SCRIPT_FILENAME)).'/plugins';
+    if (!read_folder($dir,$dirs,$files)){
+        show_error('Can not read directory info!');
+        exit;
+    }
+
+    unset($files); //we don't need them
+    natsort($dirs);
+
+    if (!config_read()){
+        show_error('Can not read configuration!');
+        exit;
+    }
+
+    if (!config_set_option('\$allow_content_eval','$allow_content_eval='.(($allow_page_eval==1)?'TRUE':'FALSE').";\n",'//##/PLUGIN_COMMON##')){
+        show_error('Can not modify configuration!');
+        exit;
+    }
+
+
+    $function_plugins='';
+    $page_plugins='';
+    config_del_options('\$page_plugins_options[^[]*\[[^[]*\]\[\'eval\'\]=');
+    while (list ($key, $val) = each($dirs)){
+        if ($val!='..'){
+            if(file_exists($dir.'/'.$val.'/main.php')){
+                include($dir.'/'.$val.'/main.php');
+                if ($plugin_function && isset($plugins_function[$val]) && $plugins_function[$val]==1){
+                    if ($function_plugins=='')
+                        $function_plugins .= "'$val'";
+                    else
+                        $function_plugins .= ",'$val'";
+                }
+                if ($plugin_page){
+                    if (isset($plugins_page[$val]) && $plugins_page[$val]==1){
+                        if ($page_plugins=='')
+                            $page_plugins .= "'$val'";
+                        else
+                            $page_plugins .= ",'$val'";
+                    }
+                    if (!config_set_option('\$page_plugins_options[^[]*\[\''.$val.'\'\]\[\'eval\'\]=','$page_plugins_options[\''.$val.'\'][\'eval\']='.(($plugins_page_eval[$val]==1)?'TRUE':'FALSE').";\n",'//##/PLUGIN_OPTIONS##')){
+                        show_error('Can not modify configuration!');
+                        exit;
+                    }
+                }
+            }
+        }
+    }
+
+    if (!config_set_option('\$allowed_page_plugins','$allowed_page_plugins=array('.$page_plugins.");\n",'//##/PLUGIN_ALLOWED##')){
+        show_error('Can not modify configuration!');
+        exit;
+    }
+    if (!config_set_option('\$allowed_function_plugins','$allowed_function_plugins=array('.$function_plugins.");\n",'//##/PLUGIN_ALLOWED##')){
+        show_error('Can not modify configuration!');
+        exit;
+    }
+
+    if (!config_write()){
+        show_error('Can not write configuration!');
+        exit;
+    }
+
+    show_info_box('Plugins configuraton saved');
+    include_once('./admin_footer.php');
+    exit;
+}
 ?>
 <script language="JavaScript" type="text/javascript">
 <!--
@@ -45,6 +117,8 @@ function show_plugin_info(val,plugin_name,plugin_version,plugin_release_date,plu
 //-->
 </script>
 
+<form action="plugin.php" method="post" name="edit">
+<input type="hidden" name="action" value="save" />
 <?php
 $files=array();
 $dirs=array();
@@ -59,7 +133,7 @@ unset($files); //we don't need them
 natsort($dirs);
 
 $count=0;
-echo '<table class="data"><tr><th>Directory</th><th>Name</th><th>Enable function</th><th>Enable page</th><th>Enable page eval</th><th>Info</th></tr>'."\n";
+echo '<table class="data"><tr><th>Directory</th><th>Name</th><th>Function</th><th>Page</th><th>Eval</th><th>Info</th></tr>'."\n";
 $even=1;
 while (list ($key, $val) = each($dirs)){
     if ($val!='..'){
@@ -71,15 +145,34 @@ while (list ($key, $val) = each($dirs)){
             $even = 1 - $even;
             make_cell($val,'');
             make_cell($plugin_name,'');
-            make_cell('<input name="function['.$val.']" type="checkbox" '.($plugin_function?'class="check"':'class="check_disabled" disabled="disabled"').'>','');
-            make_cell('<input name="page['.$val.']" type="checkbox" '.($plugin_page?'class="check"':'class="check_disabled" disabled="disabled"').'>','');
-            make_cell('<select name="page_eval['.$val.']" '.($plugin_page?'class="select"':'class="select_disabled" disabled="disabled"').'><option value="1">Yes</option><option value="0">No</option></select>');
+            make_cell('<input name="plugins_function['.$val.']" value="1" type="checkbox" '.($plugin_function?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_function_plugins)?' checked="checked"':'').'>','');
+            make_cell('<input name="plugins_page['.$val.']" value="1" type="checkbox" '.($plugin_page?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_page_plugins)?' checked="checked"':'').'>','');
+            make_cell('<select name="plugins_page_eval['.$val.']" '.($plugin_page?'class="select"':'class="select_disabled" disabled="disabled"').'><option value="1"'.($page_plugins_options[$val]['eval']?' selected="selected"':'').'>Yes</option><option value="0"'.(!$page_plugins_options[$val]['eval']?' selected="selected"':'').'>No</option></select>');
             make_cell('<input type="button" class="browse" onclick="'."show_plugin_info('$val','$plugin_name','$plugin_version','$plugin_release_date','$plugin_author','$plugin_email','$plugin_web',".(int)$plugin_page.','.(int)$plugin_function.')"'.'" value="?" />','');
         }
     }
 }
-echo "</table>\n";
-echo 'Listed plugins: '.$count;
+?>
 
+<tr>
+<td colspan="6">
+    Listed plugins: <?php echo $count; ?><br>
+    Allow anywhere evaling content of page:
+    <select name="allow_page_eval" class="select">
+    <option value="1"<?php if ($allow_content_eval) echo ' selected="selected"';?>>Yes</option>
+    <option value="0"<?php if (!$allow_content_eval) echo ' selected="selected"';?>>No</option>
+    </select><br>
+    <table class="savereset">
+    <tr>
+        <td><input type="submit" value=" Save " class="save" /></td>
+        <td><input type="reset" value=" Reset " class="reset" /></td>
+    </tr>
+    </table>
+</td>
+</tr>
+</table>
+</form>
+
+<?php
 require_once('./admin_footer.php');
 ?>

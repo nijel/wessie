@@ -26,6 +26,8 @@
 // $Id$
 error_reporting (E_ALL);
 // Config script for wessie
+// lines like following are not needed, but they allows to keep a bit of order
+// in this file, when it is being modified by php script
 
 $error_log_file='/vs/wessie/logs/error.log';
 
@@ -142,14 +144,23 @@ $admin_validator='http://validator.cic/cgi-bin/validate.cgi?input=yes&url=';
 
 $show_error_detail=TRUE;
 
+//plugin options
+
 //globally allow or deny of evaling of content
+//##PLUGIN_COMMON##
 $allow_content_eval=TRUE;
+//##/PLUGIN_COMMON##
 
 //plugin configuration:
-$allowed_page_plugins=array('file','article');
-//allow or deny of evaling of content for each plugin
-$page_plugins_options['file']['eval']=FALSE;
-$page_plugins_options['article']['eval']=TRUE;
+//##PLUGIN_ALLOWED##
+$allowed_page_plugins=array('article','file');
 $allowed_function_plugins=array();
+//##/PLUGIN_ALLOWED##
+
+//allow or deny of evaling of content for each plugin
+//##PLUGIN_OPTIONS##
+$page_plugins_options['article']['eval']=TRUE;
+$page_plugins_options['file']['eval']=FALSE;
+//##/PLUGIN_OPTIONS##
 
 ?>

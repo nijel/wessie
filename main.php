@@ -177,10 +177,14 @@ $template=fread($fh, filesize($template_file_name));
 fclose($fh);
 
 //read content
-if (file_exists('./plugins/'.$page['type'].'/page.php')){
-    require_once('./plugins/'.$page['type'].'/page.php');
+if (in_array($page['type'],$allowed_page_plugins)){
+    if (file_exists('./plugins/'.$page['type'].'/page.php')){
+        require_once('./plugins/'.$page['type'].'/page.php');
+    }else{
+        do_error(7,$page['type']);
+    }
 }else{
-    do_error(7,$page['type']);
+    do_error(8,$page['type']);
 }
 
 $content = get_content();
