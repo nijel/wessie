@@ -29,20 +29,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang; ?>" lang="<?php echo $lang; ?>">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
-  <meta http-equiv="Content-Language" content="<?php echo $lang; ?>" />
-  <title><?php title(); ?></title>
-  <link rel="home" href="<?php echo $site_home; ?>" />
-  <link rel="copyright" href="mailto:<?php echo $site_author_email; ?>" />
-  <meta name="author" content="<?php echo $site_author[$lng]; ?>" />
-  <meta name="keywords" content="<?php keywords(); ?>" />
-  <meta name="description" content="<?php description(); ?>" />
-  <meta name="generator" content="<?php echo $wessie_copyright; ?>" />
-  <script language="JavaScript" type="text/javascript">
-  <!--
-      if(top != self) { window.top.location.href=location; }
-  //-->
-  </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
+    <meta http-equiv="Content-Language" content="<?php echo $lang; ?>" />
+    <title><?php title(); ?></title>
+    <link rel="Home" href="<?php echo $site_home; ?>" />
+    <link rel="Copyright" href="mailto:<?php echo $site_author_email; ?>" />
+    <meta name="author" content="<?php echo $site_author[$lng]; ?>" />
+    <meta name="keywords" content="<?php keywords(); ?>" />
+    <meta name="description" content="<?php description(); ?>" />
+    <meta name="generator" content="<?php echo $wessie_copyright; ?>" />
+    <link rel="Icon" href="favicon.png" type="image/png" />
+
+    <!-- We LOVE Micro$oft! We don't like their silly features. -->
+    <meta name="MSSmartTagsPreventParsing" content="true" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta http-equiv="MSThemeCompatible" content="no" />
+
+    <script language="JavaScript" type="text/javascript">
+    <!--
+    if(top != self) { window.top.location.href=location; }
+    //-->
+    </script>
 </head>
 
 <body bgcolor="#000000" text="#FFFFFF" link="#EEEE00" alink="#FFFF00" vlink="#DDDD00">

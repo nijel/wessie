@@ -40,6 +40,13 @@ global $wessie_author,$wessie_version,$wessie_copyright,$site_home,$admin_charse
     <link rel="copyright" href="mailto:<?php echo $wessie_author?>" />
     <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
     <link rel="Alternate StyleSheet" href="./admin_blue.css" title="Blue" type="text/css" media="screen" />
+    <link rel="Icon" href="favicon.png" type="image/png" />
+
+    <!-- We LOVE Micro$oft! We don't like their silly features. -->
+    <meta name="MSSmartTagsPreventParsing" content="true" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta http-equiv="MSThemeCompatible" content="no" />
+
     <script language="JavaScript" type="text/javascript" src="./admin.js"></script>
 <?php echo $special; ?>
 </head>
