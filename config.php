@@ -61,7 +61,7 @@ $db_host='localhost'; // Host where MySQL is running
 $db_user='wessie'; // User name
 $db_pass='wessie'; // User password
 $db_name='wessie'; // Database name that is used by wessie
-$db_persistent=false; //true = use persistent connections, otherwise don't use
+$db_persistent=true; //true = use persistent connections, otherwise don't use
 
 $table_prepend_name=''; //prepended before each table name this allows multiple wessie running on one database
 
