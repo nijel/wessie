@@ -49,6 +49,14 @@ if (isset($PATH_INFO) && (!empty($PATH_INFO))){
             } else {
                 eval('$'.$current_var[0]."='".$current_var[1]."';");
             }
+        }else{
+            if (ereg ('page([0-9]*)\.html?',$item['value'] , $regs)) {
+                $id=$regs[1];
+            } elseif (ereg ('page([0-9]*)\.([a-z]*)\.html?',$item['value'] , $regs)) {
+                $id=$regs[1];
+                $lng=isset($lang_alias[$regs[2]])?$lang_alias[$regs[2]]:$default_lang;
+            }
+
         }
     }
     unset($info_vars);

@@ -29,9 +29,9 @@
 error_reporting (E_ALL);
 //BEFORE publishing check all TEMPORARY words!
 
+require_once('./config.php');
 require_once('./init.php');
 require_once('./errors.php');
-require_once('./config.php');
 
 //if no language was explicitly defined, try to detect it
 if (!isset($lng)){
@@ -197,8 +197,8 @@ switch ($page['type']){
 //functions:
 
 function make_url($id,$lng){
-    global $base_path;
-    return $base_path.'main.php/id='.$id.'/lng='.$lng;
+    global $base_path,$languages;
+    return $base_path.'main.php/page'.$id.'.'.$languages[$lng].'.html';
 }
 
 function download($which){
