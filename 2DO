@@ -1,6 +1,7 @@
-<meta http-equiv="Content-Language" content="cs">
+$Id$
 
 insert new row for week stat at the start of week - some cache!!!!!
+cache for categories?
 
 
 functions:
