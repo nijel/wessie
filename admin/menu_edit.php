@@ -30,20 +30,26 @@ require_once('./admin_header.php');
 <?php
 
 if (isset($id)&&isset($lng)&&!isset($name)){
-    if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and id='.$id,$db_connection)))&&($child_id=0))
-        do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
+    if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and id='.$id,$db_connection)))&&($child_id=0)){
+        show_error("Can't get menu item info! (".mysql_error().')');
+        exit;
+    }
     $item = mysql_fetch_array ($id_result);
     mysql_free_result($id_result);
 
     if ($item['parent']!=0){
-        if (!($id_result=(mysql_query('SELECT category from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and id='.$item['parent'],$db_connection)))&&($child_id=0))
-            do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
+        if (!($id_result=(mysql_query('SELECT category from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and id='.$item['parent'],$db_connection)))&&($child_id=0)){
+            show_error("Can't get menu item info! (".mysql_error().')');
+            exit;
+        }
         $parent = mysql_fetch_array ($id_result);
         mysql_free_result($id_result);
     }
 
-    if (!($id_result=mysql_query('SELECT name,description,category from '.$table_prepend_name.$table_page.' where lng='.$lng.' and id='.$item['page'].' limit 1',$db_connection)))
-        do_error(1,'SELECT '.$table_prepend_name.$table_page.': '.mysql_error());
+    if (!($id_result=mysql_query('SELECT name,description,category from '.$table_prepend_name.$table_page.' where lng='.$lng.' and id='.$item['page'].' limit 1',$db_connection))){
+        show_error("Can't get page info! (".mysql_error().')');
+        exit;
+    }
     $page=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
 } elseif (isset($category)&&isset($lng)&&!isset($name)){
@@ -51,15 +57,16 @@ if (isset($id)&&isset($lng)&&!isset($name)){
     $page=array('name'=>'','description'=>'','category'=>-1);
 
 } elseif (isset($parent)&&isset($lng)&&!isset($name)){
-    if (!($id_result=(mysql_query('SELECT id,category from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and id='.$parent,$db_connection)))&&($child_id=0))
-        do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
+    if (!($id_result=(mysql_query('SELECT id,category from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and id='.$parent,$db_connection)))&&($child_id=0)){
+        show_error("Can't get menu item info! (".mysql_error().')');
+        exit;
+    }
     $parent = mysql_fetch_array ($id_result);
     mysql_free_result($id_result);
 
     $item=array('lng'=>$lng,'category'=>$parent['category'],'parent'=>$parent['id'],'rank'=>0,'expand'=>0);
     $page=array('name'=>'','description'=>'','category'=>-1);
 } elseif (isset($id)){
-echo 'save....';
     if (!($id_result=(mysql_query('UPDATE '.$table_prepend_name.$table_menu.
             ' set name="'.$name.'"'.
             ', description="'.$description.'"'.
@@ -70,27 +77,14 @@ echo 'save....';
             ', lng='.$lng.
             ', rank='.$rank.
             ' WHERE id='.$id
-            ,$db_connection)))&&($child_id=0))
-        do_error(1,'UPDATE '.$table_prepend_name.$table_menu.': '.mysql_error());
-
-    if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and id='.$id,$db_connection)))&&($child_id=0))
-        do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
-    $item = mysql_fetch_array ($id_result);
-    mysql_free_result($id_result);
-
-    if ($item['parent']!=0){
-        if (!($id_result=(mysql_query('SELECT category from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and id='.$item['parent'],$db_connection)))&&($child_id=0))
-            do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
-        $parent = mysql_fetch_array ($id_result);
-        mysql_free_result($id_result);
+            ,$db_connection)))&&($child_id=0)){
+        show_error("Can't update menu item info! (".mysql_error().')');
+        exit;
     }
-
-    if (!($id_result=mysql_query('SELECT name,description,category from '.$table_prepend_name.$table_page.' where lng='.$lng.' and id='.$item['page'].' limit 1',$db_connection)))
-        do_error(1,'SELECT '.$table_prepend_name.$table_page.': '.mysql_error());
-    $page=mysql_fetch_array($id_result);
-    mysql_free_result($id_result);
+    show_info_box('Menu item saved',array('lng'=>$lng,'id'=>$id));
+    include_once('./admin_footer.php');
+    exit;
 } else {
-echo 'create new item....';
     if (!($id_result=(mysql_query('INSERT '.$table_prepend_name.$table_menu.
             ' set name="'.$name.'"'.
             ', description="'.$description.'"'.
@@ -100,10 +94,11 @@ echo 'create new item....';
             ', expand='.$expand.
             ', lng='.$lng.
             ', rank='.$rank
-            ,$db_connection)))&&($child_id=0))
-        do_error(1,'INSERT '.$table_prepend_name.$table_menu.': '.mysql_error());
-
-    if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$table_prepend_name.$table_menu.' where '.
+            ,$db_connection)))&&($child_id=0)){
+        show_error("Can't create menu item info! (".mysql_error().')');
+        exit;
+    }
+    if (!($id_result=(mysql_query('SELECT id from '.$table_prepend_name.$table_menu.' where '.
             'name="'.$name.'"'.
             ' and description="'.$description.'"'.
             ' and page='.$page.
@@ -112,22 +107,16 @@ echo 'create new item....';
             ' and expand='.$expand.
             ' and lng='.$lng.
             ' and rank='.$rank
-            )))&&($child_id=0))
-        do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
+            )))&&($child_id=0)){
+        show_error("Can't get menu item info! (".mysql_error().')');
+        exit;
+    }
     $item = mysql_fetch_array ($id_result);
     mysql_free_result($id_result);
 
-    if ($item['parent']!=0){
-        if (!($id_result=(mysql_query('SELECT category from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and id='.$item['parent'],$db_connection)))&&($child_id=0))
-            do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
-        $parent = mysql_fetch_array ($id_result);
-        mysql_free_result($id_result);
-    }
-
-    if (!($id_result=mysql_query('SELECT name,description,category from '.$table_prepend_name.$table_page.' where lng='.$lng.' and id='.$item['page'].' limit 1',$db_connection)))
-        do_error(1,'SELECT '.$table_prepend_name.$table_page.': '.mysql_error());
-    $page=mysql_fetch_array($id_result);
-    mysql_free_result($id_result);
+    show_info_box('Menu item created',array('lng'=>$lng,'id'=>$item['id']));
+    include_once('./admin_footer.php');
+    exit;
 }
 ?>
 <form action="menu_edit.php" method="post">
