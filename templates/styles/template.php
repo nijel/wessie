@@ -29,9 +29,6 @@
 //File containing CSS template:
 $template_data='./templates/styles/template.inc.php';
 
-//Number of top pages to display
-$top_pages_count=0;
-
 //Format of title:
 function title(){
     global $site_name,$category,$page,$lng;
@@ -44,7 +41,7 @@ function title(){
 
 //Format of upper menu items
 function make_upper_menu_item($percent,$url,$name,$short,$description,$active){
-    $result='<th onclick="window.location.replace(\''.$url.'\')" onmouseover="highlight(this,\'#FFEEBB\');" onmouseout="unhighlight(this);" width="'.$percent.'"'.($active?' class="active"':'').'><a href="'.$url.'" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$description."'".';return true">';
+    $result='<th onclick="window.location.replace(\''.$url.'\')" onmouseover="highlight(this,\'#FFEEBB\');" onmouseout="unhighlight(this);" width="'.$percent.'"'.($active?' class="active"':'').'><a href="'.$url.'" title="'.$description.'">';
     $result.=$name.'</a></th>';
     return $result;
 }
@@ -54,7 +51,7 @@ $upper_menu_divisor="\n";
 
 //Format of top pages items:
 function make_top_pages_item($url,$name,$category,$category_short,$description){
-    $result='<a href="'.$url.'" title="'.$description.'"onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$description."'".';return true">';
+    $result='<a href="'.$url.'" title="'.$description.'">';
     $result.=$name.' <font size="-3">('.$category_short.')</font></a>';
     return $result;
 }
@@ -104,7 +101,7 @@ function make_menu_item($url,$name,$category,$category_short,$description,$activ
         $text = $name;
     } else {
         $result .= '<span class="inactive">';
-        $text = '<a href="'.$url.'" title="'.$description.'" onmouseout="window.status=\'\';return true" onmouseover="window.status=\''.$description.'\';return true">'.$name.'</a>';
+        $text = '<a href="'.$url.'" title="'.$description.'">'.$name.'</a>';
     }
     if ($depth == 0){
         $text .= '</span></span>';
@@ -128,7 +125,7 @@ $left_menu_divisor="<br />\n";
 //Language choice format:
 function make_language($url,$id){
     global $languages, $lang_name, $lang_img, $lang_main_page,$base_path;
-    return '<a href="'.$url.'" target="_self" title="'.$lang_name[$id].'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$lang_name[$id]."'".';return true"><img src="'.$base_path.$lang_img[$id].'" alt="'.$languages[$id].'" />'.$lang_name[$id].'</a>';
+    return '<a href="'.$url.'" target="_self" title="'.$lang_name[$id].'"><img src="'.$base_path.$lang_img[$id].'" alt="'.$languages[$id].'" />'.$lang_name[$id].'</a>';
 }
 
 $languages_divisor=' | ';

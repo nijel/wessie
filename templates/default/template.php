@@ -29,9 +29,6 @@
 //File containing default template:
 $template_data='./templates/default/template.inc.php';
 
-//Number of top pages to display
-$top_pages_count=4;
-
 //Format of title:
 function title(){
     global $site_name,$category,$page,$lng;
@@ -44,7 +41,7 @@ function title(){
 
 //Format of upper menu items
 function make_upper_menu_item($percent,$url,$name,$short,$description,$active){
-    $result='<th align="center" valign="middle" width="'.$percent.'"><a href="'.$url.'" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$description."'".';return true">';
+    $result='<th align="center" valign="middle" width="'.$percent.'"><a href="'.$url.'" title="'.$description.'">';
     if ($active){$result.='<font color="white">'.$name.'</font></a></th>';}
     else {$result.=$name.'</a></th>';};
     return $result;
@@ -55,7 +52,7 @@ $upper_menu_divisor="\n";
 
 //Format of top pages items:
 function make_top_pages_item($url,$name,$category,$category_short,$description){
-    $result='<a href="'.$url.'" title="'.$description.'"onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$description."'".';return true">';
+    $result='<a href="'.$url.'" title="'.$description.'">';
     $result.=$name.' <font size="-3">('.$category_short.')</font></a>';
     return $result;
 }
@@ -94,10 +91,10 @@ function make_download($file,$group=array('count'=>-1)){
 function make_menu_item($url,$name,$category,$category_short,$description,$active,$depth,$is_parent){
     if ($depth==0) {
         if ($active) $result='&nbsp;<span style="font-weight:bold;font-size:110%;">'.$name.'</span>';
-        else $result='&nbsp;<a href="'.$url.'" style="font-weight:bold;font-size:110%;" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'$description'".';return true">'.$name.'</a>';
+        else $result='&nbsp;<a href="'.$url.'" style="font-weight:bold;font-size:110%;" title="'.$description.'">'.$name.'</a>';
     } else{
         if ($active) $result='&nbsp;&nbsp;&nbsp;'.$name;
-        else $result='&nbsp;&nbsp;&nbsp;<a href="'.$url.'" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'$description'".';return true">'.$name.'</a>';
+        else $result='&nbsp;&nbsp;&nbsp;<a href="'.$url.'" title="'.$description.'">'.$name.'</a>';
     }
     while ($depth > 1){
         $result='&nbsp;&nbsp;'.$result;
@@ -112,7 +109,7 @@ $left_menu_divisor="<br />\n";
 //Language choice format:
 function make_language($url,$id){
     global $languages, $lang_name, $lang_img, $lang_main_page,$base_path;
-    return '<a href="'.$url.'" target="_self" title="'.$lang_name[$id].'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$lang_name[$id]."'".';return true"><img src="'.$base_path.$lang_img[$id].'" alt="'.$languages[$id].'" align="middle" border="0" />'.$lang_name[$id].'</a>';
+    return '<a href="'.$url.'" target="_self" title="'.$lang_name[$id].'"><img src="'.$base_path.$lang_img[$id].'" alt="'.$languages[$id].'" align="middle" border="0" />'.$lang_name[$id].'</a>';
 }
 
 $languages_divisor=' | ';
