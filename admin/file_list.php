@@ -110,7 +110,7 @@ while (list ($key, $val) = each($list)){
         }
     }else{
         $filename=$val['filename'];
-        make_row_js($even,"gE('filename',window.opener).value='".($admin_file_restrict?$dir.'/'.$filename:substr($dir.'/'.$filename,$root_dir_len))."';if(window.opener.check_remote) window.opener.check_remote();window.close();");
+        make_row_js($even,"gE('filename',window.opener).value='".($restrict?substr($dir.'/'.$filename,$root_dir_len):$dir.'/'.$filename)."';if(window.opener.check_remote) window.opener.check_remote();window.close();");
         $size=$val['hsize'];
     }
     echo '<td>'.$filename.'</td><td class="size">'.$size."</td></tr>\n";
