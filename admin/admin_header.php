@@ -37,7 +37,7 @@ show_html_head($page_title);
 if (isset($onunload)){
     echo '<body onunload="'.$onunload.'">';
 }else{
-    echo '<body>';
+    echo '<body onunload="unloader()">';
 } ?>
 <table class="upper">
 <tr>

@@ -53,22 +53,22 @@ function add_file_info($dir,$list){
     $result=array();
     while (list ($key, $val) = each($list)){
         $result[$val]['filename']=$val;
-        $result[$val]['size']=filesize($dir.'/'.$val);
-        $result[$val]['hsize']=human_readable_size(filesize($dir.'/'.$val));
-        $result[$val]['is_dir']=is_dir($dir.'/'.$val);
-        $result[$val]['atime']=fileatime($dir.'/'.$val);
-        $result[$val]['ctime']=filectime($dir.'/'.$val);
-        $result[$val]['mtime']=filemtime($dir.'/'.$val);
-        $result[$val]['perms']=fileperms($dir.'/'.$val);
-        $arr = posix_getpwuid(fileowner($dir.'/'.$val));
+        $result[$val]['size']=@filesize($dir.'/'.$val);
+        $result[$val]['hsize']=human_readable_size(@filesize($dir.'/'.$val));
+        $result[$val]['is_dir']=@is_dir($dir.'/'.$val);
+        $result[$val]['atime']=@fileatime($dir.'/'.$val);
+        $result[$val]['ctime']=@filectime($dir.'/'.$val);
+        $result[$val]['mtime']=@filemtime($dir.'/'.$val);
+        $result[$val]['perms']=@fileperms($dir.'/'.$val);
+        $arr = posix_getpwuid(@fileowner($dir.'/'.$val));
         $result[$val]['owner']=$arr['name'];
-        $arr = posix_getgrgid(filegroup($dir.'/'.$val));
+        $arr = posix_getgrgid(@filegroup($dir.'/'.$val));
         $result[$val]['group']=$arr['name'];
-        $result[$val]['r']=is_readable($dir.'/'.$val);
-        $result[$val]['w']=is_writeable($dir.'/'.$val);
-        $result[$val]['x']=is_executable($dir.'/'.$val);
-        $result[$val]['l']=is_link($dir.'/'.$val);
-        $result[$val]['type']=filetype($dir.'/'.$val);
+        $result[$val]['r']=@is_readable($dir.'/'.$val);
+        $result[$val]['w']=@is_writeable($dir.'/'.$val);
+        $result[$val]['x']=@is_executable($dir.'/'.$val);
+        $result[$val]['l']=@is_link($dir.'/'.$val);
+        $result[$val]['type']=@filetype($dir.'/'.$val);
     }
     return $result;
 }

@@ -31,32 +31,47 @@ error_reporting (E_ALL);
 require_once('./auth.php');
 require_once('./functions.php');
 Header('Content-Type: text/html; charset='.$admin_charset);
+$onunload='window.opener.delwin();';
 show_html_head('Select file');
-?>
 
-<body onunload="window.opener.delwin();">
-<p class="info">Select file:</p>
+if ($limit=='limit' || $admin_file_restrict) $restrict=TRUE;
+else $restrict=FALSE;
 
-<?php
+if (!isset($limit)) $limit='limit';
 require_once('./file_functions.php');
 
-$root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
-$root_dir_len = strlen($root_dir);
+$server_root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
 
-if (!isset($dir)||!@is_dir($dir)){
-    $dir = $root_dir;
+if ($restrict){
+    $root_dir = $server_root_dir;
+    $root_dir_len = strlen($root_dir);
+} else {
+    $root_dir = '';
+    $root_dir_len = 0;
+}
+
+if (!isset($dir)||$dir==''||!@is_dir($dir)){
+    $dir = $server_root_dir;
 }elseif (!@chdir($dir)){
-    $dir = $root_dir;
+    $dir = $server_root_dir;
+}elseif ($restrict && (strlen($dir) < $root_dir_len || strpos($dir,$root_dir) === false)) {
+    echo '<div class="error">Error: Directory restriction does not allow you to work in selected directory ("'.$dir.'")!</div>';
+    $dir = $server_root_dir;
 }else{
     $dir = getcwd();
 }
 
+?>
+
+<p class="info">Select file (<?php echo $dir;?>):</p>
+
+<?php
 
 $files=array();
 $dirs=array();
 
 if (!read_folder($dir,$dirs,$files)){
-    show_error('Can not read directory info!');
+    show_error('Can not read directory info "'.$dir.'"!');
     exit;
 }
 natsort($files);
@@ -70,9 +85,9 @@ while (list ($key, $val) = each($list)){
     $even = 1 - $even;
     if ($val['is_dir']){
         if (@chdir($dir.'/'.$val['filename'])){
-            if (strncmp($root_dir,getcwd(),$root_dir_len)==0){
-                make_row_js($even,"window.location.replace('file_list.php?dir=".urlencode(getcwd())."');",'even_hand','odd_hand');
-                $filename='<a href="file_list.php?dir='.urlencode(getcwd()).'">'.$val['filename'].'</a>';
+            if (!$restrict || strncmp($root_dir,getcwd(),$root_dir_len)==0){
+                make_row_js($even,"window.location.replace('file_list.php?limit=$limit&dir=".urlencode(getcwd())."');",'even_hand','odd_hand');
+                $filename='<a href="file_list.php?limit='.$limit.'&amp;dir='.urlencode(getcwd()).'">'.$val['filename'].'</a>';
                 $size='DIR';
             }else{
                 make_row_js($even,"window.alert('This directory is outside web tree!');");
@@ -86,7 +101,7 @@ while (list ($key, $val) = each($list)){
         }
     }else{
         $filename=$val['filename'];
-        make_row_js($even,"gE('filename',window.opener).value='".substr($dir.'/'.$filename,$root_dir_len)."';window.opener.check_remote();window.close();");
+        make_row_js($even,"gE('filename',window.opener).value='".($admin_file_restrict?$dir.'/'.$filename:substr($dir.'/'.$filename,$root_dir_len))."';if(window.opener.check_remote) window.opener.check_remote();window.close();");
         $size=$val['hsize'];
     }
     echo '<td>'.$filename.'</td><td class="size">'.$size."</td></tr>\n";

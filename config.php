@@ -29,8 +29,8 @@ error_reporting (E_ALL);
 // lines like following are not needed, but they allows to keep a bit of order
 // in this file, when it is being modified by php script
 
-//##DATABASE##
 // MySQL database settings
+//##DATABASE##
 // $db_host            - host where to connect
 // $db_user            - username
 // $db_pass            - password
@@ -91,8 +91,8 @@ $lang_time = 31536000;
 //##/COOKIES##
 
 
-//##TABLES##
 // all table names are fully customisable
+//##TABLES##
 // $table_prepend_name - prepended before each table name, this allows multiple
 //                       wessies running on one database
 // $table_*            - name for each table
@@ -129,8 +129,8 @@ $category_order = 'id';
 $use_adverts = TRUE;
 //##/DESIGN##
 
-//##INFO##
 // some information about site
+//##INFO##
 // $site_home          - home of site, this doesn't have to be directory (or server)
 //                       where wessie is installed, it should be really home
 //                       page of your site
@@ -164,6 +164,11 @@ $special[1] = '';
 // $admin_confirm_delete - confirm deleting in administration?
 // $admin_confirm_uninstall - confirm uninstalling in administration?
 // $admin_validator    - link to validate page, at the end is appended url
+// $admin_file_restrict - restrict including of files only to webserver tree
+//                        (this cannot handle rewrites or simmilar methods,
+//                        this takes affect only when selecting file using
+//                        browse dialog and SHOULD affect plugins that read
+//                        files from disk)
 $admin_charset = 'iso-8859-2';
 $admin_timeout = '20 MINUTE';
 $admin_user_cookie = 2592000;
@@ -171,10 +176,11 @@ $admin_hash_cookie = 3600;
 $admin_confirm_delete = TRUE;
 $admin_confirm_uninstall = TRUE;
 $admin_validator = 'http://validator.cic/cgi-bin/validate.cgi?input=yes&amp;url=';
+$admin_file_restrict = FALSE;
 //##/ADMIN##
 
-//##ADMIN_FILES##
 // file management options
+//##ADMIN_FILES##
 // $admin_fm_restrict   - restrict file management only to webserver tree
 //                        (this cannot handle rewrites or simmilar methods)
 // $admin_fm_show_*     - which columns to show in file management
@@ -198,8 +204,8 @@ $admin_fm_maxsize = 10485760;
 //##/ADMIN_FILES##
 
 
-//##ADMIN_SIZES##
 //size of edits in administration
+//##ADMIN_SIZES##
 $admin_name_size = 80;
 $admin_short_size = 80;
 $admin_filename_size = 80;
@@ -228,4 +234,21 @@ $page_plugins_options['article']['eval'] = TRUE;
 $page_plugins_options['file']['eval'] = FALSE;
 $page_plugins_options['bullshit']['eval'] = FALSE;
 //##/PLUGIN_OPTIONS##
+
+//try to set colors for php syntax highlighting
+//##HIGHLIGHT_OPTIONS##
+// default values (probably, just taken from my php.ini):
+// highlight.string        =       #DD0000
+// highlight.comment       =       #FF8000
+// highlight.keyword       =       #007700
+// highlight.bg            =       #FFFFFF
+// highlight.default       =       #0000BB
+// highlight.html          =       #000000
+ini_set ('highlight.string', '#DD00DD');
+ini_set ('highlight.comment', '#FF8000');
+ini_set ('highlight.keyword', '#00DD00');
+ini_set ('highlight.bg', '#FFFFFF');
+ini_set ('highlight.default', '#0000EE');
+ini_set ('highlight.html', '#DDDDDD');
+//##/HIGHLIGHT_OPTIONS##
 ?>

@@ -39,9 +39,21 @@ function unhighlight(what){
     return true;
 }
 
-function open_browse_window(dir){
+close_browse_window=0;
+
+function unloader(){
+    if(close_browse_window) browse_window.close();
+}
+
+function delwin(){
+    close_browse_window=0;
+    return true;
+}
+
+function open_browse_window(dir,param){
     close_browse_window=1;
-    browse_window=window.open('./file_list.php?dir='+dir,'Select file','personalbar=0,status=0,dependent=1,toolbar=0,height=400,width=472,innerHeight=400,innerWidth=462');
+    if (!param) param='limit';
+    browse_window=window.open('./file_list.php?limit='+param+'&dir='+dir,'Select file','personalbar=0,status=0,dependent=1,toolbar=0,height=400,width=472,innerHeight=400,innerWidth=462');
     return true;
 }
 

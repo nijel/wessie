@@ -30,14 +30,27 @@ function get_content(){
     global $page;
 
     $filename='UNKNOWN';
-    $pre=FALSE;
+    $pre=TRUE;
+    $code=TRUE;
+    $html=TRUE;
+    $highlight=FALSE;
     eval($page['param']);
 
     if (!file_exists($filename)) do_error(5,$filename);
     $fh=fopen($filename,'r');
     $content=fread($fh, filesize($filename));
     fclose($fh);
-    if ($pre) $content = '<pre>'.$content.'</pre>';
+    if ($highlight) {
+        ob_start();
+        highlight_string ($content);
+        $content = ob_get_contents();
+        ob_end_clean();
+    } else {
+        if ($html) $content = htmlspecialchars($content);
+        if ($code) $content = '<code>'.$content.'</code>';
+        if ($pre) $content = '<pre>'.$content.'</pre>';
+    }
+
     return $content;
 }
 
@@ -46,7 +59,6 @@ function get_last_change(){
     global $page;
 
     $filename='UNKNOWN';
-    $pre=FALSE;
     eval($page['param']);
 
     return filemtime($filename);

@@ -26,17 +26,10 @@
 // $Id$
 
 $page_name='Download:Edit';
-$onunload='if(close_browse_window) browse_window.close();';
 require_once('./download_header.php');
 ?>
 <script language="JavaScript" type="text/javascript">
 <!--
-close_browse_window=0;
-function delwin(){
-    close_browse_window=0;
-    return true;
-}
-
 function check_remote(){
     if (gE('filename',window).value.indexOf(':/')==-1){
         gE('remote',window).checked=0;
