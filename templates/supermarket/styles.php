@@ -93,7 +93,7 @@ div.body {
 	font-size: larger:
 	font-weight: bolder;
 	color: #000000;
-	padding: 2em 5px 5px 5px
+	padding: 2.5em 5px 5px 5px
 }
 
 div.docinfo {
