@@ -24,7 +24,7 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-$page_name='Menu:Edit';
+$page_name='Menu:Delete';
 require_once('./admin_header.php');
 ?>
 <?php
