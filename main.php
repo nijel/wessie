@@ -86,8 +86,9 @@ if (!file_exists($lang_file_name)) do_error(2,'file="'.$lang_file_name.'"; lng="
 require_once($lang_file_name);
 
 //send headers - content type and refuse caching
+/* we shouldn't be so restrictive by default..
 Header('Pragma: no-cache');
-Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");
+Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");*/
 Header('Content-Type: text/html; charset='.$charset);
 
 

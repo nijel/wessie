@@ -35,6 +35,7 @@ require_once('../../init.php');
 ?>
 
 body {
+    font-family: sans-serif;
 	background-color: #DDDDDD;
 	padding: 0px;
 	margin: 0px;
@@ -57,6 +58,7 @@ div.top {
 	margin: 20px;
 	font-size: x-large;
 	font-weight: bolder;
+    text-align: center;
 }
 
 div.leftbox {
@@ -151,4 +153,12 @@ a:hover {
 
 img {
     border: none;
+}
+
+span.noindent p:first-line {
+	padding-left: 0px;
+}
+
+code {
+    font-family: monospace;
 }
