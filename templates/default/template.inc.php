@@ -38,7 +38,7 @@
     <meta name="keywords" content="<?php keywords(); ?>" />
     <meta name="description" content="<?php description(); ?>" />
     <meta name="generator" content="<?php echo $wessie_copyright; ?>" />
-    <link rel="Icon" href="favicon.png" type="image/png" />
+    <link rel="icon" href="<?php echo $base_path;?>img/favicon.png" type="image/png" />
 
     <!-- We LOVE Micro$oft! We don't like their silly features. -->
     <meta name="MSSmartTagsPreventParsing" content="true" />
