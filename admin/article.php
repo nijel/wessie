@@ -66,10 +66,10 @@ if (!$id_result=mysql_query(
 ' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
 ' where id=page and '.$table_prepend_name.$table_article.'.lng='.$table_prepend_name.$table_page.'.lng'.$cond.
 ' order by page,lng'))
-    do_error(1,'SELECT '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.': '.mysql_error());
+    show_error("Can't select articles and pages! (".mysql_error().')');
 
 if (mysql_num_rows($id_result) == 0){
-echo "Nothing...";
+    echo "Nothing...";
 } else {
     echo 'Listed articles: '.mysql_num_rows($id_result);
     echo '<table border="0"><tr><th>Page</th><th>Title</th><th>Description</th><th>Language</th><th>Last change</th><th colspan="3">Action</th></tr>'."\n";

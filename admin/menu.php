@@ -55,11 +55,11 @@ global $db_connection,$table_menu,$table_page,$table_prepend_name,$category,$eve
 
 if (!($id_result=(mysql_query('SELECT id,name,description,lng,page,category,parent,expand,rank from '.$table_prepend_name.$table_menu
         .' where '.($lng=='any'?1:('lng='.$lng)).' and parent='.$child_id.' and '.($category=='any'?1:('category='.$category)).' order by lng,rank',$db_connection)))&&($child_id=0))
-    do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
+    show_error("Can't select menu items! (".mysql_error().')');
 
 while ($item = mysql_fetch_array ($id_result)){
     if (!($id2_result=mysql_query('SELECT name,description from '.$table_prepend_name.$table_page.' where lng='.$item['lng'].' and id='.$item['page'].' limit 1',$db_connection)))
-        do_error(1,'SELECT '.$table_prepend_name.$table_page.': '.mysql_error());
+        show_error("Can't get page info! (".mysql_error().')');
     $page=mysql_fetch_array($id2_result);
     mysql_free_result($id2_result);
 
