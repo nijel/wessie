@@ -88,6 +88,7 @@
   <item url="plugins/article/main.php" />
   <item url="plugins/file/main.php" />
   <item url="admin/help.php" />
+  <item url="admin/options_header.php" />
  </project>
 </webproject>
 <!-- $Id$ -->

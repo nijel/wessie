@@ -24,11 +24,16 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-$page_name='Options';
-require_once('./options_header.php');
+require_once('./admin_header.php');
 ?>
-<p>Here you can configure majority of features of wessie. Just select from tab
-above what do you want to configure.</p>
 <?php
-require_once('./admin_footer.php');
+make_tab_start();
+make_tab_item('./options_design.php','Design','/options_design');
+make_tab_item('./options_info.php','Information','/options_info');
+make_tab_item('./options_languages.php','Languages','/options_languages');
+make_tab_item('./options_database.php','Database','/options_database');
+make_tab_item('./options_errors.php','Errors','/options_errors');
+make_tab_item('./options_admin.php','Administration','/options_admin');
+//make_tab_item('./options_.php','','/options_');
+make_tab_end();
 ?>
