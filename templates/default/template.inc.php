@@ -37,7 +37,7 @@
   <meta name="author" content="<?php echo $site_author[$lng]; ?>" />
   <meta name="keywords" content="<?php keywords(); ?>" />
   <meta name="description" content="<?php description(); ?>" />
-  <meta name="generator" content="<?php echo $wessie_version.', Copyright (C) 2001 '.$wessie_author; ?>" />
+  <meta name="generator" content="<?php echo $wessie_copyright; ?>" />
   <script language="JavaScript" type="text/javascript">
   <!--
       if(top != self) { window.top.location.href=location; }
