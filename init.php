@@ -28,7 +28,7 @@ $wessie_version_only='0.1 beta';
 $wessie_version='wessie '.$wessie_version_only;
 $wessie_author='Michal Cihar';
 $wessie_author_email='cihar@email.cz';
-$wessie_url='http://cicom.tsx.org';
+$wessie_url='http://cicom.kgb.cz';
 $search_url='search.php';
 $search_param='q';
 
