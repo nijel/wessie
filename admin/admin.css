@@ -141,6 +141,8 @@ table.tabs td.normal,table.tabs td.normal_light {
     cursor: hand;
 }
 table.tabs td.selected, table.tabs td.selected_light {
+    padding: 2px 10px 2px 10px;
+    margin: 1px 1px 0px 1px;
     background-color: #eeeebb;
     font-weight: bold;
     border-left: 2px #000000 solid;
@@ -154,6 +156,10 @@ table.tabs td.normal_light, table.tabs td.selected_light {
 table.data {
     border: none;
     vertical-align: top;
+}
+table.data td {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 table.data td.size {
     text-align: right;
