@@ -120,7 +120,7 @@ $table_stat = 'stat';
 // $category_order     - which field in database is used for ordering categories
 // $use_adverts        - use advertisement?
 // $top_pages_count    - number of top pages to display
-$template_name = 'styles';
+$template_name = 'default';
 $site_logo = 'img/wessie.png';
 $site_logo_alt = 'wessie - web site system';
 $site_logo_width = 200;

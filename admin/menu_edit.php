@@ -81,7 +81,8 @@ if (isset($id)&&isset($lng)&&!isset($name)){
         show_error("Can't update menu item info! (".mysql_error().')');
         exit;
     }
-    show_info_box('Menu item saved',array('lng'=>$lng,'id'=>$id));
+//    show_info_box('Menu item saved',array('lng'=>$lng,'id'=>$id));
+    show_info_box('Menu item saved',array(),'menu.php');
     include_once('./admin_footer.php');
     exit;
 } elseif (isset($lng)&&isset($rank)) {
@@ -114,7 +115,8 @@ if (isset($id)&&isset($lng)&&!isset($name)){
     $item = mysql_fetch_array ($id_result);
     mysql_free_result($id_result);
 
-    show_info_box('Menu item created',array('lng'=>$lng,'id'=>$item['id']));
+//    show_info_box('Menu item created',array('lng'=>$lng,'id'=>$item['id']));
+    show_info_box('Menu item created',array(),'menu.php');
     include_once('./admin_footer.php');
     exit;
 }else{

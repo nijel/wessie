@@ -35,7 +35,8 @@ if (isset($action) && ($action=='save')){
         show_error("Can't save article info! (".mysql_error().')');
         exit;
     }
-    show_info_box('Category saved',array('lng'=>$lng,'id'=>$id));
+//    show_info_box('Category saved',array('lng'=>$lng,'id'=>$id));
+    show_info_box('Category saved',array(),'category.php');
     include_once('./admin_footer.php');
     exit;
 }elseif(isset($action) && ($action=='create_new')){
@@ -51,7 +52,8 @@ if (isset($action) && ($action=='save')){
     }
     $item=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
-    show_info_box('Category created',array('lng'=>$lng,'id'=>$item['id']));
+//    show_info_box('Category created',array('lng'=>$lng,'id'=>$item['id']));
+    show_info_box('Category created',array(),'category.php');
     include_once('./admin_footer.php');
     exit;
 }elseif (isset($action) && ($action=='new') && isset($lng)){

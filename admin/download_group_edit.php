@@ -33,7 +33,8 @@ if (isset($action) && ($action=='save')){
         show_error("Can't save download group info! (".mysql_error().')');
         exit;
     }
-    show_info_box('Download group saved',array('id'=>$id));
+//    show_info_box('Download group saved',array('id'=>$id));
+    show_info_box('Download group saved',array(),'download_group.php');
     include_once('./admin_footer.php');
     exit;
 }elseif(isset($action) && ($action=='create_new')){
@@ -47,7 +48,8 @@ if (isset($action) && ($action=='save')){
     }
     $item=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
-    show_info_box('Download group created',array('id'=>$item['id']));
+//    show_info_box('Download group created',array('id'=>$item['id']));
+    show_info_box('Download group created',array(),'download_group.php');
     include_once('./admin_footer.php');
     exit;
 }elseif (isset($action) && ($action=='new')){
