@@ -540,7 +540,7 @@ function make_row_js($even,$js,$class_even='even',$class_odd='odd'){
 
 function make_tab_item($href,$text,$url){
     global $SCRIPT_NAME;
-    $class=(strpos($SCRIPT_NAME,$url)?'selected':'normal');
+    $class=($url!='' && strpos($SCRIPT_NAME,$url)?'selected':'normal');
     echo '<td class="'.$class.'" ';
     highlighter($class.'_light',$class);
     echo ' onclick="window.location.replace(\''.$href.'\')"><a href="'.$href.'">'.$text."</a></td>\n";

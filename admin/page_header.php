@@ -24,25 +24,17 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
+require_once('./admin_header.php');
 
-$page_name='Page:Edit';
-require_once('./page_header.php');
+make_tab_start();
 
-if (!isset($type)) {
-    show_error_box('Error: Bad parameters!');
-    include_once('./admin_footer.php');
-} else {
-    $form_action='page_edit.php';
-    $form_done_url='page.php';
-    $form_magic='<input type="hidden" name="type" value="'.$type.'"/>'."\n";
-    if (file_exists('../plugins/'.$type.'/admin_edit.php')){
-        require_once('../plugins/'.$type.'/admin_edit.php');
-    } else {
-        show_error_box('Error: Selected plugin ("'.$type.'") not accessible!');
-        include_once('./admin_footer.php');
-        exit;
-    }
+make_tab_item('./page.php','All pages','/page.php');
+
+reset($allowed_page_plugins);
+if (!isset($type)) $type='';
+while (list ($key, $val) = each($allowed_page_plugins)){
+    make_tab_item('./page_list.php?type='.$val,ucfirst($val).' pages',($type==$val?'/page':''));
 }
 
-require_once('./admin_footer.php');
+make_tab_end();
 ?>

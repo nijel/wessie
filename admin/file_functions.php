@@ -23,7 +23,7 @@
 // | Authors: Michal Cihar <cihar at email dot cz>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id $
+// $Id$
 
 require_once('./functions.php');
 

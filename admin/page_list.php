@@ -25,18 +25,20 @@
 //
 // $Id$
 
-$page_name='Page:Edit';
+$page_name='Pages';
 require_once('./page_header.php');
 
 if (!isset($type)) {
     show_error_box('Error: Bad parameters!');
     include_once('./admin_footer.php');
 } else {
-    $form_action='page_edit.php';
-    $form_done_url='page.php';
+    $edit_url='page_edit.php?type='.$type;
+    $delete_url='page_delete.php?type='.$type;
+    $edit_action='page_edit.php';
     $form_magic='<input type="hidden" name="type" value="'.$type.'"/>'."\n";
-    if (file_exists('../plugins/'.$type.'/admin_edit.php')){
-        require_once('../plugins/'.$type.'/admin_edit.php');
+
+    if (file_exists('../plugins/'.$type.'/admin_list.php')){
+        require_once('../plugins/'.$type.'/admin_list.php');
     } else {
         show_error_box('Error: Selected plugin ("'.$type.'") not accessible!');
         include_once('./admin_footer.php');

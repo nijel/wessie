@@ -24,8 +24,7 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-$page_name='Pages';
-require_once('./page_header.php');
+
 ?>
 <table class="filter">
   <tr>
@@ -33,13 +32,11 @@ require_once('./page_header.php');
       Filter:
     </td>
     <td  class="filtercontent">
-      <form method="get" action="page.php" class="filter">
+      <form method="get" action="article.php" class="filter">
         Language:
         <?php language_edit((isset($filter_lng) && ($filter_lng != 'any'))?$filter_lng:-1,TRUE,'filter_lng',array(),'select') ?>
-        &nbsp;Type:
-        <?php type_edit((isset($filter_type) && ($filter_type != 'any'))?$filter_type:-1,TRUE,'filter_type',array(),'select') ?>
-        &nbsp;Name:
-        <input type="text" name="filter_name" <?php if(isset($filter_name)){ echo 'value="'.$filter_name.'"'; }?> class="text" />
+        &nbsp;Title:
+        <input type="text" name="filter_title" <?php if(isset($filter_title)){ echo 'value="'.$filter_title.'"'; }?> class="text" />
         &nbsp;Description:
         <input type="text" name="filter_desc" <?php if(isset($filter_desc)){ echo 'value="'.$filter_desc.'"'; }?> class="text" />
         &nbsp;<input type="submit" value=" Go " class="go" />
@@ -54,48 +51,43 @@ if (isset($filter_lng) && $filter_lng!='any') {
 } else {
     $cond = '';
 }
-if (isset($filter_type) && $filter_type!='any') {
-    $cond .= ' and '.$table_prepend_name.$table_page.".type='".$filter_type."'";
-}
-if (isset($filter_name) && ($filter_name != '')) {
-    $cond.=' and name like "%'.$filter_name.'%"';
+if (isset($filter_title) && ($filter_title != '')) {
+    $cond.=' and name like "%'.$filter_title.'%"';
 }
 if (isset($filter_desc) && ($filter_desc != '')) {
     $cond.=' and description like "%'.$filter_desc.'%"';
 }
 
 if (!$id_result=mysql_query(
-'SELECT lng, id, name, description, count, category, type'.
-' from '.$table_prepend_name.$table_page.
-' where 1 '.$cond.
-' order by id,lng'))
-    show_error("Can't select pages! (".mysql_error().')');
+'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, id, name, description, count, category'.
+' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
+' where id=page and '.$table_prepend_name.$table_article.'.lng='.$table_prepend_name.$table_page.'.lng'.$cond.
+' order by page,lng'))
+    show_error("Can't select articles and pages! (".mysql_error().')');
 
 if (mysql_num_rows($id_result) == 0){
     echo "Nothing...";
 } else {
-    echo '<table class="data"><tr><th>Id</th><th>Name</th><th>Description</th><th>Language</th><th>Type</th><th>Actions</th></tr>'."\n";
+    echo '<table class="data"><tr><th>Page</th><th>Title</th><th>Description</th><th>Language</th><th>Last change</th><th>Actions</th></tr>'."\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
-        $url='page_edit.php?type='.$item['type'].'&amp;id='.$item['id'].'&amp;lng='.$item['lng'];
+        $url=$edit_url.'&amp;id='.$item['id'].'&amp;lng='.$item['lng'];
         make_row($even);
         $even = 1 - $even;
-        echo make_cell($item['id'],$url);
+        echo make_cell($item['page'],$url);
         echo make_cell(htmlspecialchars($item['name']),$url);
         echo make_cell(htmlspecialchars($item['description']),$url);
         echo make_cell($lang_name[$item['lng']],$url);
-        echo make_cell($item['type'],$url);
-        echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="page_delete.php?type='.$item['type'].'&amp;id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['id'],$item['lng']).'" target="_blank">View</a>&nbsp;'.((isset($admin_validator)&&($admin_validator!=''))?'|&nbsp;<a href="'.$admin_validator.urlencode(make_absolute_url($item['id'],$item['lng'])).'" target="_blank">Validate</a>&nbsp;':'').'</td></tr>'."\n";
+        echo make_cell(strftime('%c',$item['last_change']),$url,'date');
+        echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="'.$delete_url.'&amp;id='.$item['page'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;'.((isset($admin_validator)&&($admin_validator!=''))?'|&nbsp;<a href="'.$admin_validator.urlencode(make_absolute_url($item['page'],$item['lng'])).'" target="_blank">Validate</a>&nbsp;':'').'</td></tr>'."\n";
     }
     echo "</table>\n";
-    echo 'Listed pages: '.mysql_num_rows($id_result);
+    echo 'Listed articles: '.mysql_num_rows($id_result);
 }
 ?>
-<form action="page_edit.php" method="get">
-Create new page type: <?php type_edit() ?>, in language: <?php language_edit() ?>
+<form action="<?php echo $edit_action;?>" method="get">
+<?php echo $form_magic;?>
+Create new article, in language: <?php language_edit() ?>
 <input type="submit" value=" Go " class="go" />
 <input type="hidden" name="action" value="new" />
 </form>
-<?php
-require_once('./admin_footer.php');
-?>
