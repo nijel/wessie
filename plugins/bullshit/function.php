@@ -83,13 +83,19 @@ function genParagraph($senteces,$words,$letters,$addHtml) {
 function genSentence($words,$letters,$addHtml) {
     $sentence = "";
     $was_a = FALSE;
+    $first = TRUE;
     $count = rand(2,$words);
     for ($n = 0; $n <= $count; $n++) {
         if (!$was_a && (($addHtml & 2) == 2) && rand(0,20) < 1) {
             $was_a = TRUE;
             $sentence .= '<a href="/">';
         }
-        $sentence .= genWord($letters,$addHtml);
+        if ($first || rand(0,50)<2){
+            $sentence .= ucfirst(genWord($letters,$addHtml));
+            $first = FALSE;
+        } else {
+            $sentence .= genWord($letters,$addHtml);
+        }
         if ($was_a && rand(0,10) < 5) {
             $was_a = FALSE;
             $sentence .= '</a>';
@@ -101,7 +107,7 @@ function genSentence($words,$letters,$addHtml) {
     if ($was_a) {
         $sentence .= '</a>';
     }
-    return ucfirst($sentence).'.';
+    return $sentence.'.';
 }
 
 function genWord($letters,$addHtml) {
@@ -109,35 +115,44 @@ function genWord($letters,$addHtml) {
     $consonant = 0;
     $word = "";
     $special = rand(0,100);
+    $prev = ' ';
     if ($special<2) {
         $word = genWord($letters,$addHtml) . "-" . genWord($letters,$addHtml);
     } else {
         $count = rand(2,$letters);
         for ($m = 0; $m < $count; $m++) {
-            $word .= genLetter($vowel,$consonant);
+            $word .= genLetter($vowel,$consonant,$prev);
         }
     }
     return $word;
 }
 
-function genLetter(&$vowel,&$consonant) {
+function genLetter(&$vowel,&$consonant,&$prev) {
     global $vowels,$consonants;
     $letter = chr(rand(97,122));
+    if ($prev == $letter) {
+        $letter = chr(rand(97,122));
+    }
+
+    //echo "'${vowel},${consonant}->${letter}->";
 
     if (in_array($letter,$vowels)) $vowel++;
 
-    if ($vowel > 2) {
+    if (($vowel*rand(1,2)) > 2 && $consonant<2) {
         $letter = $consonants[rand(0,count($consonants)-1)];
         $vowel = 0;
     }
 
     if (in_array($letter,$consonants)) $consonant++;
 
-    if ($consonant > 2) {
+    if (($consonant*rand(1,2)) > 2 && $vowel<2) {
         $letter = $vowels[rand(0,count($vowels)-1)];
         $consonant = 0;
     }
 
+    //echo "${letter}->$vowel,$consonant'\n<br>";
+
+    $prev = $letter;
     return $letter;
 }
 ?>
