@@ -28,9 +28,54 @@ $page_name='Options:Database';
 require_once('./options_header.php');
 
 if (isset($action) && $action=='save'){
-    echo '5AV3';
+    if (!config_read()){
+        show_error('Can not read configuration!');
+        exit;
+    }
+
+    if (!config_set_option('\$db_persistent','$db_persistent = '.(isset($set_persistent)?'TRUE':'FALSE').";\n",'//##/DATABASE##')){
+        show_error('Can not modify configuration!');
+        exit;
+    }
+    if (!config_set_option('\$db_host',"\$db_host = '".$set_host."';\n",'//##/DATABASE##')){
+        show_error('Can not modify configuration!');
+        exit;
+    }
+    if (!config_set_option('\$db_user',"\$db_user = '".$set_user."';\n",'//##/DATABASE##')){
+        show_error('Can not modify configuration!');
+        exit;
+    }
+    if (!config_set_option('\$db_pass',"\$db_pass = '".$set_pass."';\n",'//##/DATABASE##')){
+        show_error('Can not modify configuration!');
+        exit;
+    }
+    if (!config_set_option('\$db_name',"\$db_name = '".$set_name."';\n",'//##/DATABASE##')){
+        show_error('Can not modify configuration!');
+        exit;
+    }
+    if (!config_set_option('\$db_prepend',"\$db_prepend = '".$set_prepend."';\n",'//##/DATABASE##')){
+        show_error('Can not modify configuration!');
+        exit;
+    }
+
+    while (list($key,$val) = each($set_table)){
+        if (!config_set_option('\$table_'.$key,"\$table_$key = '".$set_table[$key]."';\n",'//##/TABLES##')){
+            show_error('Can not modify configuration!');
+            exit;
+        }
+    }
+
+    if (!config_write()){
+        show_error('Can not write configuration!');
+        exit;
+    }
+
+    show_info_box('Database configuraton saved. <br />When you press button. new configuration will be used also for this session and if you changed anything related to authorisation, your will have to login again.');
+    include_once('./admin_footer.php');
+    exit;
 }
 
+show_warning('When you change database settings, all data may be inaccessible from web and you will have to transfer it to other MySQL account or edit configuration file (config.php) directly to set correct values.');
 echo '<form action="options_database.php" method="get"><input type="hidden" name="action" value="save"><table class="item">';
 echo "\n<tr><th>Host</th>\n";
 echo '<td><input type="text" class="text" name="set_host" value="'.$db_host.'" /></td>'."</tr>\n";

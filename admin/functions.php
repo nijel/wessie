@@ -112,7 +112,11 @@ function make_return_button($title=' OK '){
 
 
 function show_info($msg){
-    echo '<b>'.$msg.'</b><br />';
+    echo '<p class="info">'.$msg."</p>\n";
+}
+
+function show_warning($msg){
+    echo '<p class="warning">'.$msg."</p>\n";
 }
 
 function show_info_box($msg,$params=array(),$action=''){
@@ -507,7 +511,7 @@ function config_set_option($pattern,$newline,$add_before="\\?>",$fallback_add_be
 
     for ($i=0; $i < count($configuration); $i++) {
         if (isset($configuration[$i])){
-            if (ereg($pattern, $configuration[$i])){
+            if (ereg('^[[:space:]]*'.$pattern, $configuration[$i])){
                 $configuration[$i]=$newline;
                 return TRUE;
             } elseif (ereg($add_before, $configuration[$i])){
