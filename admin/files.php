@@ -132,7 +132,7 @@ while (list ($key, $val) = each($list)){
                 make_row($even);
                 $filename='<a href="files.php?'.(isset($case)?'case=&amp;':'').(isset($regexp)?'regexp=&amp;':'').'dir='.urlencode(getcwd()).'">'.($val['filename']=='..'?'.. [one level up]':$val['filename']).'</a>';
                 $size='DIR';
-                if ($val['filename'] == '..') $download_path = '';
+                if ($val['filename'] == '..' || $webdir{0} != '/') $download_path = '';
                 elseif (strncmp($root_dir,getcwd(),$root_dir_len)==0) $download_path = $webdir.$val['filename'];
                 else $download_path = '';
             }else{
@@ -153,7 +153,7 @@ while (list ($key, $val) = each($list)){
         $filename=$val['filename'];
         make_row($even);
         $size=$val['hsize'];
-        if (strncmp($root_dir,$dir.'/'.$filename,$root_dir_len)==0) $download_path = $webdir.($webdir{strlen($webdir)-1}=='/'?'':'/').$filename;
+        if ($webdir{0} == '/') $download_path = $webdir.($webdir{strlen($webdir)-1}=='/'?'':'/').$filename;
         else $download_path = '';
     }
     make_cell((isset($search)?'.':'').$filename);
