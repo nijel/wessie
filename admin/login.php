@@ -61,15 +61,20 @@ if (isset($HTTP_POST_VARS['submit'])){
     if (!(mysql_query('UPDATE '.$table_prepend_name.$table_users." set hash='".$hash."', time=NOW(), ip= '".$ip."' where user='".$user."' and pass='".$pass."' limit 1",$db_connection)))
             do_error(1,'UPDATE '.$table_prepend_name.$table_users.': '.mysql_error());
 
+    if (!isset($url)){
+        $url = 'http://' .  $SERVER_NAME . dirname($REQUEST_URI) . '/index.php';
+
+    }
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                   "DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-   <meta http-equiv="Refresh" content="0;url=http://<?php echo $SERVER_NAME.dirname($REQUEST_URI)?>/index.php" />
+   <meta http-equiv="Refresh" content="0; URL=<?php echo $url; ?>" />
 </head>
 <body>
-<a href="http://<?php echo $SERVER_NAME.dirname($REQUEST_URI)?>/index.php">REDIRECT</a>
+<a href="<?php echo $url; ?>">REDIRECT</a>
 </body>
 </html>
 <?php
@@ -120,6 +125,11 @@ if ($QUERY_STRING=='expired'){?>
 You must login before accessing administration.<br />
 <br />
 <form action="login.php" method="post">
+<?php
+if (isset($url)){
+    echo '<input type="hidden" name="url" value="' . $url . '" />';
+}
+?>
 <table>
   <tr>
     <th>Username:</th>
