@@ -22,7 +22,6 @@
   <item url="admin/menu.php" />
   <item url="admin/users.php" />
   <item url="admin/downloads.php" />
-  <item url="admin/download_groups.php" />
   <item url="img/WSS.png" />
   <item url="img/WSS_banner.png" />
   <item url="logs/error.log" />
@@ -46,5 +45,8 @@
   <item url="plugins/common.php" />
   <item url="plugins/pages/random_page/install.php" />
   <item url="plugins/pages/random_page/main.php" />
+  <item url="admin/plugins.php" />
+  <item url="admin/functions.php" />
+  <item url="admin/article_delete.php" />
  </project>
 </webproject>

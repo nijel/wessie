@@ -134,7 +134,7 @@ if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_page.' 
 $page=mysql_fetch_array($id_result);
 if (!isset($page['id'])){
     log_error('Unknown page: '.$id);
-    header('Location: http://'.$base_path.'main.php');
+    header('Location: http://'.$SERVER_NAME.$base_path.'main.php');
     bye();
 }
 mysql_free_result($id_result);
@@ -156,7 +156,7 @@ mysql_free_result($id_result);
 //read category
 if (!isset ( $categories[$page['category']] ) ) {
     log_error('Unknown category: '.$page['category']);
-    header('Location: http://'.$base_path.'main.php');
+    header('Location: http://'.$SERVER_NAME.$base_path.'main.php');
     bye();
 } else {
     $category=$categories[$page['category']];
