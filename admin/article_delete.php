@@ -83,7 +83,7 @@ Do you want to delete following article?<br>
     <td><?php make_return_button(' No ');?> </td>
   </tr>
 </table>
-<a href="<?php make_url($item['page'],$item['lng'])?>" target="_blank">Here</a> you can view article rendered in template.<br>
+<a href="<?php echo make_url($id,$lng)?>" target="_blank">Here</a> you can view article rendered in template.<br>
 
 <table border="0">
 <tr><th valign="top">
