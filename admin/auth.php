@@ -44,7 +44,6 @@ die();
 }
 $user=$HTTP_COOKIE_VARS['user'];
 $hash=$HTTP_COOKIE_VARS['hash'];
-$user='admin';
 
 if (!($id_result=mysql_query('SELECT count(user) as count from '.$table_prepend_name.$table_users.' where user="'.$user.'" and hash="'.$hash.'"',$db_connection)))
     do_error(1,'SELECT '.$table_prepend_name.$table_users.': '.mysql_error());
@@ -54,7 +53,7 @@ if ($auth['count']!=1){
     Header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=unauthorised' . $url);
     die();
 }
-if (!($id_result=mysql_query('SELECT ip,perms from '.$table_prepend_name.$table_users.' where user="'.$user.'" and hash="'.$hash.'" and time>(NOW() - interval '.$admin_timeout.')',$db_connection)))
+if (!($id_result=mysql_query('SELECT ip,perms,name from '.$table_prepend_name.$table_users.' where user="'.$user.'" and hash="'.$hash.'" and time>(NOW() - interval '.$admin_timeout.')',$db_connection)))
     do_error(1,'SELECT '.$table_prepend_name.$table_users.': '.mysql_error());
 if (mysql_num_rows($id_result)!=1){
     Header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=expired' . $url);
@@ -87,9 +86,10 @@ if ($user!='admin' && !in_array(basename($SCRIPT_NAME),$permissions)){
     Header('Content-Type: text/html; charset='.$admin_charset);
     if (!isset($page_title)) $page_title=@$site_name[0].':Administration:'.$page_name;
     show_html_head($page_title);
-    show_error("You don't have permission to view this!");
+    show_error_box("You don't have permission to view this!");
     include_once('./admin_footer.php');
     exit;
 }
+$fullname = $auth['name'];
 
 ?>

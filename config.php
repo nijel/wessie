@@ -172,6 +172,7 @@ $special[1] = '';
 //                        browse dialog and SHOULD affect plugins that read
 //                        files from disk)
 $admin_charset = 'iso-8859-2';
+$admin_default_css = 'admin_blue.css';
 $admin_timeout = '20 MINUTE';
 $admin_user_cookie = 2592000;
 $admin_hash_cookie = 3600;

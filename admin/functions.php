@@ -26,7 +26,7 @@
 // $Id$
 
 function show_html_head($title,$special=''){
-global $wessie_author,$wessie_version,$wessie_copyright,$site_home,$admin_charset,$base_path;;
+global $wessie_author,$wessie_version,$wessie_copyright,$site_home,$admin_charset,$base_path,$admin_default_css;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                   "DTD/xhtml1-transitional.dtd">
@@ -38,8 +38,9 @@ global $wessie_author,$wessie_version,$wessie_copyright,$site_home,$admin_charse
     <meta name="Generator" content="<?php echo $wessie_copyright?>" />
     <link rel="home" href="<?php echo $site_home?>" />
     <link rel="copyright" href="mailto:<?php echo $wessie_author?>" />
-    <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
+    <link rel="StyleSheet" href="./<?php echo $admin_default_css;?>" type="text/css" media="screen" />
     <link rel="Alternate StyleSheet" href="./admin_blue.css" title="Blue" type="text/css" media="screen" />
+    <link rel="Alternate StyleSheet" href="./admin_yellow.css" title="Yellow" type="text/css" media="screen" />
     <link rel="icon" href="<?php echo $base_path;?>img/favicon.png" type="image/png" />
 
     <!-- We LOVE Micro$oft! We don't like their silly features. -->

@@ -24,8 +24,12 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-Header('Pragma: no-cache');
-Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");
+$now = gmdate('D, d M Y H:i:s') . ' GMT';
+header('Expires: ' . $now);
+header('Last-Modified: ' . $now);
+header('Cache-Control: no-store, no-cache, must-revalidate'); // HTTP/1.1
+header('Cache-Control: pre-check=0, post-check=0, max-age=0'); // HTTP/1.1
+header('Pragma: no-cache'); // HTTP/1.0
 error_reporting (E_ALL);
 require_once('./auth.php');
 require_once('./functions.php');
@@ -73,7 +77,7 @@ if (isset($onunload)){
 <h1><?php echo $page_title_html; ?></h1>
 </td>
 <td class="right">
-User:<?php echo $user; ?><br />
+User:<a href="user_self.php"><?php echo $fullname; ?></a><br />
 <a href="logout.php">Logout</a>
 </td>
 </tr>

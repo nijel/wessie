@@ -72,3 +72,14 @@ function gE(e,f){
         return f.document.all[e];
     return f.document.getElementById(e);
 }
+
+/* Checks/unchecks all checkboxes */
+function set_checkboxes(the_form, element, do_check)
+{
+    var elts      = document.forms[the_form].elements[element];
+    var elts_cnt  = elts.length;
+
+    for (var i = 0; i < elts_cnt; i++) {
+        elts[i].checked = do_check;
+    } // end for
+} // end of the 'setCheckboxes()' function

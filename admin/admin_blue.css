@@ -72,7 +72,7 @@ input.info,input.browse,input.delete,input.return,input.text,input.go,input.save
     color: #000000;
     background-color: #99aaee;
 }
-select.select_disabled,input.check_disabled {
+select.select_disabled,input.check_disabled,input.text_disabled {
     color: #dddddd;
     background-color: #6688bb;
 }
