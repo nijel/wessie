@@ -28,6 +28,7 @@ Header('Pragma: no-cache');
 Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");
 error_reporting (E_ALL);
 require_once('./auth.php');
+require_once('./functions.php');
 $page_title=$site_name.':Administration:'.$page_name;
 Header('Content-Type: text/html; charset='.$admin_charset);
 ?>
@@ -90,12 +91,12 @@ User:<?php echo $user?><br>
 <table width="100%" border="0">
   <tr>
     <td width="2%">&nbsp;</td>
+    <td width="12%" align="center"><a href="category.php">Categories</a></td>
+    <td width="12%" align="center"><a href="menu.php">Menu</a></td>
     <td width="12%" align="center"><a href="pages.php">Pages</a></td>
     <td width="12%" align="center"><a href="articles.php">Articles</a></td>
-    <td width="12%" align="center"><a href="category.php">Categories</a></td>
     <td width="12%" align="center"><a href="downloads.php">Downloads</a></td>
-    <td width="12%" align="center"><a href="download_groups.php">Dnld.&nbsp;groups</a></td>
-    <td width="12%" align="center"><a href="menu.php">Menu</a></td>
+    <td width="12%" align="center"><a href="plugins.php">Plugins</a></td>
     <td width="12%" align="center"><a href="users.php">Users</a></td>
     <td width="12%" align="center"><a href="options.php">Options</a></td>
     <td width="2%">&nbsp;</td>

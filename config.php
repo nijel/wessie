@@ -99,5 +99,15 @@ $admin_charset='iso-8859-2';
 
 //how long is logged in admin valid, check MySQL documentation for details on time specification
 $admin_timeout='20 MINUTE';
+
+//size of edits in administration
+$admin_name_size=40;  //page name
+$admin_content_rows=10;
+$admin_content_cols=40;
+$admin_keywords_rows=2;
+$admin_keywords_cols=40;
+$admin_description_rows=2;
+$admin_description_cols=40;
+
 }
 ?>

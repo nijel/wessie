@@ -63,7 +63,7 @@ if (isset($filter_desc) && ($filter_desc != '')) {
 }
 
 if (!$id_result=mysql_query(
-'SELECT last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, id, name, description, count, category'.
+'SELECT UNIX_TIMESTAMP(last_change) as last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, id, name, description, count, category'.
 ' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
 ' where id=page and '.$table_prepend_name.$table_article.'.lng='.$table_prepend_name.$table_page.'.lng'.$cond.
 ' order by page,lng'))
@@ -82,7 +82,7 @@ echo "Nothing...";
             echo '<tr bgcolor="#8f8f8f"><td>';
         }
         $even = 1 - $even;
-        echo $item['page'].'</td><td>'.$item['name'].'</td><td>'.$item['description'].'</td><td>'.$lang_name[$item['lng']].'</td><td>'.$item['last_change'].' - '.strftime('%c',$item['last_change']).'</td>';
+        echo $item['page'].'</td><td>'.$item['name'].'</td><td>'.$item['description'].'</td><td>'.$lang_name[$item['lng']].'</td><td>'.strftime('%c',$item['last_change']).'</td>';
         echo '<td><a href="article_edit.php?id=',$item['page'].'&lng='.$item['lng'].'">Edit</a></td><td><a href="article_delete.php?id=',$item['page'].'&lng='.$item['lng'].'">Delete</a></td><td><a href="../main.php?id=',$item['page'].'&lng='.$item['lng'].'" target="_blank">View</a></td>'."\n";
     }
     echo "</table>\n";
