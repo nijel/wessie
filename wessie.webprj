@@ -1,6 +1,5 @@
 <!DOCTYPE webproject ><webproject>
-<!-- $Id$ -->
-<project preview="http://wessie.cic/" type="Local" name="wessie" >
+ <project preview="http://wessie.cic/" type="Local" name="wessie" >
   <upload/>
   <author>Michal Cihar</author>
   <email>cihar@email.cz</email>
@@ -51,5 +50,10 @@
   <item url="admin/menu_edit.php" />
   <item url="admin/menu_delete.php" />
   <item url="admin/menu_sync.php" />
+  <item url="devel/template.php" />
+  <item url="img/wessie.png" />
+  <item url="img/wessie_banner.png" />
+  <item url="img/wessie_icon.png" />
  </project>
 </webproject>
+<!-- $Id$ -->
