@@ -28,20 +28,26 @@
 $page_name='Articles';
 require_once('./admin_header.php');
 ?>
-<form method="GET">
+<a href="article_edit.php">New article</a><br><br>
+Filter:<br>
+<form method="GET" action="article.php">
 Language: <select name="filter_lng">
   <option value="any">Any</option>
 <?php
+
+//ob_start();
 for($i=0;$i<count($languages);$i++){
 
-echo '<option value='.$i.((isset($filter_lng) && ((int)$filter_lng)==$i)?' selected':'').'>'.$lang_name[$i]."</option>\n";
+echo '<option value='.$i.((isset($filter_lng) && ($filter_lng != 'any') && ((int)$filter_lng)==$i)?' selected':'').'>'.$lang_name[$i]."</option>\n";
 }
+//$lang_select=ob_get_contents ();
+//ob_end_flush();
 ?>
 </select>
+ Title: <input type="text" name="filter_title" <?php if(isset($filter_title)){ echo 'value="'.$filter_title.'"'; }?>>
+ Description: <input type="text" name="filter_desc" <?php if(isset($filter_desc)){ echo 'value="'.$filter_desc.'"'; }?>>
 <input type="submit">
 </form><br>
-
-
 <?php
 
 if (isset($filter_lng) && $filter_lng!='any') {
@@ -49,9 +55,15 @@ if (isset($filter_lng) && $filter_lng!='any') {
 } else {
     $cond = '';
 }
+if (isset($filter_title) && ($filter_title != '')) {
+    $cond.=' and name like "%'.$filter_title.'%"';
+}
+if (isset($filter_desc) && ($filter_desc != '')) {
+    $cond.=' and description like "%'.$filter_desc.'%"';
+}
 
 if (!$id_result=mysql_query(
-'SELECT content, last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, id, name, description, count, category'.
+'SELECT last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, id, name, description, count, category'.
 ' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
 ' where id=page and '.$table_prepend_name.$table_article.'.lng='.$table_prepend_name.$table_page.'.lng'.$cond.
 ' order by page,lng'))
@@ -60,8 +72,8 @@ if (!$id_result=mysql_query(
 if (mysql_num_rows($id_result) == 0){
 echo "Nothing...";
 } else {
-    echo 'Displayed articles: '.mysql_num_rows($id_result);
-    echo "<table border=0><tr><th>Page</th><th>Title</th><th>Description</th><th>Language</th><th colspan=2>Action</th></tr>\n";
+    echo 'Listed articles: '.mysql_num_rows($id_result);
+    echo "<table border=0><tr><th>Page</th><th>Title</th><th>Description</th><th>Language</th><th>Last change</th><th colspan=3>Action</th></tr>\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
         if ($even == 1) {
@@ -70,7 +82,8 @@ echo "Nothing...";
             echo '<tr bgcolor="#8f8f8f"><td>';
         }
         $even = 1 - $even;
-        echo $item['page'].'</td><td>'.$item['name'].'</td><td>'.$item['description'].'</td><td>'.$lang_name[$item['lng']].'</td><td><a href="article_edit.php?id=',$item['page'].'&lng='.$item['lng'].'">Edit</a></td><td><a href="article_delete.php?id=',$item['page'].'&lng='.$item['lng'].'">Delete</a></td></tr>'."\n";
+        echo $item['page'].'</td><td>'.$item['name'].'</td><td>'.$item['description'].'</td><td>'.$lang_name[$item['lng']].'</td><td>'.$item['last_change'].' - '.strftime('%c',$item['last_change']).'</td>';
+        echo '<td><a href="article_edit.php?id=',$item['page'].'&lng='.$item['lng'].'">Edit</a></td><td><a href="article_delete.php?id=',$item['page'].'&lng='.$item['lng'].'">Delete</a></td><td><a href="../main.php?id=',$item['page'].'&lng='.$item['lng'].'" target="_blank">View</a></td>'."\n";
     }
     echo "</table>\n";
 }

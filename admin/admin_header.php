@@ -40,13 +40,13 @@ Header('Content-Type: text/html; charset='.$admin_charset);
     <META NAME="Author" CONTENT="<?php echo $wss_author?>">
     <link rel="copyright" href="mailto:<?php echo $wss_author?>">
     <META NAME="Generator" CONTENT="<?php echo $wss_version.', Copyright (C) 2001 '.$wss_author?>">
+</HEAD>
+<body bgcolor="gray" text="white" link="#eeee00" alink="yellow" vlink="#dddd00">
   <SCRIPT language="JavaScript">
   <!--
      if(top != self) { window.top.location.href=location; }
   //-->
   </SCRIPT>
-</HEAD>
-<body bgcolor="gray" text="white" link="#eeee00" alink="yellow" vlink="#dddd00">
 <table border="0" width="100%">
 <tr>
 <td align="center" width="200">
@@ -82,7 +82,7 @@ Header('Content-Type: text/html; charset='.$admin_charset);
 </td>
 <td align="center" width="200">
 User:<?php echo $user?><br>
-<a href='logout.php'>Logout</a>
+<a href="logout.php">Logout</a>
 </td>
 </tr>
 </table>

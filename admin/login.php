@@ -29,8 +29,8 @@ Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");
 error_reporting (E_ALL);
 require_once('../init.php');
 require_once('../config.php');
-$page_title=$site_name.':Administration:Login';
 Header('Content-Type: text/html; charset='.$admin_charset);
+$page_title=$site_name.':Administration:Login';
 if (isset($HTTP_POST_VARS['submit'])){
     $pass=$HTTP_POST_VARS['pass'];
     $user=$HTTP_POST_VARS['user'];
@@ -46,9 +46,9 @@ if (isset($HTTP_POST_VARS['submit'])){
     }
 
 
-    setcookie ("user", $user,time()+2592000, dirname($REQUEST_URI), $SERVER_NAME);//valid one month
+    setcookie ("user", $user,time()+2592000, dirname($REQUEST_URI));//valid one month
     $hash=md5 (uniqid (rand()));
-    setcookie ("hash",$hash ,time()+3600, dirname($REQUEST_URI), $SERVER_NAME);//valid one hour
+    setcookie ("hash",$hash ,time()+3600, dirname($REQUEST_URI));//valid one hour
 
     $ip=$REMOTE_ADDR;
     $headers = getallheaders();
@@ -67,6 +67,7 @@ if (isset($HTTP_POST_VARS['submit'])){
    <META HTTP-EQUIV="Refresh" CONTENT="0;url=http://<?php echo $SERVER_NAME.dirname($REQUEST_URI)?>/index.php">
 </HEAD>
 <BODY>
+<a href="http://<?php echo $SERVER_NAME.dirname($REQUEST_URI)?>/index.php">REDIRECT</a>
 </BODY>
 </HTML>
 <?php
