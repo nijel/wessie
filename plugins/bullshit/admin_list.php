@@ -60,7 +60,7 @@ if (isset($filter_desc) && ($filter_desc != '')) {
 }
 
 if (!$id_result=mysql_query(
-'SELECT lng, id, name, description, count, category'.
+'SELECT lng, id, name, description, count, category, param'.
 ' from '.$table_prepend_name.$table_page.
 ' where type="bullshit" '.$cond.
 ' order by id,lng'))
@@ -69,16 +69,25 @@ if (!$id_result=mysql_query(
 if (mysql_num_rows($id_result) == 0){
     echo "Nothing...";
 } else {
-    echo '<table class="data"><tr><th>Id</th><th>Name</th><th>Description</th><th>Language</th><th>Actions</th></tr>'."\n";
+    echo '<table class="data"><tr><th>Id</th><th>Name</th><th>Description</th><th>Language</th><th>Paragraphs</th><th>Actions</th></tr>'."\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
         $url=$edit_url.'&amp;id='.$item['id'].'&amp;lng='.$item['lng'];
         make_row($even);
         $even = 1 - $even;
+
+        $pars=5;
+        $sentences=15;
+        $words=20;
+        $letters=15;
+        $addHtml=3;
+        eval($item['param']);
+
         echo make_cell($item['id'],$url);
         echo make_cell(htmlspecialchars($item['name']),$url);
         echo make_cell(htmlspecialchars($item['description']),$url);
         echo make_cell($lang_name[$item['lng']],$url);
+        echo make_cell($pars,$url);
         echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="'.$delete_url.'&amp;id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['id'],$item['lng']).'" target="_blank">View</a>&nbsp;'.((isset($admin_validator)&&($admin_validator!=''))?'|&nbsp;<a href="'.$admin_validator.urlencode(make_absolute_url($item['id'],$item['lng'])).'" target="_blank">Validate</a>&nbsp;':'').'</td></tr>'."\n";
     }
     echo "</table>\n";

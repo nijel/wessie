@@ -206,6 +206,8 @@ $admin_fm_maxsize = 10485760;
 
 //size of edits in administration
 //##ADMIN_SIZES##
+// $admin_fallback_size - fallback is used when no other fit
+$admin_fallback_size = 5;
 $admin_name_size = 80;
 $admin_short_size = 80;
 $admin_filename_size = 80;

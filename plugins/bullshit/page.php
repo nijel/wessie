@@ -30,12 +30,12 @@ include_once('./plugins/bullshit/function.php');
 function get_content(){
     global $page;
     $pars=5;
-    $senteces=15;
+    $sentences=15;
     $words=20;
     $letters=15;
     $addHtml=3;
     eval($page['param']);
-    return genBullshit($pars,$senteces,$words,$letters,$addHtml);
+    return genBullshit($pars,$sentences,$words,$letters,$addHtml);
 }
 
 //Return last change

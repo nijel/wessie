@@ -110,7 +110,9 @@ function sized_textarea($name,$content){
 }
 
 function sized_edit($name,$content,$onchange=''){
-    echo '<input '.($onchange==''?'':'onchange="'.$onchange.'"').'type="text" name="'.$name.'" id="'.$name.'" size="'.$GLOBALS['admin_'.$name.'_size'].'" value="'.htmlspecialchars($content).'" class="text" />';
+    global $admin_fallback_size;
+    if (isset($GLOBALS['admin_'.$name.'_size'])) $size=$GLOBALS['admin_'.$name.'_size']; else $size=$admin_fallback_size;
+    echo '<input '.($onchange==''?'':'onchange="'.$onchange.'"').'type="text" name="'.$name.'" id="'.$name.'" size="'.$size.'" value="'.htmlspecialchars($content).'" class="text" />';
 }
 
 $download_group_name_init=FALSE;

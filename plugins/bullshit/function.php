@@ -37,18 +37,18 @@ srand(make_seed());
 
 /*
 $pars       - number of paragraphs to generate
-$senteces   - maximal senteces in paragraph
+$sentences  - maximal sentences in paragraph
 $words      - maximal words in sentece
 $letters    - maximal letters in word
 $addHtml    - add some html into text
                 1 - <p>
                 2 - <a>
 */
-function genBullshit($pars=5,$senteces=15,$words=20,$letters=15,$addHtml=3) {
+function genBullshit($pars=5,$sentences=15,$words=20,$letters=15,$addHtml=3) {
     $text = "";
 
-    for ($i = 0; $i <= $pars; $i++) {
-        $text .= genParagraph($senteces,$words,$letters,$addHtml);
+    for ($i = 1; $i <= $pars; $i++) {
+        $text .= genParagraph($sentences,$words,$letters,$addHtml);
         if ($i != $pars) {
             $text .= "\n";
         }
@@ -57,14 +57,14 @@ function genBullshit($pars=5,$senteces=15,$words=20,$letters=15,$addHtml=3) {
     return $text;
 }
 
-function genParagraph($senteces,$words,$letters,$addHtml) {
+function genParagraph($sentences,$words,$letters,$addHtml) {
     $par = "";
     if (($addHtml & 1) == 1) {
         $par .= "<p>";
     }
 
-    $count = rand(1,$senteces);
-    for ($x = 0; $x <= $count; $x++) {
+    $count = rand(1,$sentences);
+    for ($x = 1; $x <= $count; $x++) {
         $par .= genSentence($words,$letters,$addHtml);
         if ($x != $count) {
             $par .= " ";
@@ -85,7 +85,7 @@ function genSentence($words,$letters,$addHtml) {
     $was_a = FALSE;
     $first = TRUE;
     $count = rand(2,$words);
-    for ($n = 0; $n <= $count; $n++) {
+    for ($n = 1; $n <= $count; $n++) {
         if (!$was_a && (($addHtml & 2) == 2) && rand(0,20) < 1) {
             $was_a = TRUE;
             $sentence .= '<a href="/">';
@@ -120,7 +120,7 @@ function genWord($letters,$addHtml) {
         $word = genWord($letters,$addHtml) . "-" . genWord($letters,$addHtml);
     } else {
         $count = rand(2,$letters);
-        for ($m = 0; $m < $count; $m++) {
+        for ($m = 1; $m < $count; $m++) {
             $word .= genLetter($vowel,$consonant,$prev);
         }
     }
