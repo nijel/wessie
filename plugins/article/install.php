@@ -38,7 +38,7 @@ if (addPageType('article')) {
         }
     }
     if ($error==''){
-        if (!$id_result=mysql_query("CREATE TABLE $table_prepend_name.$table_article (
+        if (!$id_result=mysql_query("CREATE TABLE $table_prepend_name$table_article (
         content text NOT NULL,
         last_change timestamp NOT NULL,
         page smallint unsigned NOT NULL default '0',
