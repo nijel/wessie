@@ -5,14 +5,6 @@ ORDERED by importance (order of starting work on it):
 ! = important
 !! = very important
 
-!! add comments
-
-user+admin: ? remake working with languages
-
-user: ! optimalise left menu 
-       - select all menu items for current category and then write it from array 
-       - use only ane select for menu+page tables
-
 admin: add pages listing + links to edit (this probably needs plugins working)
 
 admin+user: !! plugin functionality
@@ -58,3 +50,7 @@ admin+user: cofigurable counter/stats working
 admin+user: update documentation (FUNCTIONS, VARIABLES, README, some help, ...)
 
 admin+user: split functions.php, and to new files add something from main.php
+
+!! add comments
+
+user+admin: ? remake working with languages

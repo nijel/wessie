@@ -279,60 +279,80 @@ if ($use_adverts){
 }
 
 function left_menu(){
-global $lng,$id,$table_prepend_name,$table_menu,$db_connection;
 
     function add_childs($child_id,$depth,$parents){
-    global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
-        $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
-        $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
-    global $first_item,$left_menu_divisor,$id,$category,$db_connection,$table_menu,$table_page,$table_prepend_name,$lng;
+        global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
+            $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
+            $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
+        global $first_item,$left_menu_divisor,$id,$category,$lng,$menu_item_cache,$menu_parent_cache,$menu_page_cache;
 
-    if (!($id_result=(mysql_query('SELECT id,name,description,page,category,parent,expand from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and parent='.$child_id.' and category='.$category['id'].' order by rank',$db_connection)))&&($child_id=0))
-        do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
+        while (list ($key, $val) = each($menu_parent_cache[$child_id])){
+            if (!$first_item) echo $left_menu_divisor;
+            else $first_item=false;
 
-    while ($item = mysql_fetch_array ($id_result)){
-        if (!$first_item) echo $left_menu_divisor;
-        $first_item=false;
+            eval('?'.'>'.make_menu_item(make_url($menu_item_cache[$val]['page'],$lng),$menu_item_cache[$val]['name'],$category['name'],$category['short'],$menu_item_cache[$val]['description'],$menu_item_cache[$val]['page']==$id,$depth).'<?php ');
 
-        if (!($id2_result=mysql_query('SELECT name,description from '.$table_prepend_name.$table_page.' where lng='.$lng.' and id='.$item['page'].' limit 1',$db_connection)))
-            do_error(1,'SELECT '.$table_prepend_name.$table_page.': '.mysql_error());
-        $page=mysql_fetch_array($id2_result);
-        mysql_free_result($id2_result);
-
-        if ((!isset($item['name']))||($item['name']=='')) $name=$page['name'];
-        else $name=$item['name'];
-
-        if ((!isset($item['description']))||($item['description']=='')) $desc=$page['description'];
-        else $desc=$item['description'];
-
-        eval('?'.'>'.make_menu_item(make_url($item['page'],$lng),$name,$category['name'],$category['short'],$desc,$item['page']==$id,$depth).'<?php ');
-        if (($item['expand']==1) || ($item['page']==$id) || in_array ($item['id'],$parents)){
-            add_childs($item['id'],$depth+1,$parents);
+            //do we have any childs and should we list them?
+            if (isset($menu_parent_cache[$menu_item_cache[$val]['id']]) && (($menu_item_cache[$val]['expand']==1) || ($menu_item_cache[$val]['page']==$id) || in_array ($menu_item_cache[$val]['id'],$parents))){
+                add_childs($menu_item_cache[$val]['id'],$depth+1,$parents);
+            }
         }
     }
+
+    global $lng,$id,$table_prepend_name,$table_menu,$table_page,$db_connection,$category;
+    //cache must bu global, otherwise it would not be accessible by add_childs
+    global $menu_item_cache,$menu_parent_cache,$menu_page_cache;
+
+    // cache alle menu items for current category and then print from array
+
+    //cache for whole menu items
+    $menu_item_cache=array();
+    //cache for listing by parent
+    $menu_parent_cache=array();
+    //cache for searching by page
+    $menu_page_cache=array();
+
+    if (!($id_result=mysql_query("SELECT
+    $table_prepend_name$table_menu.id as id,
+    $table_prepend_name$table_menu.page as page,
+    if(strcmp($table_prepend_name$table_menu.name,''),$table_prepend_name$table_menu.name,$table_prepend_name$table_page.name) as name,
+    if(strcmp($table_prepend_name$table_menu.description,''),$table_prepend_name$table_menu.description,$table_prepend_name$table_page.description) as description,
+    $table_prepend_name$table_menu.category as category,
+    $table_prepend_name$table_menu.parent as parent,
+    $table_prepend_name$table_menu.expand as expand,
+    $table_prepend_name$table_menu.rank as rank
+    from $table_prepend_name$table_menu,$table_prepend_name$table_page
+    where menu.category=${category['id']} and menu.lng=$lng and menu.page=page.id and page.lng=$lng order by rank",$db_connection)))
+        do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
+
+    //fill cache items
+    while ($item = mysql_fetch_array ($id_result)){
+        $menu_page_cache[$item['page']]=$item['id'];
+        $menu_parent_cache[$item['parent']][]=$item['id'];
+        $menu_item_cache[$item['id']]=$item;
+/*        $menu_item_cache[$item['id']]['id']=$item['id'];
+        $menu_item_cache[$item['id']]['page']=$item['page'];
+        $menu_item_cache[$item['id']]['name']=$item['name'];
+        $menu_item_cache[$item['id']]['description']=$item['description'];
+        $menu_item_cache[$item['id']]['category']=$item['category'];
+        $menu_item_cache[$item['id']]['parent']=$item['parent'];
+        $menu_item_cache[$item['id']]['expand']=$item['expand'];
+        $menu_item_cache[$item['id']]['rank']=$item['rank'];*/
+    }
     mysql_free_result($id_result);
+
+    $first_item=true;
+    // Read parents of active page to know which path of menu structure should we enable
+    $parents=array();
+    $parent=-1;
+    $parent=$menu_item_cache[$menu_page_cache[$id]]['parent'];
+    while ($parent!=0){
+        $parents[]=$parent;
+        $parent=$menu_item_cache[$parent]['parent'];
     }
 
-$first_item=true;
-// Read parents of active page to know which path of menu structure should we enable
-$parents=array();
-$parent=-1;
-if (!($id_result=mysql_query('SELECT parent from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and page='.$id,$db_connection)))
-    do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
-$item=mysql_fetch_array ($id_result);
-mysql_free_result($id_result);
-$parent=$item['parent'];
-while ($parent!=0){
-    $parents[]=$parent;
-    if (!($id_result=mysql_query('SELECT parent from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and id='.$parent,$db_connection)))
-        do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
-    $item=mysql_fetch_array ($id_result);
-    mysql_free_result($id_result);
-    $parent=$item['parent'];
-}
-
-//Add childs to root
-add_childs(0,0,$parents);
+    //Add childs to root
+    add_childs(0,0,$parents);
 }
 
 function content(){
