@@ -40,7 +40,7 @@ function show_error_box($msg='Wrong parameters!',$params=array(),$action=''){
 while (list ($key, $val) = each($params)){
     echo '<input type="hidden" name="'.$key.'" value="'.$val.'" />';
 }?>
-    <input type="submit" value=" OK " />
+    <input type="submit" value=" OK " class="ok" />
   </form>
 <?php } else {
         make_return_button();
@@ -53,13 +53,13 @@ while (list ($key, $val) = each($params)){
 
 function make_return_button($title=' OK '){
     if (isset($GLOBALS['HTTP_REFERER'])) {
-    echo '<form action="'.$GLOBALS['HTTP_REFERER'].'" method="post">';
+    echo '<form action="'.$GLOBALS['HTTP_REFERER'].'" method="post" class="return">';
     ?>
-        <input type="submit" value="<?php echo $title?>" />
+        <input type="submit" value="<?php echo $title?>"  class="return" />
     </form>
     <?php } else {?>
     <form action="">
-    <input type="button" onclick="history.go(-1)" value="<?php echo $title?>" />
+    <input type="button" onclick="history.go(-1)" value="<?php echo $title?>"  class="return" />
     </form>
     <?php }
 }
@@ -78,18 +78,18 @@ function show_info_box($msg,$params=array(),$action=''){
 while (list ($key, $val) = each($params)){
     echo '<input type="hidden" name="'.$key.'" value="'.$val.'" />';
 }?>
-    <input type="submit" value=" OK " />
+    <input type="submit" value=" OK " class="ok" />
   </form>
 </div>
 <?php
 }
 
 function sized_textarea($name,$content){
-    echo '<textarea name="'.$name.'" cols="'.$GLOBALS['admin_'.$name.'_cols'].'" rows="'.$GLOBALS['admin_'.$name.'_rows'].'">'.htmlspecialchars($content).'</textarea>';
+    echo '<textarea name="'.$name.'" cols="'.$GLOBALS['admin_'.$name.'_cols'].'" rows="'.$GLOBALS['admin_'.$name.'_rows'].'" class="text">'.htmlspecialchars($content).'</textarea>';
 }
 
 function sized_edit($name,$content){
-    echo '<input type="text" name="'.$name.'" size="'.$GLOBALS['admin_'.$name.'_size'].'" value="'.htmlspecialchars($content).'" />';
+    echo '<input type="text" name="'.$name.'" size="'.$GLOBALS['admin_'.$name.'_size'].'" value="'.htmlspecialchars($content).'" class="text" />';
 }
 
 $category_name_init=FALSE;
@@ -105,10 +105,10 @@ function init_category_name(){
     $category_name_init=TRUE;
 }
 
-function category_edit($selected,$lng,$name='category',$add_any=FALSE){
+function category_edit($selected,$lng,$name='category',$add_any=FALSE,$class='select'){
     global $category_name_init,$category_name_cache;
     if (!$category_name_init) init_category_name();
-    echo '<select name="'.$name.'">';
+    echo '<select name="'.$name.'"'.($class!=''?' class="'.$class.'"':'').'>';
     if ($add_any){
         echo '<option value="any">Any</option>';
     }
@@ -119,12 +119,12 @@ function category_edit($selected,$lng,$name='category',$add_any=FALSE){
     echo '</select>';
 }
 
-function page_edit($selected,$lng,$name='page',$show_details=FALSE){
+function page_edit($selected,$lng,$name='page',$show_details=FALSE,$class='select'){
     global $table_prepend_name,$table_page,$db_connection;
     if (!($id_result=mysql_query('SELECT id,name,category from '.$table_prepend_name.$table_page.' where lng='.$lng.' order by category',$db_connection)))
         show_error(mysql_error());
 
-    echo '<select name="'.$name.'">';
+    echo '<select name="'.$name.'"'.($class!=''?' class="'.$class.'"':'').'>';
     $category=-1;
     while ($item = mysql_fetch_array ($id_result)) {
         if ($category!=$item['category']){
@@ -153,12 +153,12 @@ function get_category_name($selected,$lng){
     return isset($category_name_cache[$lng][$selected])?$category_name_cache[$lng][$selected]:'';
 }
 
-function language_edit($selected=-1,$add_any=FALSE,$name='lng',$disabled=array()){
+function language_edit($selected=-1,$add_any=FALSE,$name='lng',$disabled=array(),$class='select'){
     global $lang_name;
 
     reset($lang_name);
 
-    echo '<select name="'.$name.'">';
+    echo '<select name="'.$name.'"'.($class!=''?' class="'.$class.'"':'').'>';
     if ($add_any){
         echo '<option value="any">Any</option>';
     }
@@ -175,11 +175,11 @@ function language_edit($selected=-1,$add_any=FALSE,$name='lng',$disabled=array()
 
 function new_page($name,$type,$file,$description,$keywords,$lng,$category,$page){
     global $table_prepend_name,$table_page;
-    if (!mysql_query('INSERT '.$table_prepend_name.$table_page.' set name="'.$name.'", type="'.$type.'", file="'.$file.'",description="'.$description.'",keywords="'.$keywords.'",category='.$category.',lng='.$lng.($page!=-1?', id='.$page:''))){
+    if (!mysql_query('INSERT '.$table_prepend_name.$table_page.' set name="'.$name.'", type="'.$type.'", param="'.$file.'",description="'.$description.'",keywords="'.$keywords.'",category='.$category.',lng='.$lng.($page!=-1?', id='.$page:''))){
         show_error("Can't create page! (".mysql_error().')');
         exit;
     }
-    if (!$id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_page.' where  name="'.$name.'" and type="'.$type.'" and file="'.$file.'" and description="'.$description.'" and keywords="'.$keywords.'" and category='.$category.' and lng='.$lng.($page!=-1?' and id='.$page:''))){
+    if (!$id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_page.' where  name="'.$name.'" and type="'.$type.'" and param="'.$file.'" and description="'.$description.'" and keywords="'.$keywords.'" and category='.$category.' and lng='.$lng.($page!=-1?' and id='.$page:''))){
         show_error("Can't get back page info! (".mysql_error().')');
         exit;
     }
@@ -224,4 +224,10 @@ function make_url($id,$lng){
     return $base_path.'../main.php/id='.$id.'/lng='.$lng;
 }
 
+function highlighter($color='#00ff00'){
+    if ($color!=''){
+        echo ' onmouseover="highlight(this,\''.$color.'\');" onmouseout="unhighlight(this);"';
+//        echo ' onmouseover="oldbg=this.style.backgroundColor;if (typeof(this.style) != \'undefined\') this.style.backgroundColor = \''.$color.'\'" onmouseout="if (typeof(this.style) != \'undefined\') this.style.backgroundColor = oldbg"';
+    }
+}
 ?>

@@ -98,20 +98,20 @@ if (isset($action) && ($action=='save')){
 ?>
 <form action="article_edit.php" method="post">
 <input type="hidden" name="action" value="<?php echo $action?>" />
-<table border="0">
-<tr><th valign="top">
+<table class="item">
+<tr><th>
 Page ID:
 </th><td>
 <input type="hidden" name="page" value="<?php echo $article['page']?>" />
 <?php echo ($article['page']!=-1?$article['page']:'Page not created yet')?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 Language:
 </th><td>
 <input type="hidden" name="lng" value="<?php echo $article['lng']?>" />
 <?php echo $lang_name[$article['lng']]?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 Last change:
 </th><td>
 <?php
@@ -122,42 +122,42 @@ if($action=='create_new'){
 }
 ?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 Title:
 </th><td>
 <?php sized_edit('name', $article['name']) ?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 Category:
 </th><td>
 <?php category_edit($article['category'],$article['lng'],'category') ?>
 </td></tr>
 
 
-<tr><th valign="top">
+<tr><th>
 Description:
 </th><td>
 <?php sized_textarea('description',$article['description']) ?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 Keywords:
 </th><td>
 <?php sized_textarea('keywords',$article['keywords']) ?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 Content:
 </th><td>
 <?php sized_textarea('content',$article['content']) ?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 </th><td>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 </th><td>
-<table border="0" width="100%">
+<table class="savereset">
   <tr>
-    <td align="center"><input type="submit" value=" Save " /></td>
-    <td align="center"><input type="reset" value=" Reset " /></td>
+    <td><input type="submit" value=" Save " class="save" /></td>
+    <td><input type="reset" value=" Reset " class="reset" /></td>
   </tr>
 </table>
 </td></tr>
@@ -174,7 +174,7 @@ if ($action!='create_new'){
         echo '<input type="hidden" name="id" value="'.$article['page'].'" />';
         echo '<input type="hidden" name="from_lng" value="'.$lng.'" />';
         language_edit(-1,FALSE,'to_lng',$transl);
-        echo '<input type="submit" value=" Go " />';
+        echo '<input type="submit" value=" Go " class="go" />';
         echo '</form>';
     }
 }

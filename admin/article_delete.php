@@ -70,14 +70,14 @@ if (isset($action) && ($action=='delete') && isset($lng) && isset($id)){
 
 ?>
 Do you want to delete following article?<br />
-<table border="0">
+<table class="yesno">
   <tr>
     <td>
-<form action="article_delete.php" method="post">
+<form action="article_delete.php" method="post" class="delete">
 <input type="hidden" name="id" value="<?php echo $article['page']; ?>" />
 <input type="hidden" name="lng" value="<?php echo $article['lng']; ?>" />
 <input type="hidden" name="action" value="delete" />
-<input type="submit" value=" Yes " />
+<input type="submit" value=" Yes " class="delete" />
 </form>
     </td>
     <td><?php make_return_button(' No ');?> </td>
@@ -85,52 +85,52 @@ Do you want to delete following article?<br />
 </table>
 <a href="<?php echo make_url($id,$lng)?>" target="_blank">Here</a> you can view article rendered in template.<br />
 
-<table border="0">
-<tr><th valign="top">
+<table class="item">
+<tr><th>
 Page ID:
 </th><td>
 <?php echo ($article['page']!=-1?$article['page']:'Page not created yet')?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 Language:
 </th><td>
 <?php echo $lang_name[$article['lng']]?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 Last change:
 </th><td>
 <?php
     echo strftime('%c',$article['last_change']);
 ?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 Title:
 </th><td>
 <?php echo htmlspecialchars($article['name']) ?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 Category:
 </th><td>
 <?php echo htmlspecialchars(get_category_name($article['category'],$article['lng'])) ?>
 </td></tr>
 
 
-<tr><th valign="top">
+<tr><th>
 Description:
 </th><td>
 <?php echo htmlspecialchars($article['description']) ?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 Keywords:
 </th><td>
 <?php echo htmlspecialchars($article['keywords']) ?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 Content:
 </th><td>
 <?php echo htmlspecialchars($article['content']) ?>
 </td></tr>
-<tr><th valign="top">
+<tr><th>
 </th><td>
 </td></tr>
 </table>

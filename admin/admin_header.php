@@ -44,17 +44,14 @@ Header('Content-Type: text/html; charset='.$admin_charset);
     <meta name="Generator" content="<?php echo $wessie_version.', Copyright (C) 2001 '.$wessie_author?>" />
     <link rel="home" href="<?php echo $site_home?>" />
     <link rel="copyright" href="mailto:<?php echo $wessie_author?>" />
-  <script language="JavaScript" type="text/javascript">
-  <!--
-     if(top != self) { window.top.location.href=location; }
-  //-->
-  </script>
+    <link rel="StyleSheet" href="./admin.css" type="text/css" media="screen" />
+    <script language="JavaScript" type="text/javascript" src="./admin.js"></script>
 </head>
 
-<body bgcolor="gray" text="white" link="#eeee00" alink="yellow" vlink="#dddd00">
-<table border="0" width="100%">
+<body>
+<table class="upper">
 <tr>
-<td align="center" width="200">
+<td class="left">
 <?php
     if ($fd = fopen('/proc/uptime', 'r')){
         $ar_buf = split( ' ', fgets( $fd, 4096 ) );
@@ -82,28 +79,33 @@ Header('Content-Type: text/html; charset='.$admin_charset);
     }
 ?>
 </td>
-<td align="center">
+<td class="center">
 <h2><?php echo $page_title?></h2>
 </td>
-<td align="center" width="200">
+<td class="right">
 User:<?php echo $user?><br />
 <a href="logout.php">Logout</a>
 </td>
 </tr>
 </table>
-<hr width="100%" />
-<table width="100%" border="0">
+<table class="tabs">
   <tr>
-    <td width="2%">&nbsp;</td>
-    <td width="12%" align="center"><a href="category.php">Categories</a></td>
-    <td width="12%" align="center"><a href="menu.php">Menu</a></td>
-    <td width="12%" align="center"><a href="pages.php">Pages</a></td>
-    <td width="12%" align="center"><a href="articles.php">Articles</a></td>
-    <td width="12%" align="center"><a href="downloads.php">Downloads</a></td>
-    <td width="12%" align="center"><a href="plugins.php">Plugins</a></td>
-    <td width="12%" align="center"><a href="users.php">Users</a></td>
-    <td width="12%" align="center"><a href="options.php">Options</a></td>
-    <td width="2%">&nbsp;</td>
+<?php
+
+function make_tab_edit($href,$text,$url){
+    global $SCRIPT_NAME,$admin_highlight_tabs;
+    echo '<td'.(strpos($SCRIPT_NAME,$url)?' class="selected"':'');
+    highlighter($admin_highlight_tabs);
+    echo ' onclick="window.location.replace(\''.$href.'\')"><a href="'.$href.'">'.$text.'</a></td>'."\n";
+}
+make_tab_edit('./category.php','Categories','/categor');
+make_tab_edit('./menu.php','Menu','/menu');
+make_tab_edit('./pages.php','Pages','/page');
+make_tab_edit('./articles.php','Articles','/article');
+make_tab_edit('./downloads.php','Downloads','/download');
+make_tab_edit('./plugins.php','Plugins','/plugin');
+make_tab_edit('./users.php','Users','/user');
+make_tab_edit('./options.php','Options','/option');
+?>
   </tr>
 </table>
-<hr width="100%" />

@@ -72,14 +72,14 @@ if (isset($id)&&isset($lng)&&!isset($action)){
 }
 ?>
 Do you want to delete following menu item?<br />
-<table border="0">
+<table class="yesno">
   <tr>
     <td>
-<form action="menu_delete.php" method="post">
+<form action="menu_delete.php" method="post" class="delete">
 <input type="hidden" name="id" value="<?php echo $id; ?>" />
 <input type="hidden" name="lng" value="<?php echo $lng; ?>" />
 <input type="hidden" name="action" value="delete" />
-<input type="submit" value=" Yes " />
+<input type="submit" value=" Yes " class="delete" />
 </form>
     </td>
     <td><?php make_return_button(' No ');?> </td>
@@ -88,22 +88,22 @@ Do you want to delete following menu item?<br />
 <a href="<?php echo make_url($id,$lng)?>" target="_blank">Here</a> you can view menu rendered in template.<br />
 
 <?php if (isset($id)) echo '<input type="hidden" name="id" value="' . $id . '" />'; ?>
-<table border="0">
-<tr><th valign="top"></th><th>Menu item values</th><th>Page <?php echo isset($item['page'])?$item['page']:''; ?> values</th></tr>
-<tr><th valign="top">Name</th><td><?php echo htmlspecialchars(isset($item['name'])?$item['name']:''); ?></td><td><?php echo htmlspecialchars($page['name']); ?></td></tr>
-<tr><th valign="top">Description</th><td><?php echo htmlspecialchars(isset($item['description'])?$item['description']:''); ?></td><td><?php echo htmlspecialchars($page['description']); ?></td></tr>
-<tr><th valign="top">Page</th><td><?php echo $item['page']; ?></td><td></td></tr>
-<tr><th valign="top">Category</th><td>
+<table class="item">
+<tr><th></th><th>Menu item values</th><th>Page <?php echo isset($item['page'])?$item['page']:''; ?> values</th></tr>
+<tr><th>Name</th><td><?php echo htmlspecialchars(isset($item['name'])?$item['name']:''); ?></td><td><?php echo htmlspecialchars($page['name']); ?></td></tr>
+<tr><th>Description</th><td><?php echo htmlspecialchars(isset($item['description'])?$item['description']:''); ?></td><td><?php echo htmlspecialchars($page['description']); ?></td></tr>
+<tr><th>Page</th><td><?php echo $item['page']; ?></td><td></td></tr>
+<tr><th>Category</th><td>
 <?php
     echo htmlspecialchars(get_category_name($item['category'],$item['lng']));
 ?></td><td><?php echo htmlspecialchars(get_category_name($page['category'],$item['lng'])); ?></td></tr>
-<tr><th valign="top">
+<tr><th>
 Language:
 </th><td>
 <?php echo $lang_name[$item['lng']]?>
 </td></tr>
-<tr><th valign="top">Rank</th><td><?php echo $item['rank']; ?></td><td></td></tr>
-<tr><th valign="top">Expand</th><td>
+<tr><th>Rank</th><td><?php echo $item['rank']; ?></td><td></td></tr>
+<tr><th>Expand</th><td>
 <?php
 if ($item['expand']==0)
     echo 'When selected';

@@ -127,12 +127,12 @@ if (isset($id)&&isset($lng)&&!isset($name)){
 <?php if (isset($id)) echo '<input type="hidden" name="id" value="' . $id . '" />'; ?>
 <input type="hidden" name="lng" value="<?php echo $lng; ?>" />
 <input type="hidden" name="parent" value="<?php echo $item['parent']; ?>" />
-<table border="0">
-<tr><th valign="top"></th><th>Menu item values</th><th>Page <?php echo isset($item['page'])?$item['page']:''; ?> values</th></tr>
-<tr><th valign="top">Name</th><td><?php sized_edit('name',isset($item['name'])?$item['name']:''); ?></td><td><?php echo htmlspecialchars($page['name']); ?></td></tr>
-<tr><th valign="top">Description</th><td><?php sized_textarea('description',isset($item['description'])?$item['description']:'') ?></td><td><?php echo htmlspecialchars($page['description']); ?></td></tr>
-<tr><th valign="top">Page</th><td><?php page_edit(isset($item['page'])?$item['page']:-1,$item['lng'],'page',TRUE); ?></td><td></td></tr>
-<tr><th valign="top">Category</th><td>
+<table class="item">
+<tr><th></th><th>Menu item values</th><th>Page <?php echo isset($item['page'])?$item['page']:''; ?> values</th></tr>
+<tr><th>Name</th><td><?php sized_edit('name',isset($item['name'])?$item['name']:''); ?></td><td><?php echo htmlspecialchars($page['name']); ?></td></tr>
+<tr><th>Description</th><td><?php sized_textarea('description',isset($item['description'])?$item['description']:'') ?></td><td><?php echo htmlspecialchars($page['description']); ?></td></tr>
+<tr><th>Page</th><td><?php page_edit(isset($item['page'])?$item['page']:-1,$item['lng'],'page',TRUE); ?></td><td></td></tr>
+<tr><th>Category</th><td>
 <?php
 if ($item['parent']!=0){
     echo '<input type="hidden" name="category" value="' . $parent['category'] . '" />' . htmlspecialchars(get_category_name($parent['category'],$item['lng']));
@@ -140,14 +140,14 @@ if ($item['parent']!=0){
     category_edit($item['category'],$item['lng'],'category');
 }
 ?></td><td><?php echo htmlspecialchars(get_category_name($page['category'],$item['lng'])); ?></td></tr>
-<tr><th valign="top">
+<tr><th>
 Language:
 </th><td>
 <input type="hidden" name="lng" value="<?php echo $item['lng']?>" />
 <?php echo $lang_name[$item['lng']]?>
 </td></tr>
-<tr><th valign="top">Rank</th><td><input type="text" name="rank" value="<?php echo $item['rank']; ?>" /></td><td></td></tr>
-<tr><th valign="top">Expand</th><td><select name="expand">
+<tr><th>Rank</th><td><input type="text" name="rank" value="<?php echo $item['rank']; ?>" class="text" /></td><td></td></tr>
+<tr><th>Expand</th><td><select name="expand" class="select">
 <?php
 if ($item['expand']==0)
     echo'<option value="0" selected="selected">';
@@ -162,12 +162,12 @@ else
 ?>Always</option>
 </select>
 </td><td></td></tr>
-<tr><th valign="top">
+<tr><th>
 </th><td>
-<table border="0" width="100%">
+<table class="savereset">
   <tr>
-    <td align="center"><input type="submit" value=" Save " /></td>
-    <td align="center"><input type="reset" value=" Reset " /></td>
+    <td align="center"><input type="submit" value=" Save " class="save" /></td>
+    <td align="center"><input type="reset" value=" Reset " class="reset" /></td>
   </tr>
 </table>
 </td><td></td></tr>
