@@ -90,6 +90,7 @@ $site_author_email='cihar@email.cz';
 $site_home='http://wessie.cic';
 
 $site_logo='img/wessie.png';
+$site_logo_alt='wessie - web site system';
 
 $site_logo_width=200;
 $site_logo_height=100;
