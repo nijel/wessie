@@ -4,8 +4,8 @@
 # http://phpmyadmin.sourceforge.net/ (download page)
 #
 # Host: localhost
-# Generation Time: Jan 09, 2002 at 05:28 PM
-# Server version: 3.23.46
+# Generation Time: Jan 13, 2002 at 02:57 PM
+# Server version: 3.23.47
 # PHP Version: 4.1.1
 # Database : `wessie`
 # --------------------------------------------------------
@@ -62,6 +62,7 @@ INSERT INTO article VALUES ('<h2>Statistiky</h2>\r\n<h3>Operaèní systémy</h3>\r\
 INSERT INTO article VALUES ('<h2>Týdení statistiky</h2>\r\n<?php stat_weeks(); ?>', 20011010181450, 7, 1);
 INSERT INTO article VALUES ('<h2>Denní statistiky</h2>\r\n<?php stat_days(); ?>', 20011010181459, 8, 1);
 INSERT INTO article VALUES ('<h2>Hodinové statistiky</h2>\r\n<?php stat_hours(); ?>', 20011010181508, 9, 1);
+INSERT INTO article VALUES ('<?php echo genBullshit(); ?>', 20020112123313, 12, 0);
 # --------------------------------------------------------
 
 #
@@ -135,12 +136,12 @@ CREATE TABLE download (
 # Dumping data for table `download`
 #
 
-INSERT INTO download VALUES (1, 'README', 0, 0, 2);
+INSERT INTO download VALUES (1, 'README', 0, 0, 3);
 INSERT INTO download VALUES (2, 'wessie.zip', 0, 1, 0);
-INSERT INTO download VALUES (3, 'http://cicom.cic/files/CodeConv-2.6-setup.exe', 1, 1, 2);
-INSERT INTO download VALUES (4, '/logs/error.log', 0, 2, 1);
+INSERT INTO download VALUES (3, 'http://cicom.cic/files/CodeConv-2.6-setup.exe', 1, 1, 3);
+INSERT INTO download VALUES (4, '/logs/error.log', 0, 2, 2);
 INSERT INTO download VALUES (18, '/2DO', 0, 0, 1);
-INSERT INTO download VALUES (19, '/test/file06.txt', 0, 0, 1);
+INSERT INTO download VALUES (19, '/plugins/icons/img/powered_wessie.png', 0, 1, 3);
 # --------------------------------------------------------
 
 #
@@ -160,8 +161,8 @@ CREATE TABLE download_group (
 # Dumping data for table `download_group`
 #
 
-INSERT INTO download_group VALUES (1, 'wessie', 2);
-INSERT INTO download_group VALUES (2, '_test_', 1);
+INSERT INTO download_group VALUES (1, 'wessie', 5);
+INSERT INTO download_group VALUES (2, '_test_', 2);
 # --------------------------------------------------------
 
 #
@@ -258,7 +259,7 @@ DROP TABLE IF EXISTS page;
 CREATE TABLE page (
   id smallint(5) unsigned NOT NULL auto_increment,
   name varchar(100) NOT NULL default '',
-  type enum('article','file','links') NOT NULL default 'article',
+  type enum('article','file','links','bullshit') default NULL,
   param varchar(100) NOT NULL default '',
   description text NOT NULL,
   keywords text NOT NULL,
@@ -274,23 +275,25 @@ CREATE TABLE page (
 # Dumping data for table `page`
 #
 
-INSERT INTO page VALUES (1, 'Welcome page', 'article', '', 'Welcome page', 'wessie', 14533, 0, 1);
-INSERT INTO page VALUES (2, 'About', 'article', '', 'Information about Web Site System', 'wessie', 90, 0, 2);
-INSERT INTO page VALUES (3, '<?php echo $site_name[$lng]; ?>', 'article', '', 'Information about <?php echo $site_name[$lng]; ?>', '<?php echo $site_name[$lng]; ?>', 70, 0, 3);
-INSERT INTO page VALUES (4, 'Help', 'article', '', 'How to use Web Site System', 'wessie,Help', 1246, 0, 4);
-INSERT INTO page VALUES (6, 'Statistics', 'article', '', 'Statistical page', 'wessie,statistics', 1599, 0, 1);
-INSERT INTO page VALUES (7, 'Weekly statistics', 'article', '', 'Statistical page', 'wessie,statistics', 175, 0, 1);
-INSERT INTO page VALUES (8, 'Daily statistics', 'article', '', 'Statistical page', 'wessie,statistics', 125, 0, 1);
-INSERT INTO page VALUES (9, 'Hourly statistics', 'article', '', 'Statistical page', 'wessie,statistics', 164, 0, 1);
-INSERT INTO page VALUES (1, 'Úvodní stránka', 'article', '', 'Úvodní stránka', 'wessie', 369, 1, 1);
-INSERT INTO page VALUES (2, 'O aplikaci', 'article', '', 'Informace o Web Site System', 'wessie', 128, 1, 2);
-INSERT INTO page VALUES (3, '<?php echo $site_name[$lng]; ?>', 'article', '', 'Informace o <?php echo $site_name[$lng]; ?>', '<?php echo $site_name[$lng]; ?>', 118, 1, 3);
-INSERT INTO page VALUES (4, 'Nápovìda', 'article', '', 'Jak pou¾ívat Web Site System', 'wessie,Help', 86, 1, 4);
-INSERT INTO page VALUES (6, 'Statistiky', 'article', '', 'Stránka statistik', 'wessie,statistics', 352, 1, 1);
-INSERT INTO page VALUES (7, 'Týdení statistiky', 'article', '', 'Stránka statistik', 'wessie,statistics', 136, 1, 1);
-INSERT INTO page VALUES (8, 'Denní statistiky', 'article', '', 'Stránka statistik', 'wessie,statistics', 122, 1, 1);
-INSERT INTO page VALUES (9, 'Hodinové statistiky', 'article', '', 'Stránka statistik', 'wessie,statistics', 129, 1, 1);
+INSERT INTO page VALUES (1, 'Welcome page', 'article', '', 'Welcome page', 'wessie', 14536, 0, 1);
+INSERT INTO page VALUES (2, 'About', 'article', '', 'Information about Web Site System', 'wessie', 96, 0, 2);
+INSERT INTO page VALUES (3, '<?php echo $site_name[$lng]; ?>', 'article', '', 'Information about <?php echo $site_name[$lng]; ?>', '<?php echo $site_name[$lng]; ?>', 71, 0, 3);
+INSERT INTO page VALUES (4, 'Help', 'article', '', 'How to use Web Site System', 'wessie,Help', 1247, 0, 4);
+INSERT INTO page VALUES (6, 'Statistics', 'article', '', 'Statistical page', 'wessie,statistics', 1606, 0, 1);
+INSERT INTO page VALUES (7, 'Weekly statistics', 'article', '', 'Statistical page', 'wessie,statistics', 176, 0, 1);
+INSERT INTO page VALUES (8, 'Daily statistics', 'article', '', 'Statistical page', 'wessie,statistics', 126, 0, 1);
+INSERT INTO page VALUES (9, 'Hourly statistics', 'article', '', 'Statistical page', 'wessie,statistics', 165, 0, 1);
+INSERT INTO page VALUES (1, 'Úvodní stránka', 'article', '', 'Úvodní stránka', 'wessie', 370, 1, 1);
+INSERT INTO page VALUES (2, 'O aplikaci', 'article', '', 'Informace o Web Site System', 'wessie', 129, 1, 2);
+INSERT INTO page VALUES (3, '<?php echo $site_name[$lng]; ?>', 'article', '', 'Informace o <?php echo $site_name[$lng]; ?>', '<?php echo $site_name[$lng]; ?>', 119, 1, 3);
+INSERT INTO page VALUES (4, 'Nápovìda', 'article', '', 'Jak pou¾ívat Web Site System', 'wessie,Help', 87, 1, 4);
+INSERT INTO page VALUES (6, 'Statistiky', 'article', '', 'Stránka statistik', 'wessie,statistics', 353, 1, 1);
+INSERT INTO page VALUES (7, 'Týdení statistiky', 'article', '', 'Stránka statistik', 'wessie,statistics', 137, 1, 1);
+INSERT INTO page VALUES (8, 'Denní statistiky', 'article', '', 'Stránka statistik', 'wessie,statistics', 123, 1, 1);
+INSERT INTO page VALUES (9, 'Hodinové statistiky', 'article', '', 'Stránka statistik', 'wessie,statistics', 130, 1, 1);
 INSERT INTO page VALUES (11, '/etc/passwd', 'file', '/etc/passwd', '/etc/passwd listing', 'etc passwd', 17, 1, 1);
+INSERT INTO page VALUES (12, 'test', 'article', '', 'test', 'test', 1, 0, 1);
+INSERT INTO page VALUES (12, 'test', 'bullshit', '$pars=10;', 'test', 'test', 5, 1, 1);
 # --------------------------------------------------------
 
 #
@@ -309,9 +312,9 @@ CREATE TABLE stat (
 # Dumping data for table `stat`
 #
 
-INSERT INTO stat VALUES ('total', 'hits', 19073);
-INSERT INTO stat VALUES ('time', '00', 93);
-INSERT INTO stat VALUES ('time', '01', 19);
+INSERT INTO stat VALUES ('total', 'hits', 19107);
+INSERT INTO stat VALUES ('time', '00', 95);
+INSERT INTO stat VALUES ('time', '01', 37);
 INSERT INTO stat VALUES ('time', '02', 1);
 INSERT INTO stat VALUES ('time', '03', 1946);
 INSERT INTO stat VALUES ('time', '04', 0);
@@ -320,34 +323,34 @@ INSERT INTO stat VALUES ('time', '06', 0);
 INSERT INTO stat VALUES ('time', '07', 0);
 INSERT INTO stat VALUES ('time', '08', 1);
 INSERT INTO stat VALUES ('time', '09', 9);
-INSERT INTO stat VALUES ('time', '10', 13);
-INSERT INTO stat VALUES ('time', '11', 492);
-INSERT INTO stat VALUES ('time', '12', 201);
-INSERT INTO stat VALUES ('time', '13', 430);
-INSERT INTO stat VALUES ('time', '14', 1565);
+INSERT INTO stat VALUES ('time', '10', 14);
+INSERT INTO stat VALUES ('time', '11', 493);
+INSERT INTO stat VALUES ('time', '12', 205);
+INSERT INTO stat VALUES ('time', '13', 431);
+INSERT INTO stat VALUES ('time', '14', 1568);
 INSERT INTO stat VALUES ('time', '15', 2294);
 INSERT INTO stat VALUES ('time', '16', 40);
 INSERT INTO stat VALUES ('time', '17', 87);
-INSERT INTO stat VALUES ('time', '18', 220);
+INSERT INTO stat VALUES ('time', '18', 221);
 INSERT INTO stat VALUES ('time', '19', 62);
 INSERT INTO stat VALUES ('time', '20', 168);
-INSERT INTO stat VALUES ('time', '21', 1242);
+INSERT INTO stat VALUES ('time', '21', 1244);
 INSERT INTO stat VALUES ('time', '22', 368);
-INSERT INTO stat VALUES ('time', '23', 9702);
+INSERT INTO stat VALUES ('time', '23', 9703);
 INSERT INTO stat VALUES ('dow', '1', 3717);
 INSERT INTO stat VALUES ('dow', '2', 1348);
 INSERT INTO stat VALUES ('dow', '3', 8418);
-INSERT INTO stat VALUES ('dow', '4', 2974);
-INSERT INTO stat VALUES ('dow', '5', 1995);
-INSERT INTO stat VALUES ('dow', '6', 45);
-INSERT INTO stat VALUES ('dow', '7', 603);
+INSERT INTO stat VALUES ('dow', '4', 2975);
+INSERT INTO stat VALUES ('dow', '5', 1998);
+INSERT INTO stat VALUES ('dow', '6', 70);
+INSERT INTO stat VALUES ('dow', '7', 608);
 INSERT INTO stat VALUES ('browser', 'Links', 9);
 INSERT INTO stat VALUES ('browser', 'WebTV', 0);
 INSERT INTO stat VALUES ('browser', 'Lynx', 4);
 INSERT INTO stat VALUES ('browser', 'MSIE', 16);
 INSERT INTO stat VALUES ('browser', 'Opera', 23);
 INSERT INTO stat VALUES ('browser', 'Konqueror', 2179);
-INSERT INTO stat VALUES ('browser', 'Mozilla', 268);
+INSERT INTO stat VALUES ('browser', 'Mozilla', 285);
 INSERT INTO stat VALUES ('browser', 'Netscape', 7);
 INSERT INTO stat VALUES ('browser', 'NCSA Mosaic', 0);
 INSERT INTO stat VALUES ('browser', 'W3C_Validator', 0);
@@ -361,11 +364,11 @@ INSERT INTO stat VALUES ('browser', 'Amaya', 0);
 INSERT INTO stat VALUES ('browser', 'Downloader', 0);
 INSERT INTO stat VALUES ('browser', 'Search Indexer', 0);
 INSERT INTO stat VALUES ('browser', 'Bot', 4639);
-INSERT INTO stat VALUES ('browser', '?', 11933);
+INSERT INTO stat VALUES ('browser', '?', 11950);
 INSERT INTO stat VALUES ('os', 'Windows', 2);
 INSERT INTO stat VALUES ('os', 'WindowsNT', 3);
 INSERT INTO stat VALUES ('os', 'Amiga', 0);
-INSERT INTO stat VALUES ('os', 'Linux/Unix', 7071);
+INSERT INTO stat VALUES ('os', 'Linux/Unix', 7088);
 INSERT INTO stat VALUES ('os', 'Mac', 2);
 INSERT INTO stat VALUES ('os', 'FreeBSD', 0);
 INSERT INTO stat VALUES ('os', 'SunOS', 0);
@@ -373,10 +376,10 @@ INSERT INTO stat VALUES ('os', 'IRIX', 0);
 INSERT INTO stat VALUES ('os', 'BeOS', 0);
 INSERT INTO stat VALUES ('os', 'OS/2', 0);
 INSERT INTO stat VALUES ('os', 'AIX', 0);
-INSERT INTO stat VALUES ('os', '?', 11995);
+INSERT INTO stat VALUES ('os', '?', 12012);
 INSERT INTO stat VALUES ('week_no', '0016', 1696);
-INSERT INTO stat VALUES ('lang', '0', 17727);
-INSERT INTO stat VALUES ('lang', '1', 1303);
+INSERT INTO stat VALUES ('lang', '0', 17749);
+INSERT INTO stat VALUES ('lang', '1', 1315);
 INSERT INTO stat VALUES ('week_no', '0017', 58);
 INSERT INTO stat VALUES ('week_no', '0018', 37);
 INSERT INTO stat VALUES ('week_no', '0019', 30);
@@ -402,7 +405,8 @@ INSERT INTO stat VALUES ('week_no', '0047', 3041);
 INSERT INTO stat VALUES ('week_no', '0048', 504);
 INSERT INTO stat VALUES ('week_no', '0049', 5);
 INSERT INTO stat VALUES ('week_no', '0050', 2);
-INSERT INTO stat VALUES ('week_no', '0051', 62);
+INSERT INTO stat VALUES ('week_no', '0051', 66);
+INSERT INTO stat VALUES ('week_no', '0052', 31);
 # --------------------------------------------------------
 
 #
@@ -431,5 +435,5 @@ CREATE TABLE users (
 # Dumping data for table `users`
 #
 
-INSERT INTO users VALUES (1, 'admin', 'admin', 'Administrator', '', 'http://cicom.kgb.cz', 'CICOM web site - home of wessie', '', '192.168.1.1', 'bc49596b1349e40032e00926d9fb64da', 20020109171945);
+INSERT INTO users VALUES (1, 'admin', 'admin', 'Administrator', '', 'http://cicom.kgb.cz', 'CICOM web site - home of wessie', '', '192.168.1.1', '93a87f7a8e032a03f6ed91cc585d1907', 20020112142744);
 
