@@ -81,6 +81,10 @@
   <item url="plugins/file/page.php" />
   <item url="plugins/article/" />
   <item url="plugins/file/" />
+  <item url="templates/styles/" />
+  <item url="templates/styles/template.inc.php" />
+  <item url="templates/styles/template.php" />
+  <item url="templates/styles/styles.php" />
  </project>
 </webproject>
 <!-- $Id$ -->

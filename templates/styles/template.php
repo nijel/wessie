@@ -24,13 +24,13 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-// Default template definition file for wessie
+// CSS based template definition file for wessie
 
-//File containing default template:
-$template_data='./templates/default/template.inc.php';
+//File containing CSS template:
+$template_data='./templates/styles/template.inc.php';
 
 //Number of top pages to display
-$top_pages_count=4;
+$top_pages_count=0;
 
 //Format of title:
 function title(){
@@ -44,9 +44,8 @@ function title(){
 
 //Format of upper menu items
 function make_upper_menu_item($percent,$url,$name,$short,$description,$active){
-    $result='<th align="center" valign="middle" width="'.$percent.'"><a href="'.$url.'" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$description."'".';return true">';
-    if ($active){$result.='<font color="white">'.$name.'</font></a></th>';}
-    else {$result.=$name.'</a></th>';};
+    $result='<th onclick="window.location.replace(\''.$url.'\')" onmouseover="highlight(this,\'#FFEEBB\');" onmouseout="unhighlight(this);" width="'.$percent.'"'.($active?' class="active"':'').'><a href="'.$url.'" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$description."'".';return true">';
+    $result.=$name.'</a></th>';
     return $result;
 }
 
@@ -92,18 +91,35 @@ function make_download($file,$group=array('count'=>-1)){
 
 //Left menu format
 function make_menu_item($url,$name,$category,$category_short,$description,$active,$depth,$is_parent){
-    if ($depth==0) {
-        if ($active) $result='&nbsp;<span style="font-weight:bold;font-size:110%;">'.$name.'</span>';
-        else $result='&nbsp;<a href="'.$url.'" style="font-weight:bold;font-size:110%;" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'$description'".';return true">'.$name.'</a>';
-    } else{
-        if ($active) $result='&nbsp;&nbsp;&nbsp;'.$name;
-        else $result='&nbsp;&nbsp;&nbsp;<a href="'.$url.'" title="'.$description.'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'$description'".';return true">'.$name.'</a>';
+    if ($depth == 0){
+        $result = '<span class="root">';
+    } else {
+        $result = '';
     }
-    while ($depth > 1){
-        $result='&nbsp;&nbsp;'.$result;
+    if ($is_parent){
+        $result .= '<span class="parent">';
+    }
+    if ($active) {
+        $result .= '<span class="active">';
+        $text = $name;
+    } else {
+        $result .= '<span class="inactive">';
+        $text = '<a href="'.$url.'" title="'.$description.'" onmouseout="window.status=\'\';return true" onmouseover="window.status=\''.$description.'\';return true">'.$name.'</a>';
+    }
+    if ($depth == 0){
+        $text .= '</span></span>';
+    } else {
+        $text .= '</span>';
+    }
+    if ($is_parent){
+        $text .= '</span>';
+    }
+    $result .= '&nbsp;';
+    while ($depth > 0){
+        $result .= '&nbsp;&nbsp;';
         $depth--;
     }
-    return $result;
+    return $result . $text;
 }
 
 $left_menu_divisor="<br />\n";
@@ -112,11 +128,11 @@ $left_menu_divisor="<br />\n";
 //Language choice format:
 function make_language($url,$id){
     global $languages, $lang_name, $lang_img, $lang_main_page,$base_path;
-    return '<a href="'.$url.'" target="_self" title="'.$lang_name[$id].'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$lang_name[$id]."'".';return true"><img src="'.$base_path.$lang_img[$id].'" alt="'.$languages[$id].'" align="middle" border="0" />'.$lang_name[$id].'</a>';
+    return '<a href="'.$url.'" target="_self" title="'.$lang_name[$id].'" onmouseout="window.status='."''".';return true" onmouseover="window.status='."'".$lang_name[$id]."'".';return true"><img src="'.$base_path.$lang_img[$id].'" alt="'.$languages[$id].'" />'.$lang_name[$id].'</a>';
 }
 
 $languages_divisor=' | ';
-$languages_divisor="<br />\n";
+//$languages_divisor="<br />\n";
 
 
 //Statistics format:

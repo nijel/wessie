@@ -228,11 +228,12 @@ function upper_menu(){
 }
 
 function top_pages(){
+    global $table_prepend_name,$table_category,$table_page,$lng,$db_connection,$top_pages_divisor,$top_pages_count,$categories;;
+    if($top_pages_count>0){
         global $site_name,$lng,$site_author,$site_author_email,$site_name,$lng,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
                 $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
                 $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 
-        global $table_prepend_name,$table_category,$table_page,$lng,$db_connection,$top_pages_divisor,$top_pages_count,$categories;;
 
         $id_result=mysql_query('SELECT id,name,description,category from '.$table_prepend_name.$table_page.' where lng='.$lng.' order by count desc limit '.$top_pages_count) or
             do_error(1,'SELECT '.$table_prepend_name.$table_page.': '.mysql_error());
@@ -245,6 +246,7 @@ function top_pages(){
             eval('?'.'>'.make_top_pages_item(make_url($item['id'],$lng),$item['name'],$item_cat['name'],$item_cat['short'],$item['description']).'<?php ');
         }
         mysql_free_result($id_result);
+    }
 }
 
 function advert(){
@@ -285,7 +287,7 @@ function left_menu(){
                 if (!$first_item) echo $left_menu_divisor;
                 else $first_item=false;
 
-                eval('?'.'>'.make_menu_item(make_url($menu_item_cache[$val]['page'],$lng),$menu_item_cache[$val]['name'],$category['name'],$category['short'],$menu_item_cache[$val]['description'],$menu_item_cache[$val]['page']==$id,$depth).'<?php ');
+                eval('?'.'>'.make_menu_item(make_url($menu_item_cache[$val]['page'],$lng),$menu_item_cache[$val]['name'],$category['name'],$category['short'],$menu_item_cache[$val]['description'],$menu_item_cache[$val]['page']==$id,$depth,isset($menu_parent_cache[$menu_item_cache[$val]['id']]) && in_array ($menu_item_cache[$val]['id'],$parents)).'<?php ');
 
                 //do we have any childs and should we list them?
                 if (isset($menu_parent_cache[$menu_item_cache[$val]['id']]) && (($menu_item_cache[$val]['expand']==1) || ($menu_item_cache[$val]['page']==$id) || in_array ($menu_item_cache[$val]['id'],$parents))){
@@ -351,6 +353,7 @@ global $content,
     $page_title,$category_name,
     $browser,$os,
     $wessie_version,$wessie_author,$wessie_author_email,$wessie_url,
+    $site_logo,$site_logo_width,$site_logo_height,
     $SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,$REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path,
     $allow_content_eval,$page_plugins_options,$page,$lng;
 
