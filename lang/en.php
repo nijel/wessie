@@ -59,6 +59,8 @@ $msg_downloads = 'downloads';
 
 $msg_find = 'Find';
 
+$msg_last_change = 'Last change';
+
 $msg_ = '';
 $msg_ = '';
 $msg_ = '';

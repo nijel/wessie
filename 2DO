@@ -34,9 +34,9 @@ user: ? cache for categories
 cicom/cihar test implementation
 
 admin+user: ! banners
-	     - monitor views and CTRs
-	     - allow campaigns with n views / clicks?
-	     - allow per page/category/etc. ads
+         - monitor views and CTRs
+         - allow campaigns with n views / clicks?
+         - allow per page/category/etc. ads
              - administration by client:
              - change img/url
              - view stats

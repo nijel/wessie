@@ -25,4 +25,20 @@
 //
 // $Id$
 
+//Return content
+function get_content(){
+    global $page;
+    if (!file_exists($page['param'])) do_error(5,$page['param']);
+    $fh=fopen($page['param'],'r');
+    $content=fread($fh, filesize($page['param']));
+    fclose($fh);
+    return $content;
+}
+
+//Return last change
+function get_last_change(){
+    global $page;
+    return filemtime($page['param']);
+}
+
 ?>

@@ -25,4 +25,22 @@
 //
 // $Id$
 
+//Load article info from database
+if (!($id_result=mysql_query('SELECT UNIX_TIMESTAMP(last_change) as last_change, content from '.$table_prepend_name.$table_article.' where page='.$id.' and lng='.$lng.' limit 1',$db_connection)))
+    do_error(1,'SELECT '.$table_prepend_name.$table_article.': '.mysql_error());
+$article=mysql_fetch_array($id_result);
+mysql_free_result($id_result);
+
+//Return content
+function get_content(){
+    global $article;
+    return $article['content'];
+}
+
+//Return last change
+function get_last_change(){
+    global $article;
+    return $article['last_change'];
+}
+
 ?>

@@ -177,24 +177,14 @@ $template=fread($fh, filesize($template_file_name));
 fclose($fh);
 
 //read content
-switch ($page['type']){
-    case 'file': /* file */
-        if (!file_exists($page['param'])) do_error(5,$page['param']);
-        $fh=fopen($page['param'],'r');
-        $content=fread($fh, filesize($page['param']));
-        fclose($fh);
-        break;
-    case 'article': /* article */
-        if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_article.' where page='.$id.' and lng='.$lng.' limit 1',$db_connection)))
-            do_error(1,'SELECT '.$table_prepend_name.$table_article.': '.mysql_error());
-        $article=mysql_fetch_array($id_result);
-        mysql_free_result($id_result);
-        $content=$article['content'];
-        break;
-
-    default:
-        $content='&nbsp;';
+if (file_exists('./plugins/'.$page['type'].'/page.php')){
+    require_once('./plugins/'.$page['type'].'/page.php');
+}else{
+    do_error(7,$page['type']);
 }
+
+$content = get_content();
+$last_change = get_last_change();
 
 //functions:
 
@@ -330,14 +320,6 @@ function left_menu(){
         $menu_page_cache[$item['page']]=$item['id'];
         $menu_parent_cache[$item['parent']][]=$item['id'];
         $menu_item_cache[$item['id']]=$item;
-/*        $menu_item_cache[$item['id']]['id']=$item['id'];
-        $menu_item_cache[$item['id']]['page']=$item['page'];
-        $menu_item_cache[$item['id']]['name']=$item['name'];
-        $menu_item_cache[$item['id']]['description']=$item['description'];
-        $menu_item_cache[$item['id']]['category']=$item['category'];
-        $menu_item_cache[$item['id']]['parent']=$item['parent'];
-        $menu_item_cache[$item['id']]['expand']=$item['expand'];
-        $menu_item_cache[$item['id']]['rank']=$item['rank'];*/
     }
     mysql_free_result($id_result);
 
@@ -345,10 +327,12 @@ function left_menu(){
     // Read parents of active page to know which path of menu structure should we enable
     $parents=array();
     $parent=-1;
-    $parent=$menu_item_cache[$menu_page_cache[$id]]['parent'];
-    while ($parent!=0){
-        $parents[]=$parent;
-        $parent=$menu_item_cache[$parent]['parent'];
+    if (isset($menu_page_cache[$id])){
+        $parent=$menu_item_cache[$menu_page_cache[$id]]['parent'];
+        while ($parent!=0){
+            $parents[]=$parent;
+            $parent=$menu_item_cache[$parent]['parent'];
+        }
     }
 
     //Add childs to root

@@ -26,8 +26,6 @@
 // $Id$
 error_reporting (E_ALL);
 // Config script for wessie
-if (!isset($wessie_config_php_loaded)){
-$wessie_config_php_loaded=1;
 
 $error_log_file='/vs/wessie/logs/error.log';
 
@@ -129,5 +127,5 @@ $admin_validator='http://validator.cic/cgi-bin/validate.cgi?input=yes&url=';
 
 
 $show_error_detail=TRUE;
-}
+
 ?>

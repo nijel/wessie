@@ -58,7 +58,7 @@ $msg_times = 'krát';
 $msg_downloads = 'stáhnutí';
 
 $msg_find = 'Najít';
-$msg_ = '';
+$msg_last_change = 'Poslední zmìna';
 $msg_ = '';
 $msg_ = '';
 $msg_ = '';

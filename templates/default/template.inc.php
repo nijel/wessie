@@ -102,7 +102,10 @@ content();
 <td align="left"><font size="-3">
 <?php counter(); ?>
 </font>&nbsp;</td>
-<td align="right"><font size="-3">
+<td align="right">
+<font size="-3">
+<?php echo $msg_last_change; ?>:&nbsp;<?php echo strftime('%c',$last_change); ?>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <?php copyright(); ?>
 </font>&nbsp;</td>
 </tr>

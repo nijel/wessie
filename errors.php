@@ -79,6 +79,7 @@ function do_error($err_type=0,$err_nfo=''){
     $err_names[4] = 'missing template file';
     $err_names[5] = 'missing content file';
     $err_names[6] = 'cannot connect to MySQL';
+    $err_names[7] = 'page uses plugin that was not found';
     $err_name = isset($err_names[$err_type])?$err_names[$err_type]:$err_names[0];
 
     $headers[0] = '503 Service temporarily unavailable';
@@ -88,6 +89,7 @@ function do_error($err_type=0,$err_nfo=''){
     $headers[4] = '503 Service temporarily unavailable';
     $headers[5] = '503 Service temporarily unavailable';
     $headers[6] = '503 Service temporarily unavailable';
+    $headers[7] = '503 Service temporarily unavailable';
 
     $header = $SERVER_PROTOCOL . ' ' . (isset($headers[$err_type])?$headers[$err_type]:$headers[0]);
     $http_err_type = substr((isset($headers[$err_type])?$headers[$err_type]:$headers[0]),0,1);
@@ -99,6 +101,7 @@ function do_error($err_type=0,$err_nfo=''){
     $messages[4] = 'Internal server error';
     $messages[5] = 'Internal server error';
     $messages[6] = 'Internal server error';
+    $messages[7] = 'Internal server error';
     $message = isset($messages[$err_type])?$messages[$err_type]:$messages[0];
 
 
