@@ -34,7 +34,7 @@ require_once('./functions.php');
 Header('Content-Type: text/html; charset='.$admin_charset);
 $page_title=$site_name[0].':Administration:Login';
 if (isset($HTTP_POST_VARS['submit'])){
-    $pass=$HTTP_POST_VARS['pass'];
+    $pass=md5($HTTP_POST_VARS['pass']);
     $user=$HTTP_POST_VARS['user'];
 
     include_once('../db_connect.php');
