@@ -28,5 +28,14 @@
 $page_name='Article:Edit';
 require_once('./admin_header.php');
 
+if (!$id_result=mysql_query(
+'SELECT last_change, page, '.$table_prepend_name.$table_article.'.lng as lng, id, name, description, count, category, content '.
+' from '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.
+' where id=page and '.$table_prepend_name.$table_article.'.lng='.$table_prepend_name.$table_page.'.lng and lng='.$lng.' and id='.$id))
+    do_error(1,'SELECT '.$table_prepend_name.$table_article.','.$table_prepend_name.$table_page.': '.mysql_error());
+<form action="article_edit.php" method="POST">
+<input type="text" name="name">
+  <textarea name="content" cols="40" rows="10"></textarea>
+</form>
 require_once('./admin_footer.php');
 ?>
