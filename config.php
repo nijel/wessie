@@ -120,7 +120,7 @@ $table_stat = 'stat';
 // $category_order     - which field in database is used for ordering categories
 // $use_adverts        - use advertisement?
 // $top_pages_count    - number of top pages to display
-$template_name = 'default';
+$template_name = 'supermarket';
 $site_logo = 'img/wessie.png';
 $site_logo_alt = 'wessie - web site system';
 $site_logo_width = 200;
@@ -139,6 +139,7 @@ $top_pages_count = 4;
 // $site_author_email  - authors email
 // $site_author array  - array of authors names for each language
 // $site_name array    - array of site names for each language
+// $site_name_long array - array of long site names for each language
 // $copyright array    - array of copyrights for each language
 // $special array      - array of special info that is displayed on top of each page
 $site_home = 'http://wessie.cic';
@@ -148,6 +149,8 @@ $site_author[0] = 'Michal Cihar';
 $site_author[1] = 'Michal Èihaø';
 $site_name[0] = 'wessie Demo';
 $site_name[1] = 'ukázka wessie';
+$site_name_long[0] = 'demonstration how wessie can work';
+$site_name_long[1] = 'ukázka jak mù¾e wessie pracovat';
 $copyright[0] = 'Copyright &copy; 2001-2002 <a href="mailto:'.$site_author_email.'">'.$site_author[0].'</a>';
 $copyright[1] = 'Copyright &copy; 2001-2002 <a href="mailto:'.$site_author_email.'">'.$site_author[1].'</a>';
 $special[0] = '';

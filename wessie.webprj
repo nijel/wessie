@@ -145,6 +145,10 @@
   <item url="templates/alcatel/styles.php" />
   <item url="templates/alcatel/template.inc.php" />
   <item url="templates/alcatel/template.php" />
+  <item url="templates/supermarket/" />
+  <item url="templates/supermarket/styles.php" />
+  <item url="templates/supermarket/template.inc.php" />
+  <item url="templates/supermarket/template.php" />
  </project>
 </webproject>
 <!-- $Id$ -->
