@@ -280,15 +280,17 @@ function left_menu(){
             $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
         global $first_item,$left_menu_divisor,$id,$category,$lng,$menu_item_cache,$menu_parent_cache,$menu_page_cache;
 
-        while (list ($key, $val) = each($menu_parent_cache[$child_id])){
-            if (!$first_item) echo $left_menu_divisor;
-            else $first_item=false;
+        if (is_array($menu_parent_cache[$child_id])){
+            while (list ($key, $val) = each($menu_parent_cache[$child_id])){
+                if (!$first_item) echo $left_menu_divisor;
+                else $first_item=false;
 
-            eval('?'.'>'.make_menu_item(make_url($menu_item_cache[$val]['page'],$lng),$menu_item_cache[$val]['name'],$category['name'],$category['short'],$menu_item_cache[$val]['description'],$menu_item_cache[$val]['page']==$id,$depth).'<?php ');
+                eval('?'.'>'.make_menu_item(make_url($menu_item_cache[$val]['page'],$lng),$menu_item_cache[$val]['name'],$category['name'],$category['short'],$menu_item_cache[$val]['description'],$menu_item_cache[$val]['page']==$id,$depth).'<?php ');
 
-            //do we have any childs and should we list them?
-            if (isset($menu_parent_cache[$menu_item_cache[$val]['id']]) && (($menu_item_cache[$val]['expand']==1) || ($menu_item_cache[$val]['page']==$id) || in_array ($menu_item_cache[$val]['id'],$parents))){
-                add_childs($menu_item_cache[$val]['id'],$depth+1,$parents);
+                //do we have any childs and should we list them?
+                if (isset($menu_parent_cache[$menu_item_cache[$val]['id']]) && (($menu_item_cache[$val]['expand']==1) || ($menu_item_cache[$val]['page']==$id) || in_array ($menu_item_cache[$val]['id'],$parents))){
+                    add_childs($menu_item_cache[$val]['id'],$depth+1,$parents);
+                }
             }
         }
     }
