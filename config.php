@@ -109,5 +109,6 @@ $admin_keywords_cols=40;
 $admin_description_rows=2;
 $admin_description_cols=40;
 
+$admin_confirm_delete=TRUE;
 }
 ?>
