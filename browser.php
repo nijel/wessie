@@ -49,7 +49,7 @@ elseif(
     (ereg('Google|Slurp|LinkAlarm|AltaVista|Lycos', $HTTP_USER_AGENT)) ||
     (eregi('infoseek|search|spider', $HTTP_USER_AGENT))
         ) $browser = 'Search Indexer';
-elseif(eregi('bot|scanner', $HTTP_USER_AGENT)) $browser = 'Bot';
+elseif(eregi('bot|scanner|ApacheBench', $HTTP_USER_AGENT)) $browser = 'Bot';
 elseif(ereg('Nav|Gold|Mozilla|Netscape|Gecko', $HTTP_USER_AGENT)) $browser = 'Netscape';
 else $browser = '?';
 
@@ -65,6 +65,6 @@ elseif(!(strpos($HTTP_USER_AGENT,'BeOS')===false)) $os = 'BeOS';
 elseif(!(strpos($HTTP_USER_AGENT,'OS/2')===false)) $os = 'OS/2';
 elseif(!(strpos($HTTP_USER_AGENT,'AIX')===false)) $os = 'AIX';
 elseif(!(strpos($HTTP_USER_AGENT,'Amiga')===false)) $os = 'Amiga';
-elseif(ereg('Unix|Linux|X11', $HTTP_USER_AGENT)) $os = 'Linux/Unix';
+elseif(ereg('Unix|Linux|X11|deb|ApacheBench', $HTTP_USER_AGENT)) $os = 'Linux/Unix';
 else $os = '?';
 ?>
