@@ -28,8 +28,8 @@ require_once('./admin_header.php');
 ?>
 <?php
 make_tab_start();
-make_tab_item('./download_item.php','Downloads','/download_item');
-make_tab_item('./download_group.php','Download groups','/download_group');
-make_tab_item('./files.php','File management','/files');
+make_tab_item('./download_item.php','Downloads','admin/download_item');
+make_tab_item('./download_group.php','Download groups','admin/download_group');
+make_tab_item('./files.php','File management','admin/files');
 make_tab_end();
 ?>

@@ -28,11 +28,11 @@ require_once('./admin_header.php');
 ?>
 <?php
 make_tab_start();
-make_tab_item('./options_design.php','Design','/options_design');
-make_tab_item('./options_info.php','Information','/options_info');
-make_tab_item('./options_languages.php','Languages','/options_languages');
-make_tab_item('./options_database.php','Database','/options_database');
-make_tab_item('./options_errors.php','Errors','/options_errors');
-make_tab_item('./options_admin.php','Administration','/options_admin');
+make_tab_item('./options_design.php','Design','admin/options_design');
+make_tab_item('./options_info.php','Information','admin/options_info');
+make_tab_item('./options_languages.php','Languages','admin/options_languages');
+make_tab_item('./options_database.php','Database','admin/options_database');
+make_tab_item('./options_errors.php','Errors','admin/options_errors');
+make_tab_item('./options_admin.php','Administration','admin/options_admin');
 make_tab_end();
 ?>

@@ -28,12 +28,12 @@ require_once('./admin_header.php');
 
 make_tab_start();
 
-make_tab_item('./page.php','All','/page.php');
+make_tab_item('./page.php','All','admin/page.php');
 
 reset($allowed_page_plugins);
 if (!isset($type)) $type='';
 while (list ($key, $val) = each($allowed_page_plugins)){
-    make_tab_item('./page_list.php?type='.$val,ucfirst($val),($type==$val?'/page':''));
+    make_tab_item('./page_list.php?type='.$val,ucfirst($val),($type==$val?'admin/page':''));
 }
 
 make_tab_end();
