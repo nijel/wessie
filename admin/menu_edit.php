@@ -76,7 +76,7 @@ if (isset($id)&&isset($lng)&&!isset($name)){
             ', expand='.$expand.
             ', lng='.$lng.
             ', rank='.$rank.
-            ' WHERE id='.$id
+            ' WHERE id='.$id.' and lng='.$lng
             ,$db_connection)))&&($child_id=0)){
         show_error("Can't update menu item info! (".mysql_error().')');
         exit;
@@ -143,7 +143,6 @@ if ($item['parent']!=0){
 <tr><th>
 Language:
 </th><td>
-<input type="hidden" name="lng" value="<?php echo $item['lng']?>" />
 <?php echo $lang_name[$item['lng']]?>
 </td></tr>
 <tr><th>Rank</th><td><input type="text" name="rank" value="<?php echo $item['rank']; ?>" class="text" /></td><td></td></tr>
