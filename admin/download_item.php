@@ -25,18 +25,8 @@
 //
 // $Id$
 $page_name='Downloads';
-require_once('./admin_header.php');
+require_once('./download_header.php');
 ?>
-<table class="tabs">
-  <tr>
-<?php
-
-make_tab_edit('./download_item.php','Downloads','/download_item');
-make_tab_edit('./download_group.php','Download groups','/download_group');
-make_tab_edit('./upload.php','Upload files','/upload');
-?>
-  </tr>
-</table>
 
 <table class="filter">
   <tr>

@@ -1,7 +1,7 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 // +----------------------------------------------------------------------+
-// | Web Site System version 0.1                                          |
+// / wessie - web site system                                             |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 2001 Michal Cihar                                      |
 // +----------------------------------------------------------------------+
@@ -24,7 +24,15 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-$page_name='Download groups';
 require_once('./download_header.php');
-require_once('./admin_footer.php');
 ?>
+<table class="tabs">
+  <tr>
+<?php
+
+make_tab_edit('./download_item.php','Downloads','/download_item');
+make_tab_edit('./download_group.php','Download groups','/download_group');
+make_tab_edit('./upload.php','Upload files','/upload');
+?>
+  </tr>
+</table>
