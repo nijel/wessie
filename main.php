@@ -119,44 +119,12 @@ if (true||$increase_count){
     elseif($wno<1000) $wno='0'.(string)$wno;
     else $wno=(string)$wno;
 
-    /* TODO: This needs some optimalisations!!! */
+    /* TODO: This needs some optimalisations!!! - shouldn't be executed every time, just once a week....*/
     if (!(mysql_query('INSERT ignore '.$table_prepend_name.$table_stat." set count=1, category='week_no', item='$wno'",$db_connection)))
         do_error(1,'INSERT ignore '.$table_prepend_name.$table_stat.': '.mysql_error());
 
     if (!(mysql_query('UPDATE '.$table_prepend_name.$table_stat." set count=count+1 where (category='time' and item='".strftime('%H')."') or (category='dow' and item='$dow') or (category='week_no' and item='$wno') or (category='os' and item='$os') or (category='browser' and item='$browser') or(category='lang' and item='$lng') or (category='total' and item='hits')",$db_connection)))
             do_error(1,'UPDATE '.$table_prepend_name.$table_stat.': '.mysql_error());
-
-/*********************************************************************************************************/
-/* OLD VERSION OF STATS FOLLOWS.....                                                                     */
-/*********************************************************************************************************/
-/*
-    if (!(mysql_query('UPDATE '.$table_prepend_name.$table_stat." set count=count+1 where category='time' and item='".strftime('%H')."' limit 1",$db_connection)))
-            do_error(1,'UPDATE '.$table_prepend_name.$table_stat.': '.mysql_error());
-    if (!(mysql_query('UPDATE '.$table_prepend_name.$table_stat." set count=count+1 where category='dow' and item='$dow' limit 1",$db_connection)))
-            do_error(1,'UPDATE '.$table_prepend_name.$table_stat.': '.mysql_error());
-
-
-    if (!($id_result=mysql_query('SELECT category from '.$table_prepend_name.$table_stat." where category='week_no' and item='$wno' limit 1",$db_connection)))
-            do_error(1,'SELECT '.$table_prepend_name.$table_stat.': '.mysql_error());
-    if (mysql_num_rows($id_result)==0){
-        if (!(mysql_query('INSERT into '.$table_prepend_name.$table_stat." set count=1, category='week_no', item='$wno'",$db_connection)))
-            do_error(1,'INSERT '.$table_prepend_name.$table_stat.': '.mysql_error());
-    }else{
-        if (!(mysql_query('UPDATE '.$table_prepend_name.$table_stat." set count=count+1 where category='week_no' and item='$wno' limit 1",$db_connection)))
-            do_error(1,'UPDATE '.$table_prepend_name.$table_stat.': '.mysql_error());
-    }
-    mysql_free_result($id_result);
-
-    if (!(mysql_query('UPDATE '.$table_prepend_name.$table_stat." set count=count+1 where category='os' and item='$os' limit 1",$db_connection)))
-            do_error(1,'UPDATE '.$table_prepend_name.$table_stat.': '.mysql_error());
-    if (!(mysql_query('UPDATE '.$table_prepend_name.$table_stat." set count=count+1 where category='browser' and item='$browser' limit 1",$db_connection)))
-            do_error(1,'UPDATE '.$table_prepend_name.$table_stat.': '.mysql_error());
-
-    if (!(mysql_query('UPDATE '.$table_prepend_name.$table_stat." set count=count+1 where category='lang' and item='$lng' limit 1",$db_connection)))
-            do_error(1,'UPDATE '.$table_prepend_name.$table_stat.': '.mysql_error());
-
-    if (!(mysql_query('UPDATE '.$table_prepend_name.$table_stat." set count=count+1 where category='total' and item='hits' limit 1",$db_connection)))
-            do_error(1,'UPDATE '.$table_prepend_name.$table_stat.': '.mysql_error());*/
 }
 
 
