@@ -1,5 +1,10 @@
 $Id$
 
+KNOWN BUGS:
+
+ Undefined variable:  HTTP_USER_AGENT in browser.php
+
+
 ORDERED by importance (order of starting work on it):
 ? = may be
 ! = important
