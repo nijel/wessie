@@ -460,5 +460,17 @@ function special(){
     echo $special[$lng];
 }
 
+if (count($allowed_function_plugins)>0){
+    reset($allowed_function_plugins);
+    while( list($key,$val)=each($allowed_function_plugins)){
+        echo 'x'.$val;
+        if (file_exists('./plugins/'.$val.'/function.php')){
+            require_once('./plugins/'.$val.'/function.php');
+        }else{
+            log_error('Allowed function plugin "'.$val.'" could not be found!');
+        }
+    }
+}
+
 eval ('?'.'>'.$template);
 ?>

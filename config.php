@@ -216,7 +216,7 @@ $allow_content_eval = TRUE;
 //plugin configuration:
 //##PLUGIN_ALLOWED##
 $allowed_page_plugins = array('article','file');
-$allowed_function_plugins = array();
+$allowed_function_plugins = array('icons');
 //##/PLUGIN_ALLOWED##
 
 //allow or deny of evaling of content for each plugin
