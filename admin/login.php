@@ -47,8 +47,7 @@ if (isset($HTTP_POST_VARS['submit'])){
         die();
     }
 
-
-    setcookie ('user', $user,time()+$admin_user_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
+    if (!$admin_two_step_login) setcookie ('user', $user,time()+$admin_user_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
     $hash=md5 (uniqid (rand()));
     setcookie ('hash',$hash ,time()+$admin_hash_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
 
@@ -68,7 +67,42 @@ if (isset($HTTP_POST_VARS['submit'])){
 
     }
 
+    if ($admin_two_step_login) {
+        $url2 = 'http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/login.php?step2=1&amp;user='.urlencode($user).'&amp;url='.urlencode($url);
+    } else {
+        $url2 = $url;
+    }
+
+    show_html_head('REDIRECT','<meta http-equiv="Refresh" content="0; URL='.$url2.'" />');
+?>
+<body>
+<a href="<?php echo $url2; ?>">REDIRECT</a>
+</body>
+</html>
+<?php
+    die();
+} elseif ($admin_two_step_login && isset($HTTP_GET_VARS['step2']) && isset($hash)) {
+    $user=opt_addslashes($HTTP_GET_VARS['user']);
+
+    include_once('../db_connect.php');
+    if (!($id_result=mysql_query('SELECT count(user) as count from '.$db_prepend.$table_users.' where user="'.$user.'" and hash="'.$hash.'"',$db_connection)))
+            do_error(1,'SELECT '.$db_prepend.$table_users.': '.mysql_error());
+    $auth=mysql_fetch_array($id_result);
+    mysql_free_result($id_result);
+    if ($auth['count']!=1){
+        Header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=badlogin');
+        die();
+    }
+
+    setcookie ('user', $user,time()+$admin_user_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
+
+    if (!isset($url)){
+        $url = 'http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/index.php';
+
+    }
+
     show_html_head('REDIRECT','<meta http-equiv="Refresh" content="0; URL='.$url.'" />');
+
 ?>
 <body>
 <a href="<?php echo $url; ?>">REDIRECT</a>
@@ -76,6 +110,7 @@ if (isset($HTTP_POST_VARS['submit'])){
 </html>
 <?php
     die();
+
 }
 setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''), $SERVER_NAME); //delete cookie
 

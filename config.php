@@ -170,6 +170,8 @@ $special[1] = '';
 //                        this takes affect only when selecting file using
 //                        browse dialog and SHOULD affect plugins that read
 //                        files from disk)
+// $admin_two_step_login - ensures login to work even if there is something broken
+//                        and clients accepts only one cookie per request
 $admin_charset = 'iso-8859-2';
 $admin_default_css = 'admin_blue.css';
 $admin_timeout = '20 MINUTE';
@@ -179,6 +181,7 @@ $admin_confirm_delete = TRUE;
 $admin_confirm_uninstall = TRUE;
 $admin_validator = 'http://validator.cic/cgi-bin/validate.cgi?input=yes&amp;url=';
 $admin_file_restrict = TRUE;
+$admin_two_step_login = TRUE;
 //##/ADMIN##
 
 // file management options
