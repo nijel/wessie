@@ -46,7 +46,7 @@ if (isset($action) && ($action=='save')){
         exit;
     }
 
-    if (!config_set_option('\$allow_content_eval','$allow_content_eval='.(($allow_page_eval==1)?'TRUE':'FALSE').";\n",'//##/PLUGIN_COMMON##')){
+    if (!config_set_option('\$allow_content_eval','$allow_content_eval = '.(($allow_page_eval==1)?'TRUE':'FALSE').";\n",'//##/PLUGIN_COMMON##')){
         show_error('Can not modify configuration!');
         exit;
     }
@@ -72,7 +72,7 @@ if (isset($action) && ($action=='save')){
                         else
                             $page_plugins .= ",'$val'";
                     }
-                    if (!config_set_option('\$page_plugins_options[^[]*\[\''.$val.'\'\]\[\'eval\'\]=','$page_plugins_options[\''.$val.'\'][\'eval\']='.(($plugins_page_eval[$val]==1)?'TRUE':'FALSE').";\n",'//##/PLUGIN_OPTIONS##')){
+                    if (!config_set_option('\$page_plugins_options[^[]*\[\''.$val.'\'\]\[\'eval\'\]','$page_plugins_options[\''.$val.'\'][\'eval\'] = '.(($plugins_page_eval[$val]==1)?'TRUE':'FALSE').";\n",'//##/PLUGIN_OPTIONS##')){
                         show_error('Can not modify configuration!');
                         exit;
                     }
@@ -81,11 +81,11 @@ if (isset($action) && ($action=='save')){
         }
     }
 
-    if (!config_set_option('\$allowed_page_plugins','$allowed_page_plugins=array('.$page_plugins.");\n",'//##/PLUGIN_ALLOWED##')){
+    if (!config_set_option('\$allowed_page_plugins','$allowed_page_plugins = array('.$page_plugins.");\n",'//##/PLUGIN_ALLOWED##')){
         show_error('Can not modify configuration!');
         exit;
     }
-    if (!config_set_option('\$allowed_function_plugins','$allowed_function_plugins=array('.$function_plugins.");\n",'//##/PLUGIN_ALLOWED##')){
+    if (!config_set_option('\$allowed_function_plugins','$allowed_function_plugins = array('.$function_plugins.");\n",'//##/PLUGIN_ALLOWED##')){
         show_error('Can not modify configuration!');
         exit;
     }
