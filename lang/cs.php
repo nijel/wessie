@@ -1,6 +1,6 @@
 <?php
 setlocale(LC_ALL,'Czech');
-$charset='iso 8859-2';
+$charset='iso-8859-2';
 
 //Here will be [count] replaced by number of visits to page
 $msg_counter='Tuto stránku si prohlédlo <font size="-1"><?php echo $count?></font> náv¹tìvníkù';
