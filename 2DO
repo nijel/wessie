@@ -1,11 +1,9 @@
 <meta http-equiv="Content-Language" content="cs">
 
+insert new row for week stat at the start of week - some cache!!!!!
 
-REBUILD TEMPLATE ENGINE!
 
-tags/functions:
-	10 product info + product page
-	10 links
+functions:
 	5 discussions
 	5 mailing lists + more maillist support
 
@@ -21,8 +19,6 @@ scripts:
                  - start/stop
 
 other:
-	7 menu shouldn't be fully displayed for all pages
-	3 move variables like wss_version, wss_author, ... to separate file
 	1 custom error page
 
 configuration of:
