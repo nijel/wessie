@@ -259,6 +259,15 @@ function is_download_free($id){
     return (mysql_num_rows($id_result)==0);
 }
 
+function is_download_group_free($id){
+    global $table_prepend_name,$table_download_group;
+    if (!$id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_download_group.' where  id='.$id)){
+        show_error("Can't get download group info! (".mysql_error().')');
+        exit;
+    }
+    return (mysql_num_rows($id_result)==0);
+}
+
 function get_page_translations($id){
     global $table_prepend_name,$table_page;
     if (!$id_result=mysql_query('SELECT lng from '.$table_prepend_name.$table_page.' where id='.$id)){
@@ -311,14 +320,51 @@ function change_everywhere_category($from,$to,$lng){
 
 function delete_everywhere_category($id,$lng){
     global $table_prepend_name,$table_menu,$table_page;
-/*    if (!$id_result=mysql_query('DELETE FROM '.$table_prepend_name.$table_page.' where category='.$id.' AND lng='.$lng)){
-        show_error("Can't update category info! (".mysql_error().')');
-        exit;
-    }*/
     delete_pages('category='.$id.' AND lng='.$lng);
     if (!$id_result=mysql_query('DELETE FROM '.$table_prepend_name.$table_menu.' where category='.$id.' AND lng='.$lng)){
         show_error("Can't update category info! (".mysql_error().')');
         exit;
+    }
+}
+
+function change_downloads_download_group($from,$to){
+    global $table_prepend_name,$table_download;
+    if (!$id_result=mysql_query('UPDATE '.$table_prepend_name.$table_download.' set grp='.$to.' where grp='.$from)){
+        show_error("Can't update download info! (".mysql_error().')');
+        exit;
+    }
+}
+
+function delete_donwloads_download_group($id,$delete_files){
+    global $table_prepend_name,$table_download;
+    if ($delete_files){
+        if (!$id_result=mysql_query(
+        'SELECT id, filename, remote, grp, count '.
+        ' from '.$table_prepend_name.$table_download.
+        ' where grp='.$id))
+            show_error("Can't select download! (".mysql_error().')');
+
+        if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_download.' where grp='.$id)){
+            show_error("Can't delete downloads! (".mysql_error().')');
+            exit;
+        }
+
+        while ($download = mysql_fetch_array ($id_result)) {
+            echo '<p class="info">Attempting to delete file: '.$download['filename'].'</p>';
+            if (!file_exists('../'.$download['filename'])){
+                echo '<p class="info">File does NOT exist, so it was NOT deleted</p>';
+            }elseif (!unlink('../'.$download['filename'])){
+                echo '<p class="info">File could NOT be deleted</p>';
+            }else{
+                echo '<p class="info">File deleted</p>';
+            }
+        }
+        mysql_free_result($id_result);
+    }else{
+        if (!$id_result=mysql_query('DELETE FROM '.$table_prepend_name.$table_download.' where grp='.$id)){
+            show_error("Can't update download info! (".mysql_error().')');
+            exit;
+        }
     }
 }
 
@@ -351,12 +397,15 @@ function delete_pages($condition){
 
 }
 
-function make_row($even,$url){
+function make_row($even){
     global $admin_highlight_list;
     echo '<tr '.(($even == 1)?'class="even"':'class="odd"');
-//    echo '<tr onclick="window.location.replace(\''.$url.'\')" '.(($even == 1)?'class="even"':'class="odd"');
     highlighter($admin_highlight_list);
-    echo'><td>';
+    echo '>';
+}
+
+function make_cell($data,$url=''){
+    echo '<td '.($url!=''?'class="clickable" onclick="window.location.replace('."'".$url."'".')"':'').'>'.$data.'</td>';
 }
 
 function make_row_js($even,$js,$class_even='even',$class_odd='odd'){
@@ -397,7 +446,6 @@ function human_readable_size($size){
 function highlighter($color='#00ff00'){
     if ($color!=''){
         echo ' onmouseover="highlight(this,\''.$color.'\');" onmouseout="unhighlight(this);"';
-//        echo ' onmouseover="oldbg=this.style.backgroundColor;if (typeof(this.style) != \'undefined\') this.style.backgroundColor = \''.$color.'\'" onmouseout="if (typeof(this.style) != \'undefined\') this.style.backgroundColor = oldbg"';
     }
 }
 ?>

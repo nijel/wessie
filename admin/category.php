@@ -77,10 +77,16 @@ if (mysql_num_rows($id_result) == 0){
     echo '<table class="data"><tr><th>Id</th><th>Name</th><th>Short</th><th>Description</th><th>Language</th><th>Page</th><th>Actions</th></tr>'."\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
-        make_row($even,'category_edit.php?id='.$item['id'].'&amp;lng='.$item['lng']);
+        $url='category_edit.php?id='.$item['id'].'&amp;lng='.$item['lng'];
+        make_row($even);
         $even = 1 - $even;
-        echo $item['id'].'</td><td>'.htmlspecialchars($item['name']).'</td><td>'.htmlspecialchars($item['short']).'</td><td>'.htmlspecialchars($item['description']).'</td><td>'.$lang_name[$item['lng']].'</td><td>'.$item['page'].'</td>';
-        echo '<td>&nbsp;<a href="category_edit.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Edit</a>&nbsp;|&nbsp;<a href="category_delete.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;</td></tr>'."\n";
+        make_cell($item['id'],$url);
+        make_cell(htmlspecialchars($item['name']),$url);
+        make_cell(htmlspecialchars($item['short']),$url);
+        make_cell(htmlspecialchars($item['description']),$url);
+        make_cell($lang_name[$item['lng']],$url);
+        make_cell($item['page'],$url);
+        echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="category_delete.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;</td></tr>'."\n";
     }
     echo "</table>\n";
 }

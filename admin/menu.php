@@ -68,21 +68,23 @@ while ($item = mysql_fetch_array ($id_result)){
     if ((!isset($item['description']))||($item['description']=='')) $desc=$page['description'];
     else $desc=$item['description'];
 
-    make_row($even,'menu_edit.php?id='.$item['id'].'&amp;lng='.$item['lng']);
+    $url='menu_edit.php?id='.$item['id'].'&amp;lng='.$item['lng'];
+    $spaces = '';
+    for ($i=0; $i<$depth; $i++) $spaces .= '&nbsp;&nbsp;';
+
+    make_row($even);
     $even = 1 - $even;
 
-    echo $lang_name[$item['lng']];
-    echo '</td><td>' . htmlspecialchars(get_category_name($item['category'],$item['lng']));
-    echo '</td><td>';
-    for ($i=0; $i<$depth; $i++) echo '&nbsp;&nbsp;';
-    echo htmlspecialchars($name);
-    echo '</td><td>' . htmlspecialchars($desc) ;
-    echo '</td><td>' . $depth;
-    echo '</td><td>' . $item['rank'];
-    echo '</td><td>' . $item['expand'];
-    echo '</td><td>' . $item['id'];
-    echo '</td><td>' . $item['page'];
-    echo '</td><td>&nbsp;<a href="menu_edit.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Edit</a>&nbsp;|&nbsp;<a href="menu_edit.php?parent=',$item['id'].'&amp;lng='.$item['lng'].'">Add child</a>&nbsp;|&nbsp;<a href="menu_delete.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;</td></tr>'."\n";
+    make_cell($lang_name[$item['lng']],$url);
+    make_cell(htmlspecialchars(get_category_name($item['category'],$item['lng'])),$url);
+    make_cell($spaces.htmlspecialchars($name),$url);
+    make_cell(htmlspecialchars($desc),$url);
+    make_cell($depth,$url);
+    make_cell($item['rank'],$url);
+    make_cell($item['expand'],$url);
+    make_cell($item['id'],$url);
+    make_cell($item['page'],$url);
+    echo '</td><td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="menu_edit.php?parent=',$item['id'].'&amp;lng='.$item['lng'].'">Add child</a>&nbsp;|&nbsp;<a href="menu_delete.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;</td></tr>'."\n";
 
     add_childs($item['id'],$depth+1,$item['lng']);
 }

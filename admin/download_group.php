@@ -60,19 +60,22 @@ if (mysql_num_rows($id_result) == 0){
     echo "Nothing...";
 } else {
     echo 'Listed download groups: '.mysql_num_rows($id_result);
-    echo '<table class="data"><tr><th>Id</th><th>Filename</th><th>Group</th><th>Count</th><th>Actions</th></tr>'."\n";
+    echo '<table class="data"><tr><th>Id</th><th>Name</th><th>Count</th><th>Actions</th></tr>'."\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
-        make_row($even,'download_group_edit.php?id='.$item['id']);
+        $url='download_group_edit.php?id='.$item['id'];
+        make_row($even);
         $even = 1 - $even;
-        echo $item['id'].'</td><td>'.htmlspecialchars($item['name']).'</td><td>'.$item['count'].'</td>';
-        echo '<td>&nbsp;<a href="download_group_edit.php?id='.$item['id'].'">Edit</a>&nbsp;|&nbsp;<a href="download_group_delete.php?id='.$item['id'].'">Delete</a>&nbsp;|&nbsp;<a href="download_item.php?filter_group='.$item['id'].'">List</a>&nbsp;</td></tr>'."\n";
+        make_cell($item['id'],$url);
+        make_cell(htmlspecialchars($item['name']),$url);
+        make_cell($item['count'],$url);
+        echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="download_group_delete.php?id='.$item['id'].'">Delete</a>&nbsp;|&nbsp;<a href="download_item.php?filter_group='.$item['id'].'">List</a>&nbsp;</td></tr>'."\n";
     }
     echo "</table>\n";
 }
 ?>
 <form action="download_group_edit.php" method="get">
-Create new download
+Create new download group
 <input type="submit" value=" Go " class="go" />
 <input type="hidden" name="action" value="new" />
 </form>

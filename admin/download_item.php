@@ -83,10 +83,16 @@ if (mysql_num_rows($id_result) == 0){
                 fclose($file);
             }
         }
-        make_row($even,'download_item_edit.php?id='.$item['id']);
+        $url='download_item_edit.php?id='.$item['id'];
+        make_row($even);
         $even = 1 - $even;
-        echo $item['id'].'</td><td>'.htmlspecialchars($item['filename']).'</td><td>'.($item['remote']==1?'yes':'no').'</td><td>'.$size.'</td><td>'.htmlspecialchars(get_download_group_name($item['grp'])).'</td><td>'.$item['count'].'</td>';
-        echo '<td>&nbsp;<a href="download_item_edit.php?id='.$item['id'].'">Edit</a>&nbsp;|&nbsp;<a href="download_item_delete.php?id='.$item['id'].'">Delete</a>&nbsp;|&nbsp;<a href="../download.php?id='.$item['id'].'" target="_blank">Download</a>&nbsp;</td></tr>'."\n";
+        make_cell($item['id'],$url);
+        make_cell(htmlspecialchars($item['filename']),$url);
+        make_cell($item['remote']==1?'yes':'no',$url);
+        make_cell($size,$url);
+        make_cell(htmlspecialchars(get_download_group_name($item['grp'])),$url);
+        make_cell($item['count'],$url);
+        echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="download_item_delete.php?id='.$item['id'].'">Delete</a>&nbsp;|&nbsp;<a href="../download.php?id='.$item['id'].'" target="_blank">Download</a>&nbsp;</td></tr>'."\n";
     }
     echo "</table>\n";
 }

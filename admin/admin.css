@@ -58,6 +58,9 @@ td.filtercontent {
 td.filtertext {
     vertical-align: middle;
 }
+td.clickable {
+    cursor: hand;
+}
 form.filter {
     margin-bottom: 0px;
     margin-top: 0px;

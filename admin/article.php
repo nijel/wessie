@@ -74,10 +74,14 @@ if (mysql_num_rows($id_result) == 0){
     echo '<table class="data"><tr><th>Page</th><th>Title</th><th>Description</th><th>Language</th><th>Last change</th><th>Actions</th></tr>'."\n";
     $even=1;
     while ($item = mysql_fetch_array ($id_result)) {
-        make_row($even,'article_edit.php?id='.$item['id'].'&amp;lng='.$item['lng']);
+        $url='article_edit.php?id='.$item['id'].'&amp;lng='.$item['lng'];
+        make_row($even);
         $even = 1 - $even;
-        echo $item['page'].'</td><td>'.htmlspecialchars($item['name']).'</td><td>'.htmlspecialchars($item['description']).'</td><td>'.$lang_name[$item['lng']].'</td><td>'.strftime('%c',$item['last_change']).'</td>';
-        echo '<td>&nbsp;<a href="article_edit.php?id='.$item['page'].'&amp;lng='.$item['lng'].'">Edit</a>&nbsp;|&nbsp;<a href="article_delete.php?id='.$item['page'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;'.((isset($admin_validator)&&($admin_validator!=''))?'|&nbsp;<a href="'.$admin_validator.urlencode(make_absolute_url($item['page'],$item['lng'])).'" target="_blank">Validate</a>&nbsp;':'').'</td></tr>'."\n";
+        echo make_cell($item['page'],$url);
+        echo make_cell(htmlspecialchars($item['name']),$url);
+        echo make_cell($lang_name[$item['lng']],$url);
+        echo make_cell(strftime('%c',$item['last_change']),$url);
+        echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="article_delete.php?id='.$item['page'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;'.((isset($admin_validator)&&($admin_validator!=''))?'|&nbsp;<a href="'.$admin_validator.urlencode(make_absolute_url($item['page'],$item['lng'])).'" target="_blank">Validate</a>&nbsp;':'').'</td></tr>'."\n";
     }
     echo "</table>\n";
 }
