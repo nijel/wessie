@@ -91,11 +91,20 @@ div.left {
 
 div.leftbox {
     width: 100%;
-    border: 1px solid black;
+    border: 1px dotted black;
     background-color: #f0f4ff;
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 3px;
+}
+
+div#searchbox {
+    text-align: center;
+}
+
+form.search {
+    margin: 0px;
+    padding: 0px;
 }
 
 div.powered {
@@ -125,4 +134,12 @@ span.inactive{
 
 span.active{
     font-weight: bolder;
+}
+
+input.search_text {
+    width: 140px;
+}
+
+input.search_button {
+    width: 70px;
 }

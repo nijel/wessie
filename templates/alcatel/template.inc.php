@@ -64,11 +64,11 @@
 <div class="leftbox">
 <?php left_menu(); ?>
 </div>
-<div class="leftbox">
-<form action="<?php echo $search_url; ?>" method="get" target="_self">
+<div class="leftbox" id="searchbox">
+<form class="search" action="<?php echo $search_url; ?>" method="get" target="_self">
   <?php search_hidden_options(); ?>
-  <input type="text" name="<?php echo $search_param; ?>" size="15" />
-  <input type="submit" value="<?php echo $msg_find; ?>" />
+  <input class="search_text" type="text" name="<?php echo $search_param; ?>" />
+  <input class="search_button" type="submit" value="<?php echo $msg_find; ?>" />
 </form>
 </div>
 <div class="leftbox">

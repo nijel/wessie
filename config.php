@@ -127,7 +127,7 @@ $site_logo_width = 200;
 $site_logo_height = 100;
 $category_order = 'id';
 $use_adverts = FALSE;
-$top_pages_count = 3;
+$top_pages_count = 4;
 //##/DESIGN##
 
 // some information about site
