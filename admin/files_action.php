@@ -35,16 +35,36 @@ if (!isset($fname) || !isset($action)){
     exit;
 }
 
-if (!ereg('^(delete|move|copy|chmod)$',$action)){
+if (!ereg('^(do)?(delete|move|copy|chmod)$',$action)){
     show_error_box('Unknown action!');
     require_once('./admin_footer.php');
     exit;
 }
 
-$dir = dirname($fname);
-
 $root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
 $root_dir_len = strlen($root_dir);
+
+if(isset($dname)){
+    $ddir = dirname($dname);
+
+    if (!@chdir($ddir)||!@is_dir($ddir)){
+        show_error_box('Selected destination directory not acessible!');
+        chdir($orig_pwd);
+        require_once('./admin_footer.php');
+        exit;
+    }else{
+        $ddir = getcwd();
+    }
+
+    if ($admin_fm_restrict && (strlen($ddir) < $root_dir_len || strpos($ddir,$root_dir) != 0)) {
+        show_error_box('Directory restriction does not allow you to work in selected destination directory! ('.$ddir.')');
+        chdir($orig_pwd);
+        require_once('./admin_footer.php');
+        exit;
+    }
+}
+
+$dir = dirname($fname);
 
 if (!@chdir($dir)||!@is_dir($dir)){
     show_error_box('Selected directory not acessible!');
@@ -62,6 +82,24 @@ if ($admin_fm_restrict && (strlen($dir) < $root_dir_len || strpos($dir,$root_dir
     exit;
 }
 
+if (!file_exists(basename($fname))){
+    show_error_box('File not found!');
+    require_once('./admin_footer.php');
+    exit;
+}
+
+if ($action=='move'){
+?>
+    <form action="files_action.php" method="post" enctype="multipart/form-data">
+    Move file <?php echo $fname;?> to:<br />
+    <input type="hidden" name="action" value="domove" />
+    <?php sized_edit('filename','') ?><input type="button" class="browse" onclick="open_browse_window('<?php echo dirname($fname);?>','dirs');" value="..." /><br />
+    <input type="hidden" name="fname" value="<?php echo $fname; ?>" />
+    <input type="submit" value=" Go " class="go" />
+    </form>
+
+<?php
+}
 
 chdir($orig_pwd);
 require_once('./admin_footer.php');

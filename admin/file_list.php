@@ -32,9 +32,13 @@ require_once('./auth.php');
 require_once('./functions.php');
 Header('Content-Type: text/html; charset='.$admin_charset);
 $onunload='window.opener.delwin();';
-show_html_head('Select file');
+if ($limit=='dirs') {
+    show_html_head('Select directory');
+} else {
+    show_html_head('Select file');
+}
 
-if ($limit=='limit' || $admin_file_restrict) $restrict=TRUE;
+if ($limit=='limit' || ($limit!='dirs' && $admin_file_restrict)  || ($limit=='dirs' && $admin_fm_restrict)) $restrict=TRUE;
 else $restrict=FALSE;
 
 if (!isset($limit)) $limit='limit';
@@ -61,11 +65,11 @@ if (!isset($dir)||$dir==''||!@is_dir($dir)){
     $dir = getcwd();
 }
 
-?>
-
-<p class="info">Select file (<?php echo $dir;?>):</p>
-
-<?php
+if ($limit=='dirs') {
+    echo '<p class="info">Select directory ('.$dir."):</p>\n";
+} else {
+    echo '<p class="info">Select file ('.$dir."):</p>\n";
+}
 
 $files=array();
 $dirs=array();
@@ -73,6 +77,10 @@ $dirs=array();
 if (!read_folder($dir,$dirs,$files)){
     show_error('Can not read directory info "'.$dir.'"!');
     exit;
+}
+if ($limit=='dirs') {
+    $files=array();
+    echo "<a href=\"javascript:gE('filename',window.opener).value='$dir/';window.close();\">Select current directory</a>";
 }
 natsort($files);
 natsort($dirs);

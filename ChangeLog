@@ -1,3 +1,15 @@
+2002-01-16 Wednesday 21:58  michal
+
+	fixed bug in directory resctiction in file management 
+
+2002-01-16 Wednesday 21:41  michal
+
+	passwords in database are stored as md5 sums, not plaintext 
+
+2002-01-16 Wednesday 21:37  michal
+
+	corrected url used for choosing selected tab 
+
 2002-01-16 Wednesday 21:18  michal
 
 	added support for help in plugins: 
