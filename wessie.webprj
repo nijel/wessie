@@ -98,6 +98,14 @@
   <item url="admin/files.php" />
   <item url="admin/files_upload.php" />
   <item url="admin/admin_blue.css" />
+  <item url="plugins/icons/" />
+  <item url="plugins/icons/main.php" />
+  <item url="plugins/icons/function.php" />
+  <item url="ChangeLog" />
+  <item url="plugins/icons/img/" />
+  <item url="plugins/icons/img/powered_mysql.png" />
+  <item url="plugins/icons/img/powered_php.png" />
+  <item url="plugins/icons/img/powered_wessie.png" />
  </project>
 </webproject>
 <!-- $Id$ -->
