@@ -248,24 +248,28 @@ function top_pages(){
 }
 
 function advert(){
-global $use_adverts,$table_prepend_name,$table_advert,$db_connection;
-if ($use_adverts){
-    $id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_advert.'',$db_connection) or
-        do_error(1,'SELECT id from '.$table_prepend_name.$table_advert);
-    $adverts=mysql_num_rows($id_result);
-    mysql_free_result($id_result);
+    global $use_adverts,$table_prepend_name,$table_advert,$db_connection;
+    if ($use_adverts){
+        $id_result=mysql_query('SELECT id from '.$table_prepend_name.$table_advert.'',$db_connection) or
+            do_error(1,'SELECT id from '.$table_prepend_name.$table_advert);
+        $adverts=mysql_num_rows($id_result);
+        mysql_free_result($id_result);
 
-    srand ((double) microtime() * 1000000);
-    $advert_id=($adverts==1)?0:rand(0,$adverts-1);
+        if($adverts>0){
+            srand ((double) microtime() * 1000000);
+            $advert_id=($adverts==1)?0:rand(0,$adverts-1);
 
-    $id_result=mysql_query("SELECT code from $table_prepend_name$table_advert limit $advert_id,1",$db_connection) or
-        do_error(1,'SELECT '.$table_prepend_name.$table_advert);
-    $advert=mysql_fetch_array($id_result);
-    mysql_free_result($id_result);
-    echo $advert['code'];
-}else{
+            $id_result=mysql_query("SELECT code from $table_prepend_name$table_advert limit $advert_id,1",$db_connection) or
+                do_error(1,'SELECT '.$table_prepend_name.$table_advert);
+            $advert=mysql_fetch_array($id_result);
+            mysql_free_result($id_result);
+            echo $advert['code'];
+        }else{
+            echo '&nbsp;';
+        }
+    }else{
         echo '&nbsp;';
-}
+    }
 }
 
 function left_menu(){
