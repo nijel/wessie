@@ -47,9 +47,9 @@ if (isset($HTTP_POST_VARS['submit'])){
     }
 
 
-    setcookie ("user", $user,time()+2592000, dirname($REQUEST_URI));//valid one month
+    setcookie ("user", $user,time()+$admin_user_cookie, dirname($REQUEST_URI));
     $hash=md5 (uniqid (rand()));
-    setcookie ("hash",$hash ,time()+3600, dirname($REQUEST_URI));//valid one hour
+    setcookie ("hash",$hash ,time()+$admin_hash_cookie, dirname($REQUEST_URI));
 
     $ip=$REMOTE_ADDR;
     $headers = getallheaders();

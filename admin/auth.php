@@ -80,5 +80,5 @@ if ($auth['ip']!=$ip){
 if (!(mysql_query('UPDATE '.$table_prepend_name.$table_users." set time=NOW() where user='".$user."' and hash='".$hash."' limit 1",$db_connection)))
     do_error(1,'UPDATE '.$table_prepend_name.$table_users.': '.mysql_error());
 
-setcookie ("hash",$hash ,time()+3600, dirname($REQUEST_URI));//valid one hour
+setcookie ("hash",$hash ,time()+$admin_hash_cookie, dirname($REQUEST_URI));
 ?>
