@@ -89,6 +89,12 @@
   <item url="plugins/file/main.php" />
   <item url="admin/help.php" />
   <item url="admin/options_header.php" />
+  <item url="admin/options_design.php" />
+  <item url="admin/options_info.php" />
+  <item url="admin/options_languages.php" />
+  <item url="admin/options_database.php" />
+  <item url="admin/options_errors.php" />
+  <item url="admin/options_admin.php" />
  </project>
 </webproject>
 <!-- $Id$ -->
