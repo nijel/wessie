@@ -91,20 +91,13 @@ User:<?php echo $user?><br />
 <table class="tabs">
   <tr>
 <?php
-
-function make_tab_edit($href,$text,$url){
-    global $SCRIPT_NAME,$admin_highlight_tabs;
-    echo '<td'.(strpos($SCRIPT_NAME,$url)?' class="selected"':'');
-    highlighter($admin_highlight_tabs);
-    echo ' onclick="window.location.replace(\''.$href.'\')"><a href="'.$href.'">'.$text.'</a></td>'."\n";
-}
-make_tab_edit('./category.php','Categories','/categor');
+make_tab_edit('./category.php','Categories','/category');
 make_tab_edit('./menu.php','Menu','/menu');
-make_tab_edit('./pages.php','Pages','/page');
-make_tab_edit('./articles.php','Articles','/article');
-make_tab_edit('./downloads.php','Downloads','/download');
-make_tab_edit('./plugins.php','Plugins','/plugin');
-make_tab_edit('./users.php','Users','/user');
+make_tab_edit('./page.php','Pages','/page');
+make_tab_edit('./article.php','Articles','/article');
+make_tab_edit('./download.php','Downloads','/download');
+make_tab_edit('./plugin.php','Plugins','/plugin');
+make_tab_edit('./user.php','Users','/user');
 make_tab_edit('./options.php','Options','/option');
 ?>
   </tr>
