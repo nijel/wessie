@@ -81,7 +81,7 @@ echo "\n<tr><th>Host</th>\n";
 echo '<td><input type="text" class="text" name="set_host" value="'.$db_host.'" /></td>'."</tr>\n";
 echo "\n<tr><th>User</th>\n";
 echo '<td><input type="text" class="text" name="set_user" value="'.$db_user.'" /></td>'."</tr>\n";
-echo "\n<tr><th>Passowd</th>\n";
+echo "\n<tr><th>Password</th>\n";
 echo '<td><input type="text" class="text" name="set_pass" value="'.$db_pass.'" /></td>'."</tr>\n";
 echo "\n<tr><th>Database</th>\n";
 echo '<td><input type="text" class="text" name="set_name" value="'.$db_name.'" /></td>'."</tr>\n";
