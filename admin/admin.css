@@ -29,10 +29,18 @@ body {
     background-color: #ddddaa;
 }
 tr.even {
- background-color: #eeeecc;
+    background-color: #eeeecc;
 }
 tr.odd {
- background-color: #ddddbb;
+    background-color: #ddddbb;
+}
+tr.even_hand {
+    background-color: #eeeecc;
+    cursor: hand;
+}
+tr.odd_hand {
+    background-color: #ddddbb;
+    cursor: hand;
 }
 table.filter {
     border: none;
@@ -52,7 +60,7 @@ form.filter {
 input,select {
     background-color: #ff0000;
 }
-input.delete,input.return,input.text,input.go,input.save,input.reset,textarea.text,input.ok,select.select,input.check,input.login,input.radio {
+input.browse,input.delete,input.return,input.text,input.go,input.save,input.reset,textarea.text,input.ok,select.select,input.check,input.login,input.radio {
     color: #000000;
     background-color: #ccccaa;
 }
@@ -197,4 +205,13 @@ h1 a:visited {
 h1 a:hover {
     color: #000000;
     text-decoration: underline;
+}
+table.filelist {
+    border: none;
+    vertical-align: top;
+    width: 400px;
+}
+table.filelist td.size {
+    width: 80px;
+    text-align: right;
 }

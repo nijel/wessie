@@ -88,11 +88,9 @@ function sized_textarea($name,$content){
     echo '<textarea name="'.$name.'" cols="'.$GLOBALS['admin_'.$name.'_cols'].'" rows="'.$GLOBALS['admin_'.$name.'_rows'].'" class="text">'.htmlspecialchars($content).'</textarea>';
 }
 
-function sized_edit($name,$content){
-    echo '<input type="text" name="'.$name.'" size="'.$GLOBALS['admin_'.$name.'_size'].'" value="'.htmlspecialchars($content).'" class="text" />';
+function sized_edit($name,$content,$onchange=''){
+    echo '<input '.($onchange==''?'':'onchange="'.$onchange.'"').'type="text" name="'.$name.'" id="'.$name.'" size="'.$GLOBALS['admin_'.$name.'_size'].'" value="'.htmlspecialchars($content).'" class="text" />';
 }
-
-
 
 $download_group_name_init=FALSE;
 $download_group_name_cache=array();
@@ -361,6 +359,14 @@ function make_row($even,$url){
     echo'><td>';
 }
 
+function make_row_js($even,$js,$class_even='even',$class_odd='odd'){
+    global $admin_highlight_list;
+    echo '<tr '.(($even == 1)?'class="'.$class_even.'"':'class="'.$class_odd.'"');
+    echo '<tr onclick="'.$js.'" '.(($even == 1)?'class="even"':'class="odd"');
+    highlighter($admin_highlight_list);
+    echo'><td>';
+}
+
 function make_tab_item($href,$text,$url){
     global $SCRIPT_NAME,$admin_highlight_tabs;
     echo '<td'.(strpos($SCRIPT_NAME,$url)?' class="selected"':'');
@@ -374,6 +380,18 @@ function make_tab_start(){
 
 function make_tab_end(){
     echo '</tr></table>';
+}
+
+function human_readable_size($size){
+    if ($size<1024) {
+        return $size.' B';
+    }elseif ($size<1048576) {
+        return (round($size*10/1024)/10).' kB';
+    }elseif ($size_b<1073741824) {
+        return (round($size*10/1048576)/10).' MB';
+    }else{
+        return (round($size*10/1073741824)/10).' GB';
+    }
 }
 
 function highlighter($color='#00ff00'){

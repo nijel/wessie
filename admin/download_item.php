@@ -72,20 +72,7 @@ if (mysql_num_rows($id_result) == 0){
             if (!file_exists('../'.$item['filename'])){
                 $size='<span class="error">Not found</span>';
             }else{
-                $size_b=filesize('../'.$item['filename']);
-                $size_kb=round($size_b*10/1024)/10;
-                $size_mb=round($size_kb*10/1024)/10;
-                $size_gb=round($size_mb*10/1024)/10;
-
-                if ($size_b<1024) {
-                    $size=$size_b.' B';
-                }elseif ($size_b<1048576) {
-                    $size=$size_kb.' kB';
-                }elseif ($size_b<1073741824) {
-                    $size=$size_mb.' MB';
-                }else{
-                    $size=$size_gb.' GB';
-                }
+                $size=human_readable_size(filesize('../'.$item['filename']));
             }
         }else{
             $file = @fopen ($item['filename'], 'r');

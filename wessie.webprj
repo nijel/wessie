@@ -59,6 +59,10 @@
   <item url="admin/functions.php" />
   <item url="admin/index.php" />
   <item url="admin/download_header.php" />
+  <item url="admin/download_item_edit.php" />
+  <item url="admin/download_item_delete.php" />
+  <item url="admin/file_functions.php" />
+  <item url="admin/browse_list.php" />
  </project>
 </webproject>
 <!-- $Id$ -->

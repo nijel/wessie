@@ -1,3 +1,4 @@
+<?php
 /* vim: set expandtab tabstop=4 shiftwidth=4: */
 // +----------------------------------------------------------------------+
 // | wessie - web site system                                             |
@@ -22,41 +23,46 @@
 // | Authors: Michal Cihar <cihar at email dot cz>                        |
 // +----------------------------------------------------------------------+
 //
-// $Id$
+// $Id $
 
-if(top != self) { window.top.location.href=location; }
+require_once('./functions.php');
 
-function highlight(what,color){
-    if (typeof(what.style) != 'undefined'){
-        oldBackground=what.style.backgroundColor;
-        what.style.backgroundColor = color;
+function read_folder($path,&$dirs,&$files){
+    $list=array();
+    if ($dir = @opendir($path)) {
+        rewinddir($dir);
+        while ($file = readdir($dir)) {
+            if ($file!='.')
+                $list[]=$file;
+        }
+        closedir($dir);
+        while (list ($key, $val) = each($list)){
+            if (@is_dir($path.'/'.$val)){
+                $dirs[]=$val;
+            }else{
+                $files[]=$val;
+            }
+        }
+        return TRUE;
+    }else{
+        return FALSE;
     }
-    return true;
 }
 
-function unhighlight(what){
-    if (typeof(what.style) != 'undefined') what.style.backgroundColor = oldBackground;
-    return true;
-}
-
-function open_browse_window(dir){
-    close_browse_window=1;
-    browse_window=window.open('./browse_list.php?dir='+dir,'Select file','personalbar=0,status=0,dependent=1,toolbar=0,height=400,width=440,innerHeight=400,innerWidth=430');
-    return true;
-}
-
-/* Following part is taken from Riki Fridrich (http://acid.nfo.sk) and a bit modified: */
-function gE(e,f){
-    if(document.layers){
-        f=(f)?f:self;
-        var V=f.document.layers;
-        if(V[e])
-            return V[e];
-        for(var W=0;W<V.length;)
-            t=gE(e,V[W++]);
-        return t;
+function add_file_info($dir,$list){
+    $result=array();
+    while (list ($key, $val) = each($list)){
+        $result[$val]['filename']=$val;
+        $result[$val]['size']=filesize($dir.'/'.$val);
+        $result[$val]['hsize']=human_readable_size(filesize($dir.'/'.$val));
+        $result[$val]['is_dir']=is_dir($dir.'/'.$val);
     }
-    if(f.document.all)
-        return f.document.all[e];
-    return f.document.getElementById(e);
+    return $result;
 }
+
+function join_array(&$list,$new){
+    while (list ($key, $val) = each($new)){
+        $list[$key]=$val;
+    }
+}
+?>

@@ -109,6 +109,7 @@ $admin_timeout='20 MINUTE';
 //size of edits in administration
 $admin_name_size=80;  //page name
 $admin_short_size=80;  //page name
+$admin_filename_size=80;  //page name
 $admin_content_rows=30;
 $admin_content_cols=80;
 $admin_keywords_rows=2;

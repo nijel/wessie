@@ -26,8 +26,29 @@
 // $Id$
 
 $page_name='Download:Edit';
+$onunload='if(close_browse_window) browse_window.close();';
 require_once('./download_header.php');
+?>
+<script language="JavaScript" type="text/javascript">
+<!--
+close_browse_window=0;
+function delwin(){
+    close_browse_window=0;
+    return true;
+}
 
+function check_remote(){
+    if (gE('filename',window).value.indexOf(':/')==-1){
+        gE('remote',window).checked=0;
+    }else{
+        gE('remote',window).checked=1;
+    }
+    return true;
+}
+//-->
+</script>
+
+<?php
 if (isset($action) && ($action=='save')){
     if (!mysql_query('UPDATE '.$table_prepend_name.$table_download.' set filename="'.$filename.'", remote='.(isset($remote)?$remote:'0').', grp='.$grp.' WHERE id='.$id)){
         show_error("Can't save download info! (".mysql_error().')');
@@ -84,7 +105,7 @@ if (isset($action) && ($action=='save')){
 
 ?>
 
-<form action="download_item_edit.php" method="post">
+<form action="download_item_edit.php" method="post" name="edit">
 <input type="hidden" name="action" value="<?php echo $action?>" />
 <table class="item">
 <tr><th>
@@ -96,12 +117,13 @@ Download ID:
 <tr><th>
 Filename:
 </th><td>
-<?php sized_edit('filename', $download['filename']) ?>
+<?php sized_edit('filename', $download['filename'], 'check_remote();') ?><input type="button" class="browse" onclick="open_browse_window('<?php echo dirname(dirname($SCRIPT_FILENAME)).(($download['filename']!='')?dirname($download['filename']):dirname(dirname($SCRIPT_FILENAME)));?>');" value="..." />
+
 </td></tr>
 <tr><th>
 Remote:
 </th><td>
-<?php echo '<input type="checkbox" name="remote" value="1"  class="check"'.(($download['remote']==1)?'checked="checked"':'').' />'; ?>
+<?php echo '<input type="checkbox" id="remote" name="remote" value="1"  class="check"'.(($download['remote']==1)?'checked="checked"':'').' />'; ?>
 <span class="note">(When filename is marked as being remote, then no attempt to get size of this file is made)</span>
 </td></tr>
 <tr><th>
