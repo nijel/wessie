@@ -58,3 +58,5 @@ admin+user: cofigurable HTTP headers
 admin+user: cofigurable counter/stats working
 
 admin+user: update documentation (FUNCTIONS, VARIABLES, README, some help, ...)
+
+admin+user: split functions.php, and to new files add something from main.php
