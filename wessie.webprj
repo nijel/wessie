@@ -1,5 +1,5 @@
 <!DOCTYPE webproject ><webproject>
- <project usePreviewPrefix="1" preview="http://wessie.cic/" type="Local" previewPrefix="http://wessie.cic/" name="wessie" >
+ <project usePreviewPrefix="1" preview="http://wessie.cic/" previewPrefix="http://wessie.cic/" type="Local" name="wessie" >
   <upload/>
   <author>Michal Cihar</author>
   <email>cihar@email.cz</email>
@@ -124,6 +124,7 @@
   <item url="plugins/bullshit/admin_list.php" />
   <item url="plugins/file/admin_list.php" />
   <item url="plugins/file/admin_edit.php" />
+  <item url="plugins/file/admin_delete.php" />
  </project>
 </webproject>
 <!-- $Id$ -->
