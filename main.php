@@ -33,10 +33,6 @@ require_once('./init.php');
 require_once('./errors.php');
 require_once('./config.php');
 
-//we don't want to cache our documents....
-Header('Pragma: no-cache');
-Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");
-
 //if no language was explicitly defined, try to detect it
 if (!isset($lng)){
     if (isset($HTTP_COOKIE_VARS[$cookie_lang])){
@@ -77,6 +73,12 @@ if (!isset($lng)){
 //language file
 if (!file_exists($lang_file_name)) do_error(1,'file="'.$lang_file_name.'"; lng="'.$lng.'"');
 require_once($lang_file_name);
+
+//send headers - content type and refuse caching
+Header('Pragma: no-cache');
+Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");
+Header('Content-Type: text/html; charset='.$charset);
+
 
 //if no id specified, go to default page
 if (!isset($id)){
@@ -161,9 +163,6 @@ if (!isset ( $categories[$page['category']] ) ) {
 } else {
     $category=$categories[$page['category']];
 }
-
-//add header about content and encoding
-Header('Content-Type: text/html; charset='.$charset);
 
 //template file
 eval('$template_file_name="'.$template_file.'";');
@@ -286,7 +285,7 @@ global $site_name,$site_author,$site_author_email,$site_name,$site_home,$page_ti
         $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
 global $first_item,$left_menu_divisor,$id,$category,$db_connection,$table_menu,$table_page,$table_prepend_name,$lng;
 
-if (!($id_result=(mysql_query('SELECT id,name,description,page,category,parent,expand from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and parent='.$child_id.' and category='.$category['id'],$db_connection)))&&($child_id=0))
+if (!($id_result=(mysql_query('SELECT id,name,description,page,category,parent,expand from '.$table_prepend_name.$table_menu.' where lng='.$lng.' and parent='.$child_id.' and category='.$category['id'].' order by rank',$db_connection)))&&($child_id=0))
         do_error(1,'SELECT '.$table_prepend_name.$table_menu.': '.mysql_error());
 while ($item = mysql_fetch_array ($id_result)){
         if (!$first_item) echo $left_menu_divisor;
