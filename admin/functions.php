@@ -461,13 +461,7 @@ function delete_pages($condition){
             show_error("Can't delete menu items! (".mysql_error().')');
             exit;
         }
-
-        if ($item['type']!='file'){
-            if (!mysql_query('DELETE FROM '.$db_prepend.$GLOBALS['table_'.$item['type']].' where page='.$item['id'].' AND lng='.$item['lng'])){
-                show_error("Can't delete page details! (".mysql_error().')');
-                exit;
-            }
-        }
+        @mysql_query('DELETE FROM '.$db_prepend.$GLOBALS['table_'.$item['type']].' where page='.$item['id'].' AND lng='.$item['lng']);
     }
     mysql_free_result($id_result);
 
