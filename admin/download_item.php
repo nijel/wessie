@@ -44,7 +44,7 @@ make_tab_edit('./upload.php','Upload files','/upload');
       Filter:
     </td>
     <td class="filtercontent">
-      <form method="get" action="download.php" class="filter">
+      <form method="get" action="download_item.php" class="filter">
         Filename:
         <input type="text" name="filter_name" <?php if(isset($filter_name)){ echo 'value="'.$filter_name.'"'; }?> class="text"/>
         &nbsp;<input type="submit" value=" Go " class="go" />
