@@ -52,13 +52,13 @@ Header('Content-Type: text/html; charset='.$admin_charset);
 <?php
 require_once('./file_functions.php');
 
-$root_dir=dirname(dirname($SCRIPT_FILENAME));
-$root_dir_len=strlen($root_dir);
+$root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
+$root_dir_len = strlen($root_dir);
 
 if (!isset($dir)||!@is_dir($dir)){
-    $dir = dirname(dirname($SCRIPT_FILENAME));
+    $dir = $root_dir;
 }elseif (!@chdir($dir)){
-    $dir = dirname(dirname($SCRIPT_FILENAME));
+    $dir = $root_dir;
 }else{
     $dir = getcwd();
 }
