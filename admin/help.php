@@ -24,10 +24,11 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
+$page_title='wessie:Help';
 require_once('./auth.php');
 require_once('./functions.php');
 Header('Content-Type: text/html; charset='.$admin_charset);
-show_html_head('wessie:Help');
+show_html_head($page_title);
 ?>
 <body class="help">
 <div class="close"><a href="javascript:window.close()" onclick="window.close()">Close</a></div>

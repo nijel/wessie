@@ -29,9 +29,8 @@ require_once('../init.php');
 require_once('../config.php');
 require_once('../errors.php');
 
-
-
 require_once('../db_connect.php');
+require_once('./functions.php');
 
 if (isset($REQUEST_URI)){
     $url = '&url=' . urlencode('http://' . $SERVER_NAME . $REQUEST_URI);
@@ -55,7 +54,7 @@ if ($auth['count']!=1){
     Header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=unauthorised' . $url);
     die();
 }
-if (!($id_result=mysql_query('SELECT ip from '.$table_prepend_name.$table_users.' where user="'.$user.'" and hash="'.$hash.'" and time>(NOW() - interval '.$admin_timeout.')',$db_connection)))
+if (!($id_result=mysql_query('SELECT ip,perms from '.$table_prepend_name.$table_users.' where user="'.$user.'" and hash="'.$hash.'" and time>(NOW() - interval '.$admin_timeout.')',$db_connection)))
     do_error(1,'SELECT '.$table_prepend_name.$table_users.': '.mysql_error());
 if (mysql_num_rows($id_result)!=1){
     Header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=expired' . $url);
@@ -81,4 +80,16 @@ if (!(mysql_query('UPDATE '.$table_prepend_name.$table_users." set time=NOW() wh
     do_error(1,'UPDATE '.$table_prepend_name.$table_users.': '.mysql_error());
 
 setcookie ('hash',$hash ,time()+$admin_hash_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
+
+$permissions = explode(':',$auth['perms']);
+
+if ($user!='admin' && !in_array(basename($SCRIPT_NAME),$permissions)){
+    Header('Content-Type: text/html; charset='.$admin_charset);
+    if (!isset($page_title)) $page_title=@$site_name[0].':Administration:'.$page_name;
+    show_html_head($page_title);
+    show_error("You don't have permission to view this!");
+    include_once('./admin_footer.php');
+    exit;
+}
+
 ?>
