@@ -25,6 +25,8 @@
 //
 // $Id$ */
 Header('Content-Type: text/css');
+// allow to becached for one week
+Header("Expires: " . GMDate("D, d M Y H:i:s",time()+604800) . " GMT");
 //load configuration
 require_once('../../config.php');
 //initialize variables from $PATH_INFO and set some wessie specific variables

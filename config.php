@@ -120,13 +120,13 @@ $table_stat = 'stat';
 // $category_order     - which field in database is used for ordering categories
 // $use_adverts        - use advertisement?
 // $top_pages_count    - number of top pages to display
-$template_name = 'alcatel';
+$template_name = 'styles';
 $site_logo = 'img/wessie.png';
 $site_logo_alt = 'wessie - web site system';
 $site_logo_width = 200;
 $site_logo_height = 100;
 $category_order = 'id';
-$use_adverts = FALSE;
+$use_adverts = TRUE;
 $top_pages_count = 4;
 //##/DESIGN##
 
