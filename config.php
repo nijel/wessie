@@ -252,11 +252,11 @@ $page_plugins_options['bullshit']['eval'] = FALSE;
 // highlight.bg            =       #FFFFFF
 // highlight.default       =       #0000BB
 // highlight.html          =       #000000
-ini_set ('highlight.string', '#DD00DD');
-ini_set ('highlight.comment', '#FF8000');
-ini_set ('highlight.keyword', '#00DD00');
-ini_set ('highlight.bg', '#FFFFFF');
-ini_set ('highlight.default', '#0000EE');
-ini_set ('highlight.html', '#DDDDDD');
+ini_set('highlight.string', '#DD00DD');
+ini_set('highlight.comment', '#FF8000');
+ini_set('highlight.keyword', '#00DD00');
+ini_set('highlight.bg', '#FFFFFF');
+ini_set('highlight.default', '#0000EE');
+ini_set('highlight.html', '#DDDDDD');
 //##/HIGHLIGHT_OPTIONS##
 ?>

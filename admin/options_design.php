@@ -67,6 +67,13 @@ if (isset($action) && $action=='save'){
         exit;
     }
 
+    $vals=array('string','comment','keyword','bg','default','html');
+    while (list($key,$val)=each($vals)){
+        if (!config_set_option("ini_set[[:space:]]*\([[:space:]]*'highlight.".$val."'","ini_set('highlight.$val', '".$set_highight[$val]."');\n",'//##/HIGHLIGHT_OPTIONS##')){
+            show_error('Can not modify configuration!');
+            exit;
+        }
+    }
 
     if (!config_write()){
         show_error('Can not write configuration!');
@@ -128,6 +135,12 @@ while (list($key,$val)=each($vals)){
     echo '<option value="'.$val.'"'.($top_pages_count==$val?' selected="selected"':'').'>'.$val."</option>\n";
 }
 echo "</select></td></tr>\n";
+$vals=array('string','comment','keyword','bg','default','html');
+while (list($key,$val)=each($vals)){
+    echo "\n<tr><th>PHP highlighting: $val</th>\n";
+    echo '<td><input type="text" class="text" name="set_highight['.$val.']" value="'.ini_get('highlight.'.$val).'" /></td>'."</tr>\n";
+}
+
 ?>
 <tr><th></th><td>
 <table class="savereset">
