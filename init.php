@@ -55,9 +55,11 @@ if (isset($PATH_INFO) && (!empty($PATH_INFO))){
             } elseif (ereg ('page([0-9]*)\.([a-z]*)\.html?',$item['value'] , $regs)) {
                 $id=$regs[1];
                 $lng=isset($lang_alias[$regs[2]])?$lang_alias[$regs[2]]:$default_lang;
+            } elseif (ereg ('^([0-9]*)$',$item['value'])){
+                $id=(int)$item['value'];
             }
-
         }
+
     }
     unset($info_vars);
 }
