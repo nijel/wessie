@@ -52,7 +52,13 @@ if (!isset($lng)){
             for($i=0;$i<count($wanted_languages);$i++){
                 $curr_lang=Explode(";",$wanted_languages[$i]);
                 $curr_lang=$curr_lang[0]; //this ignores q=0.5
-                if (in_array($curr_lang,$languages)){
+                if (isset($lang_alias[$curr_lang])){
+                    $lng=$lang_alias[$curr_lang];
+                    $lang=$languages[$lng];
+                    eval('$lang_file_name="'.$lang_file.'";');
+                    if (($lng!=-1)&&(file_exists($lang_file_name))) break;
+                }
+/*                if (in_array($curr_lang,$languages)){
                     for ($j=0;$j<count($languages);$j++){
                         if (strcasecmp($languages[$j],$curr_lang)==0){
                             $lng=$j;
@@ -62,7 +68,7 @@ if (!isset($lng)){
                     $lang=$languages[$lng];
                     eval('$lang_file_name="'.$lang_file.'";');
                     if (($lng!=-1)&&(file_exists($lang_file_name))) break;
-                }
+                }*/
             }
             if (($lng==-1)||(!file_exists($lang_file_name))) $lng=$default_lang;
         }else{
@@ -72,9 +78,16 @@ if (!isset($lng)){
         }
     }
 }else{
-    $lang=$languages[$lng];
+    if (((int)$lng == 0) && ($lng != '0') && isset($lang_alias[$lng])){
+        $lng=$lang_alias[$lng];
+    }
+    @$lang=$languages[$lng];
     eval('$lang_file_name="'.$lang_file.'";');
 }
+
+//language file
+if (!file_exists($lang_file_name)) do_error(1,'file="'.$lang_file_name.'"; lng="'.$lng.'"');
+require_once($lang_file_name);
 
 //if no id specified, go to default page
 if (!isset($id)){
@@ -105,6 +118,17 @@ require_once('./db_connect.php');
 //client browser and os detection
 require_once('./browser.php');
 
+//read page
+if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_page.' where id='.$id.' and lng='.$lng.' limit 1',$db_connection)))
+    do_error(2,'SELECT '.$table_prepend_name.$table_page.': '.mysql_error());
+$page=mysql_fetch_array($id_result);
+if (!isset($page['id'])){
+    log_error('Unknown page: '.$id);
+    do_error(3,'id="'.$id.'"; lng="'.$lng.'"');
+    bye();
+}
+mysql_free_result($id_result);
+
 //generate statistics
 // true in following line is TEMPORARY (TODO - just for searching)
 if (true||$increase_count){
@@ -128,20 +152,6 @@ if (true||$increase_count){
             do_error(1,'UPDATE '.$table_prepend_name.$table_stat.': '.mysql_error());
 }
 
-
-//read page
-if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_page.' where id='.$id.' and lng='.$lng.' limit 1',$db_connection)))
-    do_error(1,'SELECT '.$table_prepend_name.$table_page.': '.mysql_error());
-$page=mysql_fetch_array($id_result);
-if (!isset($page['id'])){
-    log_error('Unknown page: '.$id);
-    header('Location: http://'.$SERVER_NAME.$base_path.'main.php');
-    bye();
-}
-mysql_free_result($id_result);
-
-
-
 //read all categories (TODO: this should be cached)
 if (!($id_result=mysql_query('SELECT * from '.$table_prepend_name.$table_category.' where lng='.$lng,$db_connection)))
     do_error(1,'SELECT '.$table_prepend_name.$table_category.': '.mysql_error());
@@ -163,15 +173,6 @@ if (!isset ( $categories[$page['category']] ) ) {
     $category=$categories[$page['category']];
 }
 
-//language file
-if (!isset($lng)){
-        $lng=$category['lng'];
-    $lang=$languages[$lng];
-    eval('$lang_file_name="'.$lang_file.'";');
-}
-if (!file_exists($lang_file_name)) do_error(2,$lang_file_name);
-require_once($lang_file_name);
-
 //add header about content and encoding
 Header('Content-Type: text/html; charset='.$charset);
 
@@ -180,7 +181,7 @@ eval('$template_file_name="'.$template_file.'";');
 require_once($template_file_name);
 
 eval('$template_file_name="'.$template_data.'";');
-if (!file_exists($template_file_name)) do_error(3,$template_file_name);
+if (!file_exists($template_file_name)) do_error(4,$template_file_name);
 $fh=fopen($template_file_name,'r');
 $template=fread($fh, filesize($template_file_name));
 fclose($fh);
@@ -188,7 +189,7 @@ fclose($fh);
 //read content
 switch ($page['type']){
     case 'file': /* file */
-        if (!file_exists($page['param'])) do_error(3,$page['param']);
+        if (!file_exists($page['param'])) do_error(5,$page['param']);
         $fh=fopen($page['param'],'r');
         $content=fread($fh, filesize($page['param']));
         fclose($fh);
@@ -474,6 +475,11 @@ make_stat('time','order by item',$mul);
 
 function stat_langs($mul=1){
 make_stat('lang','order by item',$mul,"<?php echo \$lang_name[\$item['item']] ?>");
+}
+
+function wessie_icon(){
+    global $base_path,$wessie_url;
+    echo '<a href="'.$wessie_url.'"><img src="' . $base_path . 'img/wessie_icon.png" align="middle" alt="powered by wessie" width=88" height="31" border="0" /></a>';
 }
 
 function special(){global $special;echo $special;}

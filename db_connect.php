@@ -27,13 +27,13 @@
 if (!isset($wessie_db_connect_php_loaded)){
 	$wessie_db_connect_php_loaded=1;
 	if ($db_persistent){
-		if (!($db_connection=mysql_pconnect($db_host,$db_user,$db_pass)))
-			do_error(1,'pconnect');
+		if (!($db_connection=@mysql_pconnect($db_host,$db_user,$db_pass)))
+			do_error(6,'pconnect');
 	}else{
-		if (!($db_connection=mysql_connect($db_host,$db_user,$db_pass)))
-			do_error(1,'connect');
+		if (!($db_connection=@mysql_connect($db_host,$db_user,$db_pass)))
+			do_error(6,'connect');
 	}
-	if (!mysql_select_db($db_name,$db_connection))
-		do_error(1,'select_db');
+	if (!@mysql_select_db($db_name,$db_connection))
+		do_error(6,'select_db');
 }	
 ?>
