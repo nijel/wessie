@@ -58,7 +58,7 @@ if (isset($PATH_INFO) && (!empty($PATH_INFO))){
 // obtain base path for current file
 
 if (isset($SCRIPT_NAME)){
-    $base_path = strrev(strstr(strrev($SCRIPT_NAME),'/'));
+    $base_path = dirname($SCRIPT_NAME);
 } else {
     $base_path = '/';
 }
