@@ -33,8 +33,8 @@ $template_data='./templates/alcatel/template.inc.php';
 function title(){
     global $site_name,$category,$page,$lng;
     echo $site_name[$lng].' - ';
-    eval('?'.'>'.$category['name'].'<?php ');
-    echo ' - ';
+//    eval('?'.'>'.$category['name'].'<?php ');
+//    echo ' - ';
     eval('?'.'>'.$page['name'].'<?php ');
 }
 
