@@ -56,7 +56,7 @@ if (isset($action) && ($action=='delete') && isset($lng) && isset($id)){
         $article=mysql_fetch_array($id_result);
         mysql_free_result($id_result);
         if (!isset($article['page'])){
-            show_error_box("This page desn't  exist!");
+            show_error_box("This page doesn't  exist!");
             exit();
         }
     }else{

@@ -73,7 +73,7 @@ if (isset($action) && ($action=='save')){
     $category=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
     if (!isset($category['id'])){
-        show_error_box("This category desn't  exist!");
+        show_error_box("This category doesn't  exist!");
         exit();
     }
     $category['lng']=$to_lng;

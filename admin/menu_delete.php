@@ -57,7 +57,7 @@ if (isset($id)&&isset($lng)&&!isset($action)){
         $page=mysql_fetch_array($id_result);
         mysql_free_result($id_result);
         if (!isset($item['id'])){
-            show_error_box("This menu item desn't  exist!");
+            show_error_box("This menu item doesn't  exist!");
             exit();
         }
     }else{
