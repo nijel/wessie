@@ -66,7 +66,7 @@ if (isset($id)&&isset($lng)&&!isset($name)){
 
     $item=array('lng'=>$lng,'category'=>$parent['category'],'parent'=>$parent['id'],'rank'=>0,'expand'=>0);
     $page=array('name'=>'','description'=>'','category'=>-1);
-} elseif (isset($id)){
+} elseif (isset($id)&&isset($lng)&&isset($rank)){
     if (!($id_result=(mysql_query('UPDATE '.$table_prepend_name.$table_menu.
             ' set name="'.$name.'"'.
             ', description="'.$description.'"'.
@@ -84,7 +84,7 @@ if (isset($id)&&isset($lng)&&!isset($name)){
     show_info_box('Menu item saved',array('lng'=>$lng,'id'=>$id));
     include_once('./admin_footer.php');
     exit;
-} else {
+} elseif (isset($lng)&&isset($rank)) {
     if (!($id_result=(mysql_query('INSERT '.$table_prepend_name.$table_menu.
             ' set name="'.$name.'"'.
             ', description="'.$description.'"'.
@@ -117,6 +117,10 @@ if (isset($id)&&isset($lng)&&!isset($name)){
     show_info_box('Menu item created',array('lng'=>$lng,'id'=>$item['id']));
     include_once('./admin_footer.php');
     exit;
+}else{
+    show_error_box();
+    include_once('./admin_footer.php');
+    exit();
 }
 ?>
 <form action="menu_edit.php" method="post">

@@ -107,11 +107,20 @@ echo '<table border="0"><tr><th>Language</th><th>Category</th><th>Title</th><th>
 $even=0;
 add_childs(0,0,$lng);
 ?>
-</table><br />
+</table>
+<br />
 <form action="menu_edit.php" method="get">
 Create new menu item, in language: <?php language_edit($lng); ?>
 <input type="submit" value=" Go " />
 <input type="hidden" name="category" value="-1" />
+</form>
+<br />
+<form action="menu_sync.php" method="get">
+Synchronize menu items, in category <?php category_edit(-1,$lng=='any'?0:$lng,'category',TRUE); ?>
+ from language: <?php language_edit($lng,FALSE,'lng_from'); ?>
+ to language: <?php language_edit($lng,TRUE,'lng_to'); ?>
+<input type="submit" value=" Go " />
+<input type="hidden" name="action" value="sync" />
 </form>
 <?php
 require_once('./admin_footer.php');

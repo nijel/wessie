@@ -63,8 +63,12 @@ if (isset($id)&&isset($lng)&&!isset($action)){
     }else{
         delete_menuitem();
     }
-} else {
+} elseif (isset($id)&&isset($lng)&&isset($action)){
     delete_menuitem();
+}else{
+    show_error_box();
+    include_once('./admin_footer.php');
+    exit();
 }
 ?>
 Do you want to delete following menu item?<br />
