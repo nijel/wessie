@@ -297,8 +297,7 @@ function get_category_translations($id){
 }
 
 function make_url($id,$lng){
-    global $base_path, $languages;
-    return $base_path.'/../main.php/page'.$id.'.'.$languages[$lng].'.html';
+    return make_absolute_url($id,$lng);
 }
 
 function make_absolute_url($id,$lng){
