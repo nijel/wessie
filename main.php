@@ -187,9 +187,9 @@ fclose($fh);
 //read content
 switch ($page['type']){
     case 'file': /* file */
-        if (!file_exists($page['file'])) do_error(3,$page['file']);
-        $fh=fopen($page['file'],'r');
-        $content=fread($fh, filesize($page['file']));
+        if (!file_exists($page['param'])) do_error(3,$page['param']);
+        $fh=fopen($page['param'],'r');
+        $content=fread($fh, filesize($page['param']));
         fclose($fh);
         break;
     case 'article': /* article */
@@ -199,6 +199,7 @@ switch ($page['type']){
         mysql_free_result($id_result);
         $content=$article['content'];
         break;
+
     default:
         $content='&nbsp;';
 }
