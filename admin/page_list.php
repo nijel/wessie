@@ -35,6 +35,7 @@ if (!isset($type)) {
     $edit_url='page_edit.php?type='.$type;
     $delete_url='page_delete.php?type='.$type;
     $edit_action='page_edit.php';
+    $filter_action='page_list.php';
     $form_magic='<input type="hidden" name="type" value="'.$type.'"/>'."\n";
 
     if (file_exists('../plugins/'.$type.'/admin_list.php')){
