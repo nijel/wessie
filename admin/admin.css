@@ -68,7 +68,7 @@ form.filter {
 input,select {
     background-color: #ff0000;
 }
-input.info,input.browse,input.delete,input.return,input.text,input.go,input.save,input.reset,textarea.text,input.ok,select.select,input.check,input.login,input.radio {
+input.info,input.browse,input.delete,input.return,input.text,input.go,input.save,input.reset,textarea.text,input.ok,select.select,input.check,input.login,input.radio,input.file {
     color: #000000;
     background-color: #ccccaa;
 }
@@ -99,6 +99,9 @@ a:visited {
 }
 a:hover {
     text-decoration: underline;
+}
+a.disabled {
+    color: #000000;
 }
 div.close {
     clear:right;
@@ -145,6 +148,12 @@ table.tabs td.selected {
 table.data {
     border: none;
     vertical-align: top;
+}
+table.data td.size {
+    text-align: right;
+}
+table.data td.perms {
+    font-family: monospace;
 }
 table.item {
     border: none;

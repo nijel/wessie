@@ -24,12 +24,49 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-require_once('./admin_header.php');
+$page_name='Upload';
+require_once('./download_header.php');
+require_once('./file_functions.php');
+$orig_pwd = getcwd();
+
+$root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
+$root_dir_len = strlen($root_dir);
+
+if (!isset($dir)||!isset($file)){
+    show_error_box('Error: Not enough parameters!<br/>This may be caused by attempting to upload too large file');
+    exit();
+}elseif (!@is_dir($dir)||!@chdir($dir)){
+    show_error_box('Error: Selected directory ("'.$dir.'") not accessible!');
+    exit();
+}else{
+    $dir = getcwd();
+}
+
+if ($admin_fm_restrict && (strlen($dir) < $root_dir_len || strpos($dir,$root_dir) === false)) {
+    show_error_box('Error: Directory restriction does not allow you to work in selected directory ("'.$dir.'")!');
+    exit();
+}
+
+if (strlen($dir) < $root_dir_len){
+    $webdir = '<span class="error">out of web tree!</span>';
+} else {
+    $webdir = substr($dir,$root_dir_len);
+    if ($webdir == '') $webdir = '/';
+}
+
+if (move_uploaded_file ($file, $dir.'/'.$file_name)){
+    show_info_box('File uploaded into directory '.$dir.' (web path: '.$webdir.')<br/>Name = '.$file_name.'<br/>Size = '.$file_size.'<br/>Type = '.$file_type,array('dir'=>$dir),'files.php');
+    chdir($orig_pwd);
+    include_once('./admin_footer.php');
+    exit;
+}else{
+    show_error_box("File couldn't be uploaded!");
+    exit();
+}
+
 ?>
+
 <?php
-make_tab_start();
-make_tab_item('./download_item.php','Downloads','/download_item');
-make_tab_item('./download_group.php','Download groups','/download_group');
-make_tab_item('./files.php','File management','/files');
-make_tab_end();
+chdir($orig_pwd);
+require_once('./admin_footer.php');
 ?>

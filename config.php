@@ -36,11 +36,11 @@ error_reporting (E_ALL);
 // $db_pass            - password
 // $db_name            - name of database
 // $db_persistent      - use persistant connections?
-$db_host='localhost';
-$db_user='wessie';
-$db_pass='wessie';
-$db_name='wessie';
-$db_persistent=TRUE;
+$db_host = 'localhost';
+$db_user = 'wessie';
+$db_pass = 'wessie';
+$db_name = 'wessie';
+$db_persistent = TRUE;
 //##/DATABASE##
 
 //##ERRORS##
@@ -48,8 +48,8 @@ $db_persistent=TRUE;
 //                       must be writable by user under which scripts will run
 // $show_error_detail  - show error details on error page, if disabled just
 //                       comment is added
-$error_log_file='/vs/wessie/logs/error.log';
-$show_error_detail=TRUE;
+$error_log_file = '/vs/wessie/logs/error.log';
+$show_error_detail = TRUE;
 //##/ERRORS##
 
 //##LANGUAGES##
@@ -61,21 +61,21 @@ $show_error_detail=TRUE;
 // $default_lang       - fallback language, when detection from Accept-language fails
 // $lang_file          - name of file with language-specific data, you can use inside
 //                       any php variables, that will be in time of evaluation
-//                       accessible, for example ${lang}=language shortcut,
-//                       ${lng}=language id
-$languages[0]='en';
-$lang_name[0]='English';
-$lang_img[0]='img/flags/en.png';
-$lang_main_page[0]=1;
-$languages[1]='cs';
-$lang_name[1]='Cesky';
-$lang_img[1]='img/flags/cs.png';
-$lang_main_page[1]=1;
-$default_lang=0;
-$lang_alias['en']=0;
-$lang_alias['cs']=1;
-$lang_alias['cz']=1;
-$lang_file='./lang/${lang}.php';
+//                       accessible, for example ${lang} = language shortcut,
+//                       ${lng} = language id
+$languages[0] = 'en';
+$lang_name[0] = 'English';
+$lang_img[0] = 'img/flags/en.png';
+$lang_main_page[0] = 1;
+$languages[1] = 'cs';
+$lang_name[1] = 'Cesky';
+$lang_img[1] = 'img/flags/cs.png';
+$lang_main_page[1] = 1;
+$default_lang = 0;
+$lang_alias['en'] = 0;
+$lang_alias['cs'] = 1;
+$lang_alias['cz'] = 1;
+$lang_file = './lang/${lang}.php';
 //##/LANGUAGES##
 
 //##COOKIES##
@@ -84,10 +84,10 @@ $lang_file='./lang/${lang}.php';
 // $session_time       - how long takes one session - by default when user didn't load
 //                       any page from site then he is counted as new
 // $lang_time          - how long will stay cookie identifying preffered user's language
-$cookie_count='wessie_count';
-$cookie_lang='wessie_lang';
-$session_time=3600;
-$lang_time=31536000;
+$cookie_count = 'wessie_count';
+$cookie_lang = 'wessie_lang';
+$session_time = 3600;
+$lang_time = 31536000;
 //##/COOKIES##
 
 
@@ -96,17 +96,17 @@ $lang_time=31536000;
 // $table_prepend_name - prepended before each table name, this allows multiple
 //                       wessies running on one database
 // $table_*            - name for each table
-$table_prepend_name='';
+$table_prepend_name = '';
 
-$table_page='page';
-$table_category='category';
-$table_advert='advert';
-$table_menu='menu';
-$table_article='article';
-$table_download='download';
-$table_download_group='download_group';
-$table_users='users';
-$table_stat='stat';
+$table_page = 'page';
+$table_category = 'category';
+$table_advert = 'advert';
+$table_menu = 'menu';
+$table_article = 'article';
+$table_download = 'download';
+$table_download_group = 'download_group';
+$table_users = 'users';
+$table_stat = 'stat';
 //##/TABLES##
 
 //##DESIGN##
@@ -120,13 +120,13 @@ $table_stat='stat';
 // $site_logo_height   - height of that logo
 // $category_order     - which field in database is used for ordering categories
 // $use_adverts        - use advertisement?
-$template_name='default';
-$site_logo='img/wessie.png';
-$site_logo_alt='wessie - web site system';
-$site_logo_width=200;
-$site_logo_height=100;
-$category_order='id';
-$use_adverts=TRUE;
+$template_name = 'default';
+$site_logo = 'img/wessie.png';
+$site_logo_alt = 'wessie - web site system';
+$site_logo_width = 200;
+$site_logo_height = 100;
+$category_order = 'id';
+$use_adverts = TRUE;
 //##/DESIGN##
 
 //##INFO##
@@ -140,17 +140,17 @@ $use_adverts=TRUE;
 // $site_name array    - array of site names for each language
 // $copyright array    - array of copyrights for each language
 // $special array      - array of special info that is displayed on top of each page
-$site_home='http://wessie.cic';
-$site_started=mktime(0,0,0,1,13,2001); //Recommended to be time 0:0:0
-$site_author_email='cihar@email.cz';
-$site_author[0]='Michal Cihar';
-$site_author[1]='Michal Èihaø';
-$site_name[0]='wessie Demo';
-$site_name[1]='ukázka wessie';
-$copyright[0]='Copyright &copy; 2001 <a href="mailto:'.$site_author_email.'">'.$site_author[0].'</a>';
-$copyright[1]='Copyright &copy; 2001 <a href="mailto:'.$site_author_email.'">'.$site_author[1].'</a>';
-$special[0]='';
-$special[1]='';
+$site_home = 'http://wessie.cic';
+$site_started = mktime(0,0,0,1,13,2001); //Recommended to be time 0:0:0
+$site_author_email = 'cihar@email.cz';
+$site_author[0] = 'Michal Cihar';
+$site_author[1] = 'Michal Èihaø';
+$site_name[0] = 'wessie Demo';
+$site_name[1] = 'ukázka wessie';
+$copyright[0] = 'Copyright &copy; 2001 <a href="mailto:'.$site_author_email.'">'.$site_author[0].'</a>';
+$copyright[1] = 'Copyright &copy; 2001 <a href="mailto:'.$site_author_email.'">'.$site_author[1].'</a>';
+$special[0] = '';
+$special[1] = '';
 //##/INFO##
 
 
@@ -165,43 +165,67 @@ $special[1]='';
 // $admin_highlight_* - highlighting of list items and tabs on mouse over,
 //                      if empty item is not highlighted
 // $admin_validator    - link to validate page, at the end is appended url
-$admin_charset='iso-8859-2';
-$admin_timeout='20 MINUTE';
-$admin_user_cookie=2592000;
-$admin_hash_cookie=3600;
-$admin_confirm_delete=TRUE;
-$admin_highlight_list='#ffffcc';
-$admin_highlight_tabs='#ffffcc';
-$admin_validator='http://validator.cic/cgi-bin/validate.cgi?input=yes&url=';
+$admin_charset = 'iso-8859-2';
+$admin_timeout = '20 MINUTE';
+$admin_user_cookie = 2592000;
+$admin_hash_cookie = 3600;
+$admin_confirm_delete = TRUE;
+$admin_highlight_list = '#ffffcc';
+$admin_highlight_tabs = '#ffffcc';
+$admin_validator = 'http://validator.cic/cgi-bin/validate.cgi?input=yes&url=';
 //##/ADMIN##
+
+//##ADMIN_FILES##
+// file management options
+// $admin_fm_restrict   - restrict file management only to webserver tree
+//                        (this cannot handle rewrites or simmilar methods)
+// $admin_fm_show_*     - which columns to show in file management
+// $admin_fm_quickjump  - links to often used folder, if staring with / path
+//                        is used as absolute otherwise as relative from
+//                        web server root
+// $admin_fm_maxsize    - maximal size of upload in admnistration, this doe
+//                        cannot be larget than upload_max_filesize in php.ini!
+$admin_fm_restrict = TRUE;
+$admin_fm_show_size = TRUE;
+$admin_fm_show_type = TRUE;
+$admin_fm_show_mtime = TRUE;
+$admin_fm_show_ctime = FALSE;
+$admin_fm_show_atime = FALSE;
+$admin_fm_show_allowed = TRUE;
+$admin_fm_show_rights = FALSE;
+$admin_fm_show_owner = FALSE;
+$admin_fm_show_group = FALSE;
+$admin_fm_quickjump = array('files');
+$admin_fm_maxsize = 10485760;
+//##/ADMIN_FILES##
+
 
 //##ADMIN_SIZES##
 //size of edits in administration
-$admin_name_size=80;
-$admin_short_size=80;
-$admin_filename_size=80;
-$admin_content_rows=30;
-$admin_content_cols=80;
-$admin_keywords_rows=2;
-$admin_keywords_cols=80;
-$admin_description_rows=2;
-$admin_description_cols=80;
+$admin_name_size = 80;
+$admin_short_size = 80;
+$admin_filename_size = 80;
+$admin_content_rows = 30;
+$admin_content_cols = 80;
+$admin_keywords_rows = 2;
+$admin_keywords_cols = 80;
+$admin_description_rows = 2;
+$admin_description_cols = 80;
 //##/ADMIN_SIZES##
 
 //##PLUGIN_COMMON##
-// $allow_content_eval - globally allow or deny of evaling of content
-$allow_content_eval=TRUE;
+$allow_content_eval = TRUE;
 //##/PLUGIN_COMMON##
 
 //plugin configuration:
 //##PLUGIN_ALLOWED##
-$allowed_page_plugins=array('article','file');
-$allowed_function_plugins=array();
+$allowed_page_plugins = array('article','file');
+$allowed_function_plugins = array();
 //##/PLUGIN_ALLOWED##
 
 //allow or deny of evaling of content for each plugin
 //##PLUGIN_OPTIONS##
-$page_plugins_options['article']['eval']=TRUE;
-$page_plugins_options['file']['eval']=FALSE;
+$page_plugins_options['article']['eval'] = TRUE;
+$page_plugins_options['file']['eval'] = FALSE;
 //##/PLUGIN_OPTIONS##
 ?>
