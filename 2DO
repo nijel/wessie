@@ -1,6 +1,33 @@
 $Id$
 
+ORDERED by importance (order of starting work on it)
+
+finish menu editing
+
+add category editing
+
+add downloads editing + write download script
+
+add pages listing + links to edit (this probably needs plugins working)
+
+top menu of administration - list also installed plugins, show multiple row
+
 plugin functionality!
+
+create plugin for news
+
+cicom?cihar test implementation
+
+add users + ACL + administration of it
+
+add options editing, sections:
+-languages + default pages
+-db + table names
+-site config
+-admin config
+
+add consistency checks (when page removed, there should retain no references to it - at least in system part - menus, default pages etc.)
+
 
 insert new row for week stat at the start of week - some cache!!!!!
 cache for categories?
