@@ -120,6 +120,7 @@ $table_stat = 'stat';
 // $site_logo_height   - height of that logo
 // $category_order     - which field in database is used for ordering categories
 // $use_adverts        - use advertisement?
+// $top_pages_count    - number of top pages to display
 $template_name = 'default';
 $site_logo = 'img/wessie.png';
 $site_logo_alt = 'wessie - web site system';
@@ -127,6 +128,7 @@ $site_logo_width = 200;
 $site_logo_height = 100;
 $category_order = 'id';
 $use_adverts = TRUE;
+$top_pages_count = 4;
 //##/DESIGN##
 
 // some information about site
