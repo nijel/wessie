@@ -28,12 +28,14 @@ include_once('./plugins/common.php');
 
 if (delPageType('article')) {
 
-    echo 'Dropping table article...';
-    if (!$id_result=mysql_query("DROP TABLE article",$db_connection)) {
+    echo 'Dropping table for storing articles...';
+    if (!$id_result=mysql_query("DROP TABLE $table_prepend_name.$table_article",$db_connection)) {
         echo "\n".'<div class="error">Failed creating new table!</div>';
         $error .= 'Failed dropping table!<br/>';
     } else {
         echo "DONE\n";
     }
+    if (isset($table_article))
+        echo "<div class=\"warning\">\$table_article variable is set in config.php, you should remove it, if you are not going to use article plugin any more.</div>\n";
 }
 ?>
