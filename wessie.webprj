@@ -58,6 +58,7 @@
   <item url="admin/logout.php" />
   <item url="admin/functions.php" />
   <item url="admin/index.php" />
+  <item url="admin/download_header.php" />
  </project>
 </webproject>
 <!-- $Id$ -->
