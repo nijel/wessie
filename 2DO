@@ -9,6 +9,8 @@ add category editing
 
 add downloads editing + write download script
 
+images for languages
+
 optimalise left menu - select all menu items for current category and then write it from array
 - use only ane select for menu+page tables
 
@@ -20,7 +22,9 @@ plugin functionality!
 
 create plugin for news
 
-cicom?cihar test implementation
+create plugin for simple items listing - name + value - listed on pages by n records
+
+cicom/cihar? test implementation
 
 add users + ACL + administration of it
 
