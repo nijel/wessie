@@ -468,7 +468,7 @@ make_stat('lang','order by item',$mul,"<?php echo \$lang_name[\$item['item']] ?>
 
 function wessie_icon(){
     global $base_path,$wessie_url;
-    echo '<a href="'.$wessie_url.'"><img src="' . $base_path . 'img/wessie_icon.png" align="middle" alt="powered by wessie" width=88" height="31" border="0" /></a>';
+    echo '<a href="'.$wessie_url.'"><img src="' . $base_path . 'img/wessie_icon.png" align="middle" alt="powered by wessie" width="88" height="31" border="0" /></a>';
 }
 
 function special(){global $special;echo $special;}
