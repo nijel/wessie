@@ -85,7 +85,7 @@ function genSentence($words,$letters,$addHtml) {
     $was_a = FALSE;
     $count = rand(2,$words);
     for ($n = 0; $n <= $count; $n++) {
-        if ((($addHtml & 2) == 2) && rand(0,20) < 1) {
+        if (!$was_a && (($addHtml & 2) == 2) && rand(0,20) < 1) {
             $was_a = TRUE;
             $sentence .= '<a href="/">';
         }
