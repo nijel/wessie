@@ -47,7 +47,8 @@ $lang_alias['cz']=1;
 $lang_file='./lang/${lang}.php';
 
 //Site main design template (defaultly language independant or use ${lang} for specifying language name):
-$template_file='./templates/styles/template.php';
+$template_file='./templates/default/template.php';
+//$template_file='./templates/styles/template.php';
 
 $cookie_count='wessie_count';
 $cookie_lang='wessie_lang';
@@ -93,8 +94,8 @@ $site_logo='img/wessie.png';
 $site_logo_width=200;
 $site_logo_height=100;
 
-$site_logo='img/wessie_vertical_long.png';
-$site_logo_width=20;
+//$site_logo='img/wessie_vertical_long.png';
+//$site_logo_width=20;
 
 $site_name[0]='wessie Demo';
 $site_name[1]='ukázka wessie';
