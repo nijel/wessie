@@ -24,5 +24,5 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-
+// ALTER TABLE `wessie`.`page` CHANGE `type` `type` ENUM('article','file','links','bullshit') DEFAULT 'article'
 ?>
