@@ -55,10 +55,10 @@ require_once('./file_functions.php');
 $root_dir=dirname(dirname($SCRIPT_FILENAME));
 $root_dir_len=strlen($root_dir);
 
-if (!isset($dir)||!is_dir($dir)){
-    $dir = dirname($SCRIPT_FILENAME);
+if (!isset($dir)||!@is_dir($dir)){
+    $dir = dirname(dirname($SCRIPT_FILENAME));
 }elseif (!@chdir($dir)){
-    $dir = dirname($SCRIPT_FILENAME);
+    $dir = dirname(dirname($SCRIPT_FILENAME));
 }else{
     $dir = getcwd();
 }
