@@ -10,11 +10,11 @@ ORDERED by importance (order of starting work on it):
 ! = important
 !! = very important
 
-admin: add pages listing + links to edit (this probably needs plugins working)
-
 admin+user: !! plugin functionality
 
-admin: top menu of administration - list also installed plugins, show multiple row (maybe already done)
+file plugin:
+ - add function
+ - add posibility to include file relative to server root
 
 create plugins:
  - news
