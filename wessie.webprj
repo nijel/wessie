@@ -41,5 +41,10 @@
   <item url="admin/login.php" />
   <item url="admin/logout.php" />
   <item url="admin/article_edit.php" />
+  <item url="plugins/functions/random_text/main.php" />
+  <item url="plugins/functions/random_text/install.php" />
+  <item url="plugins/common.php" />
+  <item url="plugins/pages/random_page/install.php" />
+  <item url="plugins/pages/random_page/main.php" />
  </project>
 </webproject>
