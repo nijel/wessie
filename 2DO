@@ -1,61 +1,60 @@
 $Id$
 
 ORDERED by importance (order of starting work on it):
+? = may be
+! = important
+!! = very important
 
-images for languages
+!! add comments
 
-optimalise left menu - select all menu items for current category and then write it from array
-- use only ane select for menu+page tables
+user: !! download script
 
-add pages listing + links to edit (this probably needs plugins working)
+user+admin: ? remake working with languages
 
-top menu of administration - list also installed plugins, show multiple row
+user: ! optimalise left menu 
+       - select all menu items for current category and then write it from array 
+       - use only ane select for menu+page tables
 
-plugin functionality!
+admin: add pages listing + links to edit (this probably needs plugins working)
 
-create plugin for news
+admin+user: !! plugin functionality
 
-create plugin for simple items listing - name + value - listed on pages by n records
+admin: top menu of administration - list also installed plugins, show multiple row (maybe allready done)
 
-cicom/cihar? test implementation
+create plugins:
+ - news
+ - simple items listing - name + value - listed on pages by n records
+ - mail lists
+ - discussions
 
-add users + ACL + administration of it
+admin+user: add users + ACL + administration of it
 
-add options editing, sections:
--languages + default pages
--db + table names
--site config
--admin config
+admin: add options editing, sections:
+        - languages + default pages
+        - db + table names
+        - site config
+        - admin config
 
-add consistency checks (when page removed, there should retain no references to it - at least in system part - menus, default pages etc.)
+admin: add consistency checks (when page removed, there should retain no references to it - at least in system part - menus, default pages etc.)
 
-insert new row for week stat at the start of week - some cache!!!!!
-cache for categories?
+user: insert new row for week stat at the start of week - some cache!!!!!
 
+user: ? cache for categories
 
-WHAT? valid from?
+cicom/cihar test implementation
 
+admin+user: ! banners
+	     - monitor views and CTRs
+	     - allow campaigns with n views / clicks?
+	     - allow per page/category/etc. ads
+             - administration by client:
+             - change img/url
+             - view stats
+             - start/stop
 
-plugins:
-	5 discussions
-	5 mailing lists
+admin+user: custom error page
 
-scripts:
-	2 administration
-	5 download script
-	1 banners - monitor views and CTRs
-	          - allow campaigns with n views / clicks?
-	          - allow per page/category/etc. ads
-	          - administration by client:
-	             - change img/url
-                 - view stats
-                 - start/stop
+admin+user: cofigurable HTTP headers
+admin+user: cofigurable counter/stats working
 
-other:
-	1 custom error page
-
-configuration of:
-	3 HTTP headers
-	4 counter/stats working
-
-update FUNCTIONS,VARIABLESm write README and some help
+admin+user: update documentation (FUNCTIONS, VARIABLES, README, some help, ...)
