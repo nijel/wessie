@@ -82,7 +82,7 @@ echo "Nothing...";
         }
         $even = 1 - $even;
         echo $item['page'].'</td><td>'.htmlspecialchars($item['name']).'</td><td>'.htmlspecialchars($item['description']).'</td><td>'.$lang_name[$item['lng']].'</td><td>'.strftime('%c',$item['last_change']).'</td>';
-        echo '<td><a href="article_edit.php?id=',$item['page'].'&lng='.$item['lng'].'">Edit</a></td><td><a href="article_delete.php?id=',$item['page'].'&lng='.$item['lng'].'">Delete</a></td><td><a href="../main.php?id=',$item['page'].'&lng='.$item['lng'].'" target="_blank">View</a></td>'."\n";
+        echo '<td><a href="article_edit.php?id=',$item['page'].'&lng='.$item['lng'].'">Edit</a></td><td><a href="article_delete.php?id=',$item['page'].'&lng='.$item['lng'].'">Delete</a></td><td><a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a></td>'."\n";
     }
     echo "</table>\n";
 }
