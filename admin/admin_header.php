@@ -84,13 +84,13 @@ User:<a href="user_self.php"><?php echo $fullname; ?></a><br />
 </table>
 <?php
 make_tab_start();
-make_tab_item('./category.php','Categories','admin/category');
-make_tab_item('./menu.php','Menu','admin/menu');
-make_tab_item('./page.php','Pages','admin/page');
-make_tab_item('./download_item.php','Downloads','admin/download','admin/files');
-make_tab_item('./plugin.php','Plugins','admin/plugin');
-make_tab_item('./user.php','Users','admin/user');
-make_tab_item('./options.php','Options','admin/option');
-make_tab_item_window('./help.php?'.urlencode(basename($SCRIPT_NAME)),'?','admin/help.php');
+if (in_array('category.php',$permissions)) make_tab_item('./category.php','Categories','admin/category');
+if (in_array('menu.php',$permissions)) make_tab_item('./menu.php','Menu','admin/menu');
+if (in_array('page.php',$permissions)) make_tab_item('./page.php','Pages','admin/page');
+if (in_array('download_item.php',$permissions)) make_tab_item('./download_item.php','Downloads','admin/download','admin/files');
+if (in_array('plugin.php',$permissions)) make_tab_item('./plugin.php','Plugins','admin/plugin');
+if (in_array('user.php',$permissions)) make_tab_item('./user.php','Users','admin/user');
+if (in_array('options.php',$permissions)) make_tab_item('./options.php','Options','admin/option');
+if (in_array('help.php',$permissions)) make_tab_item_window('./help.php?'.urlencode(basename($SCRIPT_NAME)),'?','admin/help.php');
 make_tab_end();
 ?>
