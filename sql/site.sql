@@ -4,7 +4,7 @@
 # http://phpmyadmin.sourceforge.net/ (download page)
 #
 # Host: localhost
-# Generation Time: Jan 13, 2002 at 02:57 PM
+# Generation Time: Jan 13, 2002 at 03:23 PM
 # Server version: 3.23.47
 # PHP Version: 4.1.1
 # Database : `wessie`
@@ -260,14 +260,13 @@ CREATE TABLE page (
   id smallint(5) unsigned NOT NULL auto_increment,
   name varchar(100) NOT NULL default '',
   type enum('article','file','links','bullshit') default NULL,
-  param varchar(100) NOT NULL default '',
+  param text NOT NULL,
   description text NOT NULL,
   keywords text NOT NULL,
   count bigint(20) unsigned NOT NULL default '0',
   lng tinyint(3) unsigned NOT NULL default '0',
   category tinyint(3) unsigned NOT NULL default '1',
   PRIMARY KEY  (id,lng),
-  UNIQUE KEY duplicity_check (name,type,param,description(100),keywords(100),lng,category),
   KEY count (lng,count)
 ) TYPE=MyISAM;
 
@@ -279,7 +278,7 @@ INSERT INTO page VALUES (1, 'Welcome page', 'article', '', 'Welcome page', 'wess
 INSERT INTO page VALUES (2, 'About', 'article', '', 'Information about Web Site System', 'wessie', 96, 0, 2);
 INSERT INTO page VALUES (3, '<?php echo $site_name[$lng]; ?>', 'article', '', 'Information about <?php echo $site_name[$lng]; ?>', '<?php echo $site_name[$lng]; ?>', 71, 0, 3);
 INSERT INTO page VALUES (4, 'Help', 'article', '', 'How to use Web Site System', 'wessie,Help', 1247, 0, 4);
-INSERT INTO page VALUES (6, 'Statistics', 'article', '', 'Statistical page', 'wessie,statistics', 1606, 0, 1);
+INSERT INTO page VALUES (6, 'Statistics', 'article', '', 'Statistical page', 'wessie,statistics', 1607, 0, 1);
 INSERT INTO page VALUES (7, 'Weekly statistics', 'article', '', 'Statistical page', 'wessie,statistics', 176, 0, 1);
 INSERT INTO page VALUES (8, 'Daily statistics', 'article', '', 'Statistical page', 'wessie,statistics', 126, 0, 1);
 INSERT INTO page VALUES (9, 'Hourly statistics', 'article', '', 'Statistical page', 'wessie,statistics', 165, 0, 1);
@@ -312,7 +311,7 @@ CREATE TABLE stat (
 # Dumping data for table `stat`
 #
 
-INSERT INTO stat VALUES ('total', 'hits', 19107);
+INSERT INTO stat VALUES ('total', 'hits', 19108);
 INSERT INTO stat VALUES ('time', '00', 95);
 INSERT INTO stat VALUES ('time', '01', 37);
 INSERT INTO stat VALUES ('time', '02', 1);
@@ -328,7 +327,7 @@ INSERT INTO stat VALUES ('time', '11', 493);
 INSERT INTO stat VALUES ('time', '12', 205);
 INSERT INTO stat VALUES ('time', '13', 431);
 INSERT INTO stat VALUES ('time', '14', 1568);
-INSERT INTO stat VALUES ('time', '15', 2294);
+INSERT INTO stat VALUES ('time', '15', 2295);
 INSERT INTO stat VALUES ('time', '16', 40);
 INSERT INTO stat VALUES ('time', '17', 87);
 INSERT INTO stat VALUES ('time', '18', 221);
@@ -343,14 +342,14 @@ INSERT INTO stat VALUES ('dow', '3', 8418);
 INSERT INTO stat VALUES ('dow', '4', 2975);
 INSERT INTO stat VALUES ('dow', '5', 1998);
 INSERT INTO stat VALUES ('dow', '6', 70);
-INSERT INTO stat VALUES ('dow', '7', 608);
+INSERT INTO stat VALUES ('dow', '7', 609);
 INSERT INTO stat VALUES ('browser', 'Links', 9);
 INSERT INTO stat VALUES ('browser', 'WebTV', 0);
 INSERT INTO stat VALUES ('browser', 'Lynx', 4);
 INSERT INTO stat VALUES ('browser', 'MSIE', 16);
 INSERT INTO stat VALUES ('browser', 'Opera', 23);
 INSERT INTO stat VALUES ('browser', 'Konqueror', 2179);
-INSERT INTO stat VALUES ('browser', 'Mozilla', 285);
+INSERT INTO stat VALUES ('browser', 'Mozilla', 286);
 INSERT INTO stat VALUES ('browser', 'Netscape', 7);
 INSERT INTO stat VALUES ('browser', 'NCSA Mosaic', 0);
 INSERT INTO stat VALUES ('browser', 'W3C_Validator', 0);
@@ -368,7 +367,7 @@ INSERT INTO stat VALUES ('browser', '?', 11950);
 INSERT INTO stat VALUES ('os', 'Windows', 2);
 INSERT INTO stat VALUES ('os', 'WindowsNT', 3);
 INSERT INTO stat VALUES ('os', 'Amiga', 0);
-INSERT INTO stat VALUES ('os', 'Linux/Unix', 7088);
+INSERT INTO stat VALUES ('os', 'Linux/Unix', 7089);
 INSERT INTO stat VALUES ('os', 'Mac', 2);
 INSERT INTO stat VALUES ('os', 'FreeBSD', 0);
 INSERT INTO stat VALUES ('os', 'SunOS', 0);
@@ -378,7 +377,7 @@ INSERT INTO stat VALUES ('os', 'OS/2', 0);
 INSERT INTO stat VALUES ('os', 'AIX', 0);
 INSERT INTO stat VALUES ('os', '?', 12012);
 INSERT INTO stat VALUES ('week_no', '0016', 1696);
-INSERT INTO stat VALUES ('lang', '0', 17749);
+INSERT INTO stat VALUES ('lang', '0', 17750);
 INSERT INTO stat VALUES ('lang', '1', 1315);
 INSERT INTO stat VALUES ('week_no', '0017', 58);
 INSERT INTO stat VALUES ('week_no', '0018', 37);
@@ -406,7 +405,7 @@ INSERT INTO stat VALUES ('week_no', '0048', 504);
 INSERT INTO stat VALUES ('week_no', '0049', 5);
 INSERT INTO stat VALUES ('week_no', '0050', 2);
 INSERT INTO stat VALUES ('week_no', '0051', 66);
-INSERT INTO stat VALUES ('week_no', '0052', 31);
+INSERT INTO stat VALUES ('week_no', '0052', 32);
 # --------------------------------------------------------
 
 #
@@ -435,5 +434,5 @@ CREATE TABLE users (
 # Dumping data for table `users`
 #
 
-INSERT INTO users VALUES (1, 'admin', 'admin', 'Administrator', '', 'http://cicom.kgb.cz', 'CICOM web site - home of wessie', '', '192.168.1.1', '93a87f7a8e032a03f6ed91cc585d1907', 20020112142744);
+INSERT INTO users VALUES (1, 'admin', 'admin', 'Administrator', '', 'http://cicom.kgb.cz', 'CICOM web site - home of wessie', '', '192.168.1.1', '3fe9d6e970a772302f8feaebf5f539cd', 20020113151144);
 
