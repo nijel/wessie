@@ -29,7 +29,6 @@
   <item url="templates/default/img/bar_left.png" />
   <item url="templates/default/img/bar_middle.png" />
   <item url="templates/default/img/bar_right.png" />
-  <item url="templates/default/template.html" />
   <item url="templates/default/template.php" />
   <item url="init.php" />
   <item url="admin/admin_header.php" />
@@ -48,5 +47,6 @@
   <item url="admin/plugins.php" />
   <item url="admin/functions.php" />
   <item url="admin/article_delete.php" />
+  <item url="templates/default/template.inc.php" />
  </project>
 </webproject>
