@@ -74,7 +74,7 @@ div.left {
 	color: #000000;
 	font-size: larger:
 	font-weight: bolder;
-	padding: 3em 2px 1em 2px
+	padding: 3.5em 2px 1em 2px
 }
 
 div.bodybox {
