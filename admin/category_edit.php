@@ -29,6 +29,8 @@ $page_name='Category:Edit';
 require_once('./admin_header.php');
 
 if (isset($action) && ($action=='save')){
+    //we should be able to edit/create category withou having any page
+    if (!isset($page)) $page=0;
     if (!mysql_query('UPDATE '.$table_prepend_name.$table_category.' set name="'.$name.'", page='.$page.', short="'.$short.'", description="'.$description.'" WHERE id='.$id.' AND lng='.$lng)){
         show_error("Can't save article info! (".mysql_error().')');
         exit;
@@ -37,6 +39,8 @@ if (isset($action) && ($action=='save')){
     include_once('./admin_footer.php');
     exit;
 }elseif(isset($action) && ($action=='create_new')){
+    //we should be able to edit/create category withou having any page
+    if (!isset($page)) $page=0;
     if (!mysql_query('INSERT '.$table_prepend_name.$table_category.' set name="'.$name.'"'.(($id==-1)?'':(', id='.$id)).', lng='.$lng.', page='.$page.', short="'.$short.'", description="'.$description.'"')){
         show_error("Can't save article info! (".mysql_error().')');
         exit;
