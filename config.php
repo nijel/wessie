@@ -29,7 +29,7 @@ error_reporting (E_ALL);
 if (!isset($wessie_config_php_loaded)){
 $wessie_config_php_loaded=1;
 
-$error_log_file='./logs/error.log';
+$error_log_file='/vs/wessie/logs/error.log';
 
 $site_started=mktime(0,0,0,1,13,2001); //Recommended to be time 0:0:0
 
@@ -104,13 +104,13 @@ $admin_charset='iso-8859-2';
 $admin_timeout='20 MINUTE';
 
 //size of edits in administration
-$admin_name_size=40;  //page name
-$admin_content_rows=10;
-$admin_content_cols=40;
+$admin_name_size=80;  //page name
+$admin_content_rows=30;
+$admin_content_cols=80;
 $admin_keywords_rows=2;
-$admin_keywords_cols=40;
+$admin_keywords_cols=80;
 $admin_description_rows=2;
-$admin_description_cols=40;
+$admin_description_cols=80;
 
 $admin_confirm_delete=TRUE;
 
