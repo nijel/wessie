@@ -162,12 +162,14 @@ $special[1] = '';
 // $admin_hash_cookie  - how long should be cookie with hash valid, this doesn't affect
 //                       security, security is made by $admin_timeout
 // $admin_confirm_delete - confirm deleting in administration?
+// $admin_confirm_uninstall - confirm uninstalling in administration?
 // $admin_validator    - link to validate page, at the end is appended url
 $admin_charset = 'iso-8859-2';
 $admin_timeout = '20 MINUTE';
 $admin_user_cookie = 2592000;
 $admin_hash_cookie = 3600;
 $admin_confirm_delete = TRUE;
+$admin_confirm_uninstall = TRUE;
 $admin_validator = 'http://validator.cic/cgi-bin/validate.cgi?input=yes&amp;url=';
 //##/ADMIN##
 
@@ -211,7 +213,7 @@ $admin_description_cols = 80;
 
 //##PLUGIN_COMMON##
 $allow_content_eval = TRUE;
-$installed_plugins = array('bullshit', 'file', 'article');
+$installed_plugins = array('bullshit', 'article', 'file');
 //##/PLUGIN_COMMON##
 
 //plugin configuration:

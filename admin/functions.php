@@ -347,6 +347,15 @@ function make_absolute_url($id,$lng){
 }
 
 
+function get_page_count($type){
+    global $table_prepend_name,$table_page;
+    if (!$id_result=mysql_query('SELECT count(*) as count from '.$table_prepend_name.$table_page." where type='".$type."'"))
+        show_error("Can't select page count! (".mysql_error().')');
+    $item = mysql_fetch_array ($id_result);
+    mysql_free_result($id_result);
+    return $item['count'];
+}
+
 function change_everywhere_category($from,$to,$lng){
     global $table_prepend_name,$table_menu,$table_page;
     if (!$id_result=mysql_query('UPDATE '.$table_prepend_name.$table_page.' set category='.$to.' where category='.$from.' AND lng='.$lng)){
