@@ -205,6 +205,11 @@ switch ($page['type']){
 
 //functions:
 
+function make_url($id,$lng){
+    global $base_path;
+    return $base_path.'main.php/id='.$id.'/lng='.$lng;
+}
+
 function download($which){
 global $table_prepend_name,$table_download,$table_download_group,$db_connection;
     if (!($id_result=mysql_query("SELECT * from $table_prepend_name$table_download where id=$which limit 1",$db_connection)))
@@ -235,7 +240,7 @@ function upper_menu(){
         while ($item = each ($categories)) {
             if ($was_item) {echo $upper_menu_divisor;}
             $was_item=true;
-            eval('?'.'>'.make_upper_menu_item($percent,$base_path.'main.php/id='.$item['value']['page'].'/lng='.$lng,$item['value']['name'],$item['value']['short'],$item['value']['description'],$page['category']==$item['value']['id']).'<?php ');
+            eval('?'.'>'.make_upper_menu_item($percent,make_url($item['value']['page'],$lng),$item['value']['name'],$item['value']['short'],$item['value']['description'],$page['category']==$item['value']['id']).'<?php ');
         }
 }
 
@@ -254,7 +259,7 @@ function top_pages(){
             if ($was_item) {echo $top_pages_divisor;}
             $was_item=true;
             $item_cat=$categories[$item['category']];
-            eval('?'.'>'.make_top_pages_item($base_path.'main.php/id='.$item['id'].'/lng='.$lng,$item['name'],$item_cat['name'],$item_cat['short'],$item['description']).'<?php ');
+            eval('?'.'>'.make_top_pages_item(make_url($item['id'],$lng),$item['name'],$item_cat['name'],$item_cat['short'],$item['description']).'<?php ');
         }
         mysql_free_result($id_result);
 }
@@ -306,7 +311,7 @@ while ($item = mysql_fetch_array ($id_result)){
         if ((!isset($item['description']))||($item['description']=='')) $desc=$page['description'];
         else $desc=$item['description'];
 
-        eval('?'.'>'.make_menu_item($base_path.'main.php/id='.$item['page'].'/lng='.$lng,$name,$category['name'],$category['short'],$desc,$item['page']==$id,$depth).'<?php ');
+        eval('?'.'>'.make_menu_item(make_url($item['page'],$lng),$name,$category['name'],$category['short'],$desc,$item['page']==$id,$depth).'<?php ');
         if (($item['expand']==1) || ($item['page']==$id) || in_array ($item['id'],$parents)){
             add_childs($item['id'],$depth+1,$parents);
         }
@@ -415,7 +420,7 @@ if (count($languages)==1){
     $result='';
     for($i=0;$i<count($languages);$i++){
         if ($result!='') $result.=$languages_divisor;
-        $result.=make_language($base_path.'main.php/id='.$id.'/lng='.$i,$lang_name[$i]);
+        $result.=make_language(make_url($id,$i),$lang_name[$i]);
     }
 }
 eval('?'.'>'.$result.'<?php ');
