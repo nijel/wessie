@@ -267,19 +267,50 @@ function change_everywhere_category($from,$to,$lng){
 
 function delete_everywhere_category($id,$lng){
     global $table_prepend_name,$table_menu,$table_page;
-    if (!$id_result=mysql_query('DELETE FROM '.$table_prepend_name.$table_page.' where category='.$id.' AND lng='.$lng)){
+/*    if (!$id_result=mysql_query('DELETE FROM '.$table_prepend_name.$table_page.' where category='.$id.' AND lng='.$lng)){
         show_error("Can't update category info! (".mysql_error().')');
         exit;
-    }
+    }*/
+    delete_pages('category='.$id.' AND lng='.$lng);
     if (!$id_result=mysql_query('DELETE FROM '.$table_prepend_name.$table_menu.' where category='.$id.' AND lng='.$lng)){
         show_error("Can't update category info! (".mysql_error().')');
         exit;
     }
 }
 
+function delete_pages($condition){
+    global $table_prepend_name,$table_menu,$table_page;
+    if (!$id_result=mysql_query('SELECT id,type,lng,category FROM '.$table_prepend_name.$table_page.' where '.$condition)){
+        show_error("Can't get pages info! (".mysql_error().')');
+        exit;
+    }
+
+    while ($item = mysql_fetch_array ($id_result)) {
+        if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_menu.' where page='.$item['id'].' AND lng='.$item['lng'])){
+            show_error("Can't delete menu items! (".mysql_error().')');
+            exit;
+        }
+
+        if ($item['type']!='file'){
+            if (!mysql_query('DELETE FROM '.$table_prepend_name.$GLOBALS['table_'.$item['type']].' where page='.$item['id'].' AND lng='.$item['lng'])){
+                show_error("Can't delete page details! (".mysql_error().')');
+                exit;
+            }
+        }
+    }
+    mysql_free_result($id_result);
+
+    if (!mysql_query('DELETE FROM '.$table_prepend_name.$table_page.' where '.$condition)){
+        show_error("Can't delete pages! (".mysql_error().')');
+        exit;
+    }
+
+}
+
 function make_row($even,$url){
     global $admin_highlight_list;
-    echo '<tr onclick="window.location.replace(\''.$url.'\')" '.(($even == 1)?'class="even"':'class="odd"');
+    echo '<tr '.(($even == 1)?'class="even"':'class="odd"');
+//    echo '<tr onclick="window.location.replace(\''.$url.'\')" '.(($even == 1)?'class="even"':'class="odd"');
     highlighter($admin_highlight_list);
     echo'><td>';
 }

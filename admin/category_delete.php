@@ -84,7 +84,7 @@ Do you want to delete following category?<br />
 If there are any articles, menu items etc. in this category, they should be:
 </p>
 <p class="radios">
-<label class="radios"><input type="radio" name="members" value="delete" class="radio" checked="checked" /> Deleted</label><br />
+<label class="radios"><input type="radio" name="members" value="delete" class="radio" checked="checked" /> Deleted <span class="warning">(this deletes also EVERYTHING what points to anything in this category)</span></label><br />
 <label class="radios"><input type="radio" name="members" value="move" class="radio" /> Moved to category: <?php category_edit(-1,$lng,'category',FALSE,'select',array($category['id'])); ?></label><br />
 <label class="radios"><input type="radio" name="members" value="keep" class="radio" /> Keept in current category <span  class="warning">(This is NOT recommended)</span></label><br />
 </p>
