@@ -374,6 +374,16 @@ function category_name(){
     global_eval($category['name']);
 }
 
+function link_up(){
+    global $category,$id,$lng,$lang_main_page,$site_home;
+    return ($category['page'] != $id)?make_url($category['page'],$lng):(($id == $lang_main_page[$lng])?$site_home:make_url($lang_main_page[$lng],$lng));
+}
+
+function link_start(){
+    global $lng,$lang_main_page;
+    return make_url($lang_main_page[$lng],$lng);
+}
+
 function keywords(){
     global $page;
     global_eval($page['keywords']);

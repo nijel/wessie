@@ -32,14 +32,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
     <meta http-equiv="Content-Language" content="<?php echo $lang; ?>" />
     <title><?php title(); ?></title>
-    <link rel="Home" href="<?php echo $site_home; ?>" />
-    <link rel="Copyright" href="mailto:<?php echo $site_author_email; ?>" />
+    <link rel="icon" href="<?php echo $base_path;?>img/favicon.png" type="image/png" />
+    <link rel="home" href="<?php echo $site_home; ?>" />
+    <link rel="up" href="<?php echo link_up(); ?>" />
+    <link rel="Copyright" href="mailto:<?php echo $site_author_email; ?>" title="<?php echo $site_name;?> Feedback" />
+    <link rev="Made" href="mailto:<?php echo $site_author_email; ?>" title="<?php echo $site_name;?> Feedback" />
     <link rel="StyleSheet" type="text/css" media="screen" href="<?php echo $base_path;?>templates/styles/styles.php" />
+
     <meta name="author" content="<?php echo $site_author[$lng]; ?>" />
     <meta name="keywords" content="<?php keywords(); ?>" />
     <meta name="description" content="<?php description(); ?>" />
     <meta name="generator" content="<?php echo $wessie_copyright; ?>" />
-    <link rel="icon" href="<?php echo $base_path;?>img/favicon.png" type="image/png" />
 
     <!-- We LOVE Micro$oft! We don't like their silly features. -->
     <meta name="MSSmartTagsPreventParsing" content="true" />
