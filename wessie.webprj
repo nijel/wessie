@@ -67,6 +67,8 @@
   <item url="admin/download_group_edit.php" />
   <item url="img/wessie_vertical_long.png" />
   <item url="logs/error.log" />
+  <item url="img/flags/cs.png" />
+  <item url="img/flags/en.png" />
  </project>
 </webproject>
 <!-- $Id$ -->

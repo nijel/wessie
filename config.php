@@ -35,9 +35,11 @@ $site_started=mktime(0,0,0,1,13,2001); //Recommended to be time 0:0:0
 
 $languages[0]='en';
 $lang_name[0]='English';
+$lang_img[0]='img/flags/en.png';
 $lang_main_page[0]=1;
 $languages[1]='cs';
 $lang_name[1]='Cesky';
+$lang_img[1]='img/flags/cs.png';
 $lang_main_page[1]=1;
 $default_lang=0;
 $lang_alias['en']=0;

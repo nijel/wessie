@@ -413,7 +413,7 @@ if (count($languages)==1){
     $result='';
     for($i=0;$i<count($languages);$i++){
         if ($result!='') $result.=$languages_divisor;
-        $result.=make_language(make_url($id,$i),$lang_name[$i]);
+        $result.=make_language(make_url($id,$i),$i);
     }
 }
 eval('?'.'>'.$result.'<?php ');
