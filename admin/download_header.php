@@ -24,7 +24,7 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-require_once('./download_header.php');
+require_once('./admin_header.php');
 ?>
 <table class="tabs">
   <tr>
