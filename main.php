@@ -280,7 +280,7 @@ function left_menu(){
             $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
         global $first_item,$left_menu_divisor,$id,$category,$lng,$menu_item_cache,$menu_parent_cache,$menu_page_cache;
 
-        if (is_array($menu_parent_cache[$child_id])){
+        if (isset($menu_parent_cache[$child_id]) && is_array($menu_parent_cache[$child_id])){
             while (list ($key, $val) = each($menu_parent_cache[$child_id])){
                 if (!$first_item) echo $left_menu_divisor;
                 else $first_item=false;
