@@ -499,7 +499,7 @@ function make_row($even){
 }
 
 function make_cell($data,$url='',$class=''){
-    echo '<td'.($class!=''?' class="'.$class.'"':'').($url!=''?' class="clickable" onclick="window.location.replace('."'".$url."'".')"':'').'>'.$data.'</td>';
+    echo '<td'.($class!=''&&$url==''?' class="'.$class.'"':'').($url!=''?' class="clickable'.$class.'" onclick="window.location.replace('."'".$url."'".')"':'').'>'.$data.'</td>';
 }
 
 function make_row_js($even,$js,$class_even='even',$class_odd='odd'){

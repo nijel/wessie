@@ -168,7 +168,7 @@ $admin_timeout = '20 MINUTE';
 $admin_user_cookie = 2592000;
 $admin_hash_cookie = 3600;
 $admin_confirm_delete = TRUE;
-$admin_validator = 'http://validator.cic/cgi-bin/validate.cgi?input=yes&url=';
+$admin_validator = 'http://validator.cic/cgi-bin/validate.cgi?input=yes&amp;url=';
 //##/ADMIN##
 
 //##ADMIN_FILES##

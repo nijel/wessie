@@ -145,10 +145,11 @@ while (list ($key, $val) = each($dirs)){
             $even = 1 - $even;
             make_cell($val,'');
             make_cell($plugin_name,'');
-            make_cell('<input name="plugins_function['.$val.']" value="1" type="checkbox" '.($plugin_function?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_function_plugins)?' checked="checked"':'').'>','');
-            make_cell('<input name="plugins_page['.$val.']" value="1" type="checkbox" '.($plugin_page?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_page_plugins)?' checked="checked"':'').'>','');
+            make_cell('<input name="plugins_function['.$val.']" value="1" type="checkbox" '.($plugin_function?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_function_plugins)?' checked="checked"':'').'/>','');
+            make_cell('<input name="plugins_page['.$val.']" value="1" type="checkbox" '.($plugin_page?'class="check"':'class="check_disabled" disabled="disabled"').(in_array($val,$allowed_page_plugins)?' checked="checked"':'').'/>','');
             make_cell('<select name="plugins_page_eval['.$val.']" '.($plugin_page?'class="select"':'class="select_disabled" disabled="disabled"').'><option value="1"'.(isset($page_plugins_options[$val]['eval'])&&$page_plugins_options[$val]['eval']?' selected="selected"':'').'>Yes</option><option value="0"'.(!isset($page_plugins_options[$val]['eval'])||!$page_plugins_options[$val]['eval']?' selected="selected"':'').'>No</option></select>');
-            make_cell('<input type="button" class="browse" onclick="'."show_plugin_info('$val','$plugin_name','$plugin_version','$plugin_release_date','$plugin_author','$plugin_email','$plugin_web',".(int)$plugin_page.','.(int)$plugin_function.')"'.'" value="?" />','');
+            make_cell('<input type="button" class="browse" onclick="'."show_plugin_info('$val','$plugin_name','$plugin_version','$plugin_release_date','$plugin_author','$plugin_email','$plugin_web',".(int)$plugin_page.','.(int)$plugin_function.')" value="?" />');
+            echo "</tr>\n";
         }
     }
 }
@@ -156,12 +157,12 @@ while (list ($key, $val) = each($dirs)){
 
 <tr>
 <td colspan="6">
-    Listed plugins: <?php echo $count; ?><br>
+    Listed plugins: <?php echo $count; ?><br />
     Allow anywhere evaling content of page:
     <select name="allow_page_eval" class="select">
     <option value="1"<?php if ($allow_content_eval) echo ' selected="selected"';?>>Yes</option>
     <option value="0"<?php if (!$allow_content_eval) echo ' selected="selected"';?>>No</option>
-    </select><br>
+    </select><br />
     <table class="savereset">
     <tr>
         <td><input type="submit" value=" Save " class="save" /></td>

@@ -65,7 +65,7 @@ if ($admin_fm_restrict && (strlen($dir) < $root_dir_len || strpos($dir,$root_dir
         <input type="radio" name="where" value="1" class="radio" <?php if ((!isset($where))||$where==1) echo "checked=\"checked\"";?>/> subfolders of current directory (<?php echo $dir; ?>)
         <input type="radio" name="where" value="2" class="radio" <?php if (isset($where)&&$where==2) echo "checked=\"checked\"";?>/> web tree
         &nbsp;<input type="submit" value=" Go " class="go" />
-        <input type="hidden" name="dir" value="<?php echo $dir; ?>">
+        <input type="hidden" name="dir" value="<?php echo $dir; ?>" />
       </form>
     </td>
   </tr>
@@ -153,7 +153,7 @@ while (list ($key, $val) = each($list)){
         $filename=$val['filename'];
         make_row($even);
         $size=$val['hsize'];
-        if (strncmp($root_dir,$dir.'/'.$filename,$root_dir_len)==0) $download_path = $webdir.$filename;
+        if (strncmp($root_dir,$dir.'/'.$filename,$root_dir_len)==0) $download_path = $webdir.($webdir{strlen($webdir)-1}=='/'?'':'/').$filename;
         else $download_path = '';
     }
     make_cell((isset($search)?'.':'').$filename);
@@ -185,9 +185,9 @@ if (!isset($search)) {
         ?>
         <form action="files_upload.php" method="post" enctype="multipart/form-data">
         Upload file:
-        <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $admin_fm_maxsize; ?>">
-        <input type="file" name="file" class="file"/>
-        <input type="hidden" name="dir" value="<?php echo $dir; ?>">
+        <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $admin_fm_maxsize; ?>" />
+        <input type="file" name="file" class="file" />
+        <input type="hidden" name="dir" value="<?php echo $dir; ?>" />
         <input type="submit" value=" Go " class="go" />
         </form>
         <?php

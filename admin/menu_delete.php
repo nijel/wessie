@@ -112,7 +112,6 @@ elseif ($item['expand']==1)
 ?>
 </td><td></td></tr>
 </table>
-</form>
 <?php
 require_once('./admin_footer.php');
 ?>

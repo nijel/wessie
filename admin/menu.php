@@ -85,7 +85,7 @@ while ($item = mysql_fetch_array ($id_result)){
     make_cell($item['expand'],$url);
     make_cell($item['id'],$url);
     make_cell($item['page'],$url);
-    echo '</td><td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="menu_edit.php?parent=',$item['id'].'&amp;lng='.$item['lng'].'">Add child</a>&nbsp;|&nbsp;<a href="menu_delete.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;</td></tr>'."\n";
+    echo '<td>&nbsp;<a href="'.$url.'">Edit</a>&nbsp;|&nbsp;<a href="menu_edit.php?parent=',$item['id'].'&amp;lng='.$item['lng'].'">Add child</a>&nbsp;|&nbsp;<a href="menu_delete.php?id='.$item['id'].'&amp;lng='.$item['lng'].'">Delete</a>&nbsp;|&nbsp;<a href="'.make_url($item['page'],$item['lng']).'" target="_blank">View</a>&nbsp;</td></tr>'."\n";
     $listed_items++;
 
     add_childs($item['id'],$depth+1,$item['lng']);
