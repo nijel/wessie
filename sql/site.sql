@@ -347,6 +347,7 @@ INSERT INTO stat VALUES ('browser', 'Lynx', 4);
 INSERT INTO stat VALUES ('browser', 'MSIE', 16);
 INSERT INTO stat VALUES ('browser', 'Opera', 23);
 INSERT INTO stat VALUES ('browser', 'Konqueror', 2179);
+INSERT INTO stat VALUES ('browser', 'Mozilla', 268);
 INSERT INTO stat VALUES ('browser', 'Netscape', 7);
 INSERT INTO stat VALUES ('browser', 'NCSA Mosaic', 0);
 INSERT INTO stat VALUES ('browser', 'W3C_Validator', 0);
@@ -402,7 +403,6 @@ INSERT INTO stat VALUES ('week_no', '0048', 504);
 INSERT INTO stat VALUES ('week_no', '0049', 5);
 INSERT INTO stat VALUES ('week_no', '0050', 2);
 INSERT INTO stat VALUES ('week_no', '0051', 62);
-INSERT INTO stat VALUES ('browser', 'Mozilla', 268);
 # --------------------------------------------------------
 
 #
