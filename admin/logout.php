@@ -26,6 +26,6 @@
 // $Id$
 Header('Pragma: no-cache');
 Header("Expires: " . GMDate("D, d M Y H:i:s") . " GMT");
-setcookie ("hash", '',time(), dirname($REQUEST_URI), $SERVER_NAME); //delete cookie
-header('Location: http://'.$SERVER_NAME.dirname($REQUEST_URI).'/login.php?failure=logout');
+setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''), $SERVER_NAME); //delete cookie
+header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=logout');
 ?>

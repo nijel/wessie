@@ -42,14 +42,14 @@ if (isset($HTTP_POST_VARS['submit'])){
     $auth=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
     if ($auth['count']!=1){
-        Header('Location: http://'.$SERVER_NAME.dirname($REQUEST_URI).'/login.php?failure=badlogin');
+        Header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=badlogin');
         die();
     }
 
 
-    setcookie ("user", $user,time()+$admin_user_cookie, dirname($REQUEST_URI));
+    setcookie ('user', $user,time()+$admin_user_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
     $hash=md5 (uniqid (rand()));
-    setcookie ("hash",$hash ,time()+$admin_hash_cookie, dirname($REQUEST_URI));
+    setcookie ('hash',$hash ,time()+$admin_hash_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''));
 
     $ip=$REMOTE_ADDR;
     $headers = getallheaders();
@@ -63,7 +63,7 @@ if (isset($HTTP_POST_VARS['submit'])){
             do_error(1,'UPDATE '.$table_prepend_name.$table_users.': '.mysql_error());
 
     if (!isset($url)){
-        $url = 'http://' .  $SERVER_NAME . dirname($REQUEST_URI) . '/index.php';
+        $url = 'http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/index.php';
 
     }
 
@@ -82,6 +82,7 @@ if (isset($HTTP_POST_VARS['submit'])){
 <?php
     die();
 }
+setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''), $SERVER_NAME); //delete cookie
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
                   "DTD/xhtml1-transitional.dtd">

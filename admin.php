@@ -24,5 +24,5 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-header('Location: http://'.$SERVER_NAME.(dirname($REQUEST_URI)=='/'?'':dirname($REQUEST_URI)).'/admin/index.php');
+header('Location: http://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/index.php');
 ?>
