@@ -24,7 +24,7 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-$wessie_version_only='0.1 beta';
+$wessie_version_only='0.2 beta';
 $wessie_version='wessie '.$wessie_version_only;
 $wessie_author='Michal Cihar';
 $wessie_author_email='cihar@email.cz';
