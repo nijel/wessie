@@ -64,6 +64,7 @@
 <div class="leftbox">
 <?php left_menu(); ?>
 </div>
+<!--
 <div class="leftbox" id="searchbox">
 <form class="search" action="<?php echo $search_url; ?>" method="get" target="_self">
   <?php search_hidden_options(); ?>
@@ -71,19 +72,22 @@
   <input class="search_button" type="submit" value="<?php echo $msg_find; ?>" />
 </form>
 </div>
+-->
+<!--
 <div class="leftbox">
 <?php top_pages(); ?>
 </div>
+-->
 <div class="leftbox">
 <?php languages(); ?>
 </div>
 <div class="powered">
 <?php
 powered_wessie();
-echo '<br /><br />';
-powered_php();
-echo '<br /><br />';
-powered_mysql();
+//echo '<br /><br />';
+//powered_php();
+//echo '<br /><br />';
+//powered_mysql();
 ?>
 </div>
 </div>
