@@ -27,6 +27,11 @@
 body {
     color: #000000;
     background-color: #ddddaa;
+    background-image: url("../img/wessie_vertical_long.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 5px 5px;
+    margin-left: 32px;
 }
 tr.even {
     background-color: #eeeecc;
