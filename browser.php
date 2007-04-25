@@ -54,6 +54,8 @@ if(isset($_SERVER["HTTP_USER_AGENT"])){
     elseif(eregi('bot|scanner|ApacheBench', $_SERVER["HTTP_USER_AGENT"])) $browser = 'Bot';
     elseif(ereg('Gecko|Galeon', $_SERVER["HTTP_USER_AGENT"])) $browser = 'Mozilla';
     elseif(ereg('Nav|Gold|Mozilla|Netscape', $_SERVER["HTTP_USER_AGENT"])) $browser = 'Netscape';
+    elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'Java')===false)) $browser = 'Java';
+    elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'libwww-perl')===false)) $browser = 'libwww-perl';
     else {
         $browser = '?';
         log_error('Unknown browser: ' . $_SERVER["HTTP_USER_AGENT"]);
@@ -72,6 +74,7 @@ if(isset($_SERVER["HTTP_USER_AGENT"])){
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'AIX')===false)) $os = 'AIX';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'Amiga')===false)) $os = 'Amiga';
     elseif(ereg('Unix|Linux|X11|deb|ApacheBench', $_SERVER["HTTP_USER_AGENT"])) $os = 'Linux/Unix';
+    elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'MSIE')===false)) $os = 'Windows';
     else {
         $os = '?';
         if ($browser != '?' && $browser != 'Bot' && $browser != 'Search Indexer') {
