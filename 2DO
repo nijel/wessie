@@ -1,11 +1,14 @@
 $Id$
 
+KNOWN BUGS:
+
+  currently none
+  should we use ORIGINAL_REMOTE_ADDR as alternative to X-Forwarded-For?
+
 NOT ORDERED by importance:
 ? = may be
 ! = important
 !! = very important
-
-ACL
 
 create plugins:
  - news
@@ -13,11 +16,8 @@ create plugins:
  - mail lists
  - discussions
 
-admin: allow more users with same login logged in at one time
-
-admin: add also other that cookie based auth
-
 admin: add options editing, sections:
+        - site config
         - admin config
 
 admin: add consistency checks (when page removed, there should retain no references to it - at least in system part - menus, default pages etc.)

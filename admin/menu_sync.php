@@ -69,7 +69,7 @@ if (isset($category)&&isset($lng_from)&&isset($lng_to)){
     }
     echo '</pre>';
     mysql_free_result($id_result);
-    show_info_box('Menu items synchronized',array(),isset($HTTP_REFERER)?$HTTP_REFERER:'menu.php');
+    show_info_box('Menu items synchronized',array(),isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:'menu.php');
     include_once('./admin_footer.php');
     exit;
 }else{

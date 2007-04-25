@@ -26,22 +26,22 @@
 // $Id$
 $wessie_version_only='0.2 beta';
 $wessie_version='wessie '.$wessie_version_only;
-$wessie_author='Michal Cihar';
-$wessie_author_email='cihar@email.cz';
-$wessie_copyright=$wessie_version.', Copyright (C) 2001-2002 '.$wessie_author;
-$wessie_copyright_email=$wessie_version.', Copyright (C) 2001-2002 <a href="mailto:'.$wessie_author_email.'">'.$wessie_author.'</a>';
-$wessie_url='http://cihar.liten.cz';
+$wessie_author='Michal &#268;iha&#345;';
+$wessie_author_email='michal@cihar.com';
+$wessie_copyright=$wessie_version.', Copyright (C) 2001-2005 '.$wessie_author;
+$wessie_copyright_email=$wessie_version.', Copyright (C) 2001-2005 <a href="mailto:'.$wessie_author_email.'">'.$wessie_author.'</a>';
+$wessie_url='http://cihar.com';
 $search_url='search.php';
 $search_param='q';
 
 //nasty hack to be XHTML compliant
-$SERVER_SIGNATURE = strtr($SERVER_SIGNATURE, array('ADDRESS'=>'address'));
+#$_SERVER['SERVER_SIGNATURE'] = strtr($_SERVER['SERVER_SIGNATURE'], array('ADDRESS'=>'address'));
 
 // extract parameter value, when specified "seacrh engine friendly"
 // (index.php/param1=value1/param2=value2
 
-if (isset($PATH_INFO) && (!empty($PATH_INFO))){
-    $info_vars = split('/',$PATH_INFO);
+if (isset($_SERVER['ORIG_PATH_INFO']) && (!empty($_SERVER['ORIG_PATH_INFO']))){
+    $info_vars = split('/',$_SERVER['ORIG_PATH_INFO']);
     while ($item = each ($info_vars)) {
         $current_var = split('=',$item['value']);
         if (isset($current_var[0]) && isset($current_var[1])){
@@ -54,7 +54,7 @@ if (isset($PATH_INFO) && (!empty($PATH_INFO))){
         }else{
             if (ereg ('page([0-9]*)\.html?',$item['value'] , $regs)) {
                 $id=(int)$regs[1];
-            } elseif (ereg ('page([0-9]*)\.([a-z]*)\.html?',$item['value'] , $regs)) {
+            } elseif (ereg ('page([0-9]*)\.([^.]*)\.html?',$item['value'] , $regs)) {
                 $id=(int)$regs[1];
                 $lng=isset($lang_alias[$regs[2]])?$lang_alias[$regs[2]]:$default_lang;
             } elseif (ereg ('^([0-9]*)$',$item['value'])){
@@ -69,8 +69,8 @@ if (isset($PATH_INFO) && (!empty($PATH_INFO))){
 
 // obtain base path for current file
 
-if (isset($SCRIPT_NAME)){
-    $base_path = dirname($SCRIPT_NAME);
+if (isset($_SERVER['SCRIPT_NAME'])){
+    $base_path = dirname($_SERVER['SCRIPT_NAME']);
     if ($base_path!='/') {
         $base_path .= '/';
         if (isset($remove_path) && (strcmp(substr($base_path,-strlen($remove_path)),$remove_path)==0))
@@ -79,5 +79,5 @@ if (isset($SCRIPT_NAME)){
 } else {
     $base_path = '/';
 }
-$base_url='http://'.$SERVER_NAME.$base_path;
+$base_url='http://'.$_SERVER['SERVER_NAME'].$base_path;
 ?>

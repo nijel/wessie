@@ -26,10 +26,8 @@
 // $Id$
 error_reporting (E_ALL);
 // Config script for wessie
-// Lines with //## are not needed, but they allow to keep a bit of order
-// in this file, when it is being modified by php script.
-// While editing by hand, please keep each option on separate line and
-// use single quotes (') for strings, otherwise editing via web may be broken.
+// lines like following are not needed, but they allows to keep a bit of order
+// in this file, when it is being modified by php script
 
 // MySQL database settings
 //##DATABASE##
@@ -58,20 +56,16 @@ $show_error_detail = TRUE;
 //##/ERRORS##
 
 //##LANGUAGES##
+// $languages array    - shortcuts for languages, they should be official = same as
+//                       send browser as Accept-language
+// $lang_name array    - names of languages, just for displaying
+// $lang_img array     - path (relative to root of wessie) to image for earch language
+// $lang_alias array   - used for decoding from Accept-language and PATH_INFO
 // $default_lang       - fallback language, when detection from Accept-language fails
 // $lang_file          - name of file with language-specific data, you can use inside
 //                       any php variables, that will be in time of evaluation
 //                       accessible, for example ${lang} = language shortcut,
 //                       ${lng} = language id
-// $languages array    - data about languages:
-//              short  - shortcut - this should be the official one = same as
-//                       send browser as Accept-language
-//              name   - names of languages, just for displaying
-//              page   - default page for language
-//              image  - path (relative to root of wessie) to image for earch language
-// $lang_alias array   - used for decoding from Accept-language and PATH_INFO
-$default_lang = 0;
-$lang_file = './lang/${lang}.php';
 $languages[0]['short'] = 'en';
 $languages[0]['name'] = 'English';
 $languages[0]['image'] = 'img/flags/en.png';
@@ -83,6 +77,8 @@ $languages[1]['image'] = 'img/flags/cs.png';
 $languages[1]['page'] = '1';
 $lang_alias['cs'] = 1;
 $lang_alias['cz'] = 1;
+$default_lang = 0;
+$lang_file = './lang/${lang}.php';
 //##/LANGUAGES##
 
 //##COOKIES##
@@ -109,7 +105,6 @@ $table_article = 'article';
 $table_download = 'download';
 $table_download_group = 'download_group';
 $table_users = 'users';
-$table_logged = 'logged';
 $table_stat = 'stat';
 //##/TABLES##
 
@@ -149,16 +144,16 @@ $top_pages_count = 4;
 // $special array      - array of special info that is displayed on top of each page
 $site_home = 'http://wessie.cicom.cic';
 $site_started = mktime(0,0,0,1,13,2001);
-$site_author_email = 'cihar@centrum.cz';
-$site_author[0] = 'Michal Cihar';
-$site_name[0] = 'wessie Demo';
+$site_author_email = 'michal@cihar.com';
+$site_author[0] = 'Michal ÄŒihaÅ™';
+$site_author[1] = 'Michal ÄŒihaÅ™';
 $site_name_long[0] = 'demonstration how wessie can work';
-$copyright[0] = 'Copyright &copy; 2001-2002 <a href="mailto:<?php echo $site_author_email;?>"><?php echo $site_author[0];?></a>';
+$site_name_long[1] = 'ukÃ¡zka jak mÅ¯Å¾e wessie pracovat';
+$site_name[0] = 'wessie Demo';
+$site_name[1] = 'ukÃ¡zka wessie';
+$copyright[0] = 'Copyright &copy; 2001 - 2007 <a href="mailto:'.$site_author_email.'">'.$site_author[0].'</a>';
+$copyright[1] = 'Copyright &copy; 2001 - 2007 <a href="mailto:'.$site_author_email.'">'.$site_author[1].'</a>';
 $special[0] = '';
-$site_author[1] = 'Michal Èihaø';
-$site_name[1] = 'ukázka wessie';
-$site_name_long[1] = 'ukázka jak mù¾e wessie pracovat';
-$copyright[1] = 'Copyright &copy; 2001-2002 <a href="mailto:<?php echo $site_author_email;?>"><?php echo $site_author[0];?></a>';
 $special[1] = '';
 //##/INFO##
 
@@ -181,14 +176,14 @@ $special[1] = '';
 // $admin_two_step_login - ensures login to work even if there is something broken
 //                        and clients accepts only one cookie per request
 // $admin_force_ssl    - force using https for administration
-$admin_charset = 'iso-8859-2';
+$admin_charset = 'utf-8';
 $admin_default_css = 'admin_blue.css';
 $admin_timeout = '20 MINUTE';
 $admin_user_cookie = 2592000;
 $admin_hash_cookie = 3600;
 $admin_confirm_delete = TRUE;
 $admin_confirm_uninstall = TRUE;
-$admin_validator = 'http://validator.cic/cgi-bin/validate.cgi?input=yes&amp;url=';
+$admin_validator = 'http://validator.w3.org/check?uri=';
 $admin_file_restrict = TRUE;
 $admin_two_step_login = TRUE;
 $admin_force_ssl = FALSE;

@@ -26,5 +26,5 @@
 // $Id$
 require_once('./config.php');
 
-header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).'/'.(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/index.php');
+header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).'/'.(substr(dirname($_SERVER['SCRIPT_NAME']),-5)!='admin'?'admin':'').'/index.php');
 ?>

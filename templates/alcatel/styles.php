@@ -145,3 +145,20 @@ input.search_text {
 input.search_button {
     width: 70px;
 }
+
+p.notice {
+    margin:             0.5em 0 0.5em 0;
+    border:             0.1em solid #FFD700;
+    color:              #000000;
+    background-color:   #FFFFDD;
+    padding:            0.5em;
+}
+
+p.error {
+    margin:             0.5em 0 0.5em 0;
+    border:             0.1em solid #FF0000;
+    color:              #FF0000;
+    background-color:   #FFFFCC;
+    padding:            0.5em;
+}
+

@@ -24,41 +24,41 @@
 // +----------------------------------------------------------------------+
 //
 // $Id$
-setlocale(LC_ALL,'Czech');
-$charset='iso-8859-2';
+setlocale(LC_ALL,'cs_CZ.UTF-8');
+$charset='utf-8';
 
 //Here will be [count] replaced by number of visits to page
-$msg_counter='Tuto stránku si prohlédlo <?php echo $count?> náv¹tìvníkù';
+$msg_counter='Tuto strÃ¡nku si prohlÃ©dlo <?php echo $count?> nÃ¡vÅ¡tÄ›vnÃ­kÅ¯';
 
-$msg_unknown='Neznámý';
+$msg_unknown='NeznÃ¡mÃ½';
 
 $msg_mysqlerr = 'Chyba MySQL';
-$msg_mysqlcantconnect = 'Nepodaøilo se pøipojit do databáze';
+$msg_mysqlcantconnect = 'NepodaÅ™ilo se pÅ™ipojit do databÃ¡ze';
 
 $msg_err = "Chyba";
-$msg_badweb = "nepodaøilo se otevøít web";
-$msg_badmail = "nevypadá jako správný email!";
-$msg_nonote = "nebyla zadána ádná poznámka!";
-$msg_redirect = "Probíhá pøesmìrování, pokud sele, pouijte tento odkaz";
-$msg_addnote = "Pøidat do knihy hostù";
-$msg_preview = "Náhled";
-$msg_prevsubmit = "Zobrazit náhled";
-$msg_addprev = "pøidávání do knihy hostù s náhledem";
-$msg_addprevh = "Kniha hostù";
-$msg_nomymail = "Tento email není povolen!";
-$msg_nomyname = "Toto jméno není povoleno!";
-$msg_showcomment = "Zobrazit komentáø";
-$msg_commentfor = "Komentáø k";
-$msg_commentnoteno = "poznámce èíslo";
-$msg_next = 'Dalích';
-$msg_previous = 'Pøedchozích';
+$msg_badweb = "nepodaÅ™ilo se otevÅ™Ã­t web";
+$msg_badmail = "nevypadÃ¡ jako sprÃ¡vnÃ½ email!";
+$msg_nonote = "nebyla zadÃ¡na Ã¡dnÃ¡ poznÃ¡mka!";
+$msg_redirect = "ProbÃ­hÃ¡ pÅ™esmÄ›rovÃ¡nÃ­, pokud sele, pouijte tento odkaz";
+$msg_addnote = "PÅ™idat do knihy hostÅ¯";
+$msg_preview = "NÃ¡hled";
+$msg_prevsubmit = "Zobrazit nÃ¡hled";
+$msg_addprev = "pÅ™idÃ¡vÃ¡nÃ­ do knihy hostÅ¯ s nÃ¡hledem";
+$msg_addprevh = "Kniha hostÅ¯";
+$msg_nomymail = "Tento email nenÃ­ povolen!";
+$msg_nomyname = "Toto jmÃ©no nenÃ­ povoleno!";
+$msg_showcomment = "Zobrazit komentÃ¡Å™";
+$msg_commentfor = "KomentÃ¡Å™ k";
+$msg_commentnoteno = "poznÃ¡mce ÄÃ­slo";
+$msg_next = 'DalÃ­ch';
+$msg_previous = 'PÅ™edchozÃ­ch';
 
-$msg_downloaded = 'sta¾eno';
-$msg_times = 'krát';
-$msg_downloads = 'stáhnutí';
+$msg_downloaded = 'staÅ¾eno';
+$msg_times = 'krÃ¡t';
+$msg_downloads = 'stÃ¡hnutÃ­';
 
-$msg_find = 'Najít';
-$msg_last_change = 'Poslední zmìna';
+$msg_find = 'NajÃ­t';
+$msg_last_change = 'PoslednÃ­ zmÄ›na';
 $msg_ = '';
 $msg_ = '';
 $msg_ = '';
@@ -67,20 +67,20 @@ $msg_ = '';
 $msg_ = '';
 $msg_ = '';
 
-$msg_gb = "Kniha hostù";
-$msg_name = "Jméno";
+$msg_gb = "Kniha hostÅ¯";
+$msg_name = "JmÃ©no";
 $msg_mail = "Email";
 $msg_web = "Web";
-$msg_note = "Poznámka";
-$msg_comment = "Komentáø&nbsp;";
-$msg_submit = "Odeslat poznámku";
+$msg_note = "PoznÃ¡mka";
+$msg_comment = "KomentÃ¡Å™&nbsp;";
+$msg_submit = "Odeslat poznÃ¡mku";
 $msg_reset = "Vymazat";
-$msg_noteno = "Poznámka èíslo";
-$msg_noteday = "zapsaná";
-$msg_commentday = "zapsaný";
+$msg_noteno = "PoznÃ¡mka ÄÃ­slo";
+$msg_noteday = "zapsanÃ¡";
+$msg_commentday = "zapsanÃ½";
 $msg_athour = "v";
 $msg_wrote = "Zapsal(a)";
-$msg_anonym = "neznámý";
+$msg_anonym = "neznÃ¡mÃ½";
 
-$msg_unknown_size = 'Neznámá velikost; ';
+$msg_unknown_size = 'NeznÃ¡mÃ¡ velikost; ';
 ?>

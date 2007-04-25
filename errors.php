@@ -49,7 +49,8 @@ if (!isset($site_name)){
     $error_site_name='wessie';
     $show_error_detail=FALSE;
 } else {
-    $error_site_name=$site_name[isset($lng)?$lng:0];
+    $lng2 = isset($lng)?$lng:0;
+    $error_site_name = isset($site_name[$lng2])?$site_name[$lng2]:$site_name[0];
 }
 
 
@@ -72,7 +73,7 @@ function log_error($what){
  * @param   string   error description
  */
 function do_error($err_type=0,$err_nfo=''){
-    global $SERVER_PROTOCOL, $error_site_name, $show_error_detail, $base_path, $SERVER_NAME;
+    global $error_site_name, $show_error_detail, $base_path;
 
     $err_names[0] = 'fallback and default';
     $err_names[1] = 'bad SQL';
@@ -95,7 +96,7 @@ function do_error($err_type=0,$err_nfo=''){
     $headers[7] = '503 Service temporarily unavailable';
     $headers[8] = '503 Service temporarily unavailable';
 
-    $header = $SERVER_PROTOCOL . ' ' . (isset($headers[$err_type])?$headers[$err_type]:$headers[0]);
+    $header = $_SERVER['SERVER_PROTOCOL'] . ' ' . (isset($headers[$err_type])?$headers[$err_type]:$headers[0]);
     $http_err_type = substr((isset($headers[$err_type])?$headers[$err_type]:$headers[0]),0,1);
 
     $messages[0] = 'Internal server error';
@@ -112,7 +113,7 @@ function do_error($err_type=0,$err_nfo=''){
 
 
 
-    //header ($header);
+    header ($header);
     echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">'."\n".
         '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">'.
         "\n<head><title>$error_site_name</title></head><body>\n".
@@ -122,7 +123,7 @@ function do_error($err_type=0,$err_nfo=''){
     if ($http_err_type == 5){
         echo "<br />\nThis page has currently some technical problems. Please try looking on oher page or connecting later.<br />";
         if (isset($base_path)){
-            echo 'You can try visiting main page of this site: <a href="http://'.$SERVER_NAME.$base_path.'main.php">http://'.$SERVER_NAME.$base_path.'main.php</a><br />'."\n";
+            echo 'You can try visiting main page of this site: <a href="http://'.$_SERVER['SERVER_NAME'].$base_path.'main.php">http://'.$_SERVER['SERVER_NAME'].$base_path.'main.php</a><br />'."\n";
         }
         echo "There is no need to contact administrator, because he surely knows about this....<br />\n";
     }

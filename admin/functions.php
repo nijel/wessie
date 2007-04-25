@@ -25,7 +25,7 @@
 //
 // $Id$
 
-$server_root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
+$server_root_dir = substr($_SERVER['SCRIPT_FILENAME'],0,-strlen($_SERVER['SCRIPT_NAME']));
 
 function show_html_head($title,$special=''){
 global $wessie_author,$wessie_version,$wessie_copyright,$site_home,$admin_charset,$base_path,$admin_default_css;
@@ -287,13 +287,13 @@ function type_edit($selected=-1,$add_any=FALSE,$name='type',$disabled=array(),$c
     echo '</select>';
 }
 
-function new_page($name,$type,$param,$description,$keywords,$lng,$category,$page){
+function new_page($name,$type,$file,$description,$keywords,$lng,$category,$page){
     global $db_prepend,$table_page;
-    if (!mysql_query('INSERT '.$db_prepend.$table_page.' set name="'.opt_addslashes($name).'", type="'.$type.'", param="'.$param.'",description="'.opt_addslashes($description).'",keywords="'.opt_addslashes($keywords).'",category='.$category.',lng='.$lng.($page!=-1?', id='.$page:''))){
+    if (!mysql_query('INSERT '.$db_prepend.$table_page.' set name="'.opt_addslashes($name).'", type="'.$type.'", param="'.opt_addslashes($file).'",description="'.opt_addslashes($description).'",keywords="'.opt_addslashes($keywords).'",category='.$category.',lng='.$lng.($page!=-1?', id='.$page:''))){
         show_error("Can't create page! (".mysql_error().')');
         exit;
     }
-    if (!$id_result=mysql_query('SELECT id from '.$db_prepend.$table_page.' where  name="'.opt_addslashes($name).'" and type="'.$type.'" and param="'.$param.'" and description="'.opt_addslashes($description).'" and keywords="'.opt_addslashes($keywords).'" and category='.$category.' and lng='.$lng.($page!=-1?' and id='.$page:''))){
+    if (!$id_result=mysql_query('SELECT id from '.$db_prepend.$table_page.' where  name="'.opt_addslashes($name).'" and type="'.$type.'" and param="'.opt_addslashes($file).'" and description="'.opt_addslashes($description).'" and keywords="'.opt_addslashes($keywords).'" and category='.$category.' and lng='.$lng.($page!=-1?' and id='.$page:''))){
         show_error("Can't get back page info! (".mysql_error().')');
         exit;
     }
@@ -375,8 +375,8 @@ function make_url($id,$lng){
 }
 
 function make_absolute_url($id,$lng){
-    global $base_path,$SERVER_NAME, $languages, $admin_force_ssl;
-    return ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.$base_path.'main.php/page'.$id.'.'.$languages[$lng]['short'].'.html';
+    global $base_path, $languages, $admin_force_ssl;
+    return ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$_SERVER['SERVER_NAME'].$base_path.'main.php/page'.$id.'.'.$languages[$lng]['short'].'.html';
 }
 
 function get_page_count($type){
@@ -477,8 +477,8 @@ $configuration=array();
 $configuration_loaded=FALSE;
 
 function config_read(){
-    global $configuration,$SCRIPT_FILENAME,$configuration_loaded;
-    if (!($file = fopen($root_dir=dirname(dirname($SCRIPT_FILENAME)).'/config.php', 'r')))
+    global $configuration,$configuration_loaded;
+    if (!($file = fopen($root_dir=dirname(dirname($_SERVER['SCRIPT_FILENAME'])).'/config.php', 'r')))
         return FALSE;
     for ($i=0; !feof($file); $i++) {
         $configuration[$i] = fgets($file, 1024);
@@ -487,8 +487,8 @@ function config_read(){
 }
 
 function config_write(){
-    global $configuration,$SCRIPT_FILENAME,$configuration_loaded;
-    if (!($file = fopen($root_dir=dirname(dirname($SCRIPT_FILENAME)).'/config.php', 'w')))
+    global $configuration,$configuration_loaded;
+    if (!($file = fopen($root_dir=dirname(dirname($_SERVER['SCRIPT_FILENAME'])).'/config.php', 'w')))
         return FALSE;
     for ($i=0; $i < count($configuration); $i++) {
         if (isset($configuration[$i])) fwrite($file, $configuration[$i], 1024);
@@ -566,19 +566,18 @@ function make_row_js($even,$js,$class_even='even',$class_odd='odd'){
 }
 
 function make_tab_item($href,$text,$url,$url2=''){
-    global $SCRIPT_NAME;
-    $class=(($url!='' && strpos($SCRIPT_NAME,$url))||($url2!='' && strpos($SCRIPT_NAME,$url2))?'selected':'normal');
+    $class=(($url!='' && strpos($_SERVER['SCRIPT_NAME'],$url))||($url2!='' && strpos($_SERVER['SCRIPT_NAME'],$url2))?'selected':'normal');
     echo '<td class="'.$class.'" ';
     highlighter($class.'_light',$class);
     echo ' onclick="window.location.replace(\''.$href.'\')"><a href="'.$href.'">'.$text."</a></td>\n";
 }
 
 function make_tab_item_window($href,$text,$url){
-    global $SCRIPT_NAME,$admin_help_height,$admin_help_width;
-    $class=(strpos($SCRIPT_NAME,$url)?'selected':'normal');
+    global $admin_help_height,$admin_help_width;
+    $class=(strpos($_SERVER['SCRIPT_NAME'],$url)?'selected':'normal');
     echo '<td class="'.$class.'" ';
     highlighter($class.'_light',$class);
-    echo ' onclick="window.open(\''.$href.'\',\'\',\'scrollbar=auto,menubar=no,location=no,status=no,toolbar=no,width='.$admin_help_width.',height='.$admin_help_height.'\');return false"><a href="'.$href.'" target="_blank">'.$text.'</a></td>'."\n";
+    echo ' onclick="window.open(\''.$href.'\',\'\',\'menubar=no,location=no,status=no,toolbar=no,width='.$admin_help_width.',height='.$admin_help_height.'\');return false"><a href="'.$href.'" target="_blank">'.$text.'</a></td>'."\n";
 }
 
 function make_tab_start(){

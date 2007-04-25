@@ -90,7 +90,7 @@ echo '<form action="options_design.php" method="get"><input type="hidden" name="
 $files=array();
 $dirs=array();
 
-$dir = dirname(dirname($SCRIPT_FILENAME)).'/templates';
+$dir = dirname(dirname($_SERVER['SCRIPT_FILENAME'])).'/templates';
 if (!read_folder($dir,$dirs,$files)){
     show_error('Can not read directory info!');
     exit;

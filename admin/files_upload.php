@@ -29,7 +29,7 @@ require_once('./download_header.php');
 require_once('./file_functions.php');
 $orig_pwd = getcwd();
 
-$root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
+$root_dir = substr($_SERVER['SCRIPT_FILENAME'],0,-strlen($_SERVER['SCRIPT_NAME']));
 $root_dir_len = strlen($root_dir);
 
 if (!isset($dir)||!isset($file)){

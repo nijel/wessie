@@ -43,7 +43,7 @@ if (!ereg('^((do_)?(delete|move|copy|chmod))|(mkdir)$',$action)){
 
 $fname = opt_stripslashes($fname);
 
-$root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
+$root_dir = substr($_SERVER['SCRIPT_FILENAME'],0,-strlen($_SERVER['SCRIPT_NAME']));
 $root_dir_len = strlen($root_dir);
 
 $dir = dirname($fname);

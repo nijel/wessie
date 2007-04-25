@@ -31,58 +31,48 @@ $remove_path='admin/';
 require_once('../init.php');
 require_once('../config.php');
 require_once('./functions.php');
-require_once('../db_connect.php');
 Header('Content-Type: text/html; charset='.$admin_charset);
 $page_title=$site_name[0].':Administration:Login';
 
-// Enforce https also for redirects
+// enforce https also for redirects
 if (isset($url) && ($admin_force_ssl || isset($HTTPS)))
     $url = ereg_replace('^http:','https:', $url);
 
-// On each login attempt clean all old hashes
-if (!(mysql_query('DELETE FROM '.$db_prepend.$table_logged.' where time<(NOW() - interval '.$admin_timeout.')', $db_connection)))
-    do_error(1,'DELETE FROM '.$db_prepend.$table_logged.': '.mysql_error());
+if (isset($_POST['submit'])){
+    $pass=md5($_POST['pass']);
+    $user=opt_addslashes($_POST['user']);
 
-
-// Generate IP address identification
-$ip=$REMOTE_ADDR;
-$headers = getallheaders();
-while (list ($header, $value) = each ($headers)) {
-    if ($header=='X-Forwarded-For') {
-        $ip.=' ('.$value.')';
-    }
-}
-
-
-if (isset($HTTP_POST_VARS['submit'])){
-    $pass=md5($HTTP_POST_VARS['pass']);
-    $user=opt_addslashes($HTTP_POST_VARS['user']);
-
-    // Check whether selected user exists
+    include_once('../db_connect.php');
     if (!($id_result=mysql_query('SELECT count(user) as count from '.$db_prepend.$table_users.' where user="'.$user.'" and pass="'.$pass.'"',$db_connection)))
             do_error(1,'SELECT '.$db_prepend.$table_users.': '.mysql_error());
     $auth=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
     if ($auth['count']!=1){
-        Header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=badlogin');
+        Header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).(substr(dirname($_SERVER['SCRIPT_NAME']),-5)!='admin'?'admin':'').'/login.php?failure=badlogin');
         die();
     }
 
-    if (!$admin_two_step_login) setcookie ('user', $user,time()+$admin_user_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),'', $admin_force_ssl || isset($HTTPS));
+    if (!$admin_two_step_login) setcookie ('user', $user,time()+$admin_user_cookie, dirname($_SERVER['SCRIPT_NAME']).(substr(dirname($_SERVER['SCRIPT_NAME']),-5)!='admin'?'admin':''),'', $admin_force_ssl || isset($HTTPS));
     $hash=md5 (uniqid (rand()));
-    setcookie ('hash',$hash ,time()+$admin_hash_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),'', $admin_force_ssl || isset($HTTPS));
+    setcookie ('hash',$hash ,time()+$admin_hash_cookie, dirname($_SERVER['SCRIPT_NAME']).(substr(dirname($_SERVER['SCRIPT_NAME']),-5)!='admin'?'admin':''),'', $admin_force_ssl || isset($HTTPS));
 
-    // Store authetication info into table
-    if (!(mysql_query('REPLACE '.$db_prepend.$table_logged." set hash='".$hash."', time=NOW(), ip= '".$ip."', user='".$user."'",$db_connection)))
-        do_error(1,'REPLACE '.$db_prepend.$table_logged.': '.mysql_error());
+    $ip=$_SERVER['REMOTE_ADDR'];
+    while (list ($header, $value) = each ($_ENV)) {
+        if ($header=='X-FORWARDED-FOR') {
+            $ip.=' ('.$value.')';
+        }
+    }
+
+    if (!(mysql_query('UPDATE '.$db_prepend.$table_users." set hash='".$hash."', time=NOW(), ip= '".$ip."' where user='".$user."' and pass='".$pass."' limit 1",$db_connection)))
+            do_error(1,'UPDATE '.$db_prepend.$table_users.': '.mysql_error());
 
     if (!isset($url)){
-        $url = ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/index.php';
+        $url = ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).(substr(dirname($_SERVER['SCRIPT_NAME']),-5)!='admin'?'admin':'') . '/index.php';
 
     }
 
     if ($admin_two_step_login) {
-        $url2 = ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/login.php?step2=1&amp;user='.urlencode($user).'&amp;url='.urlencode($url);
+        $url2 = ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).(substr(dirname($_SERVER['SCRIPT_NAME']),-5)!='admin'?'admin':'') . '/login.php?step2=1&amp;user='.urlencode($user).'&amp;url='.urlencode($url);
     } else {
         $url2 = $url;
     }
@@ -95,24 +85,23 @@ if (isset($HTTP_POST_VARS['submit'])){
 </html>
 <?php
     die();
-} elseif ($admin_two_step_login && isset($HTTP_GET_VARS['step2']) && isset($hash)) {
-    $user=opt_addslashes($HTTP_GET_VARS['user']);
+} elseif ($admin_two_step_login && isset($_GET['step2']) && isset($hash)) {
+    $user=opt_addslashes($_GET['user']);
 
     include_once('../db_connect.php');
-    if (!($id_result = mysql_query('SELECT count(user) as count from '.$db_prepend.$table_logged." where hash='".$hash."' and time>(NOW() - interval ".$admin_timeout.") and ip= '".$ip."' and user='".$user."'",$db_connection)))
-        do_error(1,'SELECT count(user) as count from '.$db_prepend.$table_logged.': '.mysql_error());
-
+    if (!($id_result=mysql_query('SELECT count(user) as count from '.$db_prepend.$table_users.' where user="'.$user.'" and hash="'.$hash.'"',$db_connection)))
+            do_error(1,'SELECT '.$db_prepend.$table_users.': '.mysql_error());
     $auth=mysql_fetch_array($id_result);
     mysql_free_result($id_result);
     if ($auth['count']!=1){
-        Header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'').'/login.php?failure=badlogin');
+        Header('Location: '.($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).(substr(dirname($_SERVER['SCRIPT_NAME']),-5)!='admin'?'admin':'').'/login.php?failure=badlogin');
         die();
     }
 
-    setcookie ('user', $user,time()+$admin_user_cookie, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),'', $admin_force_ssl || isset($HTTPS));
+    setcookie ('user', $user,time()+$admin_user_cookie, dirname($_SERVER['SCRIPT_NAME']).(substr(dirname($_SERVER['SCRIPT_NAME']),-5)!='admin'?'admin':''),'', $admin_force_ssl || isset($HTTPS));
 
     if (!isset($url)){
-        $url = ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/index.php';
+        $url = ($admin_force_ssl || isset($HTTPS) ? 'https://' : 'http://').$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).(substr(dirname($_SERVER['SCRIPT_NAME']),-5)!='admin'?'admin':'') . '/index.php';
 
     }
 
@@ -127,7 +116,7 @@ if (isset($HTTP_POST_VARS['submit'])){
     die();
 
 }
-setcookie ('hash', '',time()-3600, dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':''),'', $admin_force_ssl || isset($HTTPS)); //delete cookie
+setcookie ('hash', '',time()-3600, dirname($_SERVER['SCRIPT_NAME']).(substr(dirname($_SERVER['SCRIPT_NAME']),-5)!='admin'?'admin':''),'', $admin_force_ssl || isset($HTTPS)); //delete cookie
 
 show_html_head($page_title);
 ?>
@@ -183,7 +172,7 @@ if (isset($url)){
 <hr width="100%" />
 <?php
 if (isset($HTTPS)) echo '<p class="info">Secure connection is being used.</p>';
-else echo '<p class="error">Warning: Non-secure connection is being used.</p><p class="info"><a href="https://'.$SERVER_NAME.dirname($SCRIPT_NAME).(substr(dirname($SCRIPT_NAME),-5)!='admin'?'admin':'') . '/login.php'.(isset($url) ? '?url='.urlencode($url) : '' ).'">Try to use it</a></p>';
+else echo '<p class="error">Warning: Non-secure connection is being used.</p><p class="info"><a href="https://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).(substr(dirname($_SERVER['SCRIPT_NAME']),-5)!='admin'?'admin':'') . '/login.php'.(isset($url) ? '?url='.urlencode($url) : '' ).'">Try to use it</a></p>';
 ?>
 <hr width="100%" />
 <p class="note">Your browser must have cookies enabled to administrate this site.</p>

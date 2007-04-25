@@ -47,7 +47,7 @@ if (isset($onunload)){
 <tr>
 <td class="left">
 <?php
-    if ($fd = @fopen('/proc/uptime', 'r')){
+    if ($fd = fopen('/proc/uptime', 'r')){
         $ar_buf = split( ' ', fgets( $fd, 4096 ) );
         fclose( $fd );
 
@@ -66,7 +66,7 @@ if (isset($onunload)){
         echo 'Uptime:&nbsp;'.$result;
     }
 
-    if ( $fd = @fopen('/proc/loadavg', 'r') ) {
+    if ( $fd = fopen('/proc/loadavg', 'r') ) {
         $results = split( ' ', fgets( $fd, 4096 ) );
         echo '<br />Load:&nbsp;'.$results[0].'&nbsp;'.$results[1].'&nbsp;'.$results[2];
         fclose( $fd );
@@ -77,7 +77,7 @@ if (isset($onunload)){
 <h1><?php echo $page_title_html; ?></h1>
 </td>
 <td class="right">
-User:<a href="user_self.php"><?php echo $user_info['name']; ?></a><br />
+User:<a href="user_self.php"><?php echo $fullname; ?></a><br />
 <a href="logout.php">Logout</a>
 </td>
 </tr>
@@ -91,6 +91,6 @@ if ($user=='admin' || in_array('download_item.php',$permissions)) make_tab_item(
 if ($user=='admin' || in_array('plugin.php',$permissions)) make_tab_item('./plugin.php','Plugins','admin/plugin');
 if ($user=='admin' || in_array('user.php',$permissions)) make_tab_item('./user.php','Users','admin/user');
 if ($user=='admin' || in_array('options.php',$permissions)) make_tab_item('./options.php','Options','admin/option');
-if ($user=='admin' || in_array('help.php',$permissions)) make_tab_item_window('./help.php?'.urlencode(basename($SCRIPT_NAME)),'?','admin/help.php');
+if ($user=='admin' || in_array('help.php',$permissions)) make_tab_item_window('./help.php?'.urlencode(basename($_SERVER['SCRIPT_NAME'])),'?','admin/help.php');
 make_tab_end();
 ?>

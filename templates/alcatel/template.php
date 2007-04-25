@@ -63,7 +63,7 @@ function make_download($file,$group=array('count'=>-1)){
     if ($file['remote']==1){
         return '<a href="'.$base_path.'get.php/'.$file['id'].'/'.basename($file['filename']).'">'.basename($file['filename']).'</a> ('.$msg_unknown_size.$file['count'].' '.$msg_downloads.$grp.')';
     }else{
-        $fn=$DOCUMENT_ROOT.'/'.$file['filename'];
+        $fn=$_SERVER['DOCUMENT_ROOT'].'/'.$file['filename'];
         if (!file_exists($fn)){
             log_error("ERROR: File $fn (id:".$file['id'].') not found!');
             return $fn;

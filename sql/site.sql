@@ -364,6 +364,7 @@ INSERT INTO stat VALUES ('browser', 'Amaya', 0);
 INSERT INTO stat VALUES ('browser', 'Downloader', 0);
 INSERT INTO stat VALUES ('browser', 'Search Indexer', 0);
 INSERT INTO stat VALUES ('browser', 'Bot', 4639);
+INSERT INTO stat VALUES ('browser', 'Firefox', 4639);
 INSERT INTO stat VALUES ('browser', '?', 11965);
 INSERT INTO stat VALUES ('os', 'Windows', 2);
 INSERT INTO stat VALUES ('os', 'WindowsNT', 3);

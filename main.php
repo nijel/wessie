@@ -42,16 +42,16 @@ require_once('./browser.php');
 
 //if no language was explicitly defined, try to detect it
 if (!isset($lng)){
-    if (isset($HTTP_COOKIE_VARS[$cookie_lang])){
-            $lng=$HTTP_COOKIE_VARS[$cookie_lang];
+    if (isset($_COOKIE[$cookie_lang])){
+            $lng=$_COOKIE[$cookie_lang];
         $lang=$languages[$lng]['short'];
         eval('$lang_file_name="'.$lang_file.'";');
     }
     if ((!isset($lng)) || (!file_exists($lang_file_name))){
-        if (isset($HTTP_ACCEPT_LANGUAGE)){
+        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])){
             $lng=-1;
             $wanted_languages=array();
-            $wanted_languages=Explode(",",$HTTP_ACCEPT_LANGUAGE);
+            $wanted_languages=Explode(",",$_SERVER['HTTP_ACCEPT_LANGUAGE']);
             for($i=0;$i<count($wanted_languages);$i++){
                 $curr_lang=Explode(";",$wanted_languages[$i]);
                 $curr_lang=$curr_lang[0]; //this ignores q=0.5
@@ -93,14 +93,16 @@ Header('Content-Type: text/html; charset='.$charset);
 
 
 //if no id specified, go to default page
-if (!isset($id)){
+if (!isset($id) || $id == 0){
     $id=$languages[$lng]['page'];
+} else {
+    $id = (int)$id;
 }
 
 //read cookie and determine whether it is new user
 $increase_count=false;
-if (isset($HTTP_COOKIE_VARS[$cookie_count])){
-    $visited_pages=explode('|',$HTTP_COOKIE_VARS[$cookie_count]);
+if (isset($_COOKIE[$cookie_count])){
+    $visited_pages=explode('|',$_COOKIE[$cookie_count]);
     if (!in_array($id,$visited_pages)) {
         $visited_pages[]=$id;
         $increase_count=true;
@@ -120,7 +122,6 @@ if (!($id_result=mysql_query('SELECT * from '.$db_prepend.$table_page.' where id
     do_error(1,'SELECT '.$db_prepend.$table_page.': '.mysql_error());
 $page=mysql_fetch_array($id_result);
 if (!isset($page['id'])){
-    log_error('Unknown page: '.$id);
     do_error(3,'id="'.$id.'"; lng="'.$lng.'"');
     bye();
 }
@@ -163,7 +164,7 @@ mysql_free_result($id_result);
 //read category
 if (!isset ( $categories[$page['category']] ) ) {
     log_error('Unknown category: '.$page['category']);
-    header('Location: http://'.$SERVER_NAME.$base_path.'main.php');
+    header('Location: http://'.$_SERVER['SERVER_NAME'].$base_path.'main.php');
     bye();
 } else {
     $category=$categories[$page['category']];
@@ -197,8 +198,7 @@ $last_change = get_last_change();
 
 function global_eval($code) {
     global $site_name,$lng,$site_author,$site_author_email,$site_home,$page_title,$category_name,$wessie_version,$wessie_author,$browser,$os,
-        $wessie_author_email,$wessie_url,$SERVER_SOFTWARE,$SERVER_SIGNATURE,$SERVER_PROTOCOL,$SERVER_NAME,$SERVER_ADDR,$SERVER_PORT,$HTTP_USER_AGENT,
-        $REQUEST_URI,$REMOTE_ADDR,$HTTP_REFERER, $base_path;
+        $wessie_author_email,$wessie_url, $base_path;
     eval('?'.'>'.$code);
 }
 

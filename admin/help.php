@@ -33,11 +33,11 @@ show_html_head($page_title);
 <body class="help">
 <div class="close"><a href="javascript:window.close()" onclick="window.close()">Close</a></div>
 <?php
-if (!isset($QUERY_STRING)){
+if (!isset($_SERVER['QUERY_STRING'])){
     echo '<span class="error">No help topic!</span>';
-}elseif ($QUERY_STRING==''){
+}elseif ($_SERVER['QUERY_STRING']==''){
     echo '<span class="error">No help topic!</span>';
-}elseif ($QUERY_STRING=='plugin.php'){
+}elseif ($_SERVER['QUERY_STRING']=='plugin.php'){
     echo 'plugin...';
 }else{
     echo '<span class="error">Sorry, no help available for this topic.</span>';

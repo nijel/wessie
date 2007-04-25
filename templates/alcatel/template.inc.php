@@ -31,6 +31,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
     <meta http-equiv="Content-Language" content="<?php echo $lang; ?>" />
+    <meta name="ICBM" content="50.0687, 14.4563" />
+    <meta name="DC.title" content="Michal Cihar" />
     <title><?php title(); ?></title>
     <link rel="icon" href="<?php echo $base_path;?>img/favicon.png" type="image/png" />
     <link rel="home" href="<?php echo $site_home; ?>" />
@@ -38,7 +40,7 @@
     <link rel="contents" href="<?php echo link_start(); ?>" />
     <link rel="Copyright" href="mailto:<?php echo $site_author_email; ?>" title="<?php echo $site_name[$lng];?> Feedback" />
     <link rev="Made" href="mailto:<?php echo $site_author_email; ?>" title="<?php echo $site_name[$lng];?> Feedback" />
-    <link rel="StyleSheet" type="text/css" media="screen" href="<?php echo $base_path;?>templates/alcatel/styles.php" />
+    <link rel="StyleSheet" type="text/css" media="screen" href="<?php echo $base_path;?>templates/alcatel/styles.php/style.css" />
 
     <meta name="author" content="<?php echo $site_author[$lng]; ?>" />
     <meta name="keywords" content="<?php keywords(); ?>" />
@@ -50,6 +52,7 @@
     <meta http-equiv="imagetoolbar" content="no" />
     <meta http-equiv="MSThemeCompatible" content="no" />
 
+    <script language="javascript" type="text/javascript" src="/js/awstats_misc_tracker.js"></script>
     <script language="JavaScript" type="text/javascript">
     <!--
     if(top != self) { window.top.location.href=location; }
@@ -81,15 +84,29 @@
 <div class="leftbox">
 <?php languages(); ?>
 </div>
-<div class="powered">
 <?php
-powered_wessie();
+/*
+<div class="powered">
+//powered_wessie();
 //echo '<br /><br />';
 //powered_php();
 //echo '<br /><br />';
 //powered_mysql();
-?>
+<br />
+<br />
+<a href="http://ukcdr.org/issues/cd/quick/"><img border="0" width="88" height="31" src="/images/badcd006.png" alt="Say NO to corrupt audio discs" /></a>
+<br />
+<br />
+<a href="http://www.debian.org"><img border="0" width="88" height="31" src="/images/debian.jpg" alt="Debian powered" /></a>
+<br />
+<br />
+<a href="http://validator.w3.org/check/referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" height="31" width="88" border="0" /></a>
+<br />
+<br />
+<a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" height="31" width="88" border="0" /></a>
 </div>
+*/
+?>
 </div>
 <div class="text">
 <?php

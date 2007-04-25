@@ -26,19 +26,21 @@
 // $Id$
 
 //load configuration
-require_once($DOCUMENT_ROOT.$base_path.'config.php');
+require_once($_SERVER['DOCUMENT_ROOT'].$base_path.'config.php');
 //error handling
-require_once($DOCUMENT_ROOT.$base_path.'errors.php');
+require_once($_SERVER['DOCUMENT_ROOT'].$base_path.'errors.php');
 if (!isset($wessie_db_connect_php_loaded)){
     $wessie_db_connect_php_loaded=1;
     if ($db_persistent){
         if (!($db_connection=@mysql_pconnect($db_host,$db_user,$db_pass)))
-            do_error(6,'pconnect');
+            do_error(6,'pconnect: '.mysql_error() );
     }else{
         if (!($db_connection=@mysql_connect($db_host,$db_user,$db_pass)))
-            do_error(6,'connect');
+            do_error(6,'connect: '.mysql_error());
     }
     if (!@mysql_select_db($db_name,$db_connection))
         do_error(6,'select_db');
+    if (!@mysql_query('SET NAMES utf8'))
+        do_error(6,'set names');
 }
 ?>

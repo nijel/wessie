@@ -34,6 +34,10 @@ require_once('./errors.php');
 //connect to database
 require_once('./db_connect.php');
 
+if (!isset($id)) {
+    die('Missing parameter!');
+}
+
 if (!($id_result=mysql_query("SELECT * from $db_prepend$table_download where id=$id limit 1",$db_connection)))
     do_error(1,'SELECT '.$db_prepend.$table_download.'---'."SELECT * from $db_prepend$table_download where id=$id limit 1");
 $file=mysql_fetch_array($id_result);
@@ -49,6 +53,6 @@ if ($file['remote']==1){
     header('Location: '.$file['filename']);
 }else{
 //    header('Location: '.$base_url.$file['filename']);
-    header('Location: http://'.$SERVER_NAME.$file['filename']);
+    header('Location: http://'.$_SERVER['SERVER_NAME'].$file['filename']);
 }
 ?>

@@ -31,7 +31,7 @@ $orig_pwd = getcwd();
 
 if (isset($search) && trim($search) == '') unset($search);
 
-$root_dir = substr($SCRIPT_FILENAME,0,-strlen($SCRIPT_NAME));
+$root_dir = substr($_SERVER['SCRIPT_FILENAME'],0,-strlen($_SERVER['SCRIPT_NAME']));
 $root_dir_len = strlen($root_dir);
 
 if (!isset($dir)){
