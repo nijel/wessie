@@ -476,9 +476,12 @@ function delete_pages($condition){
 $configuration=array();
 $configuration_loaded=FALSE;
 
+$root_dir=dirname(dirname($_SERVER['SCRIPT_FILENAME']));
+$config_file = $root_dir . '/config.php';
+
 function config_read(){
-    global $configuration,$configuration_loaded;
-    if (!($file = fopen($root_dir=dirname(dirname($_SERVER['SCRIPT_FILENAME'])).'/config.php', 'r')))
+    global $configuration,$configuration_loaded,$config_file;
+    if (!($file = fopen($config_file, 'r')))
         return FALSE;
     for ($i=0; !feof($file); $i++) {
         $configuration[$i] = fgets($file, 1024);
@@ -487,8 +490,8 @@ function config_read(){
 }
 
 function config_write(){
-    global $configuration,$configuration_loaded;
-    if (!($file = fopen($root_dir=dirname(dirname($_SERVER['SCRIPT_FILENAME'])).'/config.php', 'w')))
+    global $configuration,$configuration_loaded,$config_file;
+    if (!($file = fopen($config_file, 'w')))
         return FALSE;
     for ($i=0; $i < count($configuration); $i++) {
         if (isset($configuration[$i])) fwrite($file, $configuration[$i], 1024);
