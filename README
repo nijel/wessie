@@ -5,3 +5,6 @@ Features:
  * modular architecture (I hope ;o))
  * generates valid xhtml 1.0 document (when content and templates are
    correct - at least default templates are correct)
+
+Source can be obtained from Subversion: svn://svn.cihar.com/wessie,
+ViewVC is available as http://viewsvn.cihar.com/wessie.
