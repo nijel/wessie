@@ -61,11 +61,8 @@ if (mysql_num_rows($id_result)!=1){
 }
 
 $ip=$_SERVER['REMOTE_ADDR'];
-$headers = getallheaders();
-while (list ($header, $value) = each ($headers)) {
-    if ($header=='X-Forwarded-For') {
-        $ip.=' ('.$value.')';
-    }
+if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip .= ' (' . $_SERVER['HTTP_X_FORWARDED_FOR'] . ')';
 }
 
 $auth=mysql_fetch_array($id_result);
