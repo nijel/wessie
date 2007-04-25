@@ -27,18 +27,18 @@
 $page_name='Options:Languages';
 require_once('./options_header.php');
 
-if (isset($action) && $action=='save'){
+if (isset($_REQUEST['action']) && $_REQUEST['action']=='save'){
     if (!config_read()){
         show_error('Can not read configuration!');
         exit;
     }
 
-    if (!config_set_option('\$default_lang',"\$default_lang = ".$set_default_lang.";\n",'##/LANGUAGES##')){
+    if (!config_set_option('\$default_lang',"\$default_lang = ".$_REQUEST['set_default_lang'].";\n",'##/LANGUAGES##')){
         show_error('Can not modify configuration!');
         exit;
     }
 
-    if (!config_set_option('\$lang_file',"\$lang_file = '".ereg_replace("'","\\'",$set_lang_file)."';\n",'##/LANGUAGES##')){
+    if (!config_set_option('\$lang_file',"\$lang_file = '".ereg_replace("'","\\'",$_REQUEST['set_lang_file'])."';\n",'##/LANGUAGES##')){
         show_error('Can not modify configuration!');
         exit;
     }
@@ -49,14 +49,14 @@ if (isset($action) && $action=='save'){
     config_del_options('^[[:space:]]*\$languages[[:space:]]*\[[[:space:]]*[0-9]*[[:space:]]*\]');
     config_del_options('^[[:space:]]*\$lang_alias[[:space:]]*\[');
 
-    while (list($key,$val) = each($set_languages)){
+    while (list($key,$val) = each($_REQUEST['set_languages'])){
         while (list($key2,$val2) = each($val)){
             if (!config_set_option('\$languages['.$key."]['$key2']","\$languages[$key]['$key2'] = '".ereg_replace("'","\\'",$val2)."';\n",'##/LANGUAGES##')){
                 show_error('Can not modify configuration!');
                 exit;
             }
         }
-        $aliases = explode(',',$set_aliases[$key]);
+        $aliases = explode(',',$_REQUEST['set_aliases'][$key]);
         while (list($key2,$val2) = each($aliases)){
             if (!config_set_option('\$lang_alias['."'$val2']","\$lang_alias['$val2'] = $key;\n",'##/LANGUAGES##')){
                 show_error('Can not modify configuration!');
@@ -73,7 +73,7 @@ if (isset($action) && $action=='save'){
     show_info_box('Languages configuration saved.');
     include_once('./admin_footer.php');
     exit;
-} elseif (isset($action) && $action=='create'){
+} elseif (isset($_REQUEST['action']) && $_REQUEST['action']=='create'){
     if (!config_read()){
         show_error('Can not read configuration!');
         exit;
@@ -106,8 +106,8 @@ if (isset($action) && $action=='save'){
     show_info_box('Language created.');
     include_once('./admin_footer.php');
     exit;
-} elseif (isset($action) && $action=='delete'){
-    if (!isset($languages[$delete_language])){
+} elseif (isset($_REQUEST['action']) && $_REQUEST['action']=='delete'){
+    if (!isset($languages[$_REQUEST['delete_language']])){
         show_error('You tried to delete non existent language!');
         exit;
     }
@@ -117,8 +117,8 @@ if (isset($action) && $action=='save'){
         exit;
     }
 
-    config_del_options('^[[:space:]]*\$languages[[:space:]]*\[[[:space:]]*'.$delete_language.'[[:space:]]*\]');
-    config_del_options('^[[:space:]]*\$lang_alias[[:space:]]*\[[[:space:]]*'."'[^']*'".'[[:space:]]*\][[:space:]]*=[[:space:]]*'.$delete_language.'[[:space:]]*;');
+    config_del_options('^[[:space:]]*\$languages[[:space:]]*\[[[:space:]]*'.$_REQUEST['delete_language'].'[[:space:]]*\]');
+    config_del_options('^[[:space:]]*\$lang_alias[[:space:]]*\[[[:space:]]*'."'[^']*'".'[[:space:]]*\][[:space:]]*=[[:space:]]*'.$_REQUEST['delete_language'].'[[:space:]]*;');
 
     if (!config_write()){
         show_error('Can not write configuration!');
