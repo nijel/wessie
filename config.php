@@ -267,4 +267,8 @@ ini_set('highlight.bg', '#FFFFFF');
 ini_set('highlight.default', '#0000EE');
 ini_set('highlight.html', '#DDDDDD');
 //##/HIGHLIGHT_OPTIONS##
+
+if (file_exists(dirname(__FILE__) . '/config-devel.php')) {
+    require(dirname(__FILE__) . '/config-devel.php');
+}
 ?>
