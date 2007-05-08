@@ -44,7 +44,7 @@ if(isset($_SERVER["HTTP_USER_AGENT"])){
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'amaya')===false)) $browser = 'Amaya';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'WebTV')===false)) $browser = 'WebTV';
     elseif (
-        (ereg('Teleport|WebZIP|WebCopier|Robozilla|Web Dowloader|Offline Explorer|Go!Zilla', $_SERVER["HTTP_USER_AGENT"])) ||
+        (ereg('Teleport|WebZIP|WebCopier|Robozilla|Web Dowloader|Offline Explorer|Go!Zilla|ia_archiver', $_SERVER["HTTP_USER_AGENT"])) ||
         (eregi('get', $_SERVER["HTTP_USER_AGENT"]))
             ) $browser = 'Downloader';
     elseif(
