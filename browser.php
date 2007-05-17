@@ -49,7 +49,7 @@ if(isset($_SERVER["HTTP_USER_AGENT"])){
             ) $browser = 'Downloader';
     elseif(
         (ereg('Google|Slurp|LinkAlarm|AltaVista|Lycos|holmes|Ocelli|CloakDetect', $_SERVER["HTTP_USER_AGENT"])) ||
-        (eregi('infoseek|search|spider', $_SERVER["HTTP_USER_AGENT"]))
+        (eregi('infoseek|search|spider|crawler', $_SERVER["HTTP_USER_AGENT"]))
             ) $browser = 'Search Indexer';
     elseif(eregi('bot|scanner|ApacheBench', $_SERVER["HTTP_USER_AGENT"])) $browser = 'Bot';
     elseif(ereg('Gecko|Galeon', $_SERVER["HTTP_USER_AGENT"])) $browser = 'Mozilla';
