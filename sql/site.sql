@@ -380,6 +380,7 @@ INSERT INTO stat VALUES ('os', 'BeOS', 0);
 INSERT INTO stat VALUES ('os', 'OS/2', 0);
 INSERT INTO stat VALUES ('os', 'AIX', 0);
 INSERT INTO stat VALUES ('os', 'Mobile', 0);
+INSERT INTO stat VALUES ('os', 'Symbian', 0);
 INSERT INTO stat VALUES ('os', '?', 0);
 INSERT INTO stat VALUES ('week_no', '0016', 0);
 INSERT INTO stat VALUES ('lang', '0', 0);
