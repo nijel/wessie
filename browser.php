@@ -80,7 +80,8 @@ if(isset($_SERVER["HTTP_USER_AGENT"])){
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'J2ME/MIDP')===false)) $os = 'Mobile';
     else {
         $os = '?';
-        if ($browser != '?' && $browser != 'Bot' && $browser != 'Search Indexer') {
+        if ($browser != '?' && $browser != 'Bot' && $browser != 'Search Indexer' &&
+            $browser != 'libwww-perl' && $browser != 'Java') {
             log_error('Unknown OS: ' . $_SERVER["HTTP_USER_AGENT"]);
         }
     }
