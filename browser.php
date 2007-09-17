@@ -56,6 +56,7 @@ if(isset($_SERVER["HTTP_USER_AGENT"])){
     elseif(ereg('Nav|Gold|Mozilla|Netscape', $_SERVER["HTTP_USER_AGENT"])) $browser = 'Netscape';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'Java')===false)) $browser = 'Java';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'libwww-perl')===false)) $browser = 'libwww-perl';
+    elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'libcurl')===false)) $browser = 'libcurl';
     else {
         $browser = '?';
         log_error('Unknown browser: ' . $_SERVER["HTTP_USER_AGENT"]);

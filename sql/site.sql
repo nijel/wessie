@@ -367,6 +367,7 @@ INSERT INTO stat VALUES ('browser', 'Bot', 0);
 INSERT INTO stat VALUES ('browser', 'Firefox', 0);
 INSERT INTO stat VALUES ('browser', 'Java', 0);
 INSERT INTO stat VALUES ('browser', 'libwww-perl', 0);
+INSERT INTO stat VALUES ('browser', 'libcurl', 0);
 INSERT INTO stat VALUES ('browser', '?', 0);
 INSERT INTO stat VALUES ('os', 'Windows', 0);
 INSERT INTO stat VALUES ('os', 'WindowsNT', 0);
