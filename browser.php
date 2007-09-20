@@ -75,6 +75,7 @@ if(isset($_SERVER["HTTP_USER_AGENT"])){
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'AIX')===false)) $os = 'AIX';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'Amiga')===false)) $os = 'Amiga';
     elseif(ereg('Unix|Linux|X11|deb|ApacheBench', $_SERVER["HTTP_USER_AGENT"])) $os = 'Linux/Unix';
+    elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'linux')===false)) $os = 'Linux/Unix';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'MSIE')===false)) $os = 'Windows';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'ia_archiver')===false)) $os = 'Windows';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'SymbianOS')===false)) $os = 'Symbian';
