@@ -365,6 +365,7 @@ INSERT INTO stat VALUES ('browser', 'Downloader', 0);
 INSERT INTO stat VALUES ('browser', 'Search Indexer', 0);
 INSERT INTO stat VALUES ('browser', 'Bot', 0);
 INSERT INTO stat VALUES ('browser', 'Firefox', 0);
+INSERT INTO stat VALUES ('browser', 'Iceweasel', 0);
 INSERT INTO stat VALUES ('browser', 'Java', 0);
 INSERT INTO stat VALUES ('browser', 'libwww-perl', 0);
 INSERT INTO stat VALUES ('browser', 'libcurl', 0);

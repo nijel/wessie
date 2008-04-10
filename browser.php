@@ -28,6 +28,7 @@
 if(isset($_SERVER["HTTP_USER_AGENT"])){
     if(!(strpos($_SERVER["HTTP_USER_AGENT"],'MSIE')===false)) $browser = 'MSIE';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'Firefox')===false)) $browser = 'Firefox';
+    elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'Iceweasel')===false)) $browser = 'Iceweasel';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'Lynx')===false)) $browser = 'Lynx';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'Links')===false)) $browser = 'Links';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'Konqueror')===false)) $browser = 'Konqueror';
