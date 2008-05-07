@@ -81,6 +81,7 @@ if(isset($_SERVER["HTTP_USER_AGENT"])){
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'ia_archiver')===false)) $os = 'Windows';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'SymbianOS')===false)) $os = 'Symbian';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'J2ME/MIDP')===false)) $os = 'Mobile';
+    elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'DoCoMo')===false)) $os = 'Mobile';
     else {
         $os = '?';
         if ($browser != '?' && $browser != 'Bot' && $browser != 'Search Indexer' &&
