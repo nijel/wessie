@@ -40,8 +40,8 @@ $search_param='q';
 // extract parameter value, when specified "seacrh engine friendly"
 // (index.php/param1=value1/param2=value2
 
-if (isset($_SERVER['ORIG_PATH_INFO']) && (!empty($_SERVER['ORIG_PATH_INFO']))){
-    $info_vars = split('/',$_SERVER['ORIG_PATH_INFO']);
+if (isset($_SERVER['PATH_INFO']) && (!empty($_SERVER['PATH_INFO']))){
+    $info_vars = split('/',$_SERVER['PATH_INFO']);
     while ($item = each ($info_vars)) {
         $current_var = split('=',$item['value']);
         if (isset($current_var[0]) && isset($current_var[1])){
