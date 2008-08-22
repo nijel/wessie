@@ -54,6 +54,7 @@ if(isset($_SERVER["HTTP_USER_AGENT"])){
             ) $browser = 'Search Indexer';
     elseif(eregi('bot|scanner|ApacheBench', $_SERVER["HTTP_USER_AGENT"])) $browser = 'Bot';
     elseif(eregi('Python-urllib', $_SERVER["HTTP_USER_AGENT"])) $browser = 'Bot';
+    elseif(eregi('freshmeat.net URI validator', $_SERVER["HTTP_USER_AGENT"])) $browser = 'Bot';
     elseif(ereg('Gecko|Galeon', $_SERVER["HTTP_USER_AGENT"])) $browser = 'Mozilla';
     elseif(ereg('Nav|Gold|Mozilla|Netscape', $_SERVER["HTTP_USER_AGENT"])) $browser = 'Netscape';
     elseif(!(strpos($_SERVER["HTTP_USER_AGENT"],'Java')===false)) $browser = 'Java';
