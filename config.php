@@ -151,8 +151,8 @@ $site_name_long[0] = 'demonstration how wessie can work';
 $site_name_long[1] = 'ukázka jak může wessie pracovat';
 $site_name[0] = 'wessie Demo';
 $site_name[1] = 'ukázka wessie';
-$copyright[0] = 'Copyright &copy; 2001 - 2007 <a href="mailto:'.$site_author_email.'">'.$site_author[0].'</a>';
-$copyright[1] = 'Copyright &copy; 2001 - 2007 <a href="mailto:'.$site_author_email.'">'.$site_author[1].'</a>';
+$copyright[0] = 'Copyright &copy; 2001 - 2008 <a href="mailto:'.$site_author_email.'">'.$site_author[0].'</a>';
+$copyright[1] = 'Copyright &copy; 2001 - 2008 <a href="mailto:'.$site_author_email.'">'.$site_author[1].'</a>';
 $special[0] = '';
 $special[1] = '';
 //##/INFO##
