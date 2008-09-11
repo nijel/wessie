@@ -86,7 +86,7 @@ $lang_file = './lang/${lang}.php';
 // $cookie_lang        - name of cookie that is used for storing user prefered language
 // $session_time       - how long takes one session - by default when user didn't load
 //                       any page from site then he is counted as new
-// $lang_time          - how long will stay cookie identifying preffered user's language
+// $lang_time          - how long will stay cookie identifying prefered user's language
 $cookie_count = 'wessie_count';
 $cookie_lang = 'wessie_lang';
 $session_time = 3600;
